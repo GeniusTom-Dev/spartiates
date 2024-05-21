@@ -1,5 +1,11 @@
-# SAE3.01Groupe5
+# SAE
 
-SAE 3.01 Projet serious game sur les règles du hockey sur glace
+Projet serious game sur les règles du hockey sur glace.
 
-lien du site : https://jeuspartiates.alwaysdata.net
+lien du site : https://newspartitatesgames.alwaysdata.net/
+
+> DIOPS Sokhna
+> EVEN Tom
+> LEROUX Mathieu
+> ROUGE Gabriel
+
