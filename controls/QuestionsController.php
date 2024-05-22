@@ -12,7 +12,7 @@ class QuestionsController
     /**
      * @var mixed
      */
-    private $repository;
+    private mixed $repository;
 
     public function __construct()
     {
@@ -67,7 +67,7 @@ class QuestionsController
         }
     }
 
-    public function updateQuestion($id, $text, $level, $true, $false1, $false2)
+    public function updateQuestion($id, $text, $level, $true, $false1, $false2): void
     {
         try {
             $this->repository->updateQuestionById($id, $text, $level, $true, $false1, $false2);
@@ -77,7 +77,7 @@ class QuestionsController
         }
     }
 
-    public function searchQuestion($searchTerm)
+    public function searchQuestion($searchTerm): void
     {
         $questions = $this->repository->search($searchTerm);
         foreach ($questions as $question) {
@@ -95,11 +95,10 @@ class QuestionsController
         }
     }
 
-    public function showUpdateForm($url, $id)
+    public function showUpdateForm($url, $id): void
     {
         $path = 'view/forms/' . $url . '.php';
         View::display('MISE A JOUR', $path, $this->repository->getById($id));
     }
-
 
 }

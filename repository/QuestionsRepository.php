@@ -100,7 +100,7 @@ class QuestionsRepository extends AbstractRepository
         }
     }
 
-    public function updateQuestionById($id, $text, $difficulty, $true, $false1, $false2)
+    public function updateQuestionById($id, $text, $difficulty, $true, $false1, $false2): void
     {
         $query = "UPDATE QUESTION SET TEXT = :text, DIFFICULTY = :difficulty, RESPONSE= :true, FALSE1= :false1, FALSE2= :false2  WHERE QUESTION_ID = :id;";
         $statement = $this->connexion->prepare($query);
@@ -113,7 +113,7 @@ class QuestionsRepository extends AbstractRepository
             ':false2' => $false2]);
     }
 
-    public function search($searchTerm)
+    public function search($searchTerm): array
     {
         $query = "SELECT * FROM QUESTION WHERE TEXT LIKE :searchTerm LIMIT 10";
         $statement = $this->connexion->prepare($query);

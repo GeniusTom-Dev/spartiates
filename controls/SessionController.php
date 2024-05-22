@@ -10,14 +10,14 @@ class SessionController
     /**
      * @var mixed
      */
-    private $repository;
+    private mixed $repository;
 
     public function __construct()
     {
         $this->repository = new SessionRepository();
     }
 
-    public function addSessionPlayer($pseudo, $mail)
+    public function addSessionPlayer($pseudo, $mail): void
     {
         $_SESSION['id'] = $this->repository->addSessionPlayer($pseudo, $mail, $_SESSION['code']);
         $_SESSION['pseudo'] = $pseudo;
@@ -107,6 +107,5 @@ class SessionController
             echo 'attack';
         }
     }
-
 
 }

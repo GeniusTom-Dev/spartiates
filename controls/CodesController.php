@@ -24,9 +24,6 @@ class CodesController
             if ($this->repository->isActive($code)) {
                 return true;
             }
-           else {
-                return false;
-           }
         } catch (MoreThanOneException $ERROR) {
             //on fait un retour d'erreur
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
@@ -35,20 +32,19 @@ class CodesController
         return false;
     }
 
-    public function checkSessionCode($code)
+    public function checkSessionCode($code): bool
     {
         try {
             if ($this->repository->checkSessionCode($code)) {
                 $_SESSION['code'] = $code;
                 return true;
-            } else {
-                return false;
             }
         } catch (MoreThanOneException $ERROR) {
             //on fait un retour d'erreur
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
             echo $ERROR->getMessage();
         }
+        return false;
     }
 
     public function start(): void
@@ -63,7 +59,7 @@ class CodesController
         echo $randomCode;
     }
 
-    public function stop()
+    public function stop(): void
     {
         $this->repository->stop();
         $sessionRepo = new SessionRepository();

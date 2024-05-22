@@ -8,7 +8,7 @@ class WSController
     {
     }
 
-    public function connexionWS()
+    public function connexionWS(): void
     {
         $identificationMessage = array(
             'action' => 'identify',

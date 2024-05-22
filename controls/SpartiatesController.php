@@ -12,7 +12,7 @@ class SpartiatesController
     /**
      * @var mixed
      */
-    private $repository;
+    private mixed $repository;
 
     public function __construct()
     {
@@ -50,7 +50,7 @@ class SpartiatesController
         }
     }
 
-    public function updateSpartiate($id, $lastName, $name)
+    public function updateSpartiate($id, $lastName, $name): void
     {
         try {
             $this->repository->updateSpartiateById($id, $lastName, $name);
@@ -60,7 +60,7 @@ class SpartiatesController
         }
     }
 
-    public function changeStar($id)
+    public function changeStar($id): void
     {
         try {
             if ($this->repository->isStarredById($id) === 1)
@@ -74,7 +74,7 @@ class SpartiatesController
         }
     }
 
-    public function searchSpartiate($searchTerm)
+    public function searchSpartiate($searchTerm): void
     {
         $questions = $this->repository->search($searchTerm);
         foreach ($questions as $spartiate) {
@@ -95,13 +95,13 @@ class SpartiatesController
         }
     }
 
-    public function showUpdateForm($url, $id)
+    public function showUpdateForm($url, $id): void
     {
         $path = 'view/forms/' . $url . '.php';
         View::display('MISE A JOUR', $path, $this->repository->getById($id));
     }
 
-    public function showChooseSpartiate()
+    public function showChooseSpartiate(): void
     {
         $path = 'view/chooseSpartiate.php';
         View::display('Choix du joueur', $path, $this->repository->getAll());
