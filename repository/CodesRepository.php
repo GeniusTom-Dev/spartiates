@@ -7,90 +7,79 @@ use Exception\MoreThanOneException;
 
 class CodesRepository extends AbstractRepository
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
-    public function checkSessionCode($code)
+    public function checkSessionCode($code): bool
     {
-        //on select tout les Users avec le même pseudo et password
+        // On récupère tous les Users avec le même pseudo et password
         $query = 'SELECT * FROM CODES WHERE CODE_TYPE = "SESSION" and CODE = :code ';
-        $statement = $this->connexion->prepare($query);
-        $statement->execute([
+        $result = $this->connexion->prepare($query);
+        $result->execute([
             'code' => $code,
         ]);
 
-        if ($statement->rowCount() > 1) {
-            throw new MoreThanOneException("Problème présent dans la BD");
+        if ($result->rowCount() > 1) {
+            throw new MoreThanOneException("Duplication de la SESSION $code dans la BD");
         }
 
-        if ($statement->rowCount() === 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return $result->rowCount() !== 0;
     }
 
-    public function isSessionCode()
+    // TODO what is this ???
+    public function isSessionCode(): bool
     {
         $query = 'SELECT * FROM CODES WHERE CODE_TYPE = "SESSION"';
-        $statement = $this->connexion->prepare($query);
-        $statement->execute();
-        if ($statement->rowCount() === 0) {
-            return false;
-        } else {
-            return true;
-        }
+        $result = $this->connexion->prepare($query);
+        $result->execute();
+
+        return $result->rowCount() !== 0;
     }
 
-    public function start($code)
+    public function start($code): void
     {
         $query = 'INSERT INTO CODES (CODE_TYPE, CODE)
                     VALUES ("SESSION", :code)';
-        $statement = $this->connexion->prepare($query);
-        $statement->execute([
+        $result = $this->connexion->prepare($query);
+        $result->execute([
             ':code' => $code,
         ]);
     }
 
-    public function reset()
+    public function reset(): void
     {
         $query = 'DELETE FROM CODES WHERE CODE_TYPE = "SESSION"';
-        $statement = $this->connexion->prepare($query);
-        $statement->execute();
+        $result = $this->connexion->prepare($query);
+        $result->execute();
     }
 
-    public function stop()
+    public function stop(): void
     {
         $query = 'UPDATE CODES SET ACTIVE = 0 WHERE CODE_TYPE = "SESSION";';
-        $statement = $this->connexion->prepare($query);
-        $statement->execute();
+        $result = $this->connexion->prepare($query);
+        $result->execute();
     }
 
     public function getSessionCode(): string
     {
         $query = 'SELECT CODE FROM CODES WHERE CODE_TYPE = "SESSION" and ACTIVE = 1';
-        $statement = $this->connexion->prepare($query);
-        $statement->execute();
-        $data = $statement->fetch();
-        if ($statement->rowCount() === 0) {
-            return 'Pas de session en cours';
+        $result = $this->connexion->prepare($query);
+        $result->execute();
+        $data = $result->fetch();
+
+        if ($result->rowCount() === 0) {
+            return 'Aucune session en cours';
         }
         return $data['CODE'];
     }
 
-    public function isActive($code)
+    public function isActive($code): bool
     {
         $query = 'SELECT * FROM CODES WHERE CODE_TYPE = "SESSION" and CODE = :code and ACTIVE = 1';
-        $statement = $this->connexion->prepare($query);
-        $statement->execute([
+        $result = $this->connexion->prepare($query);
+        $result->execute([
             ':code' => $code,
         ]);
-        $data = $statement->fetch();
-        if ($statement->rowCount() === 0) {
-            return false;
-        }
-        return true;
+        $result->fetch();
+
+        return $result->rowCount() !== 0;
     }
 }

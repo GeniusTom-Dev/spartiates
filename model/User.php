@@ -3,8 +3,6 @@
 namespace Model;
 /**
  * La classe User permet de gérer les utilisateurs
- *
- * @author BELABBAS-Rayane-2225010aa <Belabbas.rayane[@]etu.univ-amu.fr>
  */
 class User extends Entity
 {

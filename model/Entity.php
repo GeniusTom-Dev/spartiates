@@ -5,13 +5,13 @@ namespace Model;
 
 abstract class Entity
 {
-    //Constructeur
+    // Constructeur
     public function __construct(array $data)
     {
         $this->hydrate($data);
     }
 
-    //Hydratation
+    // Hydratation
     public function hydrate($data): void
     {
         foreach ($data as $key => $value) {

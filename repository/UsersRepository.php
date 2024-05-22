@@ -11,7 +11,7 @@ class UsersRepository extends AbstractRepository
 
     public function logIn($pseudo, $password): ?User
     {
-        //on récupère tous les Users avec le même pseudo et le même mot de passe
+        // On récupère tous les Users avec le même pseudo et le même mot de passe
         $query = 'SELECT * FROM USER WHERE PSEUDO = :pseudo and PASSWORD = :password';
         $result = $this->connexion->prepare($query);
         $result->execute(['pseudo' => $pseudo, 'password' => $password]);
@@ -21,7 +21,7 @@ class UsersRepository extends AbstractRepository
         }
 
         if ($result->rowCount() > 1) {
-            throw new MoreThanOneException("Utilisateur $pseudo dupliqué");
+            throw new MoreThanOneException("Duplication de l'USER $pseudo");
         }
 
         $user = $result->fetch();

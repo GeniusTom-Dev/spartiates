@@ -21,13 +21,13 @@ class QuestionsRepository extends AbstractRepository
         $statement = $this->connexion->prepare($query);
         $statement->execute(['id' => $id]);
 
-        //Si la requête ne rend rien ça veut dire qu'il n'y a aucune question avec cette id
+        // Si la requête ne rend rien ça veut dire qu'il n'y a aucune question avec cette id
         if ($statement->rowCount() === 0) {
             throw new NotFoundException('Aucune QUESTION trouvée');
         }
         //exception imposible mais a prévoire car on ne peut insérer qu'une question du meme ID
         if ($statement->rowCount() > 1) {
-            throw new MoreThanOneException("Problème présent dans la BD");
+            throw new MoreThanOneException("Duplication de la QUESTION $id");
         }
         $question = $statement->fetch();
         return new Question($question);
@@ -57,10 +57,6 @@ class QuestionsRepository extends AbstractRepository
         $query = 'SELECT * FROM QUESTION';
         $statement = $this->connexion->prepare($query);
         $statement->execute();
-
-//        if ($statement->rowCount() === 0) {
-//            throw new NotFoundException('Aucune question n\'a été trouvée ');
-//        }
 
         //on crée un tableau de questions contenant toutes les données
         $arraySQL = $statement->fetchAll();
@@ -96,7 +92,7 @@ class QuestionsRepository extends AbstractRepository
 
         //Si la requête ne rend rien ça veut dire qu'il n'y a aucune question avec cette id
         if ($statement->rowCount() === 0) {
-            throw new NotFoundException('Aucun question trouvé');
+            throw new NotFoundException('Aucun QUESTION trouvé');
         }
     }
 

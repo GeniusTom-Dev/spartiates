@@ -28,13 +28,10 @@ class SessionRepository extends AbstractRepository
             'code' => $code,
             'mail' => $mail
         ]);
-        $lastInsertedId = $this->connexion->lastInsertId();
-
-
-        return $lastInsertedId;
+        return $this->connexion->lastInsertId();
     }
 
-    public function deleteSession()
+    public function deleteSession(): void
     {
         $query = 'DELETE FROM SESSION';
         $statement = $this->connexion->prepare($query);
@@ -77,7 +74,7 @@ class SessionRepository extends AbstractRepository
         ]);
     }
 
-    public function setScore($id, $score)
+    public function setScore($id, $score): void
     {
         $query = 'UPDATE SESSION SET SCORE = :score WHERE SESSION_USER_ID = :id';
         $statement = $this->connexion->prepare($query);
@@ -106,7 +103,7 @@ class SessionRepository extends AbstractRepository
         return $data['SCORE'];
     }
 
-    public function isInSession($id)
+    public function isInSession($id): bool
     {
         $query = 'SELECT * FROM SESSION WHERE SESSION_USER_ID = :id';
         $statement = $this->connexion->prepare($query);
@@ -136,11 +133,11 @@ class SessionRepository extends AbstractRepository
         if ($statement->rowCount() === 0) {
             throw new NotFoundException('Aucun USER trouvé');
         }
-        $data = $statement->fetch(PDO::FETCH_ASSOC);
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 
-    public function getMailAndPseudoOfHighestScore()
+    public function getMailAndPseudoOfHighestScore(): bool|array
     {
         $query = 'SELECT pseudo, mail FROM SESSION WHERE SCORE = (SELECT MAX(SCORE) FROM SESSION)';
         $statement = $this->connexion->prepare($query);

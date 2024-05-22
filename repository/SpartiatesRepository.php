@@ -21,11 +21,11 @@ class SpartiatesRepository extends AbstractRepository
         $statement = $this->connexion->prepare($query);
         $statement->execute(['id' => $id]);
 
-        //Si la requête ne rend rien ça veut dire qu'il n'y a aucun spartiate avec cette id
+        // Si la requête ne rend rien ça veut dire qu'il n'y a aucun spartiate avec cette id
         if ($statement->rowCount() === 0) {
             throw new NotFoundException('Aucun SPARTIATE trouvé');
         }
-        //exception imposible mais a prévoire car on ne peut insérer qu'un spartiate du meme ID
+        // Exception impossible, mais à prévoir, car on ne peut insérer qu'un spartiate du meme ID
         if ($statement->rowCount() > 1) {
             throw new MoreThanOneException("Problème présent dans la BD");
         }
@@ -39,15 +39,11 @@ class SpartiatesRepository extends AbstractRepository
         $statement = $this->connexion->prepare($query);
         $statement->execute();
 
-//        if ($statement->rowCount() === 0) {
-//            throw new NotFoundException('Aucun untilisateur n\'a été trouvé ');
-//        }
-
-        //on créer un tableau de Spartiates contenant toutes les données
+        // On crée un tableau de Spartiates contenant toutes les données
         $arraySQL = $statement->fetchAll();
         $arrayUser = array();
 
-        /* on récupére le résultat de la requête SQL et on le met dans un tableau d'User'*/
+        // On récupère le résultat de la requête SQL et on le met dans un tableau d'User'
         for ($i = 0; $i < sizeof($arraySQL); $i++) {
             $user = new Spartiate($arraySQL[$i]);
             $arrayUser[] = $user;
@@ -66,12 +62,12 @@ class SpartiatesRepository extends AbstractRepository
 
     public function deleteSpartiateById($id): void
     {
-        //On supprime un spartiate avec son id
+        // On supprime un spartiate avec son id
         $query = 'DELETE FROM SPARTIATE WHERE SPART_ID = :id';
         $statement = $this->connexion->prepare($query);
         $statement->execute(['id' => $id]);
 
-        //Si la requête ne rend rien ça veut dire qu'il n'y a aucun spartiates avec cette id
+        // Si la requête ne rend rien ça veut dire qu'il n'y a aucun spartiates avec cette id
         if ($statement->rowCount() === 0) {
             throw new NotFoundException('Aucun SPARTIATE trouvé');
         }
@@ -79,24 +75,24 @@ class SpartiatesRepository extends AbstractRepository
 
     public function isStarredById($id): int
     {
-        //On select le score d'un utilisateur par rapport a son id
+        //On récupère le score d'un utilisateur par rapport à son id
         $query = 'SELECT STAR FROM SPARTIATE WHERE SPART_ID = :id';
         $statement = $this->connexion->prepare($query);
         $statement->execute(['id' => $id]);
 
-        //Si la requête ne rend rien ça veut dire qu'il n'y a aucun utilisateurs avec cette id
+        // Si la requête ne rend rien ça veut dire qu'il n'y a aucun utilisateurs avec cette id
         if ($statement->rowCount() === 0) {
             throw new NotFoundException('Aucun USER trouvé');
         }
-        //exception imposible mais a prévoire car on ne peut insérer qu'un User
+        // Exception impossible, mais à prévoir, car on ne peut insérer qu'un User
         if ($statement->rowCount() > 1) {
-            throw new MoreThanOneException("Problème présent dans la BD");
+            throw new MoreThanOneException("Duplication du SPARTIATE $id");
         }
         $user = $statement->fetch();
         return $user["STAR"];
     }
 
-    public function changeSpartiateStarById($id, $starred)
+    public function changeSpartiateStarById($id, $starred): void
     {
         $query = "UPDATE SPARTIATE SET STAR = :starred WHERE SPART_ID = :id;";
         $statement = $this->connexion->prepare($query);
@@ -105,7 +101,7 @@ class SpartiatesRepository extends AbstractRepository
             ':id' => $id]);
     }
 
-    public function updateSpartiateById($id, $lastName, $name)
+    public function updateSpartiateById($id, $lastName, $name): void
     {
         $query = "UPDATE SPARTIATE SET LASTNAME = :lastName, NAME = :name WHERE SPART_ID = :id;";
         $statement = $this->connexion->prepare($query);
@@ -116,7 +112,7 @@ class SpartiatesRepository extends AbstractRepository
 
     }
 
-    public function search($searchTerm)
+    public function search($searchTerm): array
     {
         $query = "SELECT * FROM SPARTIATE WHERE LASTNAME LIKE :searchTerm OR NAME LIKE :searchTerm LIMIT 10";
         $statement = $this->connexion->prepare($query);
