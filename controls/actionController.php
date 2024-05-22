@@ -16,37 +16,55 @@ if (!isset($_SESSION)) {
     session_start();
 }
 $actionsMapping = [
-    'logIn' => ['fields' => ['pseudo', 'password'], 'controller' => $usersController, 'success' => ['success' => true, 'url' => '/users'], 'error' => ['success' => false, 'error' => 'Identifiant ou mot de passe incorrect'], 'adminOnly' => false, 'needResponse' => true],
-    'checkSessionCode' => ['fields' => ['code'], 'controller' => $codesController, 'success' => ['success' => true, 'url' => '/pseudo'], 'error' => ['success' => false, 'error' => 'code incorrect'], 'adminOnly' => false, 'needResponse' => true],
+
+    // Spartiate
     'createSpartiate' => ['fields' => ['lastName', 'name'], 'controller' => $spartiatesController, 'redirect' => '/spartiates', 'adminOnly' => true],
-    'createQuestion' => ['fields' => ['text', 'level', 'true', 'false1', 'false2'], 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
-    'deleteUser' => ['idField' => 'id', 'controller' => $sessionController, 'redirect' => '', 'adminOnly' => true],
-    'deleteQuestion' => ['idField' => 'id', 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
-    'deleteSpartiate' => ['idField' => 'id', 'controller' => $spartiatesController, 'redirect' => '/spartiates', 'adminOnly' => true],
-    'updateQuestion' => ['idField' => 'id', 'fields' => ['text', 'level', 'true', 'false1', 'false2'], 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
     'updateSpartiate' => ['idField' => 'id', 'fields' => ['lastName', 'name'], 'controller' => $spartiatesController, 'redirect' => '/spartiates', 'adminOnly' => true],
-    'changeStar' => ['fields' => ['spartiateId'], 'controller' => $spartiatesController, 'adminOnly' => true],
-    'searchQuestion' => ['fields' => ['searchTerm'], 'controller' => $questionsController, 'adminOnly' => true],
+    'deleteSpartiate' => ['idField' => 'id', 'controller' => $spartiatesController, 'redirect' => '/spartiates', 'adminOnly' => true],
+    'setSessionSpart' => ['fields' => ['spartiateId'], 'controller' => $sessionController, 'adminOnly' => false],
     'searchSpartiate' => ['fields' => ['searchTerm'], 'controller' => $spartiatesController, 'adminOnly' => true],
+    'changeStar' => ['fields' => ['spartiateId'], 'controller' => $spartiatesController, 'adminOnly' => true],
+
+    // Question
+    'createQuestion' => ['fields' => ['text', 'level', 'true', 'false1', 'false2'], 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
+    'updateQuestion' => ['idField' => 'id', 'fields' => ['text', 'level', 'true', 'false1', 'false2'], 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
+    'deleteQuestion' => ['idField' => 'id', 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
+    'getRandomQuestion' => ['controller' => $questionsController, 'adminOnly' => false],
+    'searchQuestion' => ['fields' => ['searchTerm'], 'controller' => $questionsController, 'adminOnly' => true],
+
+    // Session Code
+    'checkSessionCode' => ['fields' => ['code'], 'controller' => $codesController, 'success' => ['success' => true, 'url' => '/pseudo'], 'error' => ['success' => false, 'error' => 'code incorrect'], 'adminOnly' => false, 'needResponse' => true],
+    'getSessionCode' => ['controller' => $codesController, 'adminOnly' => true],
+
+    // Manage Session
     'start' => ['controller' => $codesController, 'adminOnly' => true],
     'stop' => ['controller' => $codesController, 'adminOnly' => true],
-    'addSessionPlayer' => ['fields' => ['pseudo', 'mail'], 'controller' => $sessionController, 'redirect' => '/play', 'adminOnly' => false],
-    'showRanking' => ['controller' => $sessionController, 'adminOnly' => true],
-    'addScore' => ['fields' => ['score'], 'controller' => $sessionController, 'adminOnly' => false],
-    'getSessionCode' => ['controller' => $codesController, 'adminOnly' => true],
-    'getRandomQuestion' => ['controller' => $questionsController, 'adminOnly' => false],
     'isInActiveSession' => ['controller' => $sessionController, 'adminOnly' => false],
-    'showEndGame' => ['fields' => ['score'], 'controller' => $sessionController, 'adminOnly' => false],
-    'setSessionSpart' => ['fields' => ['spartiateId'], 'controller' => $sessionController, 'adminOnly' => false],
+    'addSessionPlayer' => ['fields' => ['pseudo', 'mail'], 'controller' => $sessionController, 'redirect' => '/play', 'adminOnly' => false],
+
+    // Score
+    'addScore' => ['fields' => ['score'], 'controller' => $sessionController, 'adminOnly' => false],
+
+    // Web Socket
     'startWS' => ['webSocketMessage' => 'start', 'adminOnly' => true],
     'stopWS' => ['webSocketMessage' => 'stop', 'adminOnly' => true],
     'connexionWS' => ['controller' => $wscontroller, 'adminOnly' => false],
+
+    // Game Mode
     'chooseDefense' => ['controller' => $sessionController, 'adminOnly' => false],
     'chooseAttack' => ['controller' => $sessionController, 'adminOnly' => false],
+
+    // User
+    'logIn' => ['fields' => ['pseudo', 'password'], 'controller' => $usersController, 'success' => ['success' => true, 'url' => '/users'], 'error' => ['success' => false, 'error' => 'Identifiant ou mot de passe incorrect'], 'adminOnly' => false, 'needResponse' => true],
+    'deleteUser' => ['idField' => 'id', 'controller' => $sessionController, 'redirect' => '', 'adminOnly' => true],
+
+    // Other
+    'showRanking' => ['controller' => $sessionController, 'adminOnly' => true],
+    'showEndGame' => ['fields' => ['score'], 'controller' => $sessionController, 'adminOnly' => false],
 ];
 
 // Fonction pour traiter les actions
-function handleAction($actionsMapping)
+function handleAction($actionsMapping): void
 {
     $postData = $_POST;
     $files = $_FILES;
@@ -79,7 +97,7 @@ function handleAction($actionsMapping)
             $params[] = htmlspecialchars($postData[$field]);
         }
 
-        //je verifie si mon controller existe ou si c'est une fonction websocket
+        // Vérifier si le controller existe ou si c'est une fonction websocket
         if (!isset($mapping['controller']) || isset($mapping['webSocketMessage'])) {
             if (isset($mapping['webSocketMessage']))
                 echo $mapping['webSocketMessage'];
@@ -96,7 +114,7 @@ function handleAction($actionsMapping)
             }
         } else {
             $controllers = $mapping['controller'];
-            // Appeler la fonction appropriée avec les paramètres   $controllers->action($params);
+            // Appeler la fonction appropriée avec les paramètres $controllers->action($params);
             call_user_func_array([$controllers, $action], $params);
         }
 
@@ -105,12 +123,12 @@ function handleAction($actionsMapping)
             $imageFileType = strtolower(pathinfo(basename($files["fileToUpload"]["name"]), PATHINFO_EXTENSION));
             $target_file = $target_dir . strtolower($postData['lastName']) . "_" . strtolower($postData['name'] . "." . $imageFileType);
 
-            // restreindre au extensions d'image
+            // restreindre aux extensions d'image
             if ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg" || $imageFileType == "gif") {
                 move_uploaded_file(str_replace("\\\\", "\\", $files["fileToUpload"]["tmp_name"]), $target_file);
             }
         }
-        //      Redirection
+        // Redirection
         if (isset($mapping['redirect'])) {
             echo $mapping['redirect'];
         }
@@ -122,7 +140,7 @@ function handleAction($actionsMapping)
 
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest' && !empty($_POST['action'])) {
     if (isset($actionsMapping[$_POST['action']])) {
-        // Utilisation de la fonction si la requete ajax est detectée
+        // Utilisation de la fonction si la requête ajax est détectée
         handleAction($actionsMapping);
     } elseif ($_POST['action'] == 'deconnect') {
         $_SESSION['admin'] = false;

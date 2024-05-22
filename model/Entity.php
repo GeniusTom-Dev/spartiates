@@ -12,7 +12,7 @@ abstract class Entity
     }
 
     //Hydratation
-    public function hydrate($data)
+    public function hydrate($data): void
     {
         foreach ($data as $key => $value) {
             $key = strtolower($key);

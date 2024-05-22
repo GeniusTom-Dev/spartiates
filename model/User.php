@@ -8,17 +8,17 @@ namespace Model;
  */
 class User extends Entity
 {
-    private $user_id;
-    private $password;
-    private $pseudo;
-    private $mail;
-    private $score;
-    private $admin;
+    private mixed $user_id;
+    private mixed $password;
+    private mixed $pseudo;
+    private mixed $mail;
+    private mixed $score;
+    private mixed $admin;
 
     /**
      * @return mixed
      */
-    public function getAdmin()
+    public function getAdmin(): mixed
     {
         return $this->admin;
     }
@@ -26,7 +26,7 @@ class User extends Entity
     /**
      * @param mixed $admin
      */
-    public function setAdmin($admin): void
+    public function setAdmin(mixed $admin): void
     {
         $this->admin = $admin;
     }
@@ -34,7 +34,7 @@ class User extends Entity
     /**
      * @return mixed
      */
-    public function getUser_id()
+    public function getUser_id(): mixed
     {
         return $this->user_id;
     }
@@ -42,7 +42,7 @@ class User extends Entity
     /**
      * @param mixed $user_id
      */
-    public function setUser_id($user_id): void
+    public function setUser_id(mixed $user_id): void
     {
         $this->user_id = $user_id;
     }
@@ -50,7 +50,7 @@ class User extends Entity
     /**
      * @return mixed
      */
-    public function getPassword()
+    public function getPassword(): mixed
     {
         return $this->password;
     }
@@ -58,7 +58,7 @@ class User extends Entity
     /**
      * @param mixed $password
      */
-    public function setPassword($password): void
+    public function setPassword(mixed $password): void
     {
         $this->password = $password;
     }
@@ -66,7 +66,7 @@ class User extends Entity
     /**
      * @return mixed
      */
-    public function getPseudo()
+    public function getPseudo(): mixed
     {
         return $this->pseudo;
     }
@@ -74,7 +74,7 @@ class User extends Entity
     /**
      * @param mixed $pseudo
      */
-    public function setPseudo($pseudo): void
+    public function setPseudo(mixed $pseudo): void
     {
         $this->pseudo = $pseudo;
     }
@@ -82,7 +82,7 @@ class User extends Entity
     /**
      * @return mixed
      */
-    public function getMail()
+    public function getMail(): mixed
     {
         return $this->mail;
     }
@@ -90,7 +90,7 @@ class User extends Entity
     /**
      * @param mixed $mail
      */
-    public function setMail($mail): void
+    public function setMail(mixed $mail): void
     {
         $this->mail = $mail;
     }
@@ -98,7 +98,7 @@ class User extends Entity
     /**
      * @return mixed
      */
-    public function getScore()
+    public function getScore(): mixed
     {
         return $this->score;
     }
@@ -106,7 +106,7 @@ class User extends Entity
     /**
      * @param mixed $score
      */
-    public function setScore($score): void
+    public function setScore(mixed $score): void
     {
         $this->score = $score;
     }

@@ -11,26 +11,28 @@ class CodesController
     /**
      * @var mixed
      */
-    private $repository;
+    private mixed $repository;
 
     public function __construct()
     {
         $this->repository = new CodesRepository();
     }
 
-    public function codeIsActive($code)
+    public function codeIsActive($code): bool
     {
         try {
             if ($this->repository->isActive($code)) {
                 return true;
-            } else {
-                return false;
             }
+           else {
+                return false;
+           }
         } catch (MoreThanOneException $ERROR) {
-            //on fais un retour d'erreur
+            //on fait un retour d'erreur
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
             echo $ERROR->getMessage();
         }
+        return false;
     }
 
     public function checkSessionCode($code)
@@ -43,13 +45,13 @@ class CodesController
                 return false;
             }
         } catch (MoreThanOneException $ERROR) {
-            //on fais un retour d'erreur
+            //on fait un retour d'erreur
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
             echo $ERROR->getMessage();
         }
     }
 
-    public function start()
+    public function start(): void
     {
         $randomCode = rand(10000, 99999);
         if ($this->repository->isSessionCode()) {
