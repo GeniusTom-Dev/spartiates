@@ -8,17 +8,17 @@ namespace Model;
  */
 class Question extends Entity
 {
-    private $question_id;
-    private $text;
-    private $difficulty;
-    private $response;
-    private $false1;
-    private $false2;
+    private mixed $question_id;
+    private mixed $text;
+    private mixed $difficulty;
+    private mixed $response;
+    private mixed $false1;
+    private mixed $false2;
 
     /**
      * @return mixed
      */
-    public function getResponse()
+    public function getResponse(): mixed
     {
         return $this->response;
     }
@@ -26,7 +26,7 @@ class Question extends Entity
     /**
      * @param mixed $response
      */
-    public function setResponse($response): void
+    public function setResponse(mixed $response): void
     {
         $this->response = html_entity_decode($response);
     }
@@ -34,7 +34,7 @@ class Question extends Entity
     /**
      * @return mixed
      */
-    public function getFalse1()
+    public function getFalse1(): mixed
     {
         return $this->false1;
     }
@@ -42,7 +42,7 @@ class Question extends Entity
     /**
      * @param mixed $false1
      */
-    public function setFalse1($false1): void
+    public function setFalse1(mixed $false1): void
     {
         $this->false1 = html_entity_decode($false1);
     }
@@ -50,7 +50,7 @@ class Question extends Entity
     /**
      * @return mixed
      */
-    public function getFalse2()
+    public function getFalse2(): mixed
     {
         return $this->false2;
     }
@@ -58,7 +58,7 @@ class Question extends Entity
     /**
      * @param mixed $false2
      */
-    public function setFalse2($false2): void
+    public function setFalse2(mixed $false2): void
     {
         $this->false2 = html_entity_decode($false2);
     }
@@ -66,7 +66,7 @@ class Question extends Entity
     /**
      * @return mixed
      */
-    public function getQuestion_id()
+    public function getQuestion_id(): mixed
     {
         return $this->question_id;
     }
@@ -74,7 +74,7 @@ class Question extends Entity
     /**
      * @param mixed $question_id
      */
-    public function setQuestion_id($question_id): void
+    public function setQuestion_id(mixed $question_id): void
     {
         $this->question_id = $question_id;
     }
@@ -82,7 +82,7 @@ class Question extends Entity
     /**
      * @return mixed
      */
-    public function getText()
+    public function getText(): mixed
     {
         return $this->text;
     }
@@ -90,7 +90,7 @@ class Question extends Entity
     /**
      * @param mixed $text
      */
-    public function setText($text): void
+    public function setText(mixed $text): void
     {
         $this->text = html_entity_decode($text);
     }
@@ -98,7 +98,7 @@ class Question extends Entity
     /**
      * @return mixed
      */
-    public function getDifficulty()
+    public function getDifficulty(): mixed
     {
         return $this->difficulty;
     }
@@ -106,7 +106,7 @@ class Question extends Entity
     /**
      * @param mixed $difficulty
      */
-    public function setDifficulty($difficulty): void
+    public function setDifficulty(mixed $difficulty): void
     {
         $this->difficulty = $difficulty;
     }

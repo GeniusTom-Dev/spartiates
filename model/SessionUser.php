@@ -4,15 +4,15 @@ namespace Model;
 
 class SessionUser extends Entity
 {
-    private $session_user_id;
-    private $pseudo;
-    private $code;
-    private $score;
+    private mixed $session_user_id;
+    private mixed $pseudo;
+    private mixed $code;
+    private mixed $score;
 
     /**
      * @return mixed
      */
-    public function getSession_user_id()
+    public function getSession_user_id(): mixed
     {
         return $this->session_user_id;
     }
@@ -20,7 +20,7 @@ class SessionUser extends Entity
     /**
      * @param mixed $session_user_id
      */
-    public function setSession_user_id($session_user_id): void
+    public function setSession_user_id(mixed $session_user_id): void
     {
         $this->session_user_id = $session_user_id;
     }
@@ -28,7 +28,7 @@ class SessionUser extends Entity
     /**
      * @return mixed
      */
-    public function getPseudo()
+    public function getPseudo(): mixed
     {
         return $this->pseudo;
     }
@@ -36,7 +36,7 @@ class SessionUser extends Entity
     /**
      * @param mixed $pseudo
      */
-    public function setPseudo($pseudo): void
+    public function setPseudo(mixed $pseudo): void
     {
         $this->pseudo = $pseudo;
     }
@@ -44,7 +44,7 @@ class SessionUser extends Entity
     /**
      * @return mixed
      */
-    public function getCode()
+    public function getCode(): mixed
     {
         return $this->code;
     }
@@ -52,7 +52,7 @@ class SessionUser extends Entity
     /**
      * @param mixed $code
      */
-    public function setCode($code): void
+    public function setCode(mixed $code): void
     {
         $this->code = $code;
     }
@@ -60,7 +60,7 @@ class SessionUser extends Entity
     /**
      * @return mixed
      */
-    public function getScore()
+    public function getScore(): mixed
     {
         return $this->score;
     }
@@ -68,7 +68,7 @@ class SessionUser extends Entity
     /**
      * @param mixed $score
      */
-    public function setScore($score): void
+    public function setScore(mixed $score): void
     {
         $this->score = $score;
     }

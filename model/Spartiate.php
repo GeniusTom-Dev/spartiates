@@ -8,16 +8,16 @@ namespace Model;
  */
 class Spartiate extends Entity
 {
-    private $spart_id;
-    private $lastName;
-    private $name;
-    private $number;
-    private $star;
+    private mixed $spart_id;
+    private mixed $lastName;
+    private mixed $name;
+    private mixed $number;
+    private mixed $star;
 
     /**
      * @return mixed
      */
-    public function isStarred()
+    public function isStarred(): mixed
     {
         return $this->star;
     }
@@ -25,7 +25,7 @@ class Spartiate extends Entity
     /**
      * @param mixed $star
      */
-    public function setStar($star): void
+    public function setStar(mixed $star): void
     {
         $this->star = $star;
     }
@@ -33,7 +33,7 @@ class Spartiate extends Entity
     /**
      * @return mixed
      */
-    public function getSpart_id()
+    public function getSpart_id(): mixed
     {
         return $this->spart_id;
     }
@@ -41,7 +41,7 @@ class Spartiate extends Entity
     /**
      * @param mixed $spart_id
      */
-    public function setSpart_id($spart_id): void
+    public function setSpart_id(mixed $spart_id): void
     {
         $this->spart_id = $spart_id;
     }
@@ -49,7 +49,7 @@ class Spartiate extends Entity
     /**
      * @return mixed
      */
-    public function getLastname()
+    public function getLastname(): mixed
     {
         return $this->lastName;
     }
@@ -57,7 +57,7 @@ class Spartiate extends Entity
     /**
      * @param mixed $lastName
      */
-    public function setLastname($lastName): void
+    public function setLastname(mixed $lastName): void
     {
         $this->lastName = $lastName;
     }
@@ -65,7 +65,7 @@ class Spartiate extends Entity
     /**
      * @return mixed
      */
-    public function getName()
+    public function getName(): mixed
     {
         return $this->name;
     }
@@ -73,7 +73,7 @@ class Spartiate extends Entity
     /**
      * @param mixed $name
      */
-    public function setName($name): void
+    public function setName(mixed $name): void
     {
         $this->name = $name;
     }
@@ -81,7 +81,7 @@ class Spartiate extends Entity
     /**
      * @return mixed
      */
-    public function getNumber()
+    public function getNumber(): mixed
     {
         return $this->number;
     }
@@ -89,7 +89,7 @@ class Spartiate extends Entity
     /**
      * @param mixed $number
      */
-    public function setNumber($number): void
+    public function setNumber(mixed $number): void
     {
         $this->number = $number;
     }
