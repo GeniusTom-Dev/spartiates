@@ -1,9 +1,9 @@
 <a href="/home" class="absolute left-5 top-5 w-20 h-20">
-    <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Delete">
+    <img class="p-2 w-sm h-sm bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Delete">
 </a>
 
-<div class="m-10">
-    <h1 class="titlePage">
+<div class="m-10 ">
+    <h1 class="titlePage text-center">
         <span class="text-black">Les</span> règles du jeu
     </h1>
     <div class="w-full flex justify-center items-center py-10">
@@ -17,26 +17,26 @@
         <div class="overflow-hidden relative h-[50vh] rounded-lg w-4/5 left-[10%]">
             <!-- Item 1 -->
             <div class="overflow-auto hidden duration-700 ease-in-out" data-carousel-item>
-                <span class="w-full absolute top-0 left-1/2 text-2xl font-semibold text-gray-800 -translate-x-1/2 text-center">
+                <span class="w-full absolute top-0 left-1/2 text-3xl font-semibold text-gray-800 -translate-x-1/2 text-center">
                     <?php echo file_get_contents('view/rules/game.php') ?>
                 </span>
             </div>
             <!-- Item 2 -->
             <div class="overflow-auto hidden duration-700 ease-in-out" data-carousel-item>
-                <span class="w-full absolute top-0 left-1/2 text-2xl font-semibold text-gray-800 -translate-x-1/2 text-center">
+                <span class="w-full absolute top-0 left-1/2 text-3xl font-semibold text-gray-800 -translate-x-1/2 text-center">
                     <?php echo file_get_contents('view/rules/surface.php') ?>
                 </span>
             </div>
             <!-- Item 3 -->
             <div class="overflow-auto hidden duration-700 ease-in-out" data-carousel-item>
-                <span class="w-full absolute top-0 left-1/2 text-2xl font-semibold text-gray-800 -translate-x-1/2 text-center">
+                <span class="w-full absolute top-0 left-1/2 text-3xl font-semibold text-gray-800 -translate-x-1/2 text-center">
                     <?php echo file_get_contents('view/rules/equipments.php') ?>
                 </span>
             </div>
             <!-- Item 4 -->
             <div class="overflow-auto hidden duration-700 ease-in-out" data-carousel-item>
-                <span class="w-full absolute top-0 left-1/2 text-2xl font-semibold text-gray-800 -translate-x-1/2 text-center">
-
+                <span class="w-full absolute top-0 left-1/2 text-3xl font-semibold text-gray-800 -translate-x-1/2 text-center">
+                    <?php echo file_get_contents('view/rules/offSide.php') ?>
                 </span>
             </div>
         </div>

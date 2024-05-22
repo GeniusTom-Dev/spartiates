@@ -4,6 +4,7 @@ namespace Controls;
 
 use Exception\CannotCreateException;
 use Exception\NotFoundException;
+use Repository\SpartiatesRepository;
 use View\View;
 
 class SpartiatesController
@@ -15,7 +16,7 @@ class SpartiatesController
 
     public function __construct()
     {
-        $this->repository = new \Repository\SpartiatesRepository();
+        $this->repository = new SpartiatesRepository();
     }
 
     public function showSpartiates(): void

@@ -12,7 +12,7 @@ class Connexion
     {
         if (self::$instance == null) {
 
-            self::$instance = new \PDO(
+            self::$instance = new PDO(
                 $_ENV['DSN'],
                 $_ENV['USERNAME'],
                 $_ENV['PASSWORD'],

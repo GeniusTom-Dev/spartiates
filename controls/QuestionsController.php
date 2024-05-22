@@ -4,6 +4,7 @@ namespace Controls;
 
 use Exception\CannotCreateException;
 use Exception\NotFoundException;
+use Repository\QuestionsRepository;
 use View\View;
 
 class QuestionsController
@@ -15,7 +16,7 @@ class QuestionsController
 
     public function __construct()
     {
-        $this->repository = new \Repository\QuestionsRepository();
+        $this->repository = new QuestionsRepository();
     }
 
 

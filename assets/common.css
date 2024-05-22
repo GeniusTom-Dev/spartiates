@@ -25,4 +25,23 @@
     @apply text-3xl text-customBlue uppercase;
 }
 
+.hand-animation {
+ position: absolute;
+ width: 50px;
+ height: 50px;
+ background-image: url('/assets/images/hand.png'); /* Remplacez 'hand.png' par le chemin de votre image de main */
+ background-size: cover;
+ animation: handAnimation 2.5s infinite;
+}
+
+@keyframes handAnimation {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(200px);
+    }
+}
+
+
 

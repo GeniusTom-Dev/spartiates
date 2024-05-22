@@ -1,3 +1,4 @@
+
 $(document).ready(function (e) {
     $(document).on("click", ".star", function () {
         // Toggle l'état rempli/vide de l'étoile
@@ -22,68 +23,45 @@ $(document).ready(function (e) {
         });
     });
 
-    $("#searchQuestion").on('input', function () {
-        // recupere ce qui est ecrit dans la barre de recherche
-        let searchTerm = $(this).val();
+    function handleSearch(inputSelector) {
+        $(inputSelector).on('input', function () {
+            // Récupère ce qui est écrit dans la barre de recherche
+            let searchTerm = $(this).val();
 
-        if (searchTerm.length > 0) {
-            // envoie la requete ajax
-            $.ajax({
-                type: "POST",
-                url: "/controls/actionController.php",
-                data: {
-                    action: "searchQuestion",
-                    searchTerm: searchTerm
-                },
-                success: function (result) {
-                    // affiche le resultat de la recherche
-                    if (result === "")
-                        result = "Aucun résultat";
-                    $('.result').hide()
-                    $('.searchedResult').show().html(result);
-                }
-            });
-        } else {
-            $('.searchedResult').hide()
-            $('.result').show()
-        }
-    });
+            if (searchTerm.length > 0) {
+                // Envoie la requête Ajax
+                $.ajax({
+                    type: "POST",
+                    url: "/controls/actionController.php",
+                    data: {
+                        action: inputSelector === "#searchQuestion" ? "searchQuestion" : "searchSpartiate",
+                        searchTerm: searchTerm
+                    },
+                    success: function (result) {
+                        // Affiche le résultat de la recherche
+                        if (result === "")
+                            result = "Aucun résultat";
+                        $('.result').hide();
+                        $('.searchedResult').show().html(result);
+                    }
+                });
+            } else {
+                $('.searchedResult').hide();
+                $('.result').show();
+            }
+        });
+    }
 
-    $("#searchSpartiate").on('input', function () {
-        // recupere ce qui est ecrit dans la barre de recherche
-        let searchTerm = $(this).val();
-
-        if (searchTerm.length > 0) {
-            // envoie la requete ajax
-            $.ajax({
-                type: "POST",
-                url: "/controls/actionController.php",
-                data: {
-                    action: "searchSpartiate",
-                    searchTerm: searchTerm
-                },
-                success: function (result) {
-                    // affiche le resultat de la recherche
-                    if (result === "")
-                        result = "Aucun résultat";
-                    $('.result').hide()
-                    $('.searchedResult').show().html(result);
-                }
-            });
-        } else {
-            $('.searchedResult').hide()
-            $('.result').show()
-        }
-    });
+// Appeler la fonction pour chaque champ de recherche spécifique
+    handleSearch("#searchQuestion");
+    handleSearch("#searchSpartiate");
 
     $("#verificationForm").submit(function (e) {
         e.preventDefault(); //empêcher une action par défaut
-
         // Récupérer l'URL du formulaire et la méthode
         let form_method = $(this).attr("method");
         // Encoder les éléments du formulaire et ajouter la letiable action
         let form_data = $(this).serialize()
-
         // Effectuer la requête AJAX
         $.ajax({
             url: "/controls/actionController.php",
@@ -104,11 +82,8 @@ $(document).ready(function (e) {
         e.preventDefault(); //empêcher une action par défaut
         // Récupérer l'URL du formulaire et la méthode
         let form_method = $(this).attr("method");
-
         // Encoder les éléments du formulaire et ajouter la letiable action
-        // let form_data = $(this).serialize()
         let form_data = new FormData(this);
-
         // Effectuer la requête AJAX
         $.ajax({
             url: "/controls/actionController.php",
@@ -121,7 +96,22 @@ $(document).ready(function (e) {
         });
     });
 
-    $(document).on("click", "#actionButton", function () {
+    $(document).on("click", ".chooseButton", function () {
+        let action = $(this).data("action");
+        // Effectuer la requête AJAX
+        $.ajax({
+            type: "POST",
+            url: "/controls/actionController.php",
+            data: {
+                action: action,
+            },
+        }).done(function (response) {
+            sessionStorage.setItem("game", response);
+            location.reload();
+        });
+    });
+
+    $(document).on("click", ".actionButton", function () {
         let action = $(this).data("action");
         let id = $(this).data("id");
         // Effectuer la requête AJAX
@@ -133,28 +123,22 @@ $(document).ready(function (e) {
                 id: id,
             },
         }).done(function (response) {
-            window.location.href = response;
+            if (response !== "")
+                window.location.href = response;
         });
     });
 
-    $(document).on("click", "#deconnect", function () {
-        $.ajax({
-            type: "POST",
-            url: "/controls/actionController.php",
-            data: {
-                action: "deconnect",
-            },
-        }).done(function (response) {
-            window.location.href = response;
-        });
+    $(document).on("click", ".deleteButton", function () {
+        updateRanking();
     });
 
-    $(document).on("click", "#callActionButton", function () {
-        let buttonConfirmDelete = $('#actionButton');
+
+    $(".callActionButton").on("click", function () {
+        let buttonConfirmDelete = $('.actionButton');
         buttonConfirmDelete.data('id', $(this).data("id"));
     });
 
-    $(document).on("click", ".sessionAction", function () {
+    $(".sessionAction").on("click", function () {
         let action = $(this).data("action");
         $.ajax({
             type: "POST",
@@ -164,10 +148,12 @@ $(document).ready(function (e) {
             },
         }).done(function (response) {
             $('#code').html(response);
+            updateRanking();
         });
     });
 
-    $(document).on("click", ".spartCard", function () {
+    //choix du spartiate avant le jeu
+    $(".spartCard").on("click", function () {
         let id = $(this).data("id");
         // Effectuer la requête AJAX
         $.ajax({
@@ -181,6 +167,27 @@ $(document).ready(function (e) {
             location.reload();
         });
     });
+
+    $(".buttonWS").on("click", function () {
+        let action = $(this).data("action");
+        // Effectuer la requête AJAX
+        $.ajax({
+            type: "POST",
+            url: "/controls/actionController.php",
+            data: {
+                action: action,
+            },
+        }).done(function (response) {
+            if (response === "Vous n\'avez pas les droits administratifs nécessaires.") {
+                alert(response);
+            } else {
+                sendMessage(response);
+            }
+            setTimeout(updateRanking, 1000);
+            console.log("updateRanking");
+        });
+    });
+
 });
 
 function updateRanking() {
@@ -207,11 +214,20 @@ function getSessionCode() {
     });
 }
 
+function animationHelper() {
+    console.log("animationHelper")
+    if( document.getElementById('tutorial-hand').style.display === 'none'){
+        document.getElementById('tutorial-hand').style.display = 'block';
+    } else {
+        document.getElementById('tutorial-hand').style.display = 'none';
+    }
+}
+
 if (window.location.pathname === "/users") {
     getSessionCode()
     updateRanking()
-    setInterval(updateRanking, 3000);
+    // setInterval(updateRanking, 3000);
 }
-
-
-
+if (window.location.pathname === "/sessionCode") {
+    sessionStorage.setItem("score", "0");
+}

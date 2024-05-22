@@ -2,7 +2,9 @@
 
 namespace Exception;
 
-class CannotCreateException extends \RuntimeException
+use RuntimeException;
+
+class CannotCreateException extends RuntimeException
 {
 
 }

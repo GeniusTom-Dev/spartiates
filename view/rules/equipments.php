@@ -1,5 +1,6 @@
-<h1 class="text-2xl font-semibold text-gray-800 mb-2">Equipements</h1>
-<p class="text-gray-600 mb-4">L'équipement complet d'un joueur de Hockey sur glace se compose ainsi :
+<h1 class="text-4xl text-gray-800 mb-2 font-serif">Equipements</h1>
+<p class="text-3xl text-gray-600 mb-4 font-serif">L'équipement complet d'un joueur de Hockey sur glace se compose ainsi
+    :
     <br>
     - Une crosses
     <br>

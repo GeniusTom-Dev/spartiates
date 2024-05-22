@@ -1,7 +1,9 @@
 <?php
 
 namespace Exception;
-class MoreThanOneException extends \RuntimeException
+use RuntimeException;
+
+class MoreThanOneException extends RuntimeException
 {
 
 }

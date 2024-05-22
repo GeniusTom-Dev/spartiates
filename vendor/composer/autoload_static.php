@@ -6,53 +6,53 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit4db6a181d85246bba17b4a7f56cb5657
 {
-    public static $prefixLengthsPsr4 = array(
-        'V' =>
-            array(
-                'View\\' => 5,
-            ),
-        'R' =>
-            array(
-                'Repository\\' => 11,
-            ),
-        'M' =>
-            array(
-                'Model\\' => 6,
-            ),
-        'E' =>
-            array(
-                'Exception\\' => 10,
-            ),
-        'C' =>
-            array(
-                'Controls\\' => 9,
-            ),
+    public static $prefixLengthsPsr4 = array (
+        'V' => 
+        array (
+            'View\\' => 5,
+        ),
+        'R' => 
+        array (
+            'Repository\\' => 11,
+        ),
+        'M' => 
+        array (
+            'Model\\' => 6,
+        ),
+        'E' => 
+        array (
+            'Exception\\' => 10,
+        ),
+        'C' => 
+        array (
+            'Controls\\' => 9,
+        ),
     );
 
-    public static $prefixDirsPsr4 = array(
-        'View\\' =>
-            array(
-                0 => __DIR__ . '/../..' . '/view',
-            ),
-        'Repository\\' =>
-            array(
-                0 => __DIR__ . '/../..' . '/repository',
-            ),
-        'Model\\' =>
-            array(
-                0 => __DIR__ . '/../..' . '/model',
-            ),
-        'Exception\\' =>
-            array(
-                0 => __DIR__ . '/../..' . '/exception',
-            ),
-        'Controls\\' =>
-            array(
-                0 => __DIR__ . '/../..' . '/controls',
-            ),
+    public static $prefixDirsPsr4 = array (
+        'View\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/view',
+        ),
+        'Repository\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/repository',
+        ),
+        'Model\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/model',
+        ),
+        'Exception\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/exception',
+        ),
+        'Controls\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/controls',
+        ),
     );
 
-    public static $classMap = array(
+    public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

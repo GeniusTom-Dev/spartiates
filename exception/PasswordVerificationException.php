@@ -2,7 +2,9 @@
 
 namespace Exception;
 
-class PasswordVerificationException extends \RuntimeException
+use RuntimeException;
+
+class PasswordVerificationException extends RuntimeException
 {
 
 }

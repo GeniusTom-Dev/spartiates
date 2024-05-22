@@ -7,9 +7,10 @@
     <title>%title%</title>
     <!--    style-->
     <link rel="stylesheet" href="/dist/output.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+<!--    <script src="https://cdn.tailwindcss.com"></script>-->
     <script src="/dist/bundle.js"></script>
-
+    <script src="/assets/socket.js"></script>
+    <script type="module" src="../assets/GameLauncher.js"></script>
     <script src="/dist/jquery.min.js"></script>
     <script src="/assets/index.js"></script>
     <style>
@@ -26,6 +27,9 @@
 <a href="/home" class="absolute left-5 top-0 w-20 h-20">
     <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Delete">
 </a>
+<a onclick="animationHelper()" class="absolute left-[10%] top-0 w-16 h-16">
+    <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/questionMark.svg" alt="Delete">
+</a>
 <div class="h-[20%] bg-customBlue w-full flex flex-col p-5" id="top">
     <div class="items-center text-3xl text-black text-right">
         <label>Score :</label>
@@ -40,16 +44,33 @@
     <div class="text-center w-[29.3%]"><label class="text-3xl text-black" id="rep2"></label></div>
     <div class="text-center w-[29.3%]"><label class="text-3xl text-black" id="rep3"></label></div>
 </div>
-<canvas id="myCanvas" class="bg-gray-200 absolute top-[20%] right-1/2 translate-x-1/2"></canvas>
-<script src="/assets/game.js"></script>
 
-<div class="absolute w-[90vw] h-[90vh] z-50 right-1/2 translate-x-1/2 bottom-1/2 translate-y-1/2  bg-customBlueDark opacity-95 flex flex-col items-center justify-center space-y-5 text-white"
+<canvas id="myCanvas" class="bg-gray-200 absolute top-[20%] right-1/2 translate-x-1/2"></canvas>
+
+<div class="absolute w-full h-full z-50 top-0 bg-customBlueDark opacity-95 flex flex-col items-center justify-center space-y-5 text-white"
      id="endGame" style="display: none">
-    <label class="text-5xl" id="pseudo"></label>
-    <span><label class="text-5xl">Score : </label>
-    <label class="text-5xl" id="scoreEnd"></label></span>
-    <span><label class="text-5xl">Classement : #</label>
-    <label class="text-5xl" id="rank"></label></span>
+    <span>
+        <label class="text-5xl">Felicitation </label>
+        <label class="text-5xl" id="pseudo"></label>
+        <label class="text-5xl">!</label>
+    </span>
+    <span>
+        <label class="text-5xl">Score : </label>
+        <label class="text-5xl" id="scoreEnd"></label>
+    </span>
+    <span>
+        <label class="text-5xl">Classement : #</label>
+        <label class="text-5xl" id="rank"></label>
+    </span>
+    <a href="/home" class="p-5 bg-customBlue rounded-xl text-4xl">
+        Retour à l'accueil
+    </a>
 </div>
+<div class="absolute w-full h-full z-50 top-0 bg-customBlueDark opacity-100 flex flex-col items-center justify-center space-y-5 text-white"
+     id="blockLandscape" style="display: none">
+    <h1>Tournez votre téléphone</h1>
+</div>
+<div id="tutorial-hand" class="hand-animation absolute left-[50%] bottom-[25vh]" style="display: none"></div>
+
 </body>
 </html>

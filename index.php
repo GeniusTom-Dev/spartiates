@@ -1,5 +1,10 @@
 <?php
 
+use Controls\CodesController;
+use Controls\QuestionsController;
+use Controls\SessionController;
+use Controls\SpartiatesController;
+use Controls\UsersController;
 use View\View;
 
 require 'vendor/autoload.php';
@@ -19,11 +24,11 @@ if (isset($_SESSION['last_activity']) && time() - $_SESSION['last_activity'] > 1
     $_SESSION['last_activity'] = time();
 }
 
-$questionsController = new \Controls\QuestionsController();
-$spartiatesController = new \Controls\SpartiatesController();
-$usersController = new \Controls\UsersController();
-$codesController = new \Controls\CodesController();
-$sessionController = new \Controls\SessionController();
+$questionsController = new QuestionsController();
+$spartiatesController = new SpartiatesController();
+$usersController = new UsersController();
+$codesController = new CodesController();
+$sessionController = new SessionController();
 
 // Gestion des actions
 require 'controls/actionController.php';
@@ -36,7 +41,7 @@ $pages = [
 $forms = [
     'sessionCode' => 'entrer le code',
     'pseudo' => 'entrer le pseudo',
-    'admin' => 'Connexion',
+    'connect' => 'Connexion',
 ];
 $adminForms = [
     'newQuestion' => 'Nouvelle Question',
@@ -53,19 +58,23 @@ if ('' == $url || '/' == $url || 'home' == $url) {
     View::display('Home', $path);
 
 } elseif (isset($pages[$url])) {
-
     $path = 'view/' . $url . '.php';
-    if ($url != "play" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']) && !empty($_SESSION['pseudo']) && !empty($_SESSION['spartiateId']))) {
+    if ($url != "play" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']) && !empty($_SESSION['pseudo']) && !empty($_SESSION['spartiateId']) && !empty($_SESSION['gameMode']))) {
         View::display($pages[$url], $path);
     } elseif ($url == 'play' && (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code']))) {
         $_SESSION['pseudo'] = null;
         $_SESSION['spartiateId'] = null;
+        $_SESSION['gameMode'] = null;
         header('refresh:0;url=/sessionCode');
     } elseif ($url == 'play' && empty($_SESSION['pseudo'])) {
         $_SESSION['spartiateId'] = null;
+        $_SESSION['gameMode'] = null;
         header('refresh:0;url=/pseudo');
     } elseif ($url == 'play' && empty($_SESSION['spartiateId'])) {
+        $_SESSION['gameMode'] = null;
         $spartiatesController->showChooseSpartiate();
+    } elseif ($url == 'play' && empty($_SESSION['gameMode'])) {
+        View::display('Choissisez un spartiates', 'view/chooseGameMode.php');
     }
 
 } elseif (isset($forms[$url])) {
@@ -77,7 +86,7 @@ if ('' == $url || '/' == $url || 'home' == $url) {
         header('refresh:0;url=/sessionCode');
 
 } elseif (empty($_SESSION['admin'])) {
-    header('refresh:0;url=/admin');
+    header('refresh:0;url=/connect');
 
 } elseif (isset($adminForms[$url])) {
     $path = 'view/forms/' . $url . '.php';

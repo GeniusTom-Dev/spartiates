@@ -13,15 +13,24 @@ class SessionRepository extends AbstractRepository
         parent::__construct();
     }
 
-    public function addSessionPlayer($pseudo, $code): false|string
+    public function addSessionPlayer($pseudo, $mail, $code): false|string
     {
-        $query = 'INSERT INTO SESSION (pseudo, code) VALUES (:pseudo, :code)';
+        $query1 = 'INSERT INTO MAILS (MAIL ) VALUES (:mail )';
+        $statement = $this->connexion->prepare($query1);
+        $statement->execute([
+            'mail' => $mail
+        ]);
+
+        $query = 'INSERT INTO SESSION (pseudo, code,MAIL) VALUES (:pseudo,:code, :mail)';
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             'pseudo' => $pseudo,
-            'code' => $code
+            'code' => $code,
+            'mail' => $mail
         ]);
         $lastInsertedId = $this->connexion->lastInsertId();
+
+
         return $lastInsertedId;
     }
 
@@ -34,7 +43,7 @@ class SessionRepository extends AbstractRepository
 
     public function getRanking(): array
     {
-        $query = 'SELECT * FROM SESSION ORDER BY SCORE DESC';
+        $query = 'SELECT * FROM SESSION ORDER BY SCORE DESC limit 10';
         $statement = $this->connexion->prepare($query);
         $statement->execute();
         $sessionUsers = [];
@@ -66,12 +75,18 @@ class SessionRepository extends AbstractRepository
             'id' => $id,
             'score' => $score
         ]);
-
-        //Si la requête ne rend rien ça veut dire qu'il n'y a aucun utilisateurs avec cette id
-        if ($statement->rowCount() === 0) {
-            throw new NotFoundException('Aucun USER trouvé');
-        }
     }
+
+    public function setScore($id, $score)
+    {
+        $query = 'UPDATE SESSION SET SCORE = :score WHERE SESSION_USER_ID = :id';
+        $statement = $this->connexion->prepare($query);
+        $statement->execute([
+            'id' => $id,
+            'score' => $score
+        ]);
+    }
+
 
     public function getScore($id): int
     {
@@ -122,6 +137,15 @@ class SessionRepository extends AbstractRepository
             throw new NotFoundException('Aucun USER trouvé');
         }
         $data = $statement->fetch(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    public function getMailAndPseudoOfHighestScore()
+    {
+        $query = 'SELECT pseudo, mail FROM SESSION WHERE SCORE = (SELECT MAX(SCORE) FROM SESSION)';
+        $statement = $this->connexion->prepare($query);
+        $statement->execute();
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 
