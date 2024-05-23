@@ -1,10 +1,10 @@
 <?php
 
-namespace Repository;
+namespace repository;
 
-use Exception\MoreThanOneException;
-use Exception\NotFoundException;
-use Model\Question;
+use exception\MoreThanOneException;
+use exception\NotFoundException;
+use model\Question;
 use PDO;
 
 class QuestionsRepository extends AbstractRepository

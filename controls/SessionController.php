@@ -1,9 +1,9 @@
 <?php
 
-namespace Controls;
+namespace controls;
 
-use Exception\NotFoundException;
-use Repository\SessionRepository;
+use exception\NotFoundException;
+use repository\SessionRepository;
 
 class SessionController
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Controls;
+namespace controls;
 
-use Exception\MoreThanOneException;
-use Repository\CodesRepository;
-use Repository\SessionRepository;
+use exception\MoreThanOneException;
+use repository\CodesRepository;
+use repository\SessionRepository;
 
 class CodesController
 {

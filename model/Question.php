@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace model;
 /**
  * La classe User permet de gérer les utilisateurs
  *
