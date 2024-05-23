@@ -1,6 +1,6 @@
 <?php
 
-namespace Controls;
+namespace controls;
 
 require __DIR__ . '/../vendor/autoload.php';
 

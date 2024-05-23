@@ -1,6 +1,6 @@
 <?php
 
-namespace Exception;
+namespace exception;
 use RuntimeException;
 
 class NotFoundException extends RuntimeException

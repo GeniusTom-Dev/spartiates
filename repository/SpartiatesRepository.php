@@ -1,10 +1,10 @@
 <?php
 
-namespace Repository;
+namespace repository;
 
-use Exception\MoreThanOneException;
-use Exception\NotFoundException;
-use Model\Spartiate;
+use exception\MoreThanOneException;
+use exception\NotFoundException;
+use model\Spartiate;
 use PDO;
 
 class SpartiatesRepository extends AbstractRepository

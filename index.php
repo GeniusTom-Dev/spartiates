@@ -1,11 +1,11 @@
 <?php
 
-use Controls\CodesController;
-use Controls\QuestionsController;
-use Controls\SessionController;
-use Controls\SpartiatesController;
-use Controls\UsersController;
-use View\View;
+use controls\CodesController;
+use controls\QuestionsController;
+use controls\SessionController;
+use controls\SpartiatesController;
+use controls\UsersController;
+use view\View;
 
 require 'vendor/autoload.php';
 
