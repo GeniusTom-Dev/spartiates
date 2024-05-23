@@ -74,7 +74,6 @@ switch ($url) {
     case '' :
     case '/':
     case 'home':
-        $path = 'view/home.php';
         $title = 'Home';
         break;
     case 'play' :
@@ -159,4 +158,4 @@ switch ($url) {
 /// Display
 ///////////////////////////////////////////////////////////////////////////////
 
-View::display($title, $path);
+View::display($title, $path ?? null);
