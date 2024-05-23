@@ -1,7 +1,6 @@
 <?php
 
 namespace controls;
-
 if (isset($_POST['action'])) {
     include_once "../autoloader.php";
 }
