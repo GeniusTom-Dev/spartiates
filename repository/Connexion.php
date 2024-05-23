@@ -11,7 +11,6 @@ class Connexion
     public static function getInstance(): PDO
     {
         if (self::$instance == null) {
-
             self::$instance = new PDO(
                 $_ENV['DSN'],
                 $_ENV['USERNAME'],
@@ -25,5 +24,3 @@ class Connexion
         return self::$instance;
     }
 }
-
-?>

@@ -7,14 +7,7 @@ use controls\SpartiatesController;
 use controls\UsersController;
 use view\View;
 
-spl_autoload_register(function ($class) {
-    $fileName = $class . ".php";
-    $fileName = str_replace("\\", "/", $fileName);
-    if (file_exists($fileName)) {
-        include_once $fileName;
-    }
-});
-
+require_once "autoloader.php";
 // chemin de l'URL demandée au navigateur
 $url = $_GET['url'] ?? '';
 ini_set('session.gc_lifetime', 5);
@@ -37,7 +30,7 @@ $codesController = new CodesController();
 $sessionController = new SessionController();
 
 // Gestion des actions
-require 'controls/actionController.php';
+//require 'controls/actionController.php';
 
 //listes des mots dans l'url permettant d'accéder à une page
 $pages = [
