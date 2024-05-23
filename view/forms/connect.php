@@ -2,17 +2,20 @@
     <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Delete">
 </a>
 
-<form class="bg-white p-10 rounded-md drop-shadow-xl flex flex-col justify-center items-center space-y-5"
+<form class="mt-5 rounded-md shadow-xl flex flex-col justify-center space-y-6 py-16 px-14 bg-white w-[60vw] sm:w-[90vw] md:w-[95vw]"
       id="verificationForm" method="post">
     <input type="hidden" name="action" value="logIn">
 
-    <h1> Connexion </h1>
-    <label>Nom d'utilisateur :</label>
-    <input name="pseudo" id="pseudo" type="text"/>
+    <h1 class="text-center text-[5vh]"> Connexion </h1>
 
-    <label>Mot de passe :</label>
-    <input name="password" id="password" type="password"/>
+    <p class="text-[2vh] text-gray-500 text-center">Veuillez vous connecter pour accéder à l'administration.</p>
+
+        <label class="text-[2.5vh] mb-5 text-left">Nom d'utilisateur :</label>
+        <input name="pseudo" id="pseudo" type="text" placeholder="ex. Jane Doe" class="w-full p-3 border rounded-md text-[2.5vh] mb-16 mt-5 h-[8vh]" min="3" max="20"/>
+
+        <label class="text-[2.5vh] mb-5l text-left">Mot de passe :</label>
+        <input name="password" id="password" type="password" placeholder="Mot de passe" class="w-full p-3 border rounded-md text-[2.5vh] mb-5 mt-5 h-[8vh]"/>
 
     <div class="text-red-700" id="res"></div>
-    <input class="bg-blue-500 rounded-xl text-lg py-4 px-8" type="submit" name="submit" value="Se connecter"/>
+    <input class="bg-customBlue text-white rounded-xl px-4 py-3 text-[2.5vh] cursor-pointer hover:bg-sky-300" type="submit" name="submit" value="Se connecter"/>
 </form>
