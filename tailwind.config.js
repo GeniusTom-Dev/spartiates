@@ -4,8 +4,8 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'customBlue': '#00D5FF',
-                'customBlueDark': '#001a3a',
+                'customBlue': '#ABD3E6',
+                'customBlueDark': '#2C5788',
             },
             fontFamily: {
                 'sans': ['ui-sans-serif', 'Lilita One'],
