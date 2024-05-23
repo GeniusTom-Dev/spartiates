@@ -1,11 +1,11 @@
 <?php
 
-namespace Controls;
+namespace controls;
 
-use Exception\CannotCreateException;
-use Exception\NotFoundException;
-use Repository\QuestionsRepository;
-use View\View;
+use exception\CannotCreateException;
+use exception\NotFoundException;
+use repository\QuestionsRepository;
+use view\View;
 
 class QuestionsController
 {

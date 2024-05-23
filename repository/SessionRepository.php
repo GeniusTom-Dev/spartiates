@@ -1,9 +1,9 @@
 <?php
 
-namespace Repository;
+namespace repository;
 
-use Exception\NotFoundException;
-use Model\SessionUser;
+use exception\NotFoundException;
+use model\SessionUser;
 use PDO;
 
 class SessionRepository extends AbstractRepository

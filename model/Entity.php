@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace model;
 
 
 abstract class Entity

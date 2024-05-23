@@ -1,11 +1,11 @@
 <?php
 
-namespace Controls;
+namespace controls;
 
-use Exception\CannotCreateException;
-use Exception\NotFoundException;
-use Repository\SpartiatesRepository;
-use View\View;
+use exception\CannotCreateException;
+use exception\NotFoundException;
+use repository\SpartiatesRepository;
+use view\View;
 
 class SpartiatesController
 {

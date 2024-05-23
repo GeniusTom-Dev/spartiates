@@ -1,10 +1,10 @@
 <?php
 
-namespace Controls;
+namespace controls;
 
-use Exception\MoreThanOneException;
-use Exception\NotFoundException;
-use Repository\UsersRepository;
+use exception\MoreThanOneException;
+use exception\NotFoundException;
+use repository\UsersRepository;
 
 class UsersController
 {

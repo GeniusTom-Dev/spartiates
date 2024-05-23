@@ -1,10 +1,10 @@
 <?php
 
-namespace Repository;
+namespace repository;
 
-use Exception\MoreThanOneException;
-use Exception\NotFoundException;
-use Model\User;
+use exception\MoreThanOneException;
+use exception\NotFoundException;
+use model\User;
 
 class UsersRepository extends AbstractRepository
 {

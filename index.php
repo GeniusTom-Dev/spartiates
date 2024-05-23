@@ -1,13 +1,19 @@
 <?php
 
-use Controls\CodesController;
-use Controls\QuestionsController;
-use Controls\SessionController;
-use Controls\SpartiatesController;
-use Controls\UsersController;
-use View\View;
+use controls\CodesController;
+use controls\QuestionsController;
+use controls\SessionController;
+use controls\SpartiatesController;
+use controls\UsersController;
+use view\View;
 
-require 'vendor/autoload.php';
+spl_autoload_register(function ($class) {
+    $fileName = $class . ".php";
+    $fileName = str_replace("\\", "/", $fileName);
+    if (file_exists($fileName)) {
+        include_once $fileName;
+    }
+});
 
 // chemin de l'URL demandée au navigateur
 $url = $_GET['url'] ?? '';

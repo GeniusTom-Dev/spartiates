@@ -1,8 +1,8 @@
 <?php
 
-namespace Repository;
+namespace repository;
 
-use Exception\MoreThanOneException;
+use exception\MoreThanOneException;
 
 
 class CodesRepository extends AbstractRepository
