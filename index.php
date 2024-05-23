@@ -70,11 +70,6 @@ $adminPages = [
 /// Router
 ///////////////////////////////////////////////////////////////////////////////
 
-// TODO placer ce code où il doit aller
-//elseif (empty($_SESSION['admin'])) {
-//    header('refresh:0;url=/connect');
-//}
-
 switch ($url) {
     case '' :
     case '/':
@@ -117,11 +112,17 @@ switch ($url) {
         break;
     case 'newQuestion' :
     case 'newSpartiate' :
+        if (empty($_SESSION['admin'])) {
+            header('refresh:0;url=/connect');
+        }
         $path = 'view/forms/' . $url . '.php';
         $title = $adminForms[$url];
         break;
     case 'questions' :
     case 'spartiates' :
+        if (empty($_SESSION['admin'])) {
+            header('refresh:0;url=/connect');
+        }
         $method = "show" . ucfirst($url);
         if (method_exists($adminPages[$url][1], $method)) {
             $adminPages[$url][1]->$method();
@@ -130,13 +131,22 @@ switch ($url) {
         }
         break;
     case 'users' :
+        if (empty($_SESSION['admin'])) {
+            header('refresh:0;url=/connect');
+        }
         $path = 'view/adminPages/users.php';
         $title = 'Admin';
         break;
     case 'updateQuestion' : // TODO gérer lorsque $_GET['id'] n'existe pas
+        if (empty($_SESSION['admin'])) {
+            header('refresh:0;url=/connect');
+        }
         $questionsController->showUpdateForm($url, htmlspecialchars($_GET['id']));
         break;
     case 'updateSpartiate' : // TODO gérer lorsque $_GET['id'] n'existe pas
+        if (empty($_SESSION['admin'])) {
+            header('refresh:0;url=/connect');
+        }
         $spartiatesController->showUpdateForm($url, htmlspecialchars($_GET['id']));
         break;
     default :
