@@ -71,14 +71,16 @@ $adminPages = [
 ///////////////////////////////////////////////////////////////////////////////
 
 switch ($url) {
+    // HOME PAGE
     case '' :
     case '/':
     case 'home':
         $title = 'Home';
         break;
+    // GAME
     case 'play' :
         $path = 'view/' . $url . '.php';
-
+        $title = 'Jeu de hockey';
         if (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code'])) {
             $_SESSION['pseudo'] = null;
             $_SESSION['spartiateId'] = null;
@@ -96,6 +98,7 @@ switch ($url) {
             $path = 'view/chooseGameMode.php';
         }
         break;
+    // RULES
     case 'rules' :
         $path = 'view/' . $url . '.php';
         $title = 'Regles';
@@ -108,16 +111,18 @@ switch ($url) {
             $title = $pages[$url];
         }
         break;
+    // FORMS
     case 'sessionCode' :
     case 'pseudo' :
     case 'connect' :
         $path = 'view/forms/' . $url . '.php';
+        $title = $forms[$url];
         if ($url != "pseudo" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']))) {
             $_SESSION['spartiateId'] = null;
-            $title = $forms[$url];
         } elseif ($url == 'pseudo')
             $refresh = 'sessionCode';
         break;
+    // ADMIN PAGES
     case 'newQuestion' :
     case 'newSpartiate' :
         if (empty($_SESSION['admin'])) {
@@ -128,7 +133,6 @@ switch ($url) {
         break;
     case 'questions' :
     case 'spartiates' :
-        $title = $url == 'questions' ? 'Question' : 'Spartiates';
         if (empty($_SESSION['admin'])) {
             $refresh = 'connect';
         }
@@ -143,13 +147,11 @@ switch ($url) {
         if (empty($_SESSION['admin'])) {
             $refresh = 'connect';
         }
-        $path = 'view/adminPages/users.php';
         $title = 'Admin';
         break;
     case 'updateQuestion' :
-        if(empty($_GET['id'])) {
+        if (empty($_GET['id'])) {
             $title = 'Erreur';
-            $path = 'view/error.php';
             break;
         }
         if (empty($_SESSION['admin'])) {
@@ -158,9 +160,8 @@ switch ($url) {
         $questionsController->showUpdateForm($url, htmlspecialchars($_GET['id']));
         break;
     case 'updateSpartiate' :
-        if(empty($_GET['id'])) {
+        if (empty($_GET['id'])) {
             $title = 'Erreur';
-            $path = 'view/error.php';
             break;
         }
         if (empty($_SESSION['admin'])) {
@@ -168,9 +169,9 @@ switch ($url) {
         }
         $spartiatesController->showUpdateForm($url, htmlspecialchars($_GET['id']));
         break;
+    // ERROR 404
     default :
         $title = 'Erreur';
-        $path = 'view/error.php';
         break;
 }
 
@@ -178,9 +179,9 @@ switch ($url) {
 /// Display
 ///////////////////////////////////////////////////////////////////////////////
 
-if(isset($refresh)) {
+if (isset($refresh)) {
     header("refresh:0;url=/$refresh");
 }
 
-View::display($title, $path ?? null);
+View::display($title ?? 'none', $path ?? null);
 

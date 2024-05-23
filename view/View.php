@@ -6,12 +6,18 @@ abstract class View
 {
     private const PATH = [
         'Home' => 'view/home.php',
-        '' => '',
+        'Erreur' => 'view/error.php',
+        'Admin' => 'view/adminPages/users.php',
     ];
 
     public static function display(string $title, ?string $path = null, $data = null) : void
     {
-        $path = $path ?? self::PATH[$title];
+        if($title == 'none') {
+            return;
+        }
+        if(empty($path)) {
+            $path = self::PATH[$title] ?? self::PATH['Erreur'];
+        }
         if (!file_exists($path))
             header('refresh:0;url=/404');
         if ($path == 'view/play.php') {
