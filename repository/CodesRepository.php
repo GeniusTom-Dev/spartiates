@@ -8,6 +8,12 @@ use Exception\MoreThanOneException;
 class CodesRepository extends AbstractRepository
 {
 
+    /**
+     * Check whether a code matches the session code stored in the database
+     *
+     * @param $code : of the session
+     * @return bool : true if the code is in the database and false if it is not
+     */
     public function checkSessionCode($code): bool
     {
         // On récupère tous les Users avec le même pseudo et password
@@ -24,7 +30,11 @@ class CodesRepository extends AbstractRepository
         return $result->rowCount() !== 0;
     }
 
-    // TODO what is this ???
+    /**
+     * Check if a session exists in the database
+     *
+     * @return bool : return true if a result is found and false if there is no session
+     */
     public function isSessionCode(): bool
     {
         $query = 'SELECT * FROM CODES WHERE CODE_TYPE = "SESSION"';

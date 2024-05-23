@@ -118,7 +118,7 @@ class SessionRepository extends AbstractRepository
         return true;
     }
 
-    public function getSessionUser($id)
+    public function getSessionUser($id): bool|array
     {
         $query = 'SELECT pseudo, score,
        (SELECT COUNT(DISTINCT score) + 1 FROM SESSION WHERE score > t1.score) AS rank

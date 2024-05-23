@@ -5,7 +5,7 @@
     <form class="flex flex-col items-center space-y-5 w-1/2 sm:w-full" id="form" method="post">
         <input type="hidden" name="action" value="addSessionPlayer">
         <label for="pseudo"><span class="text-3xl">Entrez votre pseudo :</span>
-            <input class="rounded-xl w-full" type="text" id="pseudo" name="pseudo" required>
+            <input class="rounded-xl w-full" type="text" id="pseudo" name="pseudo" required pattern=".*\S.*">
         </label>
 
         <label for="mail"><span class="text-3xl">Entrez votre mail :</span>
