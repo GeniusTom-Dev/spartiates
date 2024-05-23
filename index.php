@@ -30,7 +30,6 @@ $codesController = new CodesController();
 $sessionController = new SessionController();
 
 // Gestion des actions
-//require 'controls/actionController.php';
 
 //listes des mots dans l'url permettant d'accéder à une page
 $pages = [
