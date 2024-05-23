@@ -1,5 +1,9 @@
 <?php
 
+///////////////////////////////////////////////////////////////////////////////
+/// Load classes
+///////////////////////////////////////////////////////////////////////////////
+
 use controls\CodesController;
 use controls\QuestionsController;
 use controls\SessionController;
@@ -8,13 +12,20 @@ use controls\UsersController;
 use view\View;
 
 require_once "autoloader.php";
-// chemin de l'URL demandée au navigateur
-$url = $_GET['url'] ?? '';
-ini_set('session.gc_lifetime', 5);
 
+///////////////////////////////////////////////////////////////////////////////
+/// Load GET and POST variables
+///////////////////////////////////////////////////////////////////////////////
+
+$url = $_GET['url'] ?? '';
+
+///////////////////////////////////////////////////////////////////////////////
+/// Load session
+///////////////////////////////////////////////////////////////////////////////
+
+ini_set('session.gc_lifetime', 5);
 if (!isset($_SESSION))
     session_start();
-
 if (isset($_SESSION['last_activity']) && time() - $_SESSION['last_activity'] > 1800) {
     session_unset();
     session_destroy();
@@ -23,16 +34,20 @@ if (isset($_SESSION['last_activity']) && time() - $_SESSION['last_activity'] > 1
     $_SESSION['last_activity'] = time();
 }
 
+///////////////////////////////////////////////////////////////////////////////
+/// Initialize controlers
+///////////////////////////////////////////////////////////////////////////////
+
 $questionsController = new QuestionsController();
 $spartiatesController = new SpartiatesController();
 $usersController = new UsersController();
 $codesController = new CodesController();
 $sessionController = new SessionController();
 
-// Gestion des actions
-//require 'controls/actionController.php';
+///////////////////////////////////////////////////////////////////////////////
+/// Pages mapping
+///////////////////////////////////////////////////////////////////////////////
 
-//listes des mots dans l'url permettant d'accéder à une page
 $pages = [
     'play' => 'Jeu de hockey',
     'rules' => 'Regles',
@@ -51,15 +66,19 @@ $adminPages = [
     'spartiates' => ['Spartiates', $spartiatesController],
 ];
 
-if ('' == $url || '/' == $url || 'home' == $url) {
+///////////////////////////////////////////////////////////////////////////////
+/// Router
+///////////////////////////////////////////////////////////////////////////////
 
+if ('' == $url || '/' == $url || 'home' == $url) {
     $path = 'view/home.php';
-    View::display('Home', $path);
+    $title = 'Home';
 
 } elseif (isset($pages[$url])) {
     $path = 'view/' . $url . '.php';
+
     if ($url != "play" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']) && !empty($_SESSION['pseudo']) && !empty($_SESSION['spartiateId']) && !empty($_SESSION['gameMode']))) {
-        View::display($pages[$url], $path);
+        $title = $pages[$url];
     } elseif ($url == 'play' && (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code']))) {
         $_SESSION['pseudo'] = null;
         $_SESSION['spartiateId'] = null;
@@ -73,14 +92,15 @@ if ('' == $url || '/' == $url || 'home' == $url) {
         $_SESSION['gameMode'] = null;
         $spartiatesController->showChooseSpartiate();
     } elseif ($url == 'play' && empty($_SESSION['gameMode'])) {
-        View::display('Choissisez un spartiates', 'view/chooseGameMode.php');
+        $title = 'Choissisez un spartiates';
+        $path = 'view/chooseGameMode.php';
     }
 
 } elseif (isset($forms[$url])) {
     $path = 'view/forms/' . $url . '.php';
     if ($url != "pseudo" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']))) {
         $_SESSION['spartiateId'] = null;
-        View::display($forms[$url], $path);
+        $title = $forms[$url];
     } elseif ($url == 'pseudo')
         header('refresh:0;url=/sessionCode');
 
@@ -89,7 +109,7 @@ if ('' == $url || '/' == $url || 'home' == $url) {
 
 } elseif (isset($adminForms[$url])) {
     $path = 'view/forms/' . $url . '.php';
-    View::display($adminForms[$url], $path);
+    $title = $adminForms[$url];
 
 } elseif (isset($adminPages[$url])) {
     $method = "show" . ucfirst($url);
@@ -100,7 +120,7 @@ if ('' == $url || '/' == $url || 'home' == $url) {
     }
 } elseif ('users' == $url) {
     $path = 'view/adminPages/users.php';
-    View::display('Admin', $path);
+    $title = 'Admin';
 
 } elseif ('updateQuestion' == $url || 'updateSpartiate' == $url && !empty($_GET['id'])) {
     if ('updateQuestion' == $url)
@@ -108,5 +128,12 @@ if ('' == $url || '/' == $url || 'home' == $url) {
     else
         $spartiatesController->showUpdateForm($url, htmlspecialchars($_GET['id']));
 } else {
-    View::display('Erreur', 'view/error.php');
+    $title = 'Erreur';
+    $path = 'view/error.php';
 }
+
+///////////////////////////////////////////////////////////////////////////////
+/// Display
+///////////////////////////////////////////////////////////////////////////////
+
+View::display($title, $path);
