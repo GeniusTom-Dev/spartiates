@@ -50,7 +50,7 @@ class QuestionsController
     public function createQuestion($text, $level, $true, $false1, $false2): void
     {
         try {
-            $this->repository->createQuestion($text, $level, $true, $false1, $false2);
+            $this->repository->createQuestion(trim($text), $level, trim($true), trim($false1), trim($false2));
         } catch (CannotCreateException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
             echo $ERROR->getMessage();
@@ -70,7 +70,7 @@ class QuestionsController
     public function updateQuestion($id, $text, $level, $true, $false1, $false2): void
     {
         try {
-            $this->repository->updateQuestionById($id, $text, $level, $true, $false1, $false2);
+            $this->repository->updateQuestionById($id, trim($text), $level, trim($true), trim($false1), trim($false2));
         } catch (NotFoundException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
             echo $ERROR->getMessage();
