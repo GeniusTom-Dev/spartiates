@@ -77,26 +77,35 @@ switch ($url) {
         $title = 'Home';
         break;
     case 'play' :
-    case 'rules' :
         $path = 'view/' . $url . '.php';
 
-        if ($url != "play" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']) && !empty($_SESSION['pseudo']) && !empty($_SESSION['spartiateId']) && !empty($_SESSION['gameMode']))) {
-            $title = $pages[$url];
-        } elseif ($url == 'play' && (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code']))) {
+        if (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code'])) {
             $_SESSION['pseudo'] = null;
             $_SESSION['spartiateId'] = null;
             $_SESSION['gameMode'] = null;
-            header('refresh:0;url=/sessionCode');
-        } elseif ($url == 'play' && empty($_SESSION['pseudo'])) {
+            $refresh = 'sessionCode';
+        } elseif (empty($_SESSION['pseudo'])) {
             $_SESSION['spartiateId'] = null;
             $_SESSION['gameMode'] = null;
-            header('refresh:0;url=/pseudo');
-        } elseif ($url == 'play' && empty($_SESSION['spartiateId'])) {
+            $refresh = 'pseudo';
+        } elseif (empty($_SESSION['spartiateId'])) {
             $_SESSION['gameMode'] = null;
             $spartiatesController->showChooseSpartiate();
-        } elseif ($url == 'play' && empty($_SESSION['gameMode'])) {
+        } elseif (empty($_SESSION['gameMode'])) {
             $title = 'Choissisez un spartiates';
             $path = 'view/chooseGameMode.php';
+        }
+        break;
+    case 'rules' :
+        $path = 'view/' . $url . '.php';
+        $title = 'Regles';
+
+        if (!empty($_SESSION['code'])
+            && $codesController->checkSessionCode($_SESSION['code'])
+            && !empty($_SESSION['pseudo'])
+            && !empty($_SESSION['spartiateId'])
+            && !empty($_SESSION['gameMode'])) {
+            $title = $pages[$url];
         }
         break;
     case 'sessionCode' :
@@ -107,44 +116,55 @@ switch ($url) {
             $_SESSION['spartiateId'] = null;
             $title = $forms[$url];
         } elseif ($url == 'pseudo')
-            header('refresh:0;url=/sessionCode');
+            $refresh = 'sessionCode';
         break;
     case 'newQuestion' :
     case 'newSpartiate' :
         if (empty($_SESSION['admin'])) {
-            header('refresh:0;url=/connect');
+            $refresh = 'connect';
         }
         $path = 'view/forms/' . $url . '.php';
         $title = $adminForms[$url];
         break;
     case 'questions' :
     case 'spartiates' :
+        $title = $url == 'questions' ? 'Question' : 'Spartiates';
         if (empty($_SESSION['admin'])) {
-            header('refresh:0;url=/connect');
+            $refresh = 'connect';
         }
         $method = "show" . ucfirst($url);
         if (method_exists($adminPages[$url][1], $method)) {
             $adminPages[$url][1]->$method();
         } else {
-            header('refresh:0;url=/404');
+            $refresh = 'connect';
         }
         break;
     case 'users' :
         if (empty($_SESSION['admin'])) {
-            header('refresh:0;url=/connect');
+            $refresh = 'connect';
         }
         $path = 'view/adminPages/users.php';
         $title = 'Admin';
         break;
-    case 'updateQuestion' : // TODO gérer lorsque $_GET['id'] n'existe pas
+    case 'updateQuestion' :
+        if(empty($_GET['id'])) {
+            $title = 'Erreur';
+            $path = 'view/error.php';
+            break;
+        }
         if (empty($_SESSION['admin'])) {
-            header('refresh:0;url=/connect');
+            $refresh = 'connect';
         }
         $questionsController->showUpdateForm($url, htmlspecialchars($_GET['id']));
         break;
-    case 'updateSpartiate' : // TODO gérer lorsque $_GET['id'] n'existe pas
+    case 'updateSpartiate' :
+        if(empty($_GET['id'])) {
+            $title = 'Erreur';
+            $path = 'view/error.php';
+            break;
+        }
         if (empty($_SESSION['admin'])) {
-            header('refresh:0;url=/connect');
+            $refresh = 'connect';
         }
         $spartiatesController->showUpdateForm($url, htmlspecialchars($_GET['id']));
         break;
@@ -158,4 +178,9 @@ switch ($url) {
 /// Display
 ///////////////////////////////////////////////////////////////////////////////
 
+if(isset($refresh)) {
+    header("refresh:0;url=/$refresh");
+}
+
 View::display($title, $path ?? null);
+
