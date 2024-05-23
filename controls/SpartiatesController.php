@@ -33,7 +33,7 @@ class SpartiatesController
     public function createSpartiate($lastName, $name): void
     {
         try {
-            $this->repository->createSpartiate($lastName, $name);
+            $this->repository->createSpartiate(trim($lastName), trim($name));
         } catch (CannotCreateException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
             echo $ERROR->getMessage();
@@ -53,7 +53,7 @@ class SpartiatesController
     public function updateSpartiate($id, $lastName, $name): void
     {
         try {
-            $this->repository->updateSpartiateById($id, $lastName, $name);
+            $this->repository->updateSpartiateById($id, trim($lastName), trim($name));
         } catch (NotFoundException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
             echo $ERROR->getMessage();
@@ -76,8 +76,8 @@ class SpartiatesController
 
     public function searchSpartiate($searchTerm): void
     {
-        $questions = $this->repository->search($searchTerm);
-        foreach ($questions as $spartiate) {
+        $searchResult = $this->repository->search($searchTerm);
+        foreach ($searchResult as $spartiate) {
             echo '
                 <div class="flex flex-col items-center justify-center w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md">
                     <div class="flex flex-row items-center justify-between w-full mt-2">

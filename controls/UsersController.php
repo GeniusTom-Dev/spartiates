@@ -11,7 +11,7 @@ class UsersController
     /**
      * @var mixed
      */
-    private $repository;
+    private mixed $repository;
 
     public function __construct()
     {
