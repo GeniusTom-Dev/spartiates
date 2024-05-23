@@ -70,66 +70,79 @@ $adminPages = [
 /// Router
 ///////////////////////////////////////////////////////////////////////////////
 
-if ('' == $url || '/' == $url || 'home' == $url) {
-    $path = 'view/home.php';
-    $title = 'Home';
+// TODO placer ce code où il doit aller
+//elseif (empty($_SESSION['admin'])) {
+//    header('refresh:0;url=/connect');
+//}
 
-} elseif (isset($pages[$url])) {
-    $path = 'view/' . $url . '.php';
+switch ($url) {
+    case '' :
+    case '/':
+    case 'home':
+        $path = 'view/home.php';
+        $title = 'Home';
+        break;
+    case 'play' :
+    case 'rules' :
+        $path = 'view/' . $url . '.php';
 
-    if ($url != "play" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']) && !empty($_SESSION['pseudo']) && !empty($_SESSION['spartiateId']) && !empty($_SESSION['gameMode']))) {
-        $title = $pages[$url];
-    } elseif ($url == 'play' && (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code']))) {
-        $_SESSION['pseudo'] = null;
-        $_SESSION['spartiateId'] = null;
-        $_SESSION['gameMode'] = null;
-        header('refresh:0;url=/sessionCode');
-    } elseif ($url == 'play' && empty($_SESSION['pseudo'])) {
-        $_SESSION['spartiateId'] = null;
-        $_SESSION['gameMode'] = null;
-        header('refresh:0;url=/pseudo');
-    } elseif ($url == 'play' && empty($_SESSION['spartiateId'])) {
-        $_SESSION['gameMode'] = null;
-        $spartiatesController->showChooseSpartiate();
-    } elseif ($url == 'play' && empty($_SESSION['gameMode'])) {
-        $title = 'Choissisez un spartiates';
-        $path = 'view/chooseGameMode.php';
-    }
-
-} elseif (isset($forms[$url])) {
-    $path = 'view/forms/' . $url . '.php';
-    if ($url != "pseudo" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']))) {
-        $_SESSION['spartiateId'] = null;
-        $title = $forms[$url];
-    } elseif ($url == 'pseudo')
-        header('refresh:0;url=/sessionCode');
-
-} elseif (empty($_SESSION['admin'])) {
-    header('refresh:0;url=/connect');
-
-} elseif (isset($adminForms[$url])) {
-    $path = 'view/forms/' . $url . '.php';
-    $title = $adminForms[$url];
-
-} elseif (isset($adminPages[$url])) {
-    $method = "show" . ucfirst($url);
-    if (method_exists($adminPages[$url][1], $method)) {
-        $adminPages[$url][1]->$method();
-    } else {
-        header('refresh:0;url=/404');
-    }
-} elseif ('users' == $url) {
-    $path = 'view/adminPages/users.php';
-    $title = 'Admin';
-
-} elseif ('updateQuestion' == $url || 'updateSpartiate' == $url && !empty($_GET['id'])) {
-    if ('updateQuestion' == $url)
+        if ($url != "play" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']) && !empty($_SESSION['pseudo']) && !empty($_SESSION['spartiateId']) && !empty($_SESSION['gameMode']))) {
+            $title = $pages[$url];
+        } elseif ($url == 'play' && (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code']))) {
+            $_SESSION['pseudo'] = null;
+            $_SESSION['spartiateId'] = null;
+            $_SESSION['gameMode'] = null;
+            header('refresh:0;url=/sessionCode');
+        } elseif ($url == 'play' && empty($_SESSION['pseudo'])) {
+            $_SESSION['spartiateId'] = null;
+            $_SESSION['gameMode'] = null;
+            header('refresh:0;url=/pseudo');
+        } elseif ($url == 'play' && empty($_SESSION['spartiateId'])) {
+            $_SESSION['gameMode'] = null;
+            $spartiatesController->showChooseSpartiate();
+        } elseif ($url == 'play' && empty($_SESSION['gameMode'])) {
+            $title = 'Choissisez un spartiates';
+            $path = 'view/chooseGameMode.php';
+        }
+        break;
+    case 'sessionCode' :
+    case 'pseudo' :
+    case 'connect' :
+        $path = 'view/forms/' . $url . '.php';
+        if ($url != "pseudo" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']))) {
+            $_SESSION['spartiateId'] = null;
+            $title = $forms[$url];
+        } elseif ($url == 'pseudo')
+            header('refresh:0;url=/sessionCode');
+        break;
+    case 'newQuestion' :
+    case 'newSpartiate' :
+        $path = 'view/forms/' . $url . '.php';
+        $title = $adminForms[$url];
+        break;
+    case 'questions' :
+    case 'spartiates' :
+        $method = "show" . ucfirst($url);
+        if (method_exists($adminPages[$url][1], $method)) {
+            $adminPages[$url][1]->$method();
+        } else {
+            header('refresh:0;url=/404');
+        }
+        break;
+    case 'users' :
+        $path = 'view/adminPages/users.php';
+        $title = 'Admin';
+        break;
+    case 'updateQuestion' : // TODO gérer lorsque $_GET['id'] n'existe pas
         $questionsController->showUpdateForm($url, htmlspecialchars($_GET['id']));
-    else
+        break;
+    case 'updateSpartiate' : // TODO gérer lorsque $_GET['id'] n'existe pas
         $spartiatesController->showUpdateForm($url, htmlspecialchars($_GET['id']));
-} else {
-    $title = 'Erreur';
-    $path = 'view/error.php';
+        break;
+    default :
+        $title = 'Erreur';
+        $path = 'view/error.php';
+        break;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
