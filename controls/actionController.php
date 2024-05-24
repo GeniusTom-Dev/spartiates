@@ -52,10 +52,6 @@ $actionsMapping = [
     'stopWS' => ['webSocketMessage' => 'stop', 'adminOnly' => true],
     'connexionWS' => ['controller' => $wscontroller, 'adminOnly' => false],
 
-    // Game Mode
-    'chooseDefense' => ['controller' => $sessionController, 'adminOnly' => false],
-    'chooseAttack' => ['controller' => $sessionController, 'adminOnly' => false],
-
     // User
     'logIn' => ['fields' => ['pseudo', 'password'], 'controller' => $usersController, 'success' => ['success' => true, 'url' => '/users'], 'error' => ['success' => false, 'error' => 'Identifiant ou mot de passe incorrect'], 'adminOnly' => false, 'needResponse' => true],
     'deleteUser' => ['idField' => 'id', 'controller' => $sessionController, 'redirect' => '', 'adminOnly' => true],
@@ -73,16 +69,17 @@ function handleAction($actionsMapping): void
     $action = $_POST['action'];
     if (isset($actionsMapping[$action])) {
         $mapping = $actionsMapping[$action];
+
         // Vérifier si l'action nécessite des privilèges administratifs
         if ($mapping['adminOnly'] && empty($_SESSION['admin'])) {
             echo 'Vous n\'avez pas les droits administratifs nécessaires.';
             return;
         }
 
-        // Vérifier la présence des champs requis pour les actions avec POST
+        // Vérifier si tous les champs requis pour les actions de type POST sont présents
         if (isset($mapping['fields'])) {
             foreach ($mapping['fields'] as $field) {
-                if (empty($postData[$field]) && $postData[$field] !== "0" && $field != 'mail') {
+                if (empty(trim($postData[$field])) && $postData[$field] !== "0" && $field != 'mail') {
                     echo "Champ $field manquant";
                     return;
                 }
@@ -99,7 +96,7 @@ function handleAction($actionsMapping): void
             $params[] = htmlspecialchars($postData[$field]);
         }
 
-        // Vérifier si le controller existe ou si c'est une fonction websocket
+        // Vérifier si le controller existe ou la fonction websocket existe
         if (!isset($mapping['controller']) || isset($mapping['webSocketMessage'])) {
             if (isset($mapping['webSocketMessage']))
                 echo $mapping['webSocketMessage'];
@@ -120,6 +117,7 @@ function handleAction($actionsMapping): void
             call_user_func_array([$controllers, $action], $params);
         }
 
+        // Si le formulaire nécessite de déposer un fichier (ex: image d'un spartiate)
         if (isset($files["fileToUpload"])) {
             $target_dir = "../assets/spartImage/";
             $imageFileType = strtolower(pathinfo(basename($files["fileToUpload"]["name"]), PATHINFO_EXTENSION));
@@ -130,11 +128,13 @@ function handleAction($actionsMapping): void
                 move_uploaded_file(str_replace("\\\\", "\\", $files["fileToUpload"]["tmp_name"]), $target_file);
             }
         }
+
         // Redirection
         if (isset($mapping['redirect'])) {
             echo $mapping['redirect'];
         }
     } else {
+
         // Gérer les actions non valides
         echo 'Action non valide';
     }

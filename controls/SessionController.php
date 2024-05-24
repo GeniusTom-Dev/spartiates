@@ -19,7 +19,7 @@ class SessionController
 
     public function addSessionPlayer($pseudo, $mail): void
     {
-        $_SESSION['id'] = $this->repository->addSessionPlayer($pseudo, $mail, $_SESSION['code']);
+        $_SESSION['id'] = $this->repository->addSessionPlayer(trim($pseudo), trim($mail), $_SESSION['code']);
         $_SESSION['pseudo'] = $pseudo;
         $_SESSION['mail'] = $mail;
     }

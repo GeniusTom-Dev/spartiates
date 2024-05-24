@@ -8,10 +8,6 @@ use PDO;
 
 class SessionRepository extends AbstractRepository
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     public function addSessionPlayer($pseudo, $mail, $code): false|string
     {

@@ -10,11 +10,6 @@ use PDO;
 class SpartiatesRepository extends AbstractRepository
 {
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function getById($id): Spartiate
     {
         $query = 'SELECT * FROM SPARTIATE WHERE SPART_ID = :id';
@@ -27,7 +22,7 @@ class SpartiatesRepository extends AbstractRepository
         }
         // Exception impossible, mais à prévoir, car on ne peut insérer qu'un spartiate du meme ID
         if ($statement->rowCount() > 1) {
-            throw new MoreThanOneException("Problème présent dans la BD");
+            throw new MoreThanOneException("Duplication du SPARTIATE $id dans la BD");
         }
         $spartiate = $statement->fetch();
         return new Spartiate($spartiate);
@@ -86,7 +81,7 @@ class SpartiatesRepository extends AbstractRepository
         }
         // Exception impossible, mais à prévoir, car on ne peut insérer qu'un User
         if ($statement->rowCount() > 1) {
-            throw new MoreThanOneException("Duplication du SPARTIATE $id");
+            throw new MoreThanOneException("Duplication du SPARTIATE $id dans la BD");
         }
         $user = $statement->fetch();
         return $user["STAR"];

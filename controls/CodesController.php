@@ -59,6 +59,7 @@ class CodesController
         echo $randomCode;
     }
 
+    // TODO
     public function stop(): void
     {
         $this->repository->stop();
