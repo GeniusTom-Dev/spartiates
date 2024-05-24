@@ -40,9 +40,7 @@ if (isset($_SESSION['last_activity']) && time() - $_SESSION['last_activity'] > 1
 
 $questionsController = new QuestionsController();
 $spartiatesController = new SpartiatesController();
-$usersController = new UsersController();
 $codesController = new CodesController();
-$sessionController = new SessionController();
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Pages mapping
@@ -97,31 +95,19 @@ switch ($url) {
         // Ask for a game mode
         } elseif (empty($_SESSION['gameMode'])) {
             $title = 'Choissisez un spartiates';
-            $path = 'view/chooseGameMode.php';
         // Start the game
         } else {
-            $path = 'view/' . $url . '.php';
             $title = 'Jeu de hockey';
         }
         break;
     // RULES
     case 'rules' :
-        $path = 'view/' . $url . '.php';
         $title = 'Regles';
-
-        if (!empty($_SESSION['code'])
-            && $codesController->checkSessionCode($_SESSION['code'])
-            && !empty($_SESSION['pseudo'])
-            && !empty($_SESSION['spartiateId'])
-            && !empty($_SESSION['gameMode'])) {
-            $title = $pages[$url];
-        }
         break;
     // FORMS
     case 'sessionCode' :
     case 'pseudo' :
     case 'connect' :
-        $path = 'view/forms/' . $url . '.php';
         $title = $forms[$url];
         if ($url != "pseudo" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']))) {
             $_SESSION['spartiateId'] = null;
@@ -134,7 +120,6 @@ switch ($url) {
         if (empty($_SESSION['admin'])) {
             $refresh = 'connect';
         }
-        $path = 'view/forms/' . $url . '.php';
         $title = $adminForms[$url];
         break;
     case 'questions' :

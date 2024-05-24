@@ -8,6 +8,14 @@ abstract class View
         'Home' => 'view/home.php',
         'Erreur' => 'view/error.php',
         'Admin' => 'view/adminPages/users.php',
+        'Regles' => 'view/rules.php',
+        'entrer le code' => 'view/forms/sessionCode.php',
+        'entrer le pseudo' => 'view/forms/pseudo.php',
+        'Connexion' => 'view/forms/connect.php',
+        'Nouvelle Question' => 'view/forms/newQuestion.php',
+        'Nouveau Spartiate' => 'view/forms/newSpartiate.php',
+        'Choissisez un spartiates' => 'view/chooseGameMode.php',
+        'Jeu de hockey' => 'view/play.php',
     ];
 
     public static function display(string $title, ?string $path = null, $data = null) : void
