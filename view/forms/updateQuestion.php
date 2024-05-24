@@ -8,14 +8,6 @@
         <label>Question :
             <textarea class="w-full rounded-xl" type="text" name="text" required><?= $data->getText() ?></textarea>
         </label>
-        <label>Niveau :</label>
-        <select name="level" required>
-            <option value="attaquant" <?php if ($data->getDifficulty() === "ATTAQUANT") echo 'selected' ?> >Attaquant
-            </option>
-            <option value="defenseur" <?php if ($data->getDifficulty() === "DEFENSEUR") echo 'selected' ?>>Defenseur
-            </option>
-            <option value="gardien" <?php if ($data->getDifficulty() === "GARDIEN") echo 'selected' ?>>Gardien</option>
-        </select>
         <label>Bonne réponse :
             <textarea class="w-full rounded-xl" type="text" name="true" required><?= $data->getResponse() ?></textarea>
         </label>

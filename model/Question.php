@@ -10,7 +10,6 @@ class Question extends Entity
 {
     private mixed $question_id;
     private mixed $text;
-    private mixed $difficulty;
     private mixed $response;
     private mixed $false1;
     private mixed $false2;
@@ -94,22 +93,5 @@ class Question extends Entity
     {
         $this->text = html_entity_decode($text);
     }
-
-    /**
-     * @return mixed
-     */
-    public function getDifficulty(): mixed
-    {
-        return $this->difficulty;
-    }
-
-    /**
-     * @param mixed $difficulty
-     */
-    public function setDifficulty(mixed $difficulty): void
-    {
-        $this->difficulty = $difficulty;
-    }
-
 
 }

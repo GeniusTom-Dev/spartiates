@@ -14,7 +14,6 @@ abstract class View
         'Connexion' => 'view/forms/connect.php',
         'Nouvelle Question' => 'view/forms/newQuestion.php',
         'Nouveau Spartiate' => 'view/forms/newSpartiate.php',
-        'Choissisez un spartiates' => 'view/chooseGameMode.php',
         'Jeu de hockey' => 'view/play.php',
     ];
 

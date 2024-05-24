@@ -70,13 +70,12 @@ class QuestionsRepository extends AbstractRepository
         return $arrayQuestions;
     }
 
-    public function createQuestion($text, $difficulty, $true, $false1, $false2): void
+    public function createQuestion($text, $true, $false1, $false2): void
     {
-        $query = "INSERT INTO QUESTION (QUESTION_ID, TEXT, DIFFICULTY, RESPONSE, FALSE1, FALSE2) VALUES (NULL, :text, :difficulty, :true, :false1, :false2);";
+        $query = "INSERT INTO QUESTION (QUESTION_ID, TEXT, RESPONSE, FALSE1, FALSE2) VALUES (NULL, :text, :true, :false1, :false2);";
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             ':text' => $text,
-            ':difficulty' => $difficulty,
             ':true' => $true,
             ':false1' => $false1,
             ':false2' => $false2]);
@@ -96,13 +95,12 @@ class QuestionsRepository extends AbstractRepository
         }
     }
 
-    public function updateQuestionById($id, $text, $difficulty, $true, $false1, $false2): void
+    public function updateQuestionById($id, $text, $true, $false1, $false2): void
     {
-        $query = "UPDATE QUESTION SET TEXT = :text, DIFFICULTY = :difficulty, RESPONSE= :true, FALSE1= :false1, FALSE2= :false2  WHERE QUESTION_ID = :id;";
+        $query = "UPDATE QUESTION SET TEXT = :text, RESPONSE= :true, FALSE1= :false1, FALSE2= :false2  WHERE QUESTION_ID = :id;";
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             ':text' => $text,
-            ':difficulty' => $difficulty,
             ':id' => $id,
             ':true' => $true,
             ':false1' => $false1,
