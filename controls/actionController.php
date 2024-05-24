@@ -35,7 +35,7 @@ $actionsMapping = [
     'searchQuestion' => ['fields' => ['searchTerm'], 'controller' => $questionsController, 'adminOnly' => true],
 
     // Session Code
-    'checkSessionCode' => ['fields' => ['code'], 'controller' => $codesController, 'success' => ['success' => true, 'url' => '/pseudo'], 'error' => ['success' => false, 'error' => 'code incorrect'], 'adminOnly' => false, 'needResponse' => true],
+    'checkSessionCode' => ['fields' => ['code'], 'controller' => $codesController, 'success' => ['success' => true, 'url' => '/pseudo'], 'error' => ['success' => false, 'error' => 'code incorrect'], 'sessionHasEnded' => ['success' => false, 'error' => 'La session est finis'], 'adminOnly' => false, 'needResponse' => true],
     'getSessionCode' => ['controller' => $codesController, 'adminOnly' => true],
 
     // Manage Session
@@ -64,6 +64,7 @@ $actionsMapping = [
 // Fonction pour traiter les actions
 function handleAction($actionsMapping): void
 {
+    global $sessionController;
     $postData = $_POST;
     $files = $_FILES;
     $action = $_POST['action'];
@@ -106,6 +107,7 @@ function handleAction($actionsMapping): void
             // Appeler la fonction appropriée avec les paramètres
             header('Content-Type: application/json');
 
+            // Check si le code de session est correct
             if (call_user_func_array([$mapping['controller'], $action], $params)) {
                 echo json_encode($mapping['success']);
             } else {

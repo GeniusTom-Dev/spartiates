@@ -16,8 +16,7 @@ class CodesRepository extends AbstractRepository
      */
     public function checkSessionCode($code): bool
     {
-        // On récupère tous les Users avec le même pseudo et password
-        $query = 'SELECT * FROM CODES WHERE CODE_TYPE = "SESSION" and CODE = :code ';
+        $query = 'SELECT * FROM CODES WHERE CODE_TYPE = "SESSION" and CODE = :code and ACTIVE = true';
         $result = $this->connexion->prepare($query);
         $result->execute([
             'code' => $code,
