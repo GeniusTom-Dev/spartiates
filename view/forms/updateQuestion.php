@@ -1,8 +1,7 @@
 <a href="/home" class="absolute left-5 top-5 w-20 h-20">
     <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Delete">
 </a>
-    <form class="bg-white p-10 rounded-md drop-shadow-xl flex flex-col justify-center items-center space-y-5" id="form"
-          method="post">
+    <form class="bg-white p-10 rounded-md drop-shadow-xl flex flex-col justify-center items-center space-y-5" id="form" method="post">
         <input type="hidden" name="action" value="updateQuestion">
         <input type="hidden" name="id" value="<?= $data->getQuestion_id() ?>">
         <h1> Mise a jour question </h1>

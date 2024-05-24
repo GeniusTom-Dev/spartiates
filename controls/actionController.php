@@ -52,10 +52,6 @@ $actionsMapping = [
     'stopWS' => ['webSocketMessage' => 'stop', 'adminOnly' => true],
     'connexionWS' => ['controller' => $wscontroller, 'adminOnly' => false],
 
-    // Game Mode
-    'chooseDefense' => ['controller' => $sessionController, 'adminOnly' => false],
-    'chooseAttack' => ['controller' => $sessionController, 'adminOnly' => false],
-
     // User
     'logIn' => ['fields' => ['pseudo', 'password'], 'controller' => $usersController, 'success' => ['success' => true, 'url' => '/users'], 'error' => ['success' => false, 'error' => 'Identifiant ou mot de passe incorrect'], 'adminOnly' => false, 'needResponse' => true],
     'deleteUser' => ['idField' => 'id', 'controller' => $sessionController, 'redirect' => '', 'adminOnly' => true],
@@ -83,7 +79,7 @@ function handleAction($actionsMapping): void
         // Vérifier si tous les champs requis pour les actions de type POST sont présents
         if (isset($mapping['fields'])) {
             foreach ($mapping['fields'] as $field) {
-                if (empty($postData[$field]) && $postData[$field] !== "0" && $field != 'mail') {
+                if (empty(trim($postData[$field])) && $postData[$field] !== "0" && $field != 'mail') {
                     echo "Champ $field manquant";
                     return;
                 }
