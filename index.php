@@ -34,8 +34,13 @@ if (isset($_SESSION['last_activity']) && time() - $_SESSION['last_activity'] > 1
     $_SESSION['last_activity'] = time();
 }
 
+if(isset($_GET['reset']) && $_GET['reset'] === "oui"){
+    session_destroy();
+    session_unset();
+}
+
 ///////////////////////////////////////////////////////////////////////////////
-/// Initialize controlers
+/// Initialize controllers
 ///////////////////////////////////////////////////////////////////////////////
 
 $questionsController = new QuestionsController();
@@ -81,20 +86,14 @@ switch ($url) {
         if (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code'])) {
             $_SESSION['pseudo'] = null;
             $_SESSION['spartiateId'] = null;
-            $_SESSION['gameMode'] = null;
             $refresh = 'sessionCode';
         // Ask for pseudo
         } elseif (empty($_SESSION['pseudo'])) {
             $_SESSION['spartiateId'] = null;
-            $_SESSION['gameMode'] = null;
             $refresh = 'pseudo';
         // Ask for a spartian
         } elseif (empty($_SESSION['spartiateId'])) {
-            $_SESSION['gameMode'] = null;
             $spartiatesController->showChooseSpartiate();
-        // Ask for a game mode
-        } elseif (empty($_SESSION['gameMode'])) {
-            $title = 'Choissisez un spartiates';
         // Start the game
         } else {
             $title = 'Jeu de hockey';

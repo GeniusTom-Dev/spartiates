@@ -4,3 +4,4 @@ document.getElementById('createQuestion').onsubmit = function(){
     let falseAnswer1 = document.getElementById('badAnswer1').value;
     return !(question === '' || goodAnswer === '' || falseAnswer1 === '');
 }
+

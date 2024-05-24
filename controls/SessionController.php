@@ -92,20 +92,4 @@ class SessionController
         }
     }
 
-    public function chooseDefense(): void
-    {
-        if (isset($_SESSION['id']) && $this->repository->isInSession($_SESSION['id'])) {
-            $_SESSION['gameMode'] = 'defense';
-            echo 'defense';
-        }
-    }
-
-    public function chooseAttack(): void
-    {
-        if (isset($_SESSION['id']) && $this->repository->isInSession($_SESSION['id'])) {
-            $_SESSION['gameMode'] = 'attack';
-            echo 'attack';
-        }
-    }
-
 }

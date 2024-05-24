@@ -1,4 +1,3 @@
-
 $(document).ready(function (e) {
     $(document).on("click", ".star", function () {
         // Toggle l'état rempli/vide de l'étoile

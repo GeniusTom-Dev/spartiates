@@ -8,13 +8,6 @@
         <label>Question :
             <textarea id="question" class="w-full rounded-xl" type="text" name="text" required></textarea>
         </label>
-        <label>Niveau :
-            <select class="w-full text-left p-3 rounded-xl" id="level" name="level" required>
-                <option value="ATTAQUANT">Attaquant</option>
-                <option value="DEFENSEUR">Defenseur</option>
-                <option value="GUARDIEN">Gardien</option>
-            </select>
-        </label>
         <label>Bonne réponse :
             <textarea id="goodAnswer" class="w-full rounded-xl" type="text" name="true" required></textarea>
         </label>
