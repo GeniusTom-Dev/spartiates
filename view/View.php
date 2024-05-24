@@ -14,7 +14,7 @@ abstract class View
         'Connexion' => 'view/forms/connect.php',
         'Nouvelle Question' => 'view/forms/newQuestion.php',
         'Nouveau Spartiate' => 'view/forms/newSpartiate.php',
-        'Jeu de hockey' => 'view/play.php',
+        'Jeu de hockey' => 'view/game.php',
     ];
 
     public static function display(string $title, ?string $path = null, $data = null) : void

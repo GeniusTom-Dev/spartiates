@@ -129,6 +129,7 @@ $(document).ready(function (e) {
         });
     });
 
+    // D
     $(document).on("click", ".deleteButton", function () {
         updateRanking();
     });

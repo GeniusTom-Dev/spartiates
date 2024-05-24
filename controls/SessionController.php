@@ -59,7 +59,7 @@ class SessionController
         $codesController = new CodesController();
         if (!empty($_SESSION['code'] && $codesController->codeIsActive($_SESSION['code'])) && $this->repository->isInSession($_SESSION['id'])) {
             echo 'true';
-        } elseif (!empty($_SESSION['code'] && $this->repository->isInSession($_SESSION['id']))) {
+        } elseif (!empty($_SESSION['code'] && isset($_SESSION['id']) && $this->repository->isInSession($_SESSION['id']))) {
             echo 'notActive';
 
         } else {
