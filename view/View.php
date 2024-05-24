@@ -18,6 +18,9 @@ abstract class View
         if(empty($path)) {
             $path = self::PATH[$title] ?? self::PATH['Erreur'];
         }
+        if(empty($path)) {
+            return;
+        }
         if (!file_exists($path))
             header('refresh:0;url=/404');
         if ($path == 'view/play.php') {

@@ -79,23 +79,29 @@ switch ($url) {
         break;
     // GAME
     case 'play' :
-        $path = 'view/' . $url . '.php';
-        $title = 'Jeu de hockey';
+        // Ask for session code
         if (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code'])) {
             $_SESSION['pseudo'] = null;
             $_SESSION['spartiateId'] = null;
             $_SESSION['gameMode'] = null;
             $refresh = 'sessionCode';
+        // Ask for pseudo
         } elseif (empty($_SESSION['pseudo'])) {
             $_SESSION['spartiateId'] = null;
             $_SESSION['gameMode'] = null;
             $refresh = 'pseudo';
+        // Ask for a spartian
         } elseif (empty($_SESSION['spartiateId'])) {
             $_SESSION['gameMode'] = null;
             $spartiatesController->showChooseSpartiate();
+        // Ask for a game mode
         } elseif (empty($_SESSION['gameMode'])) {
             $title = 'Choissisez un spartiates';
             $path = 'view/chooseGameMode.php';
+        // Start the game
+        } else {
+            $path = 'view/' . $url . '.php';
+            $title = 'Jeu de hockey';
         }
         break;
     // RULES
