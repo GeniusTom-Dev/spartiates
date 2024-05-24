@@ -1,18 +1,22 @@
-<a href="/home" class="absolute left-5 top-5 w-20 h-20">
-    <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Delete">
+<a href="/home" class="absolute left-5 top-5 w-16 h-16">
+    <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Home">
 </a>
-<div class=" w-full flex flex-col justify-center items-center">
-    <form class="flex flex-col items-center space-y-5 w-1/2 sm:w-full" id="form" method="post">
+<div class="w-full flex flex-col justify-center items-center">
+    <form class="flex flex-col space-y-14 px-5 py-3 w-full sm:w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2 bg-white rounded sm:h-auto md:h-auto lg:h-auto xl:h-auto" id="form" method="post">
         <input type="hidden" name="action" value="addSessionPlayer">
-        <label for="pseudo"><span class="text-3xl">Entrez votre pseudo :</span>
-            <input class="rounded-xl w-full" type="text" id="pseudo" name="pseudo" required pattern=".*\S.*">
+        <label for="pseudo"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Entrez votre pseudo :</span>
+            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl" type="text" id="pseudo" name="pseudo" required pattern=".*\S.*">
         </label>
 
-        <label for="mail"><span class="text-3xl">Entrez votre mail :</span>
-            <br>(facultatif pour recevoir une recompense en cas de victoire)
-            <input class="rounded-xl w-full" type="email" id="mail" name="mail">
+        <label for="mail"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Entrez votre mail :</span>
+            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl" type="email" id="mail" name="mail" required>
         </label>
 
-        <input type="submit" value="JOUER" class="text-3xl border-2 border-black rounded-xl w-2/3 md:w-2/5 xl:w-1/6"/>
+        <div class="w-full flex flex-row items-center space-x-4">
+            <input type="checkbox" class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 xl:w-9 xl:h-9" id="conditionsValidation" />
+            <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">J'accepte les conditions générales d'utilisation</p>
+        </div>
+
+        <input type="submit" value="JOUER" class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl shadow-inner bg-customBlue hover:bg-sky-300 rounded-xl w-2/3 md:w-2/5 xl:w-1/5 text-center px-2 py-2" id="playButton"/>
     </form>
 </div>

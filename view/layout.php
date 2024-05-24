@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="description" content="Serious Game de hockey pour les Spartiate de Marseille"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon"/>
     <title>%title%</title>
     <!--   style   -->
