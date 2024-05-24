@@ -5,12 +5,13 @@
     <meta name="description" content="Serious Game de hockey pour les Spartiate de Marseille"/>
     <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon"/>
     <title>%title%</title>
-    <!--    style-->
+    <!--   style   -->
     <link rel="stylesheet" href="/dist/output.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/dist/bundle.js"></script>
     <script src="/dist/jquery.min.js"></script>
     <script src="/assets/index.js" defer></script>
+    <script src="/assets/form.js" defer></script>
 </head>
 
 <body class="bg-[var(--color-bg)] flex flex-col min-h-screen">

@@ -13,6 +13,7 @@
     <script type="module" src="../assets/GameLauncher.js"></script>
     <script src="/dist/jquery.min.js"></script>
     <script src="/assets/index.js"></script>
+    <script src="/assets/form.js"></script>
     <style>
         body {
             -webkit-user-select: none; /* Désactivation de la sélection sur les navigateurs WebKit/Blink */
