@@ -1,23 +1,27 @@
+<script src="/assets/socket.js"></script>
+
 <a href="/home" class="absolute left-5 top-5 w-20 h-20">
-    <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Delete">
+    <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Home">
 </a>
-<a class="absolute right-5 top-5 w-16 h-16">
-    <img class="p-2 bg-customBlue rounded-xl actionButton cursor-pointer" src="/assets/images/deconnect.svg"
-         data-action="deconnect" alt="deconnect">
+<a class="absolute right-5 top-5 w-16 h-16 cursor-pointer">
+    <img class="p-2 bg-customBlue rounded-xl actionButton" src="/assets/images/deconnect.svg"
+         data-action="deconnect" alt="Disconnect">
 </a>
 
-
-<div class="w-full">
-    <h1 class="titlePage">
+<div class="w-full p-4">
+    <h1 class="titlePage text-center text-3xl md:text-4xl lg:text-5xl mb-4">
         <span class="text-black">Les</span> Spartiates
     </h1>
-    <div class="w-full flex flex-row justify-center items-center">
-        <a class="button" href='/users'><span>Utilisateurs</span></a>
-        <a class="button" href='/questions'><span>Questions</span></a>
+    <div class="w-full flex flex-row justify-center items-center space-x-2 mb-4">
+        <a class="bg-white lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer"
+           href='/users'><span>Utilisateurs</span></a>
+        <a class="bg-white lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer"
+           href='/questions'><span>Questions</span></a>
     </div>
 
-    <div class="flex flex-col items-center justify-center">
-        <button class="blueButton" onclick="window.location.href='/newSpartiate'">Nouveau Joueur</button>
+    <div class="flex flex-col items-center justify-center space-y-4 mb-4">
+        <button class="bg-customBlue lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer"
+                onclick="window.location.href='/newSpartiate'">Nouveau Joueur</button>
         <div class="flex flex-row items-center justify-between w-full px-4 py-2 border-b border-gray-200">
             <input type="text" placeholder="Rechercher" id="searchSpartiate"
                    class="w-full px-4 py-2 text-gray-700 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:bg-white focus:border-gray-500">
@@ -71,7 +75,7 @@
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
-                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                               clip-rule="evenodd"></path>
                     </svg>
                     <span class="sr-only">Close modal</span>
