@@ -42,7 +42,7 @@ $actionsMapping = [
     'start' => ['controller' => $codesController, 'adminOnly' => true],
     'stop' => ['controller' => $codesController, 'adminOnly' => true],
     'isInActiveSession' => ['controller' => $sessionController, 'adminOnly' => false],
-    'addSessionPlayer' => ['fields' => ['pseudo', 'mail'], 'controller' => $sessionController, 'redirect' => '/play', 'adminOnly' => false],
+    'addSessionPlayer' => ['fields' => ['pseudo', 'mail'], 'controller' => $sessionController, 'redirect' => '/game', 'adminOnly' => false],
 
     // Score
     'addScore' => ['fields' => ['score'], 'controller' => $sessionController, 'adminOnly' => false],
