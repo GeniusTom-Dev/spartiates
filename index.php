@@ -52,7 +52,7 @@ $codesController = new CodesController();
 ///////////////////////////////////////////////////////////////////////////////
 
 $pages = [
-    'play' => 'Jeu de hockey',
+    'game' => 'Jeu de hockey',
     'rules' => 'Regles',
 ];
 $forms = [
@@ -81,7 +81,7 @@ switch ($url) {
         $title = 'Home';
         break;
     // GAME
-    case 'play' :
+    case 'game' :
         // Ask for session code
         if (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code'])) {
             $_SESSION['pseudo'] = null;
