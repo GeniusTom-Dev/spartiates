@@ -1201,10 +1201,6 @@ input:checked + .toggle-bg{
   z-index: 50;
 }
 
-.m-10{
-  margin: 2.5rem;
-}
-
 .mx-1{
   margin-left: 0.25rem;
   margin-right: 0.25rem;
@@ -1223,6 +1219,14 @@ input:checked + .toggle-bg{
 .my-4{
   margin-top: 1rem;
   margin-bottom: 1rem;
+.my-10{
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.my-3{
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .mb-1{
@@ -1365,6 +1369,10 @@ input:checked + .toggle-bg{
   height: 18vh;
 }
 
+.h-\[18vh\]{
+  height: 18vh;
+}
+
 .h-\[20\%\]{
   height: 20%;
 }
@@ -1429,6 +1437,10 @@ input:checked + .toggle-bg{
   width: 2.75rem;
 }
 
+.w-11\/12{
+  width: 91.666667%;
+}
+
 .w-16{
   width: 4rem;
 }
@@ -1451,10 +1463,6 @@ input:checked + .toggle-bg{
 
 .w-4{
   width: 1rem;
-}
-
-.w-4\/5{
-  width: 80%;
 }
 
 .w-5{
@@ -1483,6 +1491,10 @@ input:checked + .toggle-bg{
 
 .w-full{
   width: 100%;
+}
+
+.max-w-2xl{
+  max-width: 42rem;
 }
 
 .max-w-md{
@@ -1656,6 +1668,18 @@ input:checked + .toggle-bg{
   --tw-space-y-reverse: 0;
   margin-top: calc(3.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(3.5rem * var(--tw-space-y-reverse));
+}
+
+.space-y-14 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(3.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(3.5rem * var(--tw-space-y-reverse));
+}
+
+.space-y-4 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
 
 .space-y-5 > :not([hidden]) ~ :not([hidden]){
@@ -1943,9 +1967,9 @@ input:checked + .toggle-bg{
   padding-right: 2rem;
 }
 
-.py-10{
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
+.py-16{
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 .py-16{
@@ -2044,6 +2068,23 @@ input:checked + .toggle-bg{
   font-size: 5vh;
 }
 
+.text-\[2\.5vh\]{
+  font-size: 2.5vh;
+}
+
+.text-\[2vh\]{
+  font-size: 2vh;
+}
+
+.text-\[5vh\]{
+  font-size: 5vh;
+}
+
+.text-base{
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 .text-lg{
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -2054,8 +2095,21 @@ input:checked + .toggle-bg{
   line-height: 1.25rem;
 }
 
+.text-xl{
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
 .font-bold{
   font-weight: 700;
+}
+
+.font-extralight{
+  font-weight: 200;
+}
+
+.font-light{
+  font-weight: 300;
 }
 
 .font-medium{
@@ -2082,6 +2136,16 @@ input:checked + .toggle-bg{
 .text-blue-600{
   --tw-text-opacity: 1;
   color: rgb(28 100 242 / var(--tw-text-opacity));
+}
+
+.text-customBlue{
+  --tw-text-opacity: 1;
+  color: rgb(171 211 230 / var(--tw-text-opacity));
+}
+
+.text-customGreen{
+  --tw-text-opacity: 1;
+  color: rgb(40 167 69 / var(--tw-text-opacity));
 }
 
 .text-gray-300{
@@ -2167,6 +2231,12 @@ input:checked + .toggle-bg{
 .shadow-md{
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-xl{
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -2572,6 +2642,14 @@ input:checked + .toggle-bg{
     height: auto;
   }
 
+  .sm\:h-\[40vh\]{
+    height: 40vh;
+  }
+
+  .sm\:h-auto{
+    height: auto;
+  }
+
   .sm\:w-10{
     width: 2.5rem;
   }
@@ -2586,6 +2664,17 @@ input:checked + .toggle-bg{
 
   .sm\:w-\[90vw\]{
     width: 90vw;
+  .sm\:w-\[90\%\]{
+    width: 90%;
+  }
+
+  .sm\:w-\[90vw\]{
+    width: 90vw;
+  }
+
+  .sm\:bg-amber-300{
+    --tw-bg-opacity: 1;
+    background-color: rgb(252 211 77 / var(--tw-bg-opacity));
   }
 
   .sm\:p-5{
@@ -2614,10 +2703,20 @@ input:checked + .toggle-bg{
 
   .md\:h-\[10vh\]{
     height: 10vh;
+  .md\:h-7{
+    height: 1.75rem;
   }
 
-  .md\:h-\[7vh\]{
-    height: 7vh;
+  .md\:h-\[50vh\]{
+    height: 50vh;
+  }
+
+  .md\:h-\[6vh\]{
+    height: 6vh;
+  }
+
+  .md\:h-\[8vh\]{
+    height: 8vh;
   }
 
   .md\:h-auto{
@@ -2640,6 +2739,14 @@ input:checked + .toggle-bg{
     width: 75%;
   }
 
+  .md\:w-2\/6{
+    width: 33.333333%;
+  }
+
+  .md\:w-3\/4{
+    width: 75%;
+  }
+
   .md\:w-3\/5{
     width: 60%;
   }
@@ -2656,8 +2763,39 @@ input:checked + .toggle-bg{
     width: 95vw;
   }
 
+  .md\:w-7{
+    width: 1.75rem;
+  }
+
+  .md\:w-\[80\%\]{
+    width: 80%;
+  }
+
+  .md\:w-\[95vw\]{
+    width: 95vw;
+  }
+
   .md\:grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:bg-emerald-600{
+    --tw-bg-opacity: 1;
+    background-color: rgb(5 150 105 / var(--tw-bg-opacity));
+  }
+
+  .md\:p-5{
+    padding: 1.25rem;
+  }
+
+  .md\:px-4{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .md\:py-4{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   .md\:py-6{
@@ -2674,11 +2812,56 @@ input:checked + .toggle-bg{
     font-size: 1.125rem;
     line-height: 1.75rem;
   }
+
+  .md\:text-2xl{
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .md\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .md\:text-4xl{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .md\:text-\[2\.5vh\]{
+    font-size: 2.5vh;
+  }
+
+  .md\:text-\[3vh\]{
+    font-size: 3vh;
+  }
+
+  .md\:text-lg{
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .md\:text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
 }
 
 @media (min-width: 1024px){
   .lg\:h-8{
     height: 2rem;
+  }
+
+  .lg\:h-auto{
+    height: auto;
+  }
+
+  .lg\:h-8{
+    height: 2rem;
+  }
+
+  .lg\:h-\[50vh\]{
+    height: 50vh;
   }
 
   .lg\:h-auto{
@@ -2703,11 +2886,57 @@ input:checked + .toggle-bg{
 
   .lg\:w-full{
     width: 100%;
+  .lg\:w-2\/3{
+    width: 66.666667%;
+  }
+
+  .lg\:w-8{
+    width: 2rem;
+  }
+
+  .lg\:w-\[70\%\]{
+    width: 70%;
+  }
+
+  .lg\:flex-row{
+    flex-direction: row;
+  }
+
+  .lg\:space-x-4 > :not([hidden]) ~ :not([hidden]){
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .lg\:space-y-0 > :not([hidden]) ~ :not([hidden]){
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0px * var(--tw-space-y-reverse));
+  }
+
+  .lg\:bg-fuchsia-500{
+    --tw-bg-opacity: 1;
+    background-color: rgb(217 70 239 / var(--tw-bg-opacity));
+  }
+
+  .lg\:py-8{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   .lg\:text-3xl{
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+
+  .lg\:text-4xl{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .lg\:text-5xl{
+    font-size: 3rem;
+    line-height: 1;
   }
 
   .lg\:text-xl{
@@ -2719,6 +2948,26 @@ input:checked + .toggle-bg{
 @media (min-width: 1280px){
   .xl\:h-9{
     height: 2.25rem;
+  }
+
+  .xl\:h-auto{
+    height: auto;
+  }
+
+  .xl\:w-1\/2{
+    width: 50%;
+  }
+
+  .xl\:w-1\/5{
+    width: 20%;
+  }
+
+  .xl\:h-9{
+    height: 2.25rem;
+  }
+
+  .xl\:h-\[50vh\]{
+    height: 50vh;
   }
 
   .xl\:h-auto{
@@ -2753,6 +3002,27 @@ input:checked + .toggle-bg{
   .xl\:text-4xl{
     font-size: 2.25rem;
     line-height: 2.5rem;
+  }
+
+  .xl\:bg-orange-600{
+    --tw-bg-opacity: 1;
+    background-color: rgb(208 56 1 / var(--tw-bg-opacity));
+  }
+
+  .xl\:text-2xl{
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .xl\:text-4xl{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+@media (min-width: 1536px){
+  .\32xl\:h-\[40vh\]{
+    height: 40vh;
   }
 }
 
