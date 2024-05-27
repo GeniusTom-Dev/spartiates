@@ -17,10 +17,10 @@ class SessionController
         $this->repository = new SessionRepository();
     }
 
-    public function addSessionPlayer($pseudo, $email): void
+    public function addSessionPlayer($username, $email): void
     {
-        $_SESSION['id'] = $this->repository->addSessionPlayer(trim($pseudo), trim($email), $_SESSION['code']);
-        $_SESSION['pseudo'] = $pseudo;
+        $_SESSION['id'] = $this->repository->addSessionPlayer(trim($username), trim($email), $_SESSION['code']);
+        $_SESSION['username'] = $username;
         $_SESSION['email'] = $email;
     }
 
@@ -32,7 +32,7 @@ class SessionController
             echo '
             <tr class="bg-white">
                 <td class="px-4 py-2 border-t border-b text-center font-bold">' . $i . '</td>
-                <td class="px-4 py-2 border-t border-b text-center">' . $sessionUser->getLogin() . '</td>
+                <td class="px-4 py-2 border-t border-b text-center">' . $sessionUser->getUsername() . '</td>
                 <td class="px-4 py-2 border-t border-b text-center">' . $sessionUser->getScore() . '</td>
                 <td class="p-2 border bg-[var(--color-bg)] text-center">
                     <button data-id="' . $sessionUser->get_id() . '" data-action="deleteUser" class="deleteButton actionButton inline-block w-8 h-8 bg-red-500 hover:bg-red-700 rounded" type="button">
@@ -85,10 +85,10 @@ class SessionController
         }
     }
 
-    public function setSessionSpart($spartiateId): void
+    public function setSessionSpart($spartanId): void
     {
         if (isset($_SESSION['id']) && $this->repository->isInSession($_SESSION['id'])) {
-            $_SESSION['spartiateId'] = $spartiateId;
+            $_SESSION['spartanId'] = $spartanId;
         }
     }
 

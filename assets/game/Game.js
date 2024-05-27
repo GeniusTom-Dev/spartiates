@@ -33,7 +33,7 @@ export class Game {
             },
             dataType: 'json',
             success: function (response) {
-                $("#pseudo").text(response.pseudo);
+                $("#username").text(response.username);
                 $("#scoreEnd").text(response.score.toString());
                 $("#rank").text(response.rank.toString());
                 sessionStorage.setItem("score", 0);

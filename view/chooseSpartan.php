@@ -4,16 +4,16 @@
 <div>
     <h1 class="text-3xl text-black text-center">Choisissez votre spartiate</h1>
     <div class="result grid gap-4 p-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-        <?php foreach ($data as $spartiate) { ?>
+        <?php foreach ($data as $spartan) { ?>
             <div class="spartCard cursor-pointer flex flex-col items-center justify-center w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md"
-                 data-id="<?= $spartiate->get_id() ?>">
+                 data-id="<?= $spartan->getId() ?>">
                 <?php
-                if ($fileName = glob('assets/spartImage/' . strtolower($spartiate->getLastname()) . '_' . strtolower($spartiate->getName()) . '.*')) {
+                if ($fileName = glob('assets/spartImage/' . strtolower($spartan->getLastname()) . '_' . strtolower($spartan->getName()) . '.*')) {
                     echo '<img class="w-24 h-32 rounded-3xl object-contain" src="' . $fileName[0] . '" alt="image du spartiate">';
                 }
                 ?>
                 <div class="flex flex-row items-center justify-between w-full mt-2">
-                    <p class="text-lg font-medium text-gray-800 mr-5"><?= $spartiate->getLastname() ?> <?= $spartiate->getName() ?></p>
+                    <p class="text-lg font-medium text-gray-800 mr-5"><?= $spartan->getLastname() ?> <?= $spartan->getName() ?></p>
                 </div>
             </div>
         <?php } ?>

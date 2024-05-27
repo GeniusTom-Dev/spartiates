@@ -3,13 +3,13 @@
 </a>
     <form class="bg-white p-10 rounded-md drop-shadow-xl flex flex-col justify-center items-center space-y-5" id="form" method="post">
         <input type="hidden" name="action" value="updateQuestion">
-        <input type="hidden" name="id" value="<?= $data->getQuestion_id() ?>">
-        <h1> Mise a jour question </h1>
+        <input type="hidden" name="id" value="<?= $data->getId() ?>">
+        <h1> Mise à jour question </h1>
         <label>Question :
             <textarea class="w-full rounded-xl" type="text" name="text" required><?= $data->getText() ?></textarea>
         </label>
         <label>Bonne réponse :
-            <textarea class="w-full rounded-xl" type="text" name="true" required><?= $data->getResponse() ?></textarea>
+            <textarea class="w-full rounded-xl" type="text" name="true" required><?= $data->getAnswer() ?></textarea>
         </label>
         <label>Mauvaise réponse 1 :
             <textarea class="w-full rounded-xl" type="text" name="false1" required><?= $data->getFalse1() ?></textarea>

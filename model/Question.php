@@ -10,24 +10,24 @@ class Question extends Entity
 {
     private mixed $id;
     private mixed $text;
-    private mixed $response;
+    private mixed $answer;
     private mixed $false1;
     private mixed $false2;
 
     /**
      * @return mixed
      */
-    public function getResponse(): mixed
+    public function getAnswer(): mixed
     {
-        return $this->response;
+        return $this->answer;
     }
 
     /**
-     * @param mixed $response
+     * @param mixed $answer
      */
-    public function setResponse(mixed $response): void
+    public function setAnswer(mixed $answer): void
     {
-        $this->response = html_entity_decode($response);
+        $this->answer = html_entity_decode($answer);
     }
 
     /**
@@ -65,7 +65,7 @@ class Question extends Entity
     /**
      * @return mixed
      */
-    public function get_id(): mixed
+    public function getId(): mixed
     {
         return $this->id;
     }
@@ -73,7 +73,7 @@ class Question extends Entity
     /**
      * @param mixed $id
      */
-    public function set_id(mixed $id): void
+    public function setId(mixed $id): void
     {
         $this->id = $id;
     }

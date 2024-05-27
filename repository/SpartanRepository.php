@@ -24,8 +24,8 @@ class SpartanRepository extends AbstractRepository
         if ($statement->rowCount() > 1) {
             throw new MoreThanOneException("Duplication du SPARTIATE $id dans la BD");
         }
-        $spartiate = $statement->fetch();
-        return new Spartan($spartiate);
+        $spartan = $statement->fetch();
+        return new Spartan($spartan);
     }
 
     public function getAll(): array

@@ -9,19 +9,19 @@ use model\Admin;
 class UsersRepository extends AbstractRepository
 {
 
-    public function logIn($pseudo, $password): ?Admin
+    public function logIn($login, $password): ?Admin
     {
-        // On récupère tous les Users avec le même pseudo et le même mot de passe
-        $query = 'SELECT * FROM ADMIN WHERE LOGIN = :pseudo and PASSWORD = :password';
+        // On récupère tous les Users avec le même nom d'utilisateur et le même mot de passe
+        $query = 'SELECT * FROM ADMIN WHERE LOGIN = :login and PASSWORD = :password';
         $result = $this->connexion->prepare($query);
-        $result->execute(['pseudo' => $pseudo, 'password' => $password]);
+        $result->execute(['login' => $login, 'password' => $password]);
 
         if ($result->rowCount() === 0) {
             throw new NotFoundException('Aucun ADMIN trouvé');
         }
 
         if ($result->rowCount() > 1) {
-            throw new MoreThanOneException("Duplication de l'ADMIN $pseudo");
+            throw new MoreThanOneException("Duplication de l'ADMIN $login");
         }
 
         $user = $result->fetch();

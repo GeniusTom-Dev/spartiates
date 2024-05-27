@@ -3,12 +3,12 @@
 </a>
     <form class="bg-white p-10 rounded-md drop-shadow-xl flex flex-col justify-center items-center space-y-5" id="form"
           method="post" enctype="multipart/form-data">
-        <input type="hidden" name="action" value="createSpartiate">
-        <h1 id="login"> Nouveau Spartiate </h1>
+        <input type="hidden" name="action" value="createSpartan">
+        <h1 id="username"> Nouveau Spartiate </h1>
         <label>Nom :<br>
             <input class="rounded-xl" name="lastName" id="lastName" type="text" required/>
         </label>
-        <label>Prenom :<br>
+        <label>Prénom :<br>
             <input class="rounded-xl" name="name" id="name" type="text" required/>
         </label>
         <input type="file" name="fileToUpload" id="fileToUpload" required accept="image/png, image/jpeg, image/jpg" >

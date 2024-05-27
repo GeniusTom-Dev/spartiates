@@ -14,7 +14,7 @@ class WSController
             'action' => 'identify',
             'id' => $_SESSION['id'] ?? 1,
             'admin' => !empty($_SESSION['admin']),
-            'pseudo' => $_SESSION['pseudo'] ?? 'Anonyme',
+            'username' => $_SESSION['username'] ?? 'Anonyme',
         );
 
         // Convertir le tableau associatif en JSON

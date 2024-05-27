@@ -4,7 +4,7 @@ $(document).ready(function (e) {
         let filled = !$(this).data("filled");
         $(this).data("filled", filled);
         // Récupérer l'ID du joueur associé
-        let spartiateId = $(this).data("spartiate-id");
+        let spartanId = $(this).data("spartiate-id");
         // Mettre à jour l'image en fonction de l'état rempli/vide
         let imageUrl = filled ? "/assets/images/fullStar.svg" : "/assets/images/emptyStar.svg";
         $(this).attr("src", imageUrl);
@@ -14,7 +14,7 @@ $(document).ready(function (e) {
             url: "/controls/actionController.php",
             data: {
                 action: "changeStar",
-                spartiateId: spartiateId
+                spartanId: spartanId
             },
             dataType: "json",
             success: function (response) {
@@ -163,7 +163,7 @@ $(document).ready(function (e) {
             url: "/controls/actionController.php",
             data: {
                 action: "setSessionSpart",
-                spartiateId: id,
+                spartanId: id,
             },
         }).done(function (response) {
             location.reload();

@@ -52,7 +52,7 @@
      id="endGame" style="display: none">
     <span>
         <label class="text-5xl">Felicitation </label>
-        <label class="text-5xl" id="pseudo"></label>
+        <label class="text-5xl" id="username"></label>
         <label class="text-5xl">!</label>
     </span>
     <span>
