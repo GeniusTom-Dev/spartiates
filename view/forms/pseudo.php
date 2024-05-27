@@ -8,8 +8,8 @@
             <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl" type="text" id="pseudo" name="pseudo" required pattern=".*\S.*">
         </label>
 
-        <label for="mail"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Entrez votre mail :</span>
-            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl" type="email" id="mail" name="mail" required>
+        <label for="email"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Entrez votre mail :</span>
+            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl" type="email" id="email" name="email" required>
         </label>
 
         <div class="w-full flex flex-row items-center space-x-4">

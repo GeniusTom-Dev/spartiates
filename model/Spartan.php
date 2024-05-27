@@ -4,9 +4,9 @@ namespace model;
 /**
  * La classe User permet de gérer les utilisateurs
  */
-class Spartiate extends Entity
+class Spartan extends Entity
 {
-    private mixed $spart_id;
+    private mixed $id;
     private mixed $lastName;
     private mixed $name;
     private mixed $number;
@@ -31,17 +31,17 @@ class Spartiate extends Entity
     /**
      * @return mixed
      */
-    public function getSpart_id(): mixed
+    public function get_id(): mixed
     {
-        return $this->spart_id;
+        return $this->id;
     }
 
     /**
-     * @param mixed $spart_id
+     * @param mixed $id
      */
-    public function setSpart_id(mixed $spart_id): void
+    public function setId(mixed $id): void
     {
-        $this->spart_id = $spart_id;
+        $this->id = $id;
     }
 
     /**

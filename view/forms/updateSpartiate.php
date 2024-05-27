@@ -4,8 +4,8 @@
     <form class="bg-white p-10 rounded-md drop-shadow-xl flex flex-col justify-center items-center space-y-5" id="form"
           method="post">
         <input type="hidden" name="action" value="updateSpartiate">
-        <input type="hidden" name="id" value="<?= $data->getSpart_id() ?>">
-        <h1 id="login"> Mise a jour question Spartiate </h1>
+        <input type="hidden" name="id" value="<?= $data->get_id() ?>"> <!-- $data est la liste des Spartiates -->
+        <h1 id="login"> Mise à jour question Spartiate </h1>
         <label>Nom :</label>
         <input name="lastName" id="lastName" type="text" value="<?= $data->getLastname() ?>" required/>
         <label>Prenom :</label>

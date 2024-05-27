@@ -33,7 +33,7 @@ $(document).ready(function (e) {
                     type: "POST",
                     url: "/controls/actionController.php",
                     data: {
-                        action: inputSelector === "#searchQuestion" ? "searchQuestion" : "searchSpartiate",
+                        action: inputSelector === "#searchQuestion" ? "searchQuestion" : "searchSpartan",
                         searchTerm: searchTerm
                     },
                     success: function (result) {
@@ -53,7 +53,7 @@ $(document).ready(function (e) {
 
 // Appeler la fonction pour chaque champ de recherche spécifique
     handleSearch("#searchQuestion");
-    handleSearch("#searchSpartiate");
+    handleSearch("#searchSpartan");
 
     $("#verificationForm").submit(function (e) {
         e.preventDefault(); //empêcher une action par défaut

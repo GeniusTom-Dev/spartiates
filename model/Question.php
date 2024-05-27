@@ -8,7 +8,7 @@ namespace model;
  */
 class Question extends Entity
 {
-    private mixed $question_id;
+    private mixed $id;
     private mixed $text;
     private mixed $response;
     private mixed $false1;
@@ -65,17 +65,17 @@ class Question extends Entity
     /**
      * @return mixed
      */
-    public function getQuestion_id(): mixed
+    public function get_id(): mixed
     {
-        return $this->question_id;
+        return $this->id;
     }
 
     /**
-     * @param mixed $question_id
+     * @param mixed $id
      */
-    public function setQuestion_id(mixed $question_id): void
+    public function set_id(mixed $id): void
     {
-        $this->question_id = $question_id;
+        $this->id = $id;
     }
 
     /**

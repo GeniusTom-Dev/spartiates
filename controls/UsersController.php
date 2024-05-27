@@ -23,7 +23,7 @@ class UsersController
         //on récupère les informations rentrées dans le formulaire
         try {
             $user = $this->repository->logIn($pseudo, $password);
-            if (!empty($user) && $user->getAdmin() == 1) {
+            if (!empty($user) && $user->isAdminActive() == 1) {
                 $_SESSION['admin'] = true;
                 return true;
             }

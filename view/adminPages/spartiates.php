@@ -41,16 +41,16 @@
                         <p class="text-lg font-medium text-gray-800 mr-5"><?= $spartiate->getLastname() ?> <?= $spartiate->getName() ?></p>
                         <div class="flex flex-row space-x-2">
                             <div class="inline-block w-8 h-8 bg-customBlue hover:bg-blue-700 rounded cursor-pointer">
-                                <img class="p-1 star" data-spartiate-id="<?= $spartiate->getSpart_id() ?>"
+                                <img class="p-1 star" data-spartiate-id="<?= $spartiate->get_id() ?>"
                                      data-filled="<?= $spartiate->isStarred() ?>"
                                      src="<?php echo $spartiate->isStarred() ? '/assets/images/fullStar.svg' : '/assets/images/emptyStar.svg'; ?>"
                                      alt="etoile du match">
                             </div>
-                            <a href="/updateSpartiate?id=<?= $spartiate->getSpart_id() ?>"
+                            <a href="/updateSpartiate?id=<?= $spartiate->get_id() ?>"
                                class="inline-block w-8 h-8 bg-customBlue hover:bg-blue-700 rounded">
                                 <img class="p-1" src="/assets/images/edit.svg" alt="Edit">
                             </a>
-                            <button data-id="<?= $spartiate->getSpart_id() ?>"
+                            <button data-id="<?= $spartiate->get_id() ?>"
                                     data-modal-target="deleteModalSpartiate" data-modal-toggle="deleteModalSpartiate"
                                     class="callActionButton inline-block w-8 h-8 bg-red-500 hover:bg-red-700 rounded"
                                     type="button">

@@ -6,7 +6,7 @@
     <div class="result grid gap-4 p-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
         <?php foreach ($data as $spartiate) { ?>
             <div class="spartCard cursor-pointer flex flex-col items-center justify-center w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md"
-                 data-id="<?= $spartiate->getSpart_id() ?>">
+                 data-id="<?= $spartiate->get_id() ?>">
                 <?php
                 if ($fileName = glob('assets/spartImage/' . strtolower($spartiate->getLastname()) . '_' . strtolower($spartiate->getName()) . '.*')) {
                     echo '<img class="w-24 h-32 rounded-3xl object-contain" src="' . $fileName[0] . '" alt="image du spartiate">';

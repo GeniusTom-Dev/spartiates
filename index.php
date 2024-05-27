@@ -7,7 +7,7 @@
 use controls\CodesController;
 use controls\QuestionsController;
 use controls\SessionController;
-use controls\SpartiatesController;
+use controls\SpartanController;
 use controls\UsersController;
 use view\View;
 
@@ -44,7 +44,7 @@ if(isset($_GET['reset']) && $_GET['reset'] === "oui"){
 ///////////////////////////////////////////////////////////////////////////////
 
 $questionsController = new QuestionsController();
-$spartiatesController = new SpartiatesController();
+$spartiatesController = new SpartanController();
 $codesController = new CodesController();
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ $codesController = new CodesController();
 ///////////////////////////////////////////////////////////////////////////////
 
 $pages = [
-    'play' => 'Jeu de hockey',
+    'game' => 'Jeu de hockey',
     'rules' => 'Regles',
 ];
 $forms = [
@@ -62,7 +62,7 @@ $forms = [
 ];
 $adminForms = [
     'newQuestion' => 'Nouvelle Question',
-    'newSpartiate' => 'Nouveau Spartiate',
+    'newSpartiate' => 'Nouveau Spartan',
 ];
 $adminPages = [
     'questions' => ['Questions', $questionsController],
@@ -81,7 +81,7 @@ switch ($url) {
         $title = 'Home';
         break;
     // GAME
-    case 'play' :
+    case 'game' :
         // Ask for session code
         if (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code'])) {
             $_SESSION['pseudo'] = null;
@@ -93,7 +93,7 @@ switch ($url) {
             $refresh = 'pseudo';
         // Ask for a spartian
         } elseif (empty($_SESSION['spartiateId'])) {
-            $spartiatesController->showChooseSpartiate();
+            $spartiatesController->showChooseSpartan();
         // Start the game
         } else {
             $title = 'Jeu de hockey';
@@ -149,7 +149,7 @@ switch ($url) {
         }
         $questionsController->showUpdateForm($url, htmlspecialchars($_GET['id']));
         break;
-    case 'updateSpartiate' :
+    case 'updateSpartan' :
         if (empty($_GET['id'])) {
             $title = 'Erreur';
             break;

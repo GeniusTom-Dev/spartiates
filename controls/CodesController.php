@@ -67,10 +67,10 @@ class CodesController
         $data = $sessionRepo->getMailAndPseudoOfHighestScore();
         if (!empty($data)) {
             foreach ($data as $row) {
-                if (!empty($row['mail']) && !empty($row['pseudo'])) {
-                    $to = $row['mail'];
-                    $who = $row['pseudo'];
-                    $subject = 'Jeu Spartiate';
+                if (!empty($row['email']) && !empty($row['login'])) {
+                    $to = $row['email'];
+                    $who = $row['login'];
+                    $subject = 'Jeu Spartan';
                     $headers = 'De: Spartiates <jeuspartiates@alwaysdata.net>' . "\r\n";
                     $message = 'Bonjour ' . $who . ' vous avez fait le meilleur score gardez ce mail pour récupérer votre prix';
                     mail($to, $subject, $message, $headers);
