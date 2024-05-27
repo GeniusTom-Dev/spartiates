@@ -6,17 +6,17 @@
          data-action="deconnect" alt="deconnect">
 </a>
 
-<div class="w-full">
-    <h1 class="titlePage">
+<div class="w-full p-4">
+    <h1 class="titlePage text-center text-3xl md:text-4xl lg:text-5xl mb-4">
         <span class="text-black">Les</span> questions
     </h1>
-    <div class="w-full flex flex-row justify-center items-center">
-        <a class="button" href='/users'><span>Utilisateurs</span></a>
-        <a class="button" href='/spartiates'><span>Sportifs</span></a>
+    <div class="w-full flex flex-row justify-center items-center space-x-2 mb-4">
+        <a class="bg-white lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer" href='/users'><span>Utilisateurs</span></a>
+        <a class="bg-white lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer" href='/spartiates'><span>Sportifs</span></a>
     </div>
 
     <div class="flex flex-col items-center justify-center">
-        <button class="blueButton" onclick="window.location.href='/newQuestion'">Ajouter une question</button>
+        <button class="bg-customBlue lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer" onclick="window.location.href='/newQuestion'">Ajouter une question</button>
         <div class="flex flex-row items-center justify-between w-full px-4 py-2 border-b border-gray-200">
             <input type="text" placeholder="Rechercher" id="searchQuestion"
                    class="w-full px-4 py-2 text-gray-700 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:bg-white focus:border-gray-500">

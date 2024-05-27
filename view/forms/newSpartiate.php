@@ -11,6 +11,6 @@
         <label>Prenom :<br>
             <input class="rounded-xl" name="name" id="name" type="text" required/>
         </label>
-        <input type="file" name="fileToUpload" id="fileToUpload" required>
+        <input type="file" name="fileToUpload" id="fileToUpload" required accept="image/png, image/jpeg, image/jpg" >
         <input class="bg-blue-500 rounded-xl text-lg py-4 px-8" type="submit" name="create" value="Créer">
     </form>
