@@ -4,10 +4,10 @@ namespace controls;
 
 use exception\CannotCreateException;
 use exception\NotFoundException;
-use repository\SpartiatesRepository;
+use repository\SpartanRepository;
 use view\View;
 
-class SpartiatesController
+class SpartanController
 {
     /**
      * @var mixed
@@ -16,10 +16,10 @@ class SpartiatesController
 
     public function __construct()
     {
-        $this->repository = new SpartiatesRepository();
+        $this->repository = new SpartanRepository();
     }
 
-    public function showSpartiates(): void
+    public function showSpartan(): void
     {
         try {
             $path = 'view/adminPages/spartiates.php';
@@ -30,30 +30,30 @@ class SpartiatesController
         }
     }
 
-    public function createSpartiate($lastName, $name): void
+    public function createSpartan($lastName, $name): void
     {
         try {
-            $this->repository->createSpartiate(trim($lastName), trim($name));
+            $this->repository->createSpartan(trim($lastName), trim($name));
         } catch (CannotCreateException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
             echo $ERROR->getMessage();
         }
     }
 
-    public function deleteSpartiate($id): void
+    public function deleteSpartan($id): void
     {
         try {
-            $this->repository->deleteSpartiateById($id);
+            $this->repository->deleteSpartanById($id);
         } catch (NotFoundException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
             echo $ERROR->getMessage();
         }
     }
 
-    public function updateSpartiate($id, $lastName, $name): void
+    public function updateSpartan($id, $lastName, $name): void
     {
         try {
-            $this->repository->updateSpartiateById($id, trim($lastName), trim($name));
+            $this->repository->updateSpartanById($id, trim($lastName), trim($name));
         } catch (NotFoundException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
             echo $ERROR->getMessage();
@@ -64,9 +64,9 @@ class SpartiatesController
     {
         try {
             if ($this->repository->isStarredById($id) === 1)
-                $this->repository->changeSpartiateStarById($id, 0);
+                $this->repository->changeSpartanStarById($id, 0);
             else
-                $this->repository->changeSpartiateStarById($id, 1);
+                $this->repository->changeSpartanStarById($id, 1);
 
         } catch (NotFoundException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
@@ -74,19 +74,19 @@ class SpartiatesController
         }
     }
 
-    public function searchSpartiate($searchTerm): void
+    public function searchSpartan($searchTerm): void
     {
         $searchResult = $this->repository->search($searchTerm);
-        foreach ($searchResult as $spartiate) {
+        foreach ($searchResult as $spartan) {
             echo '
                 <div class="flex flex-col items-center justify-center w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md">
                     <div class="flex flex-row items-center justify-between w-full mt-2">
-                        <p class="text-lg font-medium text-gray-800 mr-5">' . $spartiate->getLastname() . ' ' . $spartiate->getName() . '</p>
+                        <p class="text-lg font-medium text-gray-800 mr-5">' . $spartan->getLastname() . ' ' . $spartan->getName() . '</p>
                         <div class="flex flex-row space-x-2">
                             <div class="inline-block w-8 h-8 bg-customBlue hover:bg-blue-700 rounded cursor-pointer">
-                                  <img class="p-1 star" data-spartiate-id="' . $spartiate->getSpart_id() . '" data-filled="' . $spartiate->isStarred() . '" src="' . ($spartiate->isStarred() ? "/assets/images/fullStar.svg" : "/assets/images/emptyStar.svg") . '" alt="etoile du match">
+                                  <img class="p-1 star" data-spartiate-id="' . $spartan->get_id() . '" data-filled="' . $spartan->isStarred() . '" src="' . ($spartan->isStarred() ? "/assets/images/fullStar.svg" : "/assets/images/emptyStar.svg") . '" alt="etoile du match">
                             </div>
-                            <a href="/updateSpartiate&id=' . $spartiate->getSpart_id() . '" class="inline-block w-8 h-8 bg-customBlue hover:bg-blue-700 rounded">
+                            <a href="/updateSpartan&id=' . $spartan->get_id() . '" class="inline-block w-8 h-8 bg-customBlue hover:bg-blue-700 rounded">
                                 <img class="p-1" src="/assets/images/edit.svg" alt="Edit">
                             </a>
                         </div>
@@ -101,7 +101,7 @@ class SpartiatesController
         View::display('MISE A JOUR', $path, $this->repository->getById($id));
     }
 
-    public function showChooseSpartiate(): void
+    public function showChooseSpartan(): void
     {
         $path = 'view/chooseSpartiate.php';
         View::display('Choix du joueur', $path, $this->repository->getAll());

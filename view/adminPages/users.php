@@ -19,7 +19,6 @@
            data-action="startWS">Demarrer</a>
         <a class="bg-white lg:w-1/3 w-full w-full h-[8vh] py-8 py-6 drop-shadow-xl text-4xl lg:text-xl my-4 mx-1 rounded-lg flex justify-center items-center cursor-pointer buttonWS"
            data-action="stopWS">Stop</a>
-        <!--    <a class="sessionAction" data-action="reset">Reinitialiser</a>-->
     </div>
 
     <div class="px-5 lg:w-full flex flex-row justify-center items-center">

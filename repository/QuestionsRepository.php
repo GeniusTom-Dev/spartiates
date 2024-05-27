@@ -10,14 +10,9 @@ use PDO;
 class QuestionsRepository extends AbstractRepository
 {
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function getById($id): Question
     {
-        $query = 'SELECT * FROM QUESTION WHERE QUESTION_ID = :id';
+        $query = 'SELECT * FROM QUESTION WHERE ID = :id';
         $statement = $this->connexion->prepare($query);
         $statement->execute(['id' => $id]);
 
@@ -72,7 +67,7 @@ class QuestionsRepository extends AbstractRepository
 
     public function createQuestion($text, $true, $false1, $false2): void
     {
-        $query = "INSERT INTO QUESTION (QUESTION_ID, TEXT, RESPONSE, FALSE1, FALSE2) VALUES (NULL, :text, :true, :false1, :false2);";
+        $query = "INSERT INTO QUESTION (ID, TEXT, ANSWER, FALSE1, FALSE2) VALUES (NULL, :text, :true, :false1, :false2);";
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             ':text' => $text,
@@ -85,7 +80,7 @@ class QuestionsRepository extends AbstractRepository
     public function deleteQuestionById($id): void
     {
         //On supprime une question avec son id
-        $query = 'DELETE FROM QUESTION WHERE QUESTION_ID = :id';
+        $query = 'DELETE FROM QUESTION WHERE ID = :id';
         $statement = $this->connexion->prepare($query);
         $statement->execute(['id' => $id]);
 
@@ -97,7 +92,7 @@ class QuestionsRepository extends AbstractRepository
 
     public function updateQuestionById($id, $text, $true, $false1, $false2): void
     {
-        $query = "UPDATE QUESTION SET TEXT = :text, RESPONSE= :true, FALSE1= :false1, FALSE2= :false2  WHERE QUESTION_ID = :id;";
+        $query = "UPDATE QUESTION SET TEXT = :text, ANSWER= :true, FALSE1= :false1, FALSE2= :false2  WHERE ID = :id;";
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             ':text' => $text,

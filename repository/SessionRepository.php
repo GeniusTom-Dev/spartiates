@@ -3,45 +3,57 @@
 namespace repository;
 
 use exception\NotFoundException;
-use model\SessionUser;
+use model\SessionPlayer;
 use PDO;
 
 class SessionRepository extends AbstractRepository
 {
 
-    public function addSessionPlayer($pseudo, $mail, $code): false|string
+    public function addSessionPlayer($pseudo, $email, $code): false|string
     {
-        $query1 = 'INSERT INTO MAILS (MAIL ) VALUES (:mail )';
-        $statement = $this->connexion->prepare($query1);
+        // We checked if the email already exist
+
+        $queryDoesEmailExist = 'SELECT id FROM EMAIL WHERE email = :email';
+        $statement = $this->connexion->prepare($queryDoesEmailExist);
         $statement->execute([
-            'mail' => $mail
+            'email' => $email
         ]);
 
-        $query = 'INSERT INTO SESSION (pseudo, code,MAIL) VALUES (:pseudo,:code, :mail)';
+        if ($statement->rowCount() === 1) {
+            $emailId = $statement->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            // If the email doesn't already exist, we insert it in EMAIL
+            $query1 = 'INSERT INTO EMAIL (EMAIL ) VALUES (:email )';
+            $statement = $this->connexion->prepare($query1);
+            $statement->execute([
+                'email' => $email
+            ]);
+        }
+
+        $query = 'INSERT INTO PLAYER (login, score, email) VALUES (:pseudo, 0, (SELECT id FROM EMAIL WHERE email = :email))';
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             'pseudo' => $pseudo,
-            'code' => $code,
-            'mail' => $mail
+            'email' => $email
         ]);
         return $this->connexion->lastInsertId();
     }
 
     public function deleteSession(): void
     {
-        $query = 'DELETE FROM SESSION';
+        $query = 'DELETE FROM PLAYER';
         $statement = $this->connexion->prepare($query);
         $statement->execute();
     }
 
     public function getRanking(): array
     {
-        $query = 'SELECT * FROM SESSION ORDER BY SCORE DESC limit 10';
+        $query = 'SELECT * FROM PLAYER ORDER BY SCORE DESC limit 10';
         $statement = $this->connexion->prepare($query);
         $statement->execute();
         $sessionUsers = [];
         while ($data = $statement->fetch(PDO::FETCH_ASSOC)) {
-            $sessionUsers[] = new SessionUser($data);
+            $sessionUsers[] = new SessionPlayer($data);
         }
         return $sessionUsers;
     }
@@ -49,7 +61,7 @@ class SessionRepository extends AbstractRepository
     public function deleteUserById($id): void
     {
         //On supprime un user avec son id
-        $query = 'DELETE FROM SESSION WHERE SESSION_USER_ID = :id';
+        $query = 'DELETE FROM PLAYER WHERE ID = :id';
         $statement = $this->connexion->prepare($query);
         $statement->execute(['id' => $id]);
 
@@ -62,7 +74,7 @@ class SessionRepository extends AbstractRepository
     public function addScore($id, $score): void
     {
         //On ajoute le score à l'utilisateur
-        $query = 'UPDATE SESSION SET SCORE = SCORE + :score WHERE SESSION_USER_ID = :id';
+        $query = 'UPDATE PLAYER SET SCORE = SCORE + :score WHERE ID = :id';
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             'id' => $id,
@@ -72,7 +84,7 @@ class SessionRepository extends AbstractRepository
 
     public function setScore($id, $score): void
     {
-        $query = 'UPDATE SESSION SET SCORE = :score WHERE SESSION_USER_ID = :id';
+        $query = 'UPDATE PLAYER SET SCORE = :score WHERE ID = :id';
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             'id' => $id,
@@ -84,7 +96,7 @@ class SessionRepository extends AbstractRepository
     public function getScore($id): int
     {
         //On ajoute le score à l'utilisateur
-        $query = 'SELECT * FROM SESSION WHERE SESSION_USER_ID = :id';
+        $query = 'SELECT * FROM PLAYER WHERE ID = :id';
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             'id' => $id,
@@ -101,7 +113,7 @@ class SessionRepository extends AbstractRepository
 
     public function isInSession($id): bool
     {
-        $query = 'SELECT * FROM SESSION WHERE SESSION_USER_ID = :id';
+        $query = 'SELECT * FROM PLAYER WHERE ID = :id';
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             'id' => $id,
@@ -116,11 +128,9 @@ class SessionRepository extends AbstractRepository
 
     public function getSessionUser($id): bool|array
     {
-        $query = 'SELECT pseudo, score,
+        $query = 'SELECT login, score,
        (SELECT COUNT(DISTINCT score) + 1 FROM SESSION WHERE score > t1.score) AS rank
-        FROM SESSION t1
-        WHERE SESSION_USER_ID = :id;
-';
+        FROM SESSION t1 WHERE ID = :id;';
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             ':id' => $id,
@@ -129,17 +139,15 @@ class SessionRepository extends AbstractRepository
         if ($statement->rowCount() === 0) {
             throw new NotFoundException('Aucun USER trouvé');
         }
-        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getMailAndPseudoOfHighestScore(): bool|array
     {
-        $query = 'SELECT pseudo, mail FROM SESSION WHERE SCORE = (SELECT MAX(SCORE) FROM SESSION)';
+        $query = 'SELECT login, email FROM PLAYER WHERE SCORE = (SELECT MAX(SCORE) FROM PLAYER)';
         $statement = $this->connexion->prepare($query);
         $statement->execute();
-        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
 

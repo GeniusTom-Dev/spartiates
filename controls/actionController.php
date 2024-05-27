@@ -8,7 +8,7 @@ if (isset($_POST['action'])) {
 
 // Utiliser un tableau pour stocker les instances des contrôleurs
 $questionsController = new QuestionsController();
-$spartiatesController = new SpartiatesController();
+$spartanController = new SpartanController();
 $usersController = new UsersController();
 $codesController = new CodesController();
 $sessionController = new SessionController();
@@ -19,13 +19,13 @@ if (!isset($_SESSION)) {
 }
 $actionsMapping = [
 
-    // Spartiate
-    'createSpartiate' => ['fields' => ['lastName', 'name'], 'controller' => $spartiatesController, 'redirect' => '/spartiates', 'adminOnly' => true],
-    'updateSpartiate' => ['idField' => 'id', 'fields' => ['lastName', 'name'], 'controller' => $spartiatesController, 'redirect' => '/spartiates', 'adminOnly' => true],
-    'deleteSpartiate' => ['idField' => 'id', 'controller' => $spartiatesController, 'redirect' => '/spartiates', 'adminOnly' => true],
+    // Spartan
+    'createSpartan' => ['fields' => ['lastName', 'name'], 'controller' => $spartanController, 'redirect' => '/spartiates', 'adminOnly' => true],
+    'updateSpartan' => ['idField' => 'id', 'fields' => ['lastName', 'name'], 'controller' => $spartanController, 'redirect' => '/spartiates', 'adminOnly' => true],
+    'deleteSpartan' => ['idField' => 'id', 'controller' => $spartanController, 'redirect' => '/spartiates', 'adminOnly' => true],
     'setSessionSpart' => ['fields' => ['spartiateId'], 'controller' => $sessionController, 'adminOnly' => false],
-    'searchSpartiate' => ['fields' => ['searchTerm'], 'controller' => $spartiatesController, 'adminOnly' => true],
-    'changeStar' => ['fields' => ['spartiateId'], 'controller' => $spartiatesController, 'adminOnly' => true],
+    'searchSpartan' => ['fields' => ['searchTerm'], 'controller' => $spartanController, 'adminOnly' => true],
+    'changeStar' => ['fields' => ['spartiateId'], 'controller' => $spartanController, 'adminOnly' => true],
 
     // Question
     'createQuestion' => ['fields' => ['text', 'level', 'true', 'false1', 'false2'], 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
@@ -42,7 +42,7 @@ $actionsMapping = [
     'start' => ['controller' => $codesController, 'adminOnly' => true],
     'stop' => ['controller' => $codesController, 'adminOnly' => true],
     'isInActiveSession' => ['controller' => $sessionController, 'adminOnly' => false],
-    'addSessionPlayer' => ['fields' => ['pseudo', 'mail'], 'controller' => $sessionController, 'redirect' => '/play', 'adminOnly' => false],
+    'addSessionPlayer' => ['fields' => ['pseudo', 'email'], 'controller' => $sessionController, 'redirect' => '/play', 'adminOnly' => false],
 
     // Score
     'addScore' => ['fields' => ['score'], 'controller' => $sessionController, 'adminOnly' => false],

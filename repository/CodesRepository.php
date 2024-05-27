@@ -16,7 +16,7 @@ class CodesRepository extends AbstractRepository
      */
     public function checkSessionCode($code): bool
     {
-        $query = 'SELECT * FROM CODES WHERE CODE_TYPE = "SESSION" and CODE = :code and ACTIVE = true';
+        $query = 'SELECT * FROM SESSION WHERE CODE = :code and ACTIVE = true';
         $result = $this->connexion->prepare($query);
         $result->execute([
             'code' => $code,
@@ -36,7 +36,7 @@ class CodesRepository extends AbstractRepository
      */
     public function isSessionCode(): bool
     {
-        $query = 'SELECT * FROM CODES WHERE CODE_TYPE = "SESSION"';
+        $query = 'SELECT * FROM SESSION';
         $result = $this->connexion->prepare($query);
         $result->execute();
 
@@ -45,8 +45,8 @@ class CodesRepository extends AbstractRepository
 
     public function start($code): void
     {
-        $query = 'INSERT INTO CODES (CODE_TYPE, CODE)
-                    VALUES ("SESSION", :code)';
+        $query = 'INSERT INTO SESSION (CODE, ACTIVE)
+                    VALUES (:code, 1)';
         $result = $this->connexion->prepare($query);
         $result->execute([
             ':code' => $code,
@@ -55,21 +55,21 @@ class CodesRepository extends AbstractRepository
 
     public function reset(): void
     {
-        $query = 'DELETE FROM CODES WHERE CODE_TYPE = "SESSION"';
+        $query = 'DELETE FROM SESSION';
         $result = $this->connexion->prepare($query);
         $result->execute();
     }
 
     public function stop(): void
     {
-        $query = 'UPDATE CODES SET ACTIVE = 0 WHERE CODE_TYPE = "SESSION";';
+        $query = 'UPDATE SESSION SET ACTIVE = 0;';
         $result = $this->connexion->prepare($query);
         $result->execute();
     }
 
     public function getSessionCode(): string
     {
-        $query = 'SELECT CODE FROM CODES WHERE CODE_TYPE = "SESSION" and ACTIVE = 1';
+        $query = 'SELECT CODE FROM SESSION WHERE ACTIVE = 1';
         $result = $this->connexion->prepare($query);
         $result->execute();
         $data = $result->fetch();
@@ -82,7 +82,7 @@ class CodesRepository extends AbstractRepository
 
     public function isActive($code): bool
     {
-        $query = 'SELECT * FROM CODES WHERE CODE_TYPE = "SESSION" and CODE = :code and ACTIVE = 1';
+        $query = 'SELECT * FROM SESSION WHERE CODE = :code and ACTIVE = 1';
         $result = $this->connexion->prepare($query);
         $result->execute([
             ':code' => $code,

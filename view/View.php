@@ -13,7 +13,7 @@ abstract class View
         'entrer le pseudo' => 'view/forms/pseudo.php',
         'Connexion' => 'view/forms/connect.php',
         'Nouvelle Question' => 'view/forms/newQuestion.php',
-        'Nouveau Spartiate' => 'view/forms/newSpartiate.php',
+        'Nouveau Spartan' => 'view/forms/newSpartiate.php',
         'Jeu de hockey' => 'view/game.php',
     ];
 

@@ -4,15 +4,15 @@ namespace repository;
 
 use exception\MoreThanOneException;
 use exception\NotFoundException;
-use model\Spartiate;
+use model\Spartan;
 use PDO;
 
-class SpartiatesRepository extends AbstractRepository
+class SpartanRepository extends AbstractRepository
 {
 
-    public function getById($id): Spartiate
+    public function getById($id): Spartan
     {
-        $query = 'SELECT * FROM SPARTIATE WHERE SPART_ID = :id';
+        $query = 'SELECT * FROM SPARTAN WHERE ID = :id';
         $statement = $this->connexion->prepare($query);
         $statement->execute(['id' => $id]);
 
@@ -25,12 +25,12 @@ class SpartiatesRepository extends AbstractRepository
             throw new MoreThanOneException("Duplication du SPARTIATE $id dans la BD");
         }
         $spartiate = $statement->fetch();
-        return new Spartiate($spartiate);
+        return new Spartan($spartiate);
     }
 
     public function getAll(): array
     {
-        $query = 'SELECT * FROM SPARTIATE';
+        $query = 'SELECT * FROM SPARTAN';
         $statement = $this->connexion->prepare($query);
         $statement->execute();
 
@@ -40,25 +40,25 @@ class SpartiatesRepository extends AbstractRepository
 
         // On récupère le résultat de la requête SQL et on le met dans un tableau d'User'
         for ($i = 0; $i < sizeof($arraySQL); $i++) {
-            $user = new Spartiate($arraySQL[$i]);
+            $user = new Spartan($arraySQL[$i]);
             $arrayUser[] = $user;
         }
         return $arrayUser;
     }
 
-    public function createSpartiate($lastname, $name): void
+    public function createSpartan($lastname, $name): void
     {
-        $query = "INSERT INTO SPARTIATE (SPART_ID, LASTNAME, NAME) VALUES (NULL, :lastName, :name);";
+        $query = "INSERT INTO SPARTAN (ID, LASTNAME, NAME) VALUES (NULL, :lastName, :name);";
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             ':lastName' => $lastname,
             ':name' => $name]);
     }
 
-    public function deleteSpartiateById($id): void
+    public function deleteSpartanById($id): void
     {
         // On supprime un spartiate avec son id
-        $query = 'DELETE FROM SPARTIATE WHERE SPART_ID = :id';
+        $query = 'DELETE FROM SPARTAN WHERE ID = :id';
         $statement = $this->connexion->prepare($query);
         $statement->execute(['id' => $id]);
 
@@ -71,7 +71,7 @@ class SpartiatesRepository extends AbstractRepository
     public function isStarredById($id): int
     {
         //On récupère le score d'un utilisateur par rapport à son id
-        $query = 'SELECT STAR FROM SPARTIATE WHERE SPART_ID = :id';
+        $query = 'SELECT STAR FROM SPARTAN WHERE ID = :id';
         $statement = $this->connexion->prepare($query);
         $statement->execute(['id' => $id]);
 
@@ -87,18 +87,18 @@ class SpartiatesRepository extends AbstractRepository
         return $user["STAR"];
     }
 
-    public function changeSpartiateStarById($id, $starred): void
+    public function changeSpartanStarById($id, $starred): void
     {
-        $query = "UPDATE SPARTIATE SET STAR = :starred WHERE SPART_ID = :id;";
+        $query = "UPDATE SPARTAN SET STAR = :starred WHERE ID = :id;";
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             ':starred' => $starred,
             ':id' => $id]);
     }
 
-    public function updateSpartiateById($id, $lastName, $name): void
+    public function updateSpartanById($id, $lastName, $name): void
     {
-        $query = "UPDATE SPARTIATE SET LASTNAME = :lastName, NAME = :name WHERE SPART_ID = :id;";
+        $query = "UPDATE SPARTAN SET LASTNAME = :lastName, NAME = :name WHERE ID = :id;";
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             ':lastName' => $lastName,
@@ -109,13 +109,13 @@ class SpartiatesRepository extends AbstractRepository
 
     public function search($searchTerm): array
     {
-        $query = "SELECT * FROM SPARTIATE WHERE LASTNAME LIKE :searchTerm OR NAME LIKE :searchTerm LIMIT 10";
+        $query = "SELECT * FROM SPARTAN WHERE LASTNAME LIKE :searchTerm OR NAME LIKE :searchTerm LIMIT 10";
         $statement = $this->connexion->prepare($query);
         $statement->execute([':searchTerm' => "%$searchTerm%"]);
 
         $spartiates = [];
         while ($data = $statement->fetch(PDO::FETCH_ASSOC)) {
-            $spartiates[] = new Spartiate($data);
+            $spartiates[] = new Spartan($data);
         }
         return $spartiates;
     }
