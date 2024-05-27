@@ -31,7 +31,7 @@ class Spartan extends Entity
     /**
      * @return mixed
      */
-    public function get_id(): mixed
+    public function getId(): mixed
     {
         return $this->id;
     }

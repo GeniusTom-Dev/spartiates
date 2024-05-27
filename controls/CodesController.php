@@ -64,12 +64,12 @@ class CodesController
     {
         $this->repository->stop();
         $sessionRepo = new SessionRepository();
-        $data = $sessionRepo->getMailAndPseudoOfHighestScore();
+        $data = $sessionRepo->getMailAndUsernameOfHighestScore();
         if (!empty($data)) {
             foreach ($data as $row) {
-                if (!empty($row['email']) && !empty($row['login'])) {
+                if (!empty($row['email']) && !empty($row['username'])) {
                     $to = $row['email'];
-                    $who = $row['login'];
+                    $who = $row['username'];
                     $subject = 'Jeu Spartan';
                     $headers = 'De: Spartiates <jeuspartiates@alwaysdata.net>' . "\r\n";
                     $message = 'Bonjour ' . $who . ' vous avez fait le meilleur score gardez ce mail pour récupérer votre prix';

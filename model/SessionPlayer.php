@@ -5,7 +5,7 @@ namespace model;
 class SessionPlayer extends Entity
 {
     private mixed $id;
-    private mixed $login;
+    private mixed $username;
     private mixed $score;
     private mixed $email;
 
@@ -28,17 +28,17 @@ class SessionPlayer extends Entity
     /**
      * @return mixed
      */
-    public function getLogin(): mixed
+    public function getUsername(): mixed
     {
-        return $this->login;
+        return $this->username;
     }
 
     /**
-     * @param mixed $login
+     * @param mixed $username
      */
-    public function setLogin(mixed $login): void
+    public function setUsername(mixed $username): void
     {
-        $this->login = $login;
+        $this->username = $username;
     }
 
     /**

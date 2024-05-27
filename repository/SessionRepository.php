@@ -9,7 +9,7 @@ use PDO;
 class SessionRepository extends AbstractRepository
 {
 
-    public function addSessionPlayer($pseudo, $email, $code): false|string
+    public function addSessionPlayer($username, $email, $code): false|string
     {
         // We checked if the email already exist
 
@@ -30,10 +30,10 @@ class SessionRepository extends AbstractRepository
             ]);
         }
 
-        $query = 'INSERT INTO PLAYER (login, score, email) VALUES (:pseudo, 0, (SELECT id FROM EMAIL WHERE email = :email))';
+        $query = 'INSERT INTO PLAYER (username, score, email) VALUES (:username, 0, (SELECT id FROM EMAIL WHERE email = :email))';
         $statement = $this->connexion->prepare($query);
         $statement->execute([
-            'pseudo' => $pseudo,
+            'username' => $username,
             'email' => $email
         ]);
         return $this->connexion->lastInsertId();
@@ -128,9 +128,9 @@ class SessionRepository extends AbstractRepository
 
     public function getSessionUser($id): bool|array
     {
-        $query = 'SELECT login, score,
-       (SELECT COUNT(DISTINCT score) + 1 FROM SESSION WHERE score > t1.score) AS rank
-        FROM SESSION t1 WHERE ID = :id;';
+        $query = 'SELECT username, score,
+       (SELECT COUNT(DISTINCT score) + 1 FROM PLAYER WHERE score > t1.score) AS rank
+        FROM PLAYER t1 WHERE ID = :id;';
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             ':id' => $id,
@@ -142,9 +142,9 @@ class SessionRepository extends AbstractRepository
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getMailAndPseudoOfHighestScore(): bool|array
+    public function getMailAndUsernameOfHighestScore(): bool|array
     {
-        $query = 'SELECT login, email FROM PLAYER WHERE SCORE = (SELECT MAX(SCORE) FROM PLAYER)';
+        $query = 'SELECT username, email FROM PLAYER WHERE SCORE = (SELECT MAX(SCORE) FROM PLAYER)';
         $statement = $this->connexion->prepare($query);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);

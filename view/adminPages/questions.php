@@ -12,7 +12,7 @@
     </h1>
     <div class="w-full flex flex-row justify-center items-center space-x-2 mb-4">
         <a class="bg-white lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer" href='/users'><span>Utilisateurs</span></a>
-        <a class="bg-white lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer" href='/spartiates'><span>Sportifs</span></a>
+        <a class="bg-white lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer" href='/spartans'><span>Sportifs</span></a>
     </div>
 
     <div class="flex flex-col items-center justify-center">
@@ -29,11 +29,11 @@
                     <div class="flex flex-row items-center justify-between w-full mt-2">
                         <p class="text-lg font-medium text-gray-800 mr-5"><?= $question->getText() ?> </p>
                         <div class="flex flex-row space-x-2">
-                            <a href="/updateQuestion&id=<?= $question->getQuestion_id() ?>"
+                            <a href="/updateQuestion&id=<?= $question->getId() ?>"
                                class="inline-block w-8 h-8 bg-customBlue hover:bg-blue-700 rounded cursor-pointer">
                                 <img class="p-1" src="/assets/images/edit.svg" alt="Delete">
                             </a>
-                            <button data-id="<?= $question->getQuestion_id() ?>"
+                            <button data-id="<?= $question->getId() ?>"
                                     data-modal-target="deleteModalQuestion" data-modal-toggle="deleteModalQuestion"
                                     class="callActionButton inline-block w-8 h-8 bg-red-500 hover:bg-red-700 rounded"
                                     type="button">
@@ -64,8 +64,8 @@
                     <span class="sr-only">Close modal</span>
                 </button>
                 <img class="text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true"
-                     src="/assets/images/trashcan.svg" </img>
-                <p class="mb-4 text-gray-300">Etes vous sur de vouloir supprimer ?</p>
+                     src="/assets/images/trashcan.svg"  alt="supprimer"/>
+                <p class="mb-4 text-gray-300">Êtes-vous sûr de vouloir supprimer ?</p>
                 <div class="flex justify-center items-center space-x-4">
                     <button data-modal-toggle="deleteModalQuestion" type="button"
                             class="py-2 px-3 text-sm font-medium rounded-lg border focus:ring-4 focus:outline-none focus:ring-primary-300 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600 focus:ring-gray-600">

@@ -10,10 +10,10 @@ abstract class View
         'Admin' => 'view/adminPages/users.php',
         'Regles' => 'view/rules.php',
         'entrer le code' => 'view/forms/sessionCode.php',
-        'entrer le pseudo' => 'view/forms/pseudo.php',
+        'entrer un nom d\'utilisateur' => 'view/forms/username.php',
         'Connexion' => 'view/forms/connect.php',
         'Nouvelle Question' => 'view/forms/newQuestion.php',
-        'Nouveau Spartan' => 'view/forms/newSpartiate.php',
+        'Nouveau Spartiate' => 'view/forms/newSpartan.php',
         'Jeu de hockey' => 'view/game.php',
     ];
 
@@ -30,7 +30,7 @@ abstract class View
         }
         if (!file_exists($path))
             header('refresh:0;url=/404');
-        if ($path == 'view/play.php') {
+        if ($path == 'view/game.php') {
             echo str_replace(['%title%'], [$title], file_get_contents($path));
         } else {
             extract(array('data' => $data));

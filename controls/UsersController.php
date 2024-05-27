@@ -18,11 +18,11 @@ class UsersController
         $this->repository = new UsersRepository();
     }
 
-    public function logIn($pseudo, $password): bool
+    public function logIn($login, $password): bool
     {
         //on récupère les informations rentrées dans le formulaire
         try {
-            $user = $this->repository->logIn($pseudo, $password);
+            $user = $this->repository->logIn($login, $password);
             if (!empty($user) && $user->isAdminActive() == 1) {
                 $_SESSION['admin'] = true;
                 return true;

@@ -4,8 +4,8 @@
 <div class="w-full flex flex-col justify-center items-center">
     <form class="flex flex-col space-y-14 px-5 py-3 w-full sm:w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2 bg-white rounded sm:h-auto md:h-auto lg:h-auto xl:h-auto" id="form" method="post">
         <input type="hidden" name="action" value="addSessionPlayer">
-        <label for="pseudo"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Entrez votre pseudo :</span>
-            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl" type="text" id="pseudo" name="pseudo" required pattern=".*\S.*">
+        <label for="username"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Entrez votre nom d'utilisateur :</span>
+            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl" type="text" id="username" name="username" required pattern=".*\S.*">
         </label>
 
         <label for="email"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Entrez votre mail :</span>

@@ -39,7 +39,7 @@ class QuestionsController
         }
         if (!empty($_SESSION['randomQuestion'])) {
             $temp = array('text' => $_SESSION['randomQuestion'][0]->getText(),
-                'vrai' => $_SESSION['randomQuestion'][0]->getResponse(),
+                'vrai' => $_SESSION['randomQuestion'][0]->getAnswer(),
                 'faux1' => $_SESSION['randomQuestion'][0]->getFalse1(),
                 'faux2' => $_SESSION['randomQuestion'][0]->getFalse2());
             $_SESSION['randomQuestion'] = array_slice($_SESSION['randomQuestion'], 1);
@@ -47,10 +47,10 @@ class QuestionsController
         }
     }
 
-    public function createQuestion($text, $level, $true, $false1, $false2): void
+    public function createQuestion($text, $true, $false1, $false2): void
     {
         try {
-            $this->repository->createQuestion(trim($text), $level, trim($true), trim($false1), trim($false2));
+            $this->repository->createQuestion(trim($text), trim($true), trim($false1), trim($false2));
         } catch (CannotCreateException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
             echo $ERROR->getMessage();
@@ -67,10 +67,10 @@ class QuestionsController
         }
     }
 
-    public function updateQuestion($id, $text, $level, $true, $false1, $false2): void
+    public function updateQuestion($id, $text, $true, $false1, $false2): void
     {
         try {
-            $this->repository->updateQuestionById($id, trim($text), $level, trim($true), trim($false1), trim($false2));
+            $this->repository->updateQuestionById($id, trim($text), trim($true), trim($false1), trim($false2));
         } catch (NotFoundException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
             echo $ERROR->getMessage();
@@ -86,7 +86,7 @@ class QuestionsController
                 <div class="flex flex-row items-center justify-between w-full mt-2">
                     <p class="text-lg font-medium text-gray-800 mr-5"> ' . $question->getText() . ' </p>
                     <div class="flex flex-row space-x-2">
-                        <a href="/updateQuestion&id=' . $question->getQuestion_id() . '" class="inline-block w-8 h-8 bg-customBlue hover:bg-blue-700 rounded cursor-pointer">
+                        <a href="/updateQuestion&id=' . $question->getId() . '" class="inline-block w-8 h-8 bg-customBlue hover:bg-blue-700 rounded cursor-pointer">
                             <img class="p-1" src="/assets/images/edit.svg" alt="Delete">
                         </a>
                     </div>

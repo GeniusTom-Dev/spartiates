@@ -20,29 +20,29 @@ if (!isset($_SESSION)) {
 $actionsMapping = [
 
     // Spartan
-    'createSpartan' => ['fields' => ['lastName', 'name'], 'controller' => $spartanController, 'redirect' => '/spartiates', 'adminOnly' => true],
-    'updateSpartan' => ['idField' => 'id', 'fields' => ['lastName', 'name'], 'controller' => $spartanController, 'redirect' => '/spartiates', 'adminOnly' => true],
-    'deleteSpartan' => ['idField' => 'id', 'controller' => $spartanController, 'redirect' => '/spartiates', 'adminOnly' => true],
-    'setSessionSpart' => ['fields' => ['spartiateId'], 'controller' => $sessionController, 'adminOnly' => false],
+    'createSpartan' => ['fields' => ['lastName', 'name'], 'controller' => $spartanController, 'redirect' => '/spartans', 'adminOnly' => true],
+    'updateSpartan' => ['idField' => 'id', 'fields' => ['lastName', 'name'], 'controller' => $spartanController, 'redirect' => '/spartans', 'adminOnly' => true],
+    'deleteSpartan' => ['idField' => 'id', 'controller' => $spartanController, 'redirect' => '/spartans', 'adminOnly' => true],
+    'setSessionSpart' => ['fields' => ['spartanId'], 'controller' => $sessionController, 'adminOnly' => false],
     'searchSpartan' => ['fields' => ['searchTerm'], 'controller' => $spartanController, 'adminOnly' => true],
-    'changeStar' => ['fields' => ['spartiateId'], 'controller' => $spartanController, 'adminOnly' => true],
+    'changeStar' => ['fields' => ['spartanId'], 'controller' => $spartanController, 'adminOnly' => true],
 
     // Question
-    'createQuestion' => ['fields' => ['text', 'level', 'true', 'false1', 'false2'], 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
-    'updateQuestion' => ['idField' => 'id', 'fields' => ['text', 'level', 'true', 'false1', 'false2'], 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
+    'createQuestion' => ['fields' => ['text', 'true', 'false1', 'false2'], 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
+    'updateQuestion' => ['idField' => 'id', 'fields' => ['text', 'true', 'false1', 'false2'], 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
     'deleteQuestion' => ['idField' => 'id', 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
     'getRandomQuestion' => ['controller' => $questionsController, 'adminOnly' => false],
     'searchQuestion' => ['fields' => ['searchTerm'], 'controller' => $questionsController, 'adminOnly' => true],
 
     // Session Code
-    'checkSessionCode' => ['fields' => ['code'], 'controller' => $codesController, 'success' => ['success' => true, 'url' => '/pseudo'], 'error' => ['success' => false, 'error' => 'code incorrect'], 'sessionHasEnded' => ['success' => false, 'error' => 'La session est finis'], 'adminOnly' => false, 'needResponse' => true],
+    'checkSessionCode' => ['fields' => ['code'], 'controller' => $codesController, 'success' => ['success' => true, 'url' => '/username'], 'error' => ['success' => false, 'error' => 'code incorrect'], 'sessionHasEnded' => ['success' => false, 'error' => 'La session est finis'], 'adminOnly' => false, 'needResponse' => true],
     'getSessionCode' => ['controller' => $codesController, 'adminOnly' => true],
 
     // Manage Session
     'start' => ['controller' => $codesController, 'adminOnly' => true],
     'stop' => ['controller' => $codesController, 'adminOnly' => true],
     'isInActiveSession' => ['controller' => $sessionController, 'adminOnly' => false],
-    'addSessionPlayer' => ['fields' => ['pseudo', 'email'], 'controller' => $sessionController, 'redirect' => '/game', 'adminOnly' => false],
+    'addSessionPlayer' => ['fields' => ['username', 'email'], 'controller' => $sessionController, 'redirect' => '/game', 'adminOnly' => false],
 
     // Score
     'addScore' => ['fields' => ['score'], 'controller' => $sessionController, 'adminOnly' => false],
@@ -53,7 +53,7 @@ $actionsMapping = [
     'connexionWS' => ['controller' => $wscontroller, 'adminOnly' => false],
 
     // User
-    'logIn' => ['fields' => ['pseudo', 'password'], 'controller' => $usersController, 'success' => ['success' => true, 'url' => '/users'], 'error' => ['success' => false, 'error' => 'Identifiant ou mot de passe incorrect'], 'adminOnly' => false, 'needResponse' => true],
+    'logIn' => ['fields' => ['login', 'password'], 'controller' => $usersController, 'success' => ['success' => true, 'url' => '/users'], 'error' => ['success' => false, 'error' => 'Identifiant ou mot de passe incorrect'], 'adminOnly' => false, 'needResponse' => true],
     'deleteUser' => ['idField' => 'id', 'controller' => $sessionController, 'redirect' => '', 'adminOnly' => true],
 
     // Other
@@ -64,7 +64,6 @@ $actionsMapping = [
 // Fonction pour traiter les actions
 function handleAction($actionsMapping): void
 {
-    global $sessionController;
     $postData = $_POST;
     $files = $_FILES;
     $action = $_POST['action'];

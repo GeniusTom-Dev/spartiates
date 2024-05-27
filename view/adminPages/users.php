@@ -10,21 +10,21 @@
 
 <div class="w-full p-4">
     <h1 class="titlePage text-center text-3xl md:text-4xl lg:text-5xl mb-4">
-        <span class="text-black">La</span> page users
+        <span class="text-black">LE PANEL</span> D'ADMINISTRATION
     </h1>
     <div class="w-full flex justify-center items-center text-xl md:text-2xl lg:text-4xl mb-4">
         <h2 class="bg-customBlue p-4 md:p-5 rounded-xl" id="code"></h2>
     </div>
     <div class="px-5 w-full flex flex-col lg:flex-row justify-center items-center space-y-4 lg:space-y-0 lg:space-x-4 mb-4">
         <a class="bg-white lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer buttonWS"
-           data-action="startWS">Demarrer</a>
+           data-action="startWS">Démarrer</a>
         <a class="bg-white lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer buttonWS"
            data-action="stopWS">Stop</a>
     </div>
 
     <div class="px-5 w-full flex flex-col lg:flex-row justify-center items-center space-y-4 lg:space-y-0 lg:space-x-4 mb-4">
         <a class="bg-customBlue lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer"
-           href='/spartiates'>Sportifs</a>
+           href='/spartans'>Sportifs</a>
         <a class="bg-customBlue lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer"
            href='/questions'>Questions</a>
     </div>

@@ -44,7 +44,7 @@ if(isset($_GET['reset']) && $_GET['reset'] === "oui"){
 ///////////////////////////////////////////////////////////////////////////////
 
 $questionsController = new QuestionsController();
-$spartiatesController = new SpartanController();
+$spartanController = new SpartanController();
 $codesController = new CodesController();
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -53,20 +53,20 @@ $codesController = new CodesController();
 
 $pages = [
     'game' => 'Jeu de hockey',
-    'rules' => 'Regles',
+    'rules' => 'Règles',
 ];
 $forms = [
     'sessionCode' => 'entrer le code',
-    'pseudo' => 'entrer le pseudo',
+    'username' => 'entrer un nom d\'utilisateur',
     'connect' => 'Connexion',
 ];
 $adminForms = [
     'newQuestion' => 'Nouvelle Question',
-    'newSpartiate' => 'Nouveau Spartan',
+    'newSpartan' => 'Nouveau Spartiate',
 ];
 $adminPages = [
     'questions' => ['Questions', $questionsController],
-    'spartiates' => ['Spartiates', $spartiatesController],
+    'spartans' => ['Spartans', $spartanController],
 ];
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -74,55 +74,60 @@ $adminPages = [
 ///////////////////////////////////////////////////////////////////////////////
 
 switch ($url) {
+
     // HOME PAGE
     case '' :
     case '/':
     case 'home':
         $title = 'Home';
         break;
+
     // GAME
     case 'game' :
         // Ask for session code
         if (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code'])) {
-            $_SESSION['pseudo'] = null;
-            $_SESSION['spartiateId'] = null;
+            $_SESSION['username'] = null;
+            $_SESSION['spartanId'] = null;
             $refresh = 'sessionCode';
-        // Ask for pseudo
-        } elseif (empty($_SESSION['pseudo'])) {
-            $_SESSION['spartiateId'] = null;
-            $refresh = 'pseudo';
-        // Ask for a spartian
-        } elseif (empty($_SESSION['spartiateId'])) {
-            $spartiatesController->showChooseSpartan();
+        // Ask for username
+        } elseif (empty($_SESSION['username'])) {
+            $_SESSION['spartanId'] = null;
+            $refresh = 'login';
+        // Ask for a spartan
+        } elseif (empty($_SESSION['spartanId'])) {
+            $spartanController->showChooseSpartan();
         // Start the game
         } else {
             $title = 'Jeu de hockey';
         }
         break;
+
     // RULES
     case 'rules' :
         $title = 'Regles';
         break;
+
     // FORMS
     case 'sessionCode' :
-    case 'pseudo' :
+    case 'username' :
     case 'connect' :
         $title = $forms[$url];
-        if ($url != "pseudo" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']))) {
-            $_SESSION['spartiateId'] = null;
-        } elseif ($url == 'pseudo')
+        if ($url != "username" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']))) {
+            $_SESSION['spartanId'] = null;
+        } elseif ($url == 'username')
             $refresh = 'sessionCode';
         break;
+
     // ADMIN PAGES
     case 'newQuestion' :
-    case 'newSpartiate' :
+    case 'newSpartan' :
         if (empty($_SESSION['admin'])) {
             $refresh = 'connect';
         }
         $title = $adminForms[$url];
         break;
     case 'questions' :
-    case 'spartiates' :
+    case 'spartans' :
         if (empty($_SESSION['admin'])) {
             $refresh = 'connect';
         }
@@ -157,8 +162,9 @@ switch ($url) {
         if (empty($_SESSION['admin'])) {
             $refresh = 'connect';
         }
-        $spartiatesController->showUpdateForm($url, htmlspecialchars($_GET['id']));
+        $spartanController->showUpdateForm($url, htmlspecialchars($_GET['id']));
         break;
+
     // ERROR 404
     default :
         $title = 'Erreur';

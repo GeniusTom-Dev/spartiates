@@ -13,8 +13,8 @@
 
         <p class="text-[2vh] text-gray-500 text-center">Veuillez vous connecter pour accéder à l'administration.</p>
 
-        <label class="text-[2.5vh] mb-5 text-left" for="pseudo">Nom d'utilisateur :</label>
-        <input name="pseudo" id="pseudo" type="text" placeholder="ex. Jane Doe" class="w-full p-3 border rounded-md text-[2.5vh] mb-16 mt-5 h-[8vh]" min="3" max="20"/>
+        <label class="text-[2.5vh] mb-5 text-left" for="login">Nom d'utilisateur :</label>
+        <input name="login" id="login" type="text" placeholder="ex. Jane Doe" class="w-full p-3 border rounded-md text-[2.5vh] mb-16 mt-5 h-[8vh]" min="3" max="20"/>
 
         <label class="text-[2.5vh] mb-5 text-left" for="password">Mot de passe :</label>
         <input name="password" id="password" type="password" placeholder="Mot de passe" class="w-full p-3 border rounded-md text-[2.5vh] mb-5 mt-5 h-[8vh]"/>
