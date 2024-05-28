@@ -39,9 +39,9 @@ class QuestionsController
         }
         if (!empty($_SESSION['randomQuestion'])) {
             $temp = array('text' => $_SESSION['randomQuestion'][0]->getText(),
-                'vrai' => $_SESSION['randomQuestion'][0]->getAnswer(),
-                'faux1' => $_SESSION['randomQuestion'][0]->getFalse1(),
-                'faux2' => $_SESSION['randomQuestion'][0]->getFalse2());
+                'answer' => $_SESSION['randomQuestion'][0]->getAnswer(),
+                'false1' => $_SESSION['randomQuestion'][0]->getFalse1(),
+                'false2' => $_SESSION['randomQuestion'][0]->getFalse2());
             $_SESSION['randomQuestion'] = array_slice($_SESSION['randomQuestion'], 1);
             echo json_encode($temp);
         }

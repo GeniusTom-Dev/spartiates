@@ -6,9 +6,7 @@
 
 use controls\CodesController;
 use controls\QuestionsController;
-use controls\SessionController;
 use controls\SpartanController;
-use controls\UsersController;
 use view\View;
 
 require_once "autoloader.php";

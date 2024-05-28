@@ -97,21 +97,6 @@ $(document).ready(function (e) {
         });
     });
 
-    $(document).on("click", ".chooseButton", function () {
-        let action = $(this).data("action");
-        // Effectuer la requête AJAX
-        $.ajax({
-            type: "POST",
-            url: "/controls/actionController.php",
-            data: {
-                action: action,
-            },
-        }).done(function (response) {
-            sessionStorage.setItem("game", response);
-            location.reload();
-        });
-    });
-
     $(document).on("click", ".actionButton", function () {
         let action = $(this).data("action");
         let id = $(this).data("id");
@@ -138,20 +123,6 @@ $(document).ready(function (e) {
     $(".callActionButton").on("click", function () {
         let buttonConfirmDelete = $('.actionButton');
         buttonConfirmDelete.data('id', $(this).data("id"));
-    });
-
-    $(".sessionAction").on("click", function () {
-        let action = $(this).data("action");
-        $.ajax({
-            type: "POST",
-            url: "/controls/actionController.php",
-            data: {
-                action: action,
-            },
-        }).done(function (response) {
-            $('#code').html(response);
-            updateRanking();
-        });
     });
 
     //choix du spartiate avant le jeu
@@ -228,8 +199,4 @@ function animationHelper() {
 if (window.location.pathname === "/users") {
     getSessionCode()
     updateRanking()
-    // setInterval(updateRanking, 3000);
-}
-if (window.location.pathname === "/sessionCode") {
-    sessionStorage.setItem("score", "0");
 }

@@ -33,4 +33,5 @@ export default class Game {
         let posY = this.container.clientHeight * 0.9
         this.puck.classList.add("-translate-y-["+ posY +"px]", "-translate-x-["+ posX +"px]", "transition-transform")
     }
+
 }

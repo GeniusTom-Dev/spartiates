@@ -1,6 +1,6 @@
 <div class="w-full lg:w-2/3 h-full flex flex-col">
     <div class="w-full h-[12vh] flex justify-center items-center text-center">
-        <h2>Lorem ipsum dolor sit amet. C’est juste un texte exemple pour visualiser les choses ?</h2>
+        <h2 id="question">Lorem ipsum dolor sit amet. C’est juste un texte exemple pour visualiser les choses ?</h2>
     </div>
     <div class="w-full h-[28vh]">
         <div class="w-full h-[8vh] flex items-center justify-around">
