@@ -25,3 +25,25 @@
 .titlePage {
     @apply text-3xl text-customBlue uppercase;
 }
+
+.carousel-container {
+    height: auto;
+}
+
+@media (min-width: 640px) { /* sm */
+    .carousel-container {
+        height: 40vh;
+    }
+}
+
+@media (min-width: 768px) { /* md */
+    .carousel-container {
+        height: 50vh;
+    }
+}
+
+@media (min-width: 1024px) { /* lg */
+    .carousel-container {
+        height: 60vh;
+    }
+}

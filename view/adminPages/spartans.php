@@ -1,9 +1,9 @@
 <script src="/assets/socket.js"></script>
 
-<a href="/home" class="absolute left-5 top-5 w-20 h-20">
+<a href="/home" class="absolute left-5 top-4 md:top-5 w-12 md:w-16 h-12 md:h-16">
     <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Home">
 </a>
-<a class="absolute right-5 top-5 w-16 h-16 cursor-pointer">
+<a class="absolute right-4 top-4 md:top-5 w-12 md:w-16 h-12 md:h-16 cursor-pointer">
     <img class="p-2 bg-customBlue rounded-xl actionButton" src="/assets/images/deconnect.svg"
          data-action="deconnect" alt="Disconnect">
 </a>

@@ -8,20 +8,28 @@ let answerA = document.getElementById("answerA")
 let answerB = document.getElementById("answerB")
 let answerC = document.getElementById("answerC")
 
+let elements = [spartiate, puck, container, answerA, answerB, answerC];
 
-let game = new Game(spartiate, puck, container)
-getQuestion()
-answerA.addEventListener("click", async () => {
-     await game.startSpartiateAnnimation("A")
-})
+let allElementsLoaded = elements.every(element => element);
 
-answerB.addEventListener("click", async () => {
-     await game.startSpartiateAnnimation("B")
-})
+if (allElementsLoaded){
+    let game = new Game(spartiate, puck, container)
 
-answerC.addEventListener("click", async () => {
-     await game.startSpartiateAnnimation("C")
-})
+    // TODO : A implémenté
+    getQuestion()
+
+    answerA.addEventListener("click", async () => {
+        await game.startSpartiateAnnimation("A")
+    })
+
+    answerB.addEventListener("click", async () => {
+        await game.startSpartiateAnnimation("B")
+    })
+
+    answerC.addEventListener("click", async () => {
+        await game.startSpartiateAnnimation("C")
+    })
+}
 
 function shuffleArray(array) {
      for (let i = array.length - 1; i > 0; i--) {

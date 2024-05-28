@@ -1,8 +1,8 @@
-<a href="/home" class="absolute left-5 top-5 w-20 h-20">
+<a href="/home" class="absolute left-5 top-4 md:top-5 w-12 md:w-16 h-12 md:h-16">
     <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Delete">
 </a>
 <div>
-    <h1 class="text-3xl text-black text-center">Choisissez votre spartiate</h1>
+    <h1 class="text-3xl text-black text-center">Choisissez <span class="text-customBlue">votre spartiate</span></h1>
     <div class="result grid gap-4 p-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
         <?php foreach ($data as $spartan) { ?>
             <div class="spartCard cursor-pointer flex flex-col items-center justify-center w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md"
