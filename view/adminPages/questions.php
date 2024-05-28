@@ -1,7 +1,7 @@
-<a href="/home" class="absolute left-5 top-5 w-20 h-20">
+<a href="/home" class="absolute left-5 top-4 md:top-5 w-12 md:w-16 h-12 md:h-16">
     <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Delete">
 </a>
-<a class="absolute right-5 top-5 w-16 h-16">
+<a class="absolute right-5 top-5 md:top-4 w-12 md:w-16 h-12 md:h-16">
     <img class="p-2 bg-customBlue rounded-xl actionButton cursor-pointer" src="/assets/images/deconnect.svg"
          data-action="deconnect" alt="deconnect">
 </a>
@@ -17,7 +17,7 @@
 
     <div class="flex flex-col items-center justify-center">
         <button class="bg-customBlue lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer" onclick="window.location.href='/newQuestion'">Ajouter une question</button>
-        <div class="flex flex-row items-center justify-between w-full px-4 py-2 border-b border-gray-200">
+        <div class="flex flex-row items-center justify-between w-full px-4 py-2 border-b border-gray-200 mt-10">
             <input type="text" placeholder="Rechercher" id="searchQuestion"
                    class="w-full px-4 py-2 text-gray-700 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:bg-white focus:border-gray-500">
         </div>

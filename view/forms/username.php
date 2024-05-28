@@ -1,15 +1,15 @@
-<a href="/home" class="absolute left-5 top-5 w-16 h-16">
+<a href="/home" class="absolute left-5 top-4 md:top-5 w-12 md:w-16 h-12 md:h-16">
     <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Home">
 </a>
 <div class="w-full flex flex-col justify-center items-center">
     <form class="flex flex-col space-y-14 px-5 py-3 w-full sm:w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2 bg-white rounded sm:h-auto md:h-auto lg:h-auto xl:h-auto" id="form" method="post">
         <input type="hidden" name="action" value="addSessionPlayer">
         <label for="username"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Entrez votre nom d'utilisateur :</span>
-            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl" type="text" id="username" name="username" required pattern=".*\S.*">
+            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl border-gray-300" type="text" id="username" name="username" required pattern=".*\S.*">
         </label>
 
         <label for="email"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Entrez votre mail :</span>
-            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl" type="email" id="email" name="email" required>
+            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl border-gray-300" type="email" id="email" name="email" required>
         </label>
 
         <div class="w-full flex flex-row items-center space-x-4">

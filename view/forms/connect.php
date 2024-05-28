@@ -1,6 +1,6 @@
 <?php
 ?>
-<a href="/home" class="absolute left-5 top-5 w-20 h-20">
+<a href="/home" class="absolute left-5 top-4 md:top-5 w-12 md:w-16 h-12 md:h-16">
     <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Home">
 </a>
 

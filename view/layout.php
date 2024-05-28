@@ -12,15 +12,15 @@
     <script src="/dist/bundle.js"></script>
     <script src="/dist/jquery.min.js"></script>
     <script src="/assets/index.js" defer></script>
-    <script src="/assets/gameController.js" type="module"></script>
+<!--    <script src="/assets/gameController.js" type="module"></script>-->
 </head>
 
 <body class="bg-[var(--color-bg)] flex flex-col min-h-screen">
 
-<header class="bg-cover bg-bottom bg-no-repeat h-[18vh] relative mb-5"
+<header class="bg-cover bg-bottom bg-no-repeat h-[15vh] sm:h-[13vh] md:h-[15vh] lg:h-[20vh] xl:h-[25vh] 2xl:h-[35vh] relative mb-5"
         style="background-image: url('/assets/images/header.png')">
     <a href="https://marseillehockeyclub.com" target="_blank">
-        <img class="w-1/3 md:w-1/5 lg:w-1/5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        <img class="mt-2 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
              src="/assets/images/logo.png" alt="lg-logo">
     </a>
     <img class="w-1/5 absolute bottom-0 right-0" src="/assets/images/headerLines.png" alt="headerLines">
@@ -30,7 +30,7 @@
     %content%
 </div>
 
-<footer class="bg-cover bg-top h-[18vh] relative -z-10" style="background-image: url('/assets/images/footer.png')">
+<footer class="bg-cover bg-top h-[15vh] sm:h-[13vh] md:h-[15vh] lg:h-[20vh] xl:h-[25vh] 2xl:h-[35vh] relative -z-10" style="background-image: url('/assets/images/footer.png')">
     <img class="w-1/5 absolute bottom-0 right-0" src="/assets/images/headerLines.png" alt="headerLines.png">
     <p class="absolute bottom-0 left-0 text-white">CC-by 2023-2024 le site </p>
 </footer>
