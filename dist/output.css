@@ -2216,12 +2216,6 @@ input:checked + .toggle-bg{
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.shadow-xl{
-  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
 .outline{
   outline-style: solid;
 }
@@ -2627,6 +2621,10 @@ input:checked + .toggle-bg{
     height: 1.5rem;
   }
 
+  .sm\:h-\[40vh\]{
+    height: 40vh;
+  }
+
   .sm\:h-auto{
     height: auto;
   }
@@ -2669,6 +2667,14 @@ input:checked + .toggle-bg{
 @media (min-width: 768px){
   .md\:inset-0{
     inset: 0px;
+  }
+
+  .md\:h-7{
+    height: 1.75rem;
+  }
+
+  .md\:h-\[50vh\]{
+    height: 50vh;
   }
 
   .md\:h-7{
@@ -2793,6 +2799,10 @@ input:checked + .toggle-bg{
     height: 2rem;
   }
 
+  .lg\:h-\[60vh\]{
+    height: 60vh;
+  }
+
   .lg\:h-auto{
     height: auto;
   }
@@ -2864,6 +2874,10 @@ input:checked + .toggle-bg{
     height: 2.25rem;
   }
 
+  .xl\:h-\[60vh\]{
+    height: 60vh;
+  }
+
   .xl\:h-auto{
     height: auto;
   }
@@ -2888,6 +2902,11 @@ input:checked + .toggle-bg{
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .xl\:bg-orange-600{
+    --tw-bg-opacity: 1;
+    background-color: rgb(208 56 1 / var(--tw-bg-opacity));
+  }
+
   .xl\:text-2xl{
     font-size: 1.5rem;
     line-height: 2rem;
@@ -2896,6 +2915,12 @@ input:checked + .toggle-bg{
   .xl\:text-4xl{
     font-size: 2.25rem;
     line-height: 2.5rem;
+  }
+}
+
+@media (min-width: 1536px){
+  .\32xl\:h-\[60vh\]{
+    height: 60vh;
   }
 }
 
