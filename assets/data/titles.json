@@ -1,0 +1,14 @@
+{
+  "home" : "Page d'accueil",
+  "error" : "Erreur",
+  "users" : "Admin",
+  "rules" : "Règles",
+  "sessionCode" : "Entrer le code",
+  "username" : "Entrer un nom d'utilisateur",
+  "connect" : "Connexion",
+  "newQuestion" : "Nouvelle Question",
+  "newSpartan" : "Nouveau Spartiate",
+  "game" : "Jeu de hockey",
+  "spartans": "Les Spartiates",
+    "questions": "Les Questions"
+}
