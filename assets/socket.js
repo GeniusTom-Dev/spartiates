@@ -77,7 +77,6 @@ function sendIDMessage(message, id) {
 function WSRanking(message) {
     let ranking = $("#ranking");
     ranking.empty();
-// [{"id":"239","score":2600, "username": "JohnDoe"}]
     const messageJson = JSON.parse(message);
 
     for (let i = 0; i < messageJson.length; i++) {

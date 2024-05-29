@@ -90,14 +90,14 @@ class QuestionsRepository extends AbstractRepository
         }
     }
 
-    public function updateQuestionById($id, $text, $true, $false1, $false2): void
+    public function updateQuestionById($id, $text, $answer, $false1, $false2): void
     {
-        $query = "UPDATE QUESTION SET TEXT = :text, ANSWER= :true, FALSE1= :false1, FALSE2= :false2  WHERE ID = :id;";
+        $query = "UPDATE QUESTION SET TEXT = :text, ANSWER= :answer, FALSE1= :false1, FALSE2= :false2  WHERE ID = :id;";
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             ':text' => $text,
             ':id' => $id,
-            ':true' => $true,
+            ':answer' => $answer,
             ':false1' => $false1,
             ':false2' => $false2]);
     }
