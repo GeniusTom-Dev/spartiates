@@ -18,8 +18,33 @@
 
         <label class="text-[2.5vh] mb-5 text-left" for="password">Mot de passe :</label>
         <input name="password" id="password" type="password" placeholder="Mot de passe" class="w-full p-3 border rounded-md text-[2.5vh] mb-5 mt-5 h-[8vh]"/>
+        <a href="/connect" id="forgot-password" class="text-[2vh] text-right hover:underline cursor-pointer">Mot de passe oubié ?</a>
+
+        <p id="email-sent-message" class="text-[2.5vh] text-center hidden">Un e-mail vous a été envoyé</p>
 
         <div class="text-red-700" id="res"></div>
         <input class="bg-customBlue text-white rounded-xl px-4 py-3 text-[2.5vh] cursor-pointer hover:bg-sky-300" type="submit" name="submit" value="Se connecter"/>
+
     </form>
 </div>
+
+<script>
+    document.getElementById('forgot-password').addEventListener('click', function(event) {
+        event.preventDefault();
+
+        fetch('/controls/sendResetEmail.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const emailSentMessage = document.getElementById('email-sent-message');
+
+                    setTimeout(() => {
+                       emailSentMessage.classList.remove('hidden');
+                    }, 10000);
+                } else {
+                    alert('Impossible d\'envoyer l\'email. Veuillez réessayer plus tard.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>

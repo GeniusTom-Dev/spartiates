@@ -165,6 +165,50 @@ switch ($url) {
         $spartanController->showUpdateForm($url, htmlspecialchars($_GET['id']));
         break;
 
+    // RESET PASSWORD
+    case 'reset' :
+        if (isset($_GET['token'])) {
+            $tokenRepository = new \repository\TokenRepository();
+            $email = $_ENV['USER_EMAIL'];
+            $isValidToken = $tokenRepository->validateToken($_GET['token']);
+
+            if ($isValidToken && $email) {
+                $title = 'Réinitialisation du mot de passe';
+                View::display($title, 'view/forms/resetPwd.php');
+            } else {
+                $title = 'Erreur';
+                View::display($title);
+            }
+        } elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['token'])) {
+            $tokenRepository = new \repository\TokenRepository();
+            $email = $_ENV['USER_EMAIL'];
+            $isValidToken = $tokenRepository->validateToken($_POST['token']);
+
+            if ($isValidToken && $email) {
+                if ($_POST['newPassword'] === $_POST['confirmPassword']) {
+                    $hashedPassword = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
+
+                    // Utilisation de la classe Connexion pour obtenir une instance de PDO
+                    $pdo = \repository\Connexion::getInstance();
+                    $stmt = $pdo->prepare("UPDATE users SET password = ? WHERE username = ?");
+                    $stmt->execute([$hashedPassword, $_GET['login']]);
+
+                    $tokenRepository->removeToken($email);
+
+                    echo "Votre mot de passe a été réinitialisé avec succès.";
+                } else {
+                    echo "Les mots de passe ne correspondent pas.";
+                }
+            } else {
+                echo "Token invalide ou expiré.";
+            }
+        } else {
+            $title = 'Erreur';
+            View::display($title);
+        }
+        break;
+
+
     // ERROR 404
     default :
         $title = 'Erreur';
