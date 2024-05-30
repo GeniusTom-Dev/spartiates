@@ -75,7 +75,7 @@ export default class Game {
     /**
      * Check la réponse du joueur
      **/
-    checkedAnswer() {
+    checkedAnswer(playerAnswer) {
             $.ajax({
                 type: "POST",
                 url: "/controls/actionController.php",
@@ -85,16 +85,46 @@ export default class Game {
                 },
                 dataType: 'json',
                 success: async (answer) =>  {
-                    $("#answerA").css("background-color", "#DC3545");
-                    $("#answerB").css("background-color", "#DC3545");
-                    $("#answerC").css("background-color", "#DC3545");
-                    if (document.getElementById('answerA').textContent.slice(3) === answer) {
+                    /*if (document.getElementById('answerA').textContent.slice(3) === answer) {
+                        await this.startSpartiateAnnimation("A")
                         $("#answerA").css("background-color", "#28A745");
+                        $("#answerB").css("background-color", "#DC3545");
+                        $("#answerC").css("background-color", "#DC3545");
                     } else if (document.getElementById('answerB').textContent.slice(3) === answer) {
+                        await this.startSpartiateAnnimation("B")
                         $("#answerB").css("background-color", "#28A745");
+                        $("#answerC").css("background-color", "#DC3545");
+                        $("#answerA").css("background-color", "#DC3545");
                     } else {
+                        await this.startSpartiateAnnimation("C")
                         $("#answerC").css("background-color", "#28A745");
-                    }
+                        $("#answerA").css("background-color", "#DC3545");
+                        $("#answerB").css("background-color", "#DC3545");
+                    }*/
+
+                    /////
+
+                    const answers = {
+                        "A": document.getElementById('answerA'),
+                        "B": document.getElementById('answerB'),
+                        "C": document.getElementById('answerC')
+                    };
+
+                    // Function to update the background colors
+                    const updateBackgroundColors = () => {
+                        Object.keys(answers).forEach(key => {
+                            // If the answer is the right one, the background color of the button become green
+                            // Otherwise, the background color will be red
+                            answers[key].style.backgroundColor = (answers[key].innerHTML.slice(3) === answer) ? "#28A745" : "#DC3545";
+                        });
+                    };
+
+                    updateBackgroundColors();
+                        /*if (answers[key].textContent.slice(3) === answer) {
+                            await this.startSpartiateAnnimation(key);
+
+                            break;
+                        }*/
 
                     // remove the current question index of the list
                     if (this.questionIndexes.length !== 0) {

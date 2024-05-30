@@ -17,19 +17,19 @@ if (allElementsLoaded){
     await game.getQuestion()
 
     answerA.addEventListener("click", async () => {
-        await game.checkedAnswer(answerA.textContent.slice(3))
+        await game.checkedAnswer("A")
         await game.startSpartiateAnnimation("A")
         await game.getQuestion()
     })
 
     answerB.addEventListener("click", async () => {
-        await game.checkedAnswer(answerB.textContent.slice(3))
+        await game.checkedAnswer("B")
         await game.startSpartiateAnnimation("B")
         await game.getQuestion()
     })
 
     answerC.addEventListener("click", async () => {
-        await game.checkedAnswer(answerC.textContent.slice(3))
+        await game.checkedAnswer("C")
         await game.startSpartiateAnnimation("C")
         await game.getQuestion()
     })
