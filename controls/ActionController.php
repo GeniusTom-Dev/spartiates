@@ -10,7 +10,7 @@ class ActionController{
 
         $newAction = new \stdClass();
         $newAction->name = $name;
-        $newAction->fields = $fields;
+        $newAction->fields = $fields['fields'] ?? [];
         $newAction->controller = $controller;
         $newAction->redirect = $redirect;
         $newAction->adminOnly = $adminOnly;
@@ -32,8 +32,8 @@ class ActionController{
         $postData = $_POST;
         $files = $_FILES;
         $action = $_POST['action'];
-        if (isset($actions[$action])) {
-            $mapping = $actions[$action];
+        if (isset($this->actions[$action])) {
+            $mapping = $this->actions[$action];
 
             // Vérifier si l'action nécessite des privilèges administratifs
             if ($mapping->adminOnly && empty($_SESSION['admin'])) {
@@ -61,6 +61,11 @@ class ActionController{
                 $params[] = htmlspecialchars($postData[$field]);
             }
 
+            if(isset($mapping->controller)){
+                $mapping->controller = "controls\\" . $mapping->controller;
+                $mapping->controller = new $mapping->controller();
+            }
+
             // Vérifier si le controller existe ou la fonction websocket existe
             if (!isset($mapping->controller) || isset($mapping->webSocketMessage)) {
                 if (isset($mapping->webSocketMessage))
@@ -72,6 +77,7 @@ class ActionController{
                 header('Content-Type: application/json');
 
                 // Check si le code de session est correct
+
                 if (call_user_func_array([$mapping->controller, $action], $params)) {
                     echo json_encode($mapping->success);
                 } else {
