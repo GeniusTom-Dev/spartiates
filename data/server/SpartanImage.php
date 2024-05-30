@@ -37,6 +37,25 @@ class SpartanImage
      * @throws Exception If the file is too big or the extension is invalid
      */
 
+    /**
+     * Find a directory matching the given spartan name.
+     *
+     * @param string $name The name of the spartan.
+     * @return string The directory where he can be found.
+     * @throws NotFoundException When no files match the name.
+     */
+
+    public static function getSpartan(string $name) : string
+    {
+        foreach (self::ALLOWED_EXTENSIONS as $extension) {
+            $file = self::SPARTAN_IMAGES_DIRECTORY . $name . $extension;
+            if (file_exists($file)) {
+                return $file;
+            }
+        }
+        throw new NotFoundException("Aucun spartiate ne correspond à $name");
+    }
+
     public static function addSpartan(string $name, string $image) : bool
     {
         self::checkImage($image);
@@ -72,25 +91,6 @@ class SpartanImage
             self::updateImage($currentName, $image);
         }
         return TRUE;
-    }
-
-    /**
-     * Find a directory matching the given spartan name.
-     *
-     * @param string $name The name of the spartan.
-     * @return string The directory where he can be found.
-     * @throws NotFoundException When no files match the name.
-     */
-
-    public static function getSpartan(string $name) : string
-    {
-        foreach (self::ALLOWED_EXTENSIONS as $extension) {
-            $file = self::SPARTAN_IMAGES_DIRECTORY . $name . $extension;
-            if (file_exists($file)) {
-                return $file;
-            }
-        }
-        throw new NotFoundException("Aucun spartiate ne correspond à $name");
     }
 
     /**
