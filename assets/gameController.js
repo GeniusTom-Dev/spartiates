@@ -14,48 +14,23 @@ let allElementsLoaded = elements.every(element => element);
 
 if (allElementsLoaded){
     let game = new Game(spartiate, puck, container)
-
-    // TODO : A implémenté
-    getQuestion()
+    await game.getQuestion()
 
     answerA.addEventListener("click", async () => {
+        await game.checkedAnswer(answerA.textContent.slice(3))
         await game.startSpartiateAnnimation("A")
+        await game.getQuestion()
     })
 
     answerB.addEventListener("click", async () => {
+        await game.checkedAnswer(answerB.textContent.slice(3))
         await game.startSpartiateAnnimation("B")
+        await game.getQuestion()
     })
 
     answerC.addEventListener("click", async () => {
+        await game.checkedAnswer(answerC.textContent.slice(3))
         await game.startSpartiateAnnimation("C")
+        await game.getQuestion()
     })
-}
-
-function shuffleArray(array) {
-     for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-     }
-     return array;
-}
-
-/**
- * Récupère une question aléatoire et l'affiche dans le canvas
- */
-function getQuestion() {
-     $.ajax({
-          type: "POST",
-          url: "/controls/actionController.php",
-          data: {
-               action: "getRandomQuestion",
-          },
-          dataType: 'json',
-          success: function (question) {
-               let answerShuffle = shuffleArray([question.answer, question.false1, question.false2]);
-               $("#question").text(question.text);
-               $("#answerA").text(answerShuffle[0]);
-               $("#answerB").text(answerShuffle[1]);
-               $("#answerC").text(answerShuffle[2]);
-          }
-     });
 }

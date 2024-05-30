@@ -28,7 +28,7 @@ class QuestionsRepository extends AbstractRepository
         return new Question($question);
     }
 
-    public function getRandomQuestion(): array
+    public function getQuestion(): array
     {
         $query = 'SELECT * FROM QUESTION ORDER BY RAND();';
         $statement = $this->connexion->prepare($query);

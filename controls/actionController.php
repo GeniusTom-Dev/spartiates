@@ -31,7 +31,8 @@ $actionsMapping = [
     'createQuestion' => ['fields' => ['text', 'true', 'false1', 'false2'], 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
     'updateQuestion' => ['idField' => 'id', 'fields' => ['text', 'true', 'false1', 'false2'], 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
     'deleteQuestion' => ['idField' => 'id', 'controller' => $questionsController, 'redirect' => '/questions', 'adminOnly' => true],
-    'getRandomQuestion' => ['controller' => $questionsController, 'adminOnly' => false],
+    'getQuestion' => ['fields' => ['index'], 'controller' => $questionsController, 'adminOnly' => false],
+    'getAnswer' => ['fields' => ['index'], 'controller' => $questionsController, 'adminOnly' => false],
     'searchQuestion' => ['fields' => ['searchTerm'], 'controller' => $questionsController, 'adminOnly' => true],
 
     // Session Code

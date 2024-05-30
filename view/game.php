@@ -15,14 +15,8 @@
         </div>
     </div>
     <div class="w-full h-[20vh]">
-        <div class="w-full h-1/3 shadow-inner bg-customBlue border-2 flex justify-center items-center cursor-pointer my-2" id="answerA">
-            A. Lorem Impsu lalala lalala la ala lla  la l al alalla al a a
-        </div>
-        <div class="w-full h-1/3 shadow-inner bg-customBlue border-x-2 flex justify-center items-center cursor-pointer my-2" id="answerB">
-            B. Lorem Impsu lalala lalala la ala lla  la l al alalla al a a
-        </div>
-        <div class="w-full h-1/3 shadow-inner bg-customBlue border-2 flex justify-center items-center cursor-pointer my-2" id="answerC">
-            C. Lorem Impsu lalala lalala la ala lla  la l al alalla al a a
-        </div>
+        <div class="w-full h-1/3 shadow-inner bg-customBlue border-2 flex justify-center items-center cursor-pointer my-2" id="answerA"></div>
+        <div class="w-full h-1/3 shadow-inner bg-customBlue border-x-2 flex justify-center items-center cursor-pointer my-2" id="answerB"></div>
+        <div class="w-full h-1/3 shadow-inner bg-customBlue border-2 flex justify-center items-center cursor-pointer my-2" id="answerC"></div>
     </div>
 </div>

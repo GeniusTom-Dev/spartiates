@@ -31,19 +31,40 @@ class QuestionsController
         }
     }
 
-    public function getRandomQuestion(): void
+    /**
+     * Send an Ajax response with the question corresponding to the $index of a random list of questions stocker in $_SESSION
+     * The list of questions is $_SESSION is randomized so that the "index/id" of the questions changed every time.
+     * The $index of the question that we are going to get is randomized, to prevent players to have the same questions in the same order
+     *
+     * @param int $index
+     * @return void
+     */
+    public function getQuestion(int $index): void
     {
         if (empty($_SESSION['randomQuestion'])) {
-            $question = $this->repository->getRandomQuestion();
+            $question = $this->repository->getQuestion();
             $_SESSION['randomQuestion'] = $question;
         }
         if (!empty($_SESSION['randomQuestion'])) {
-            $temp = array('text' => $_SESSION['randomQuestion'][0]->getText(),
-                'answer' => $_SESSION['randomQuestion'][0]->getAnswer(),
-                'false1' => $_SESSION['randomQuestion'][0]->getFalse1(),
-                'false2' => $_SESSION['randomQuestion'][0]->getFalse2());
-            $_SESSION['randomQuestion'] = array_slice($_SESSION['randomQuestion'], 1);
+            $temp = array('text' => $_SESSION['randomQuestion'][$index]->getText(),
+                'answer' => $_SESSION['randomQuestion'][$index]->getAnswer(),
+                'false1' => $_SESSION['randomQuestion'][$index]->getFalse1(),
+                'false2' => $_SESSION['randomQuestion'][$index]->getFalse2(),);
             echo json_encode($temp);
+            //echo json_encode("OK : " . sizeof($_SESSION['randomQuestion']));
+        }
+    }
+
+    /**
+     * Check if the player answer is the correct answer
+     * TODO : gérer si l'index est mauvais
+     * @param $index
+     * renvoie un json avec l'attribut, "isAnswerCorrect": true, if the user find the good answer and , "isAnswerCorrect": false, otherwise.
+     */
+    public function getAnswer(int $index) : void
+    {
+        if (!empty($_SESSION['randomQuestion'])) {
+            echo json_encode($_SESSION['randomQuestion'][$index]->getAnswer());
         }
     }
 
