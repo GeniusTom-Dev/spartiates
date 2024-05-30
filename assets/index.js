@@ -11,7 +11,7 @@ $(document).ready(function (e) {
 
         $.ajax({
             type: "POST",
-            url: "/controls/actionController.php",
+            url: "/index.php",
             data: {
                 action: "changeStar",
                 spartanId: spartanId
@@ -31,7 +31,7 @@ $(document).ready(function (e) {
                 // Envoie la requête Ajax
                 $.ajax({
                     type: "POST",
-                    url: "/controls/actionController.php",
+                    url: "/index.php",
                     data: {
                         action: inputSelector === "#searchQuestion" ? "searchQuestion" : "searchSpartan",
                         searchTerm: searchTerm
@@ -63,7 +63,7 @@ $(document).ready(function (e) {
         let form_data = $(this).serialize()
         // Effectuer la requête AJAX
         $.ajax({
-            url: "/controls/actionController.php",
+            url: "/index.php",
             type: form_method,
             data: form_data
         }).done(function (response) {
@@ -87,7 +87,7 @@ $(document).ready(function (e) {
         let form_data = new FormData(this);
         // Effectuer la requête AJAX
         $.ajax({
-            url: "/controls/actionController.php",
+            url: "/index.php",
             type: form_method,
             data: form_data,
             contentType: false,
@@ -103,7 +103,7 @@ $(document).ready(function (e) {
         // Effectuer la requête AJAX
         $.ajax({
             type: "POST",
-            url: "/controls/actionController.php",
+            url: "/index.php",
             data: {
                 action: action,
                 id: id,
@@ -131,7 +131,7 @@ $(document).ready(function (e) {
         // Effectuer la requête AJAX
         $.ajax({
             type: "POST",
-            url: "/controls/actionController.php",
+            url: "/index.php",
             data: {
                 action: "setSessionSpart",
                 spartanId: id,
@@ -146,7 +146,7 @@ $(document).ready(function (e) {
         // Effectuer la requête AJAX
         $.ajax({
             type: "POST",
-            url: "/controls/actionController.php",
+            url: "/index.php",
             data: {
                 action: action,
             },
@@ -166,7 +166,7 @@ $(document).ready(function (e) {
 function updateRanking() {
     $.ajax({
         type: "POST",
-        url: "/controls/actionController.php",
+        url: "/index.php",
         data: {
             action: "showRanking",
         },
@@ -178,7 +178,7 @@ function updateRanking() {
 function getSessionCode() {
     $.ajax({
         type: "POST",
-        url: "/controls/actionController.php",
+        url: "/index.php",
         data: {
             action: "getSessionCode",
         },

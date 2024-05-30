@@ -4,13 +4,8 @@
 /// Load classes
 ///////////////////////////////////////////////////////////////////////////////
 
-use controls\CodesController;
-use controls\QuestionsController;
-use controls\SessionController;
-use controls\SpartanController;
-use controls\UsersController;
-use controls\RouteController;
-use view\View;
+use controls\{QuestionsController, SpartanController, RouteController, ActionController};
+
 
 require_once "autoloader.php";
 
@@ -53,29 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 $questionsController = new QuestionsController();
 $spartanController = new SpartanController();
 $routeController = new RouteController();
+$actionController = new ActionController();
 
-///////////////////////////////////////////////////////////////////////////////
-/// Pages mapping
-///////////////////////////////////////////////////////////////////////////////
-
-$pages = [
-    'game' => 'Jeu de hockey',
-    'rules' => 'Règles',
-];
-$forms = [
-    'sessionCode' => 'entrer le code',
-    'username' => 'entrer un nom d\'utilisateur',
-    'connect' => 'Connexion',
-    'reset' => 'Réinitialiser le mot de passe',
-];
-$adminForms = [
-    'newQuestion' => 'Nouvelle Question',
-    'newSpartan' => 'Nouveau Spartiate',
-];
-$adminPages = [
-    'questions' => ['Questions', $questionsController],
-    'spartans' => ['Spartans', $spartanController],
-];
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Router
@@ -114,8 +88,56 @@ try {
 
 
 ///////////////////////////////////////////////////////////////////////////////
+/// Register Actions
+///////////////////////////////////////////////////////////////////////////////
+
+
+$actionController->registerAction("createSpartan", ['fields' => ['lastName', 'name']], "spartanController", '/spartans', true);
+$actionController->registerAction("updateSpartan", ['idField' => 'id', 'fields' => ['lastName', 'name']], "spartanController", '/spartans', true);
+$actionController->registerAction("deleteSpartan", ['idField' => 'id'], "spartanController", '/spartans', true);
+$actionController->registerAction("setSessionSpart", ['fields' => ['spartanId']], "sessionController", null);
+$actionController->registerAction("searchSpartan", ['fields' => ['searchTerm']], "spartanController", null, true);
+$actionController->registerAction("changeStar", ['fields' => ['spartanId']], "spartanController", null, true);
+
+$actionController->registerAction("createQuestion", ['fields' => ['text', 'true', 'false1', 'false2']], "questionsController", '/questions', true);
+$actionController->registerAction("updateQuestion", ['idField' => 'id', 'fields' => ['text', 'true', 'false1', 'false2']], "questionsController", '/questions', true);
+$actionController->registerAction("deleteQuestion", ['idField' => 'id'], "questionsController", '/questions', true);
+$actionController->registerAction("getRandomQuestion", [], "questionsController", null);
+$actionController->registerAction("searchQuestion", ['fields' => ['searchTerm']], "questionsController", null, true);
+
+$actionController->registerAction("checkSessionCode", ['fields' => ['code']], "codesController", null,false,  ['error' => ['success' => false, 'error' => 'code incorrect']], ['sessionHasEnded' => ['success' => false, 'error' => 'La session est finis']], ['needResponse' => true]);
+$actionController->registerAction("getSessionCode", [], "codesController", null, true);
+
+$actionController->registerAction("start", [], "codesController", null, true);
+$actionController->registerAction("stop", [], "codesController", null, true);
+$actionController->registerAction("isInActiveSession", [], "sessionController", null);
+$actionController->registerAction("addSessionPlayer", ['fields' => ['username', 'email']], "sessionController", '/game');
+
+$actionController->registerAction("addScore", ['fields' => ['score']], "sessionController", null);
+
+$actionController->registerAction("startWS", [], "wscontroller", null, true);
+$actionController->registerAction("stopWS", [], "wscontroller", null, true);
+$actionController->registerAction("connexionWS", [], "wscontroller", null);
+
+$actionController->registerAction("logIn", ['fields' => ['login', 'password']], "usersController", '/users');
+$actionController->registerAction("deleteUser", ['idField' => 'id'], "sessionController", '', true);
+
+$actionController->registerAction("showRanking", [], "sessionController", null, true);
+$actionController->registerAction("showEndGame", ['fields' => ['score']], "sessionController", null);
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+/// Check Action
+///////////////////////////////////////////////////////////////////////////////
+
+if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest' && !empty($_POST['action'])) {
+    $actionController->handleAction();
+    exit;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 /// Display
 ///////////////////////////////////////////////////////////////////////////////
-///
 
 $routeController->displayRoutes($url);
