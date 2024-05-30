@@ -56,6 +56,22 @@ class QuestionsController
     }
 
     /**
+     * Send an Ajax response with the total number of questions (with a maximum of 200)
+     *
+     * @return void
+     */
+    public function getQuestionsNumber(): void
+    {
+        if (!empty($_SESSION['randomQuestion'])) {
+            if (sizeof($_SESSION['randomQuestion']) > 200) {
+                echo json_encode(200);
+            } else {
+                echo json_encode(sizeof($_SESSION['randomQuestion']));
+            }
+        }
+    }
+
+    /**
      * Check if the player answer is the correct answer
      * TODO : gérer si l'index est mauvais
      * @param $index

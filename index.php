@@ -104,6 +104,7 @@ $actionController->registerAction("createQuestion", ['fields' => ['text', 'true'
 $actionController->registerAction("updateQuestion", ['idField' => 'id', 'fields' => ['text', 'true', 'false1', 'false2']], "QuestionsController", '/questions', true);
 $actionController->registerAction("deleteQuestion", ['idField' => 'id'], "QuestionsController", '/questions', true);
 $actionController->registerAction("getQuestion", ['fields' => ['index']], "QuestionsController", null);
+$actionController->registerAction("getQuestionsNumber", [], "QuestionsController", null);
 $actionController->registerAction("getAnswer", ['fields' => ['index']], "QuestionsController", null);
 $actionController->registerAction("searchQuestion", ['fields' => ['searchTerm']], "QuestionsController", null, true);
 

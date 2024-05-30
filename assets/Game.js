@@ -1,16 +1,18 @@
 export default class Game {
 
-     constructor(spartiate, puck, container) {
-        this.spartiate = spartiate;
-        this.puck = puck;
-        this.container = container;
+    constructor(spartiate, puck, container) {
+          this.spartiate = spartiate;
+          this.puck = puck;
+          this.container = container;
 
-        this.multiplicator = []
-        this.multiplicator["A"] = 1;
-        this.multiplicator["B"] = 2;
-        this.multiplicator["C"] = 3;
+          this.multiplicator = []
+          this.multiplicator["A"] = 1;
+          this.multiplicator["B"] = 2;
+          this.multiplicator["C"] = 3;
+    }
 
-        this.numberOfQuestions = 3;
+    async initialize() {
+        this.numberOfQuestions = await this.getQuestionsNumber();
         this.questionIndexes = this.shuffleArray(Array(this.numberOfQuestions).fill().map((_, i) => i));
     }
 
@@ -22,10 +24,19 @@ export default class Game {
         return array;
     }
 
-    /**
-     * Récupère une question aléatoire et l'affiche dans le canvas
-     */
+    async getQuestionsNumber() {
+        return await $.ajax({
+            type: "POST",
+            url: "/controls/actionController.php",
+            data: {
+                action: "getQuestionsNumber",
+            },
+            dataType: 'json',
+        });
+    }
+
     getQuestion() {
+
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -48,7 +59,7 @@ export default class Game {
                 index: this.questionIndexes[0]
             },
             dataType: 'json',
-            success: (question) => {
+            success: async (question) => {
 
                 // Reset of the background color of answers
                 $("#answerA").css({
@@ -76,7 +87,7 @@ export default class Game {
 
 
     /**
-     * Check la réponse du joueur
+     * Check the player's answer
      **/
     checkedAnswer(playerAnswer) {
             $.ajax({
@@ -88,24 +99,6 @@ export default class Game {
                 },
                 dataType: 'json',
                 success: async (answer) =>  {
-                    /*if (document.getElementById('answerA').textContent.slice(3) === answer) {
-                        await this.startSpartiateAnnimation("A")
-                        $("#answerA").css("background-color", "#28A745");
-                        $("#answerB").css("background-color", "#DC3545");
-                        $("#answerC").css("background-color", "#DC3545");
-                    } else if (document.getElementById('answerB').textContent.slice(3) === answer) {
-                        await this.startSpartiateAnnimation("B")
-                        $("#answerB").css("background-color", "#28A745");
-                        $("#answerC").css("background-color", "#DC3545");
-                        $("#answerA").css("background-color", "#DC3545");
-                    } else {
-                        await this.startSpartiateAnnimation("C")
-                        $("#answerC").css("background-color", "#28A745");
-                        $("#answerA").css("background-color", "#DC3545");
-                        $("#answerB").css("background-color", "#DC3545");
-                    }*/
-
-                    /////
 
                     const answers = {
                         "A": document.getElementById('answerA'),
@@ -123,11 +116,6 @@ export default class Game {
                     };
 
                     updateBackgroundColors();
-                        /*if (answers[key].textContent.slice(3) === answer) {
-                            await this.startSpartiateAnnimation(key);
-
-                            break;
-                        }*/
 
                     // remove the current question index of the list
                     if (this.questionIndexes.length !== 0) {

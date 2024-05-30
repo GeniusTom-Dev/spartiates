@@ -14,6 +14,7 @@ let allElementsLoaded = elements.every(element => element);
 
 if (allElementsLoaded){
     let game = new Game(spartiate, puck, container)
+    await game.initialize()
     await game.getQuestion()
 
     // Link a clickListener and a button
@@ -46,22 +47,4 @@ if (allElementsLoaded){
         answerB.disabled = false;
         answerC.disabled = false;
     }
-
-    /*answerA.addEventListener("click", async () => {
-        await game.checkedAnswer("A")
-        await game.startSpartiateAnnimation("A")
-        await game.getQuestion()
-    })
-
-    answerB.addEventListener("click", async () => {
-        await game.checkedAnswer("B")
-        await game.startSpartiateAnnimation("B")
-        await game.getQuestion()
-    })
-
-    answerC.addEventListener("click", async () => {
-        await game.checkedAnswer("C")
-        await game.startSpartiateAnnimation("C")
-        await game.getQuestion()
-    })*/
 }
