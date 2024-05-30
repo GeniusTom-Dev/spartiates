@@ -6,8 +6,6 @@ abstract class View
 {
     public static function display(string $title, string $path = null, $data = null) : void
     {
-
-
         if (empty($title) && empty($path)){
             header('refresh:0;url=/error');
             exit;
