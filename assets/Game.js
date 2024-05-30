@@ -49,6 +49,8 @@ export default class Game {
             },
             dataType: 'json',
             success: (question) => {
+
+                // Reset of the background color of answers
                 $("#answerA").css({
                     "--tw-bg-opacity": 0.5, // Par exemple, définir l'opacité
                     "background-color": "rgb(171, 211, 230)"
@@ -62,6 +64,7 @@ export default class Game {
                     "background-color": "rgb(171, 211, 230)"
                 });
 
+                // Shuffle and display the possible answer of the question
                 let answerShuffle = shuffleArray([question.answer, question.false1, question.false2]);
                 $("#question").text(question.text);
                 $("#answerA").text("A. " + answerShuffle[0]);
