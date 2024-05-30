@@ -18,25 +18,20 @@
     <div class="flex flex-col items-center justify-center">
         <button class="bg-customBlue lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer" onclick="window.location.href='/newQuestion'">Ajouter une question</button>
         <div class="flex flex-row items-center justify-between w-full px-4 py-2 border-b border-gray-200 mt-10">
-            <input type="text" placeholder="Rechercher" id="searchQuestion"
-                   class="w-full px-4 py-2 text-gray-700 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:bg-white focus:border-gray-500">
+            <input type="text" placeholder="Rechercher" id="searchQuestion" class="w-full px-4 py-2 text-gray-700 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:bg-white focus:border-gray-500">
         </div>
 
         <div class="searchedResult grid gap-4 p-4" style="display: none;"></div>
         <div class="result grid gap-4 p-4">
             <?php foreach ($data as $question) { ?>
-                <div class="flex flex-col items-center justify-center w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md">
+                <div class="question-card flex flex-col items-center justify-center w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md">
                     <div class="flex flex-row items-center justify-between w-full mt-2">
-                        <p class="text-lg font-medium text-gray-800 mr-5"><?= $question->getText() ?> </p>
+                        <p class="question-text text-lg font-medium text-gray-800 mr-5"><?= $question->getText() ?></p>
                         <div class="flex flex-row space-x-2">
-                            <a href="/updateQuestion&id=<?= $question->getId() ?>"
-                               class="inline-block w-8 h-8 bg-customBlue hover:bg-blue-700 rounded cursor-pointer">
+                            <a href="/updateQuestion&id=<?= $question->getId() ?>" class="inline-block w-8 h-8 bg-customBlue hover:bg-blue-700 rounded cursor-pointer">
                                 <img class="p-1" src="/assets/images/edit.svg" alt="Delete">
                             </a>
-                            <button data-id="<?= $question->getId() ?>"
-                                    data-modal-target="deleteModalQuestion" data-modal-toggle="deleteModalQuestion"
-                                    class="callActionButton inline-block w-8 h-8 bg-red-500 hover:bg-red-700 rounded"
-                                    type="button">
+                            <button data-id="<?= $question->getId() ?>" data-modal-target="deleteModalQuestion" data-modal-toggle="deleteModalQuestion" class="callActionButton inline-block w-8 h-8 bg-red-500 hover:bg-red-700 rounded" type="button">
                                 <img class="p-1" src="/assets/images/trashcan.svg" alt="Delete">
                             </button>
                         </div>
@@ -45,6 +40,7 @@
             <?php } ?>
         </div>
     </div>
+
 
     <!-- Main modal -->
     <div id="deleteModalQuestion" tabindex="-1" aria-hidden="true"
@@ -80,3 +76,4 @@
         </div>
     </div>
 </div>
+<script src="/assets/search.js"></script>
