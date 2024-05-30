@@ -40,6 +40,12 @@ if(isset($_GET['reset']) && $_GET['reset'] === "oui"){
     session_unset();
 }
 
+$usersController = new UsersController();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'reset') {
+    $usersController->handleResetPasswordForm();
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 /// Initialize controllers
 ///////////////////////////////////////////////////////////////////////////////
@@ -48,7 +54,28 @@ $questionsController = new QuestionsController();
 $spartanController = new SpartanController();
 $routeController = new RouteController();
 
+///////////////////////////////////////////////////////////////////////////////
+/// Pages mapping
+///////////////////////////////////////////////////////////////////////////////
 
+$pages = [
+    'game' => 'Jeu de hockey',
+    'rules' => 'Règles',
+];
+$forms = [
+    'sessionCode' => 'entrer le code',
+    'username' => 'entrer un nom d\'utilisateur',
+    'connect' => 'Connexion',
+    'reset' => 'Réinitialiser le mot de passe',
+];
+$adminForms = [
+    'newQuestion' => 'Nouvelle Question',
+    'newSpartan' => 'Nouveau Spartiate',
+];
+$adminPages = [
+    'questions' => ['Questions', $questionsController],
+    'spartans' => ['Spartans', $spartanController],
+];
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Router
@@ -64,8 +91,10 @@ try {
     $routeController->addRoute("sessionCode","sessionCode",false, null, "forms");
     $routeController->addRoute("username","username",false, null, "forms");
     $routeController->addRoute("connect","connect",false, null, "forms");
+    $routeController->addRoute("reset","resetPwd", false, null, "resetPassword");
 
     $routeController->addRoute("error", "error");
+    $routeController->addRoute("success", "success");
 
     // Admin Pages
     $routeController->addRoute("newQuestion","newQuestion", true);
@@ -87,6 +116,6 @@ try {
 ///////////////////////////////////////////////////////////////////////////////
 /// Display
 ///////////////////////////////////////////////////////////////////////////////
-
+///
 
 $routeController->displayRoutes($url);

@@ -28,4 +28,10 @@ class UsersRepository extends AbstractRepository
         return new Admin($user);
     }
 
+    public function updatePassword($login, $password){
+        $query = 'UPDATE ADMIN SET PASSWORD = :password WHERE LOGIN = :login';
+        $result = $this->connexion->prepare($query);
+        $result->execute(['login' => $login, 'password' => $password]);
+
+    }
 }

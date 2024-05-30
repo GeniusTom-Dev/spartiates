@@ -10,5 +10,7 @@
   "newSpartan" : "Nouveau Spartiate",
   "game" : "Jeu de hockey",
   "spartans": "Les Spartiates",
-    "questions": "Les Questions"
+  "questions": "Les Questions",
+  "reset" : "Réinitialiser le mot de passe",
+  "success" : "Succès"
 }
