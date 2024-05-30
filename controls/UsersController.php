@@ -36,5 +36,30 @@ class UsersController
         return false;
     }
 
+    public function updatePassword($login, $password){
+        $this->repository->updatePassword($login, $password);
+    }
+
+    public function handleResetPasswordForm() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $newPassword = $_POST['newPassword'];
+            $confirmPassword = $_POST['confirmPassword'];
+            $token = $_POST['token'];
+
+            // Vérifiez si les mots de passe correspondent
+            if ($newPassword === $confirmPassword) {
+                $login = "admin";
+                if ($login) {
+                    $this->updatePassword($login, $newPassword);
+                    header('Location: /success');
+                    exit();
+                } else {
+                    echo "Token invalide.";
+                }
+            } else {
+                echo "Les mots de passe ne correspondent pas.";
+            }
+        }
+    }
 
 }

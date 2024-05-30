@@ -4,10 +4,8 @@
 /// Load classes
 ///////////////////////////////////////////////////////////////////////////////
 
-use controls\CodesController;
-use controls\QuestionsController;
-use controls\SpartanController;
-use view\View;
+use controls\{QuestionsController, SpartanController, RouteController, ActionController};
+
 
 require_once "autoloader.php";
 
@@ -37,145 +35,109 @@ if(isset($_GET['reset']) && $_GET['reset'] === "oui"){
     session_unset();
 }
 
+$usersController = new UsersController();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'reset') {
+    $usersController->handleResetPasswordForm();
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 /// Initialize controllers
 ///////////////////////////////////////////////////////////////////////////////
 
 $questionsController = new QuestionsController();
 $spartanController = new SpartanController();
-$codesController = new CodesController();
+$routeController = new RouteController();
+$actionController = new ActionController();
 
-///////////////////////////////////////////////////////////////////////////////
-/// Pages mapping
-///////////////////////////////////////////////////////////////////////////////
-
-$pages = [
-    'game' => 'Jeu de hockey',
-    'rules' => 'Règles',
-];
-$forms = [
-    'sessionCode' => 'entrer le code',
-    'username' => 'entrer un nom d\'utilisateur',
-    'connect' => 'Connexion',
-];
-$adminForms = [
-    'newQuestion' => 'Nouvelle Question',
-    'newSpartan' => 'Nouveau Spartiate',
-];
-$adminPages = [
-    'questions' => ['Questions', $questionsController],
-    'spartans' => ['Spartans', $spartanController],
-];
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Router
 ///////////////////////////////////////////////////////////////////////////////
 
-switch ($url) {
 
-    // HOME PAGE
-    case '' :
-    case '/':
-    case 'home':
-        $title = 'Home';
-        break;
+try {
+    $routeController->addRoute(["", "/", "home"], "home");
+    $routeController->addRoute("rules", "rules");
 
-    // GAME
-    case 'game' :
-        // Ask for session code
-        if (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code'])) {
-            $_SESSION['username'] = null;
-            $_SESSION['spartanId'] = null;
-            $refresh = 'sessionCode';
-        // Ask for username
-        } elseif (empty($_SESSION['username'])) {
-            $_SESSION['spartanId'] = null;
-            $refresh = 'login';
-        // Ask for a spartan
-        } elseif (empty($_SESSION['spartanId'])) {
-            $spartanController->showChooseSpartan();
-        // Start the game
-        } else {
-            $title = 'Jeu de hockey';
-        }
-        break;
+    $routeController->addRoute("game", "game", false , null, "game");
 
-    // RULES
-    case 'rules' :
-        $title = 'Regles';
-        break;
+    $routeController->addRoute("sessionCode","sessionCode",false, null, "forms");
+    $routeController->addRoute("username","username",false, null, "forms");
+    $routeController->addRoute("connect","connect",false, null, "forms");
+    $routeController->addRoute("reset","resetPwd", false, null, "resetPassword");
 
-    // FORMS
-    case 'sessionCode' :
-    case 'username' :
-    case 'connect' :
-        $title = $forms[$url];
-        if ($url != "username" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']))) {
-            $_SESSION['spartanId'] = null;
-        } elseif ($url == 'username')
-            $refresh = 'sessionCode';
-        break;
+    $routeController->addRoute("error", "error");
+    $routeController->addRoute("success", "success");
 
-    // ADMIN PAGES
-    case 'newQuestion' :
-    case 'newSpartan' :
-        if (empty($_SESSION['admin'])) {
-            $refresh = 'connect';
-        }
-        $title = $adminForms[$url];
-        break;
-    case 'questions' :
-    case 'spartans' :
-        if (empty($_SESSION['admin'])) {
-            $refresh = 'connect';
-        }
-        $method = "show" . ucfirst($url);
-        if (method_exists($adminPages[$url][1], $method)) {
-            $adminPages[$url][1]->$method();
-        } else {
-            $refresh = 'connect';
-        }
-        break;
-    case 'users' :
-        if (empty($_SESSION['admin'])) {
-            $refresh = 'connect';
-        }
-        $title = 'Admin';
-        break;
-    case 'updateQuestion' :
-        if (empty($_GET['id'])) {
-            $title = 'Erreur';
-            break;
-        }
-        if (empty($_SESSION['admin'])) {
-            $refresh = 'connect';
-        }
-        $questionsController->showUpdateForm($url, htmlspecialchars($_GET['id']));
-        break;
-    case 'updateSpartan' :
-        if (empty($_GET['id'])) {
-            $title = 'Erreur';
-            break;
-        }
-        if (empty($_SESSION['admin'])) {
-            $refresh = 'connect';
-        }
-        $spartanController->showUpdateForm($url, htmlspecialchars($_GET['id']));
-        break;
+    // Admin Pages
+    $routeController->addRoute("newQuestion","newQuestion", true);
+    $routeController->addRoute("newSpartan","newSpartan", true);
 
-    // ERROR 404
-    default :
-        $title = 'Erreur';
-        break;
+    $routeController->addRoute("questions","questions", true, $questionsController, $method = "showQuestions");
+    $routeController->addRoute("spartans","spartans", true, $spartanController, $method = "showSpartans");
+
+    $routeController->addRoute("users", "users", true);
+
+    $routeController->addRoute("updateQuestion", "updateQuestion", true,$questionsController,"showUpdateForm");
+    $routeController->addRoute("updateSpartan", "updateSpartan", true,$spartanController,"showUpdateForm");
+
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+/// Register Actions
+///////////////////////////////////////////////////////////////////////////////
+
+
+$actionController->registerAction("createSpartan", ['fields' => ['lastName', 'name']], "spartanController", '/spartans', true);
+$actionController->registerAction("updateSpartan", ['idField' => 'id', 'fields' => ['lastName', 'name']], "spartanController", '/spartans', true);
+$actionController->registerAction("deleteSpartan", ['idField' => 'id'], "spartanController", '/spartans', true);
+$actionController->registerAction("setSessionSpart", ['fields' => ['spartanId']], "sessionController", null);
+$actionController->registerAction("searchSpartan", ['fields' => ['searchTerm']], "spartanController", null, true);
+$actionController->registerAction("changeStar", ['fields' => ['spartanId']], "spartanController", null, true);
+
+$actionController->registerAction("createQuestion", ['fields' => ['text', 'true', 'false1', 'false2']], "questionsController", '/questions', true);
+$actionController->registerAction("updateQuestion", ['idField' => 'id', 'fields' => ['text', 'true', 'false1', 'false2']], "questionsController", '/questions', true);
+$actionController->registerAction("deleteQuestion", ['idField' => 'id'], "questionsController", '/questions', true);
+$actionController->registerAction("getRandomQuestion", [], "questionsController", null);
+$actionController->registerAction("searchQuestion", ['fields' => ['searchTerm']], "questionsController", null, true);
+
+$actionController->registerAction("checkSessionCode", ['fields' => ['code']], "codesController", null,false,  ['error' => ['success' => false, 'error' => 'code incorrect']], ['sessionHasEnded' => ['success' => false, 'error' => 'La session est finis']], ['needResponse' => true]);
+$actionController->registerAction("getSessionCode", [], "codesController", null, true);
+
+$actionController->registerAction("start", [], "codesController", null, true);
+$actionController->registerAction("stop", [], "codesController", null, true);
+$actionController->registerAction("isInActiveSession", [], "sessionController", null);
+$actionController->registerAction("addSessionPlayer", ['fields' => ['username', 'email']], "sessionController", '/game');
+
+$actionController->registerAction("addScore", ['fields' => ['score']], "sessionController", null);
+
+$actionController->registerAction("startWS", [], "wscontroller", null, true);
+$actionController->registerAction("stopWS", [], "wscontroller", null, true);
+$actionController->registerAction("connexionWS", [], "wscontroller", null);
+
+$actionController->registerAction("logIn", ['fields' => ['login', 'password']], "usersController", '/users');
+$actionController->registerAction("deleteUser", ['idField' => 'id'], "sessionController", '', true);
+
+$actionController->registerAction("showRanking", [], "sessionController", null, true);
+$actionController->registerAction("showEndGame", ['fields' => ['score']], "sessionController", null);
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+/// Check Action
+///////////////////////////////////////////////////////////////////////////////
+
+if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest' && !empty($_POST['action'])) {
+    $actionController->handleAction();
+    exit;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Display
 ///////////////////////////////////////////////////////////////////////////////
 
-if (isset($refresh)) {
-    header("refresh:0;url=/$refresh");
-}
-
-View::display($title ?? 'none', $path ?? null);
-
+$routeController->displayRoutes($url);
