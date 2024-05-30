@@ -78,6 +78,7 @@ try {
     $routeController->addRoute("spartans","spartans", true, $spartanController, $method = "showSpartans");
 
     $routeController->addRoute("users", "users", true);
+    $routeController->addRoute("qrcode", "qrcode", true);
 
     $routeController->addRoute("updateQuestion", "updateQuestion", true,$questionsController,"showUpdateForm");
     $routeController->addRoute("updateSpartan", "updateSpartan", true,$spartanController,"showUpdateForm");

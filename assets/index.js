@@ -184,6 +184,7 @@ function getSessionCode() {
         },
     }).done(function (response) {
         $('#code').html(response.toString());
+        $('#linkCode').attr("href", "qrcode?code=" + response.toString());
     });
 }
 
