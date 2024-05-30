@@ -1,5 +1,9 @@
 <?php
 
+namespace classes\data\server;
+
+use Exception;
+use InvalidArgumentException;
 use exception\NotFoundException;
 
 /**
@@ -29,15 +33,6 @@ class SpartanImage
     const MAX_IMAGE_SIZE = 5000000;
 
     /**
-     * Create a new spartan.
-     *
-     * @param string $name The spartan name.
-     * @param string $image The image of the spartan.
-     * @return bool True on success, False on failure.
-     * @throws Exception If the file is too big or the extension is invalid
-     */
-
-    /**
      * Find a directory matching the given spartan name.
      *
      * @param string $name The name of the spartan.
@@ -56,6 +51,15 @@ class SpartanImage
         throw new NotFoundException("Aucun spartiate ne correspond à $name");
     }
 
+    /**
+     * Create a new spartan.
+     *
+     * @param string $name The spartan name.
+     * @param string $image The image of the spartan.
+     * @return bool True on success, False on failure.
+     * @throws Exception If the file is too big or the extension is invalid
+     */
+
     public static function addSpartan(string $name, string $image) : bool
     {
         self::checkImage($image);
@@ -63,7 +67,7 @@ class SpartanImage
         try {
             self::getSpartan($name);
             self::updateImage($name, $image);
-        } catch(NotFoundException $exception) {
+        } catch(NotFoundException) {
             $extension = self::getExtension(basename($image));
             $file = self::SPARTAN_IMAGES_DIRECTORY . $name . $extension;
             return move_uploaded_file($image, $file) ?? TRUE;
@@ -80,6 +84,7 @@ class SpartanImage
      * @param string $newName The spartan's new name.
      * @param string|null $image [OPTIONAL] The spartan's image.
      * @return bool TRUE on success OR if nothing matches, FALSE on failure.
+     * @throws Exception if the extension is not okay.
      */
 
     public static function update(string $currentName, string $newName, ?string $image = null) : bool
@@ -195,16 +200,15 @@ class SpartanImage
      * Checks a given image.
      *
      * @param string $image The name to format.
-     * @return boolean TRUE if the image is ok, or else FALSE.
+     * @return void
      * @throws Exception If the file is not okay (too big, extension not allowed, extension not allowed).
      */
 
-    private static function checkImage(string $image) : bool
+    private static function checkImage(string $image) : void
     {
         self::getExtension($image);
         if(getimagesize($image) > self::MAX_IMAGE_SIZE) {
             throw new Exception("La taille de l'image est trop grande");
         }
-        return TRUE;
     }
 }
