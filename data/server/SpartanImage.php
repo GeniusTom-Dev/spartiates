@@ -2,6 +2,17 @@
 
 use exception\NotFoundException;
 
+/**
+ * Contains static methods and constants used to get, add, update and delete spartan images from the server.
+ *
+ * The $name and $image are usually like this :
+ * ```php
+ * $name = $firstName . ' ' . $lastName;
+ * $image = $_FILES['filesToUpload']['tmp_name']
+ * ```
+ *
+ */
+
 class SpartanImage
 {
     /**
@@ -21,7 +32,7 @@ class SpartanImage
      * Create a new spartan.
      *
      * @param string $name The spartan name.
-     * @param string $image The image of the spartan. Usually ``$_FILES['filesToUpload']['tmp_name']``
+     * @param string $image The image of the spartan.
      * @return bool True on success, False on failure.
      * @throws Exception If the file is too big or the extension is invalid
      */
@@ -68,7 +79,7 @@ class SpartanImage
      *
      * @param string $name The name of the spartan.
      * @return string The directory where he can be found.
-     * @throws NotFoundException When no files matches the name.
+     * @throws NotFoundException When no files match the name.
      */
 
     public static function getSpartan(string $name) : string
@@ -88,7 +99,7 @@ class SpartanImage
      * @param string $currentName The spartan's current name.
      * @param string $newName The spartan's new name.
      * @return bool TRUE on success OR if nothing matches, FALSE on failure.
-     * @throws Exception if the extension is not okay
+     * @throws Exception if the extension is not okay.
      */
 
     public static function updateName(string $currentName, string $newName) : bool
@@ -131,16 +142,16 @@ class SpartanImage
     }
 
     /**
-     * Get a file's extension
+     * Get a file's extension.
      *
-     * Checks also if the extension is allowed
+     * Checks also if the extension is allowed.
      *
-     * @param string $directory The file to extract the extension from
-     * @return string The file's extension
-     * @throws Exception If the extension is not allowed
+     * @param string $directory The file to extract the extension from.
+     * @return string The file's extension.
+     * @throws Exception If the extension is not allowed.
      */
 
-    public static function getExtension(string $directory) : string
+    private static function getExtension(string $directory) : string
     {
         $extension = strtolower(pathinfo($directory, PATHINFO_EXTENSION));
         if(!in_array($extension, self::ALLOWED_EXTENSIONS)) {
@@ -150,19 +161,21 @@ class SpartanImage
     }
 
     /**
-     * Checks and format a given spartan name
+     * Checks and format a given spartan name.
      *
-     * Trims it, replaces whitespaces and special characters
+     * Trims it, replaces whitespaces and special characters.
      *
-     * @param string $name The name to format
-     * @return string The formatted name
-     * @throws InvalidArgumentException If the name contains invalid characters
+     * @param string $name The name to format.
+     * @return string The formatted name.
+     * @throws InvalidArgumentException If the name contains invalid characters.
      */
 
-    public static function formatName(string $name) : string
+    private static function formatName(string $name) : string
     {
         $name = trim($name);
         $name = str_replace(' ', '_', $name);
+
+        // TODO Move the replacement of special characters into its own global function because it could be usefull elsewhere
 
         $specialChars =
             array('à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', 'À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Ù', 'Ú', 'Û', 'Ü', 'Ý');
@@ -179,14 +192,14 @@ class SpartanImage
     }
 
     /**
-     * Checks a given image
+     * Checks a given image.
      *
-     * @param string $image The name to format
-     * @return boolean TRUE if the image is ok, or else FALSE
-     * @throws Exception If the file is not okay (too big, extension not allowed, extension not allowed)
+     * @param string $image The name to format.
+     * @return boolean TRUE if the image is ok, or else FALSE.
+     * @throws Exception If the file is not okay (too big, extension not allowed, extension not allowed).
      */
 
-    public static function checkImage(string $image) : bool
+    private static function checkImage(string $image) : bool
     {
         self::getExtension($image);
         if(getimagesize($image) > self::MAX_IMAGE_SIZE) {
