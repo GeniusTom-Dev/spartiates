@@ -45,7 +45,7 @@ function shuffleArray(array) {
 function getQuestion() {
      $.ajax({
           type: "POST",
-          url: "/controls/actionController.php",
+          url: "/index.php",
           data: {
                action: "getRandomQuestion",
           },

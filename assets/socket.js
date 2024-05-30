@@ -3,7 +3,7 @@ let socket = new WebSocket('wss://spartiates-socket-server.glitch.me/');
 socket.addEventListener('open', (event) => {
     $.ajax({
         type: "POST",
-        url: "/controls/actionController.php",
+        url: "/index.php",
         data: {
             action: "connexionWS",
         },
@@ -41,7 +41,7 @@ function sendMessage(message) {
         socket.send(JSON.stringify(JsonMessage));
         $.ajax({
             type: "POST",
-            url: "/controls/actionController.php",
+            url: "/index.php",
             data: {
                 action: message,
             },
