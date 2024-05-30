@@ -1,7 +1,6 @@
 <?php
-require_once "../repository/TokenRepository.php";
-
-use {repository\TokenRepository};
+include_once "../autoloader.php";
+use repository\TokenRepository;
 
 $email = $_ENV['USER_EMAIL'];
 
@@ -16,7 +15,6 @@ if ($email) {
     $subject = "Password Reset Request";
     $message = "Cliquez sur ce lien pour réinitialiser le mot de passe: $resetLink";
     $headers = "From: no-reply@spartiates.com";
-
     if (mail($to, $subject, $message, $headers)) {
         echo json_encode(['success' => true]);
     } else {

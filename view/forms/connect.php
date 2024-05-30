@@ -37,9 +37,9 @@
             .then(data => {
                 if (data.success) {
                     const emailSentMessage = document.getElementById('email-sent-message');
-
+                    emailSentMessage.classList.remove('hidden');
                     setTimeout(() => {
-                       emailSentMessage.classList.remove('hidden');
+                        emailSentMessage.classList.add('hidden');
                     }, 10000);
                 } else {
                     alert('Impossible d\'envoyer l\'email. Veuillez réessayer plus tard.');

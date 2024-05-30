@@ -147,5 +147,12 @@ class RouteController{
 
     }
 
-
+    public function resetPassword(): void {
+        $token = $_GET['token'] ?? null;
+        if ($token) {
+            View::display("Réinitialiser le mot de passe", "view/forms/resetPwd.php", ['token' => $token]);
+        } else {
+            View::display("Erreur", "view/error.php");
+        }
+    }
 }
