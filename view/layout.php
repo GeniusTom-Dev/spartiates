@@ -12,7 +12,7 @@
     <script src="/dist/bundle.js"></script>
     <script src="/dist/jquery.min.js"></script>
     <script src="/assets/index.js" defer></script>
-<!--    <script src="/assets/gameController.js" type="module"></script>-->
+    <script src="/assets/gameController.js" type="module"></script>
 </head>
 
 <body class="bg-[var(--color-bg)] flex flex-col min-h-screen">
@@ -32,7 +32,7 @@
 
 <footer class="bg-cover bg-top h-[15vh] sm:h-[13vh] md:h-[15vh] lg:h-[20vh] xl:h-[25vh] 2xl:h-[35vh] relative -z-10" style="background-image: url('/assets/images/footer.png')">
     <img class="w-1/5 absolute bottom-0 right-0" src="/assets/images/headerLines.png" alt="headerLines.png">
-    <p class="absolute bottom-0 left-0 text-white">CC-by 2023-2024 le site </p>
+    <p class="absolute bottom-0 left-0 text-white">CC-by TOM EVEN ONLY </p>
 </footer>
 
 </body>

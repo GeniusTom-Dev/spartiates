@@ -14,48 +14,37 @@ let allElementsLoaded = elements.every(element => element);
 
 if (allElementsLoaded){
     let game = new Game(spartiate, puck, container)
+    await game.initialize()
+    await game.getQuestion()
 
-    // TODO : A implémenté
-    getQuestion()
+    // Link a clickListener and a button
+    // This function disables the buttons until all the actions are done in order to prevent the user from spam-clicking the answers
+    function attachClickListener(element, answer) {
+        element.addEventListener("click", async () => {
 
-    answerA.addEventListener("click", async () => {
-        await game.startSpartiateAnnimation("A")
-    })
+            disableButtons();
 
-    answerB.addEventListener("click", async () => {
-        await game.startSpartiateAnnimation("B")
-    })
+            await game.checkedAnswer(answer);
+            await game.startSpartiateAnnimation(answer);
+            await game.getQuestion();
 
-    answerC.addEventListener("click", async () => {
-        await game.startSpartiateAnnimation("C")
-    })
-}
+            enableButtons();
+        });
+    }
 
-function shuffleArray(array) {
-     for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-     }
-     return array;
-}
+    attachClickListener(answerA, "A");
+    attachClickListener(answerB, "B");
+    attachClickListener(answerC, "C");
 
-/**
- * Récupère une question aléatoire et l'affiche dans le canvas
- */
-function getQuestion() {
-     $.ajax({
-          type: "POST",
-          url: "/index.php",
-          data: {
-               action: "getRandomQuestion",
-          },
-          dataType: 'json',
-          success: function (question) {
-               let answerShuffle = shuffleArray([question.answer, question.false1, question.false2]);
-               $("#question").text(question.text);
-               $("#answerA").text(answerShuffle[0]);
-               $("#answerB").text(answerShuffle[1]);
-               $("#answerC").text(answerShuffle[2]);
-          }
-     });
+    function disableButtons() {
+        answerA.disabled = true;
+        answerB.disabled = true;
+        answerC.disabled = true;
+    }
+
+    function enableButtons() {
+        answerA.disabled = false;
+        answerB.disabled = false;
+        answerC.disabled = false;
+    }
 }

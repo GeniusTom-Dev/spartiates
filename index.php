@@ -4,7 +4,7 @@
 /// Load classes
 ///////////////////////////////////////////////////////////////////////////////
 
-use controls\{QuestionsController, SpartanController, RouteController, ActionController};
+use controls\{QuestionsController, UsersController, SpartanController, RouteController, ActionController};
 
 
 require_once "autoloader.php";
@@ -78,6 +78,7 @@ try {
     $routeController->addRoute("spartans","spartans", true, $spartanController, $method = "showSpartans");
 
     $routeController->addRoute("users", "users", true);
+    $routeController->addRoute("qrcode", "qrcode", true);
 
     $routeController->addRoute("updateQuestion", "updateQuestion", true,$questionsController,"showUpdateForm");
     $routeController->addRoute("updateSpartan", "updateSpartan", true,$spartanController,"showUpdateForm");
@@ -92,52 +93,50 @@ try {
 ///////////////////////////////////////////////////////////////////////////////
 
 
-$actionController->registerAction("createSpartan", ['fields' => ['lastName', 'name']], "spartanController", '/spartans', true);
-$actionController->registerAction("updateSpartan", ['idField' => 'id', 'fields' => ['lastName', 'name']], "spartanController", '/spartans', true);
-$actionController->registerAction("deleteSpartan", ['idField' => 'id'], "spartanController", '/spartans', true);
-$actionController->registerAction("setSessionSpart", ['fields' => ['spartanId']], "sessionController", null);
-$actionController->registerAction("searchSpartan", ['fields' => ['searchTerm']], "spartanController", null, true);
-$actionController->registerAction("changeStar", ['fields' => ['spartanId']], "spartanController", null, true);
+$actionController->registerAction("createSpartan", ['fields' => ['lastName', 'name']], "SpartanController", '/spartans', true);
+$actionController->registerAction("updateSpartan", ['idField' => 'id', 'fields' => ['lastName', 'name']], "SpartanController", '/spartans', true);
+$actionController->registerAction("deleteSpartan", ['idField' => 'id'], "SpartanController", '/spartans', true);
+$actionController->registerAction("setSessionSpart", ['fields' => ['spartanId']], "SessionController", null);
+$actionController->registerAction("searchSpartan", ['fields' => ['searchTerm']], "SpartanController", null, true);
+$actionController->registerAction("changeStar", ['fields' => ['spartanId']], "SpartanController", null, true);
 
-$actionController->registerAction("createQuestion", ['fields' => ['text', 'true', 'false1', 'false2']], "questionsController", '/questions', true);
-$actionController->registerAction("updateQuestion", ['idField' => 'id', 'fields' => ['text', 'true', 'false1', 'false2']], "questionsController", '/questions', true);
-$actionController->registerAction("deleteQuestion", ['idField' => 'id'], "questionsController", '/questions', true);
-$actionController->registerAction("getRandomQuestion", [], "questionsController", null);
-$actionController->registerAction("searchQuestion", ['fields' => ['searchTerm']], "questionsController", null, true);
+$actionController->registerAction("createQuestion", ['fields' => ['text', 'true', 'false1', 'false2']], "QuestionsController", '/questions', true);
+$actionController->registerAction("updateQuestion", ['idField' => 'id', 'fields' => ['text', 'true', 'false1', 'false2']], "QuestionsController", '/questions', true);
+$actionController->registerAction("deleteQuestion", ['idField' => 'id'], "QuestionsController", '/questions', true);
+$actionController->registerAction("getQuestion", ['fields' => ['index']], "QuestionsController", null);
+$actionController->registerAction("getQuestionsNumber", [], "QuestionsController", null);
+$actionController->registerAction("getAnswer", ['fields' => ['index']], "QuestionsController", null);
+$actionController->registerAction("searchQuestion", ['fields' => ['searchTerm']], "QuestionsController", null, true);
 
-$actionController->registerAction("checkSessionCode", ['fields' => ['code']], "codesController", null,false,  ['error' => ['success' => false, 'error' => 'code incorrect']], ['sessionHasEnded' => ['success' => false, 'error' => 'La session est finis']], ['needResponse' => true]);
-$actionController->registerAction("getSessionCode", [], "codesController", null, true);
+$actionController->registerAction("checkSessionCode", ['fields' => ['code']], "CodesController", null, false, ['success' => ['success' => true, 'url' => '/username']], ['error' => ['success' => false, 'error' => 'code incorrect']], ['sessionHasEnded' => ['success' => false, 'error' => 'La session est finis']], ['needResponse' => true]);
+$actionController->registerAction("getSessionCode", [], "CodesController", null, true);
 
-$actionController->registerAction("start", [], "codesController", null, true);
-$actionController->registerAction("stop", [], "codesController", null, true);
-$actionController->registerAction("isInActiveSession", [], "sessionController", null);
-$actionController->registerAction("addSessionPlayer", ['fields' => ['username', 'email']], "sessionController", '/game');
+$actionController->registerAction("start", [], "CodesController", null, true);
+$actionController->registerAction("stop", [], "CodesController", null, true);
+$actionController->registerAction("isInActiveSession", [], "SessionController", null);
+$actionController->registerAction("addSessionPlayer", ['fields' => ['username', 'email']], "SessionController", '/game');
 
-$actionController->registerAction("addScore", ['fields' => ['score']], "sessionController", null);
+$actionController->registerAction("addScore", ['fields' => ['score']], "SessionController", null);
 
-$actionController->registerAction("startWS", [], "wscontroller", null, true);
-$actionController->registerAction("stopWS", [], "wscontroller", null, true);
-$actionController->registerAction("connexionWS", [], "wscontroller", null);
+$actionController->registerAction("startWS", [], "WSController", null, true);
+$actionController->registerAction("stopWS", [], "WSController", null, true);
+$actionController->registerAction("connexionWS", [], "WSController", null);
 
-$actionController->registerAction("logIn", ['fields' => ['login', 'password']], "usersController", '/users');
-$actionController->registerAction("deleteUser", ['idField' => 'id'], "sessionController", '', true);
+$actionController->registerAction("logIn", ['fields' => ['login', 'password']], "UsersController", null,false, ['success' => ['success' => true, 'url' => '/users']], ['error' => ['success' => false, 'error' => 'Identifiant ou mot de passe incorrect']], ['needResponse' => true]);
+$actionController->registerAction("deleteUser", ['idField' => 'id'], "SessionController", '', true);
 
-$actionController->registerAction("showRanking", [], "sessionController", null, true);
-$actionController->registerAction("showEndGame", ['fields' => ['score']], "sessionController", null);
+$actionController->registerAction("showRanking", [], "SessionController", null, true);
+$actionController->registerAction("showEndGame", ['fields' => ['score']], "SessionController", null);
 
 
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Check Action
+/// Check Action or Display
 ///////////////////////////////////////////////////////////////////////////////
 
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest' && !empty($_POST['action'])) {
     $actionController->handleAction();
-    exit;
+}else{
+    //$actionController->handleAction();
+    $routeController->displayRoutes($url);
 }
-
-///////////////////////////////////////////////////////////////////////////////
-/// Display
-///////////////////////////////////////////////////////////////////////////////
-
-$routeController->displayRoutes($url);

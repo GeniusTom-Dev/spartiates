@@ -12,5 +12,6 @@
   "spartans": "Les Spartiates",
   "questions": "Les Questions",
   "reset" : "Réinitialiser le mot de passe",
-  "success" : "Succès"
+  "success" : "Succès",
+  "qrcode" : "QR Code"
 }
