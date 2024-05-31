@@ -9,5 +9,8 @@
     <input name="lastName" id="lastName" type="text" value="<?= $data->getLastname() ?>" required class="rounded-xl border-gray-300 border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
     <label for="name" class="text-left">Prénom :</label>
     <input name="name" id="name" type="text" value="<?= $data->getName() ?>" required class="rounded-xl border-gray-300 border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    <label class="w-full text-lg md:text-xl">Nouvelle photo :
+        <input class="rounded w-full mt-2 p-1" type="file" name="fileToUpload" id="fileToUpload" accept="image/png, image/jpeg, image/jpg">
+    </label>
     <input class="bg-customBlue rounded-xl text-lg py-3 px-6 hover:bg-sky-300 cursor-pointer" type="submit" name="update" value="Mettre à jour">
 </form>

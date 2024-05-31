@@ -18,13 +18,9 @@ $(document).ready(function (e) {
                         // Affiche le résultat de la recherche
                         if (result === "")
                             result = "Aucun résultat";
-                        $('.result').hide();
-                        $('.searchedResult').show().html(result);
                     }
                 });
             } else {
-                $('.searchedResult').hide();
-                $('.result').show();
             }
         });
     }
