@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
             cards.forEach(card => {
                 const name = card.querySelector(nameSelector).textContent.toLowerCase();
                 if (name.includes(query)) {
-                    card.style.display = 'flex';
+                    card.style.display = 'block';
                 } else {
                     card.style.display = 'none';
                 }

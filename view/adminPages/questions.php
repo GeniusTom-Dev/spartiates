@@ -21,7 +21,6 @@
             <input type="text" placeholder="Rechercher" id="searchQuestion" class="w-full px-4 py-2 text-gray-700 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:bg-white focus:border-gray-500">
         </div>
 
-        <div class="searchedResult grid gap-4 p-4" style="display: none;"></div>
         <div class="result grid gap-4 p-4">
             <?php foreach ($data as $question) { ?>
                 <div class="question-card flex flex-col items-center justify-center w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md">
