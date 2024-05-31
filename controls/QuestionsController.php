@@ -51,7 +51,6 @@ class QuestionsController
                 'false1' => $_SESSION['randomQuestion'][$index]->getFalse1(),
                 'false2' => $_SESSION['randomQuestion'][$index]->getFalse2(),);
             echo json_encode($temp);
-            //echo json_encode("OK : " . sizeof($_SESSION['randomQuestion']));
         }
     }
 
@@ -62,12 +61,14 @@ class QuestionsController
      */
     public function getQuestionsNumber(): void
     {
-        if (!empty($_SESSION['randomQuestion'])) {
-            if (sizeof($_SESSION['randomQuestion']) > 200) {
-                echo json_encode(200);
-            } else {
-                echo json_encode(sizeof($_SESSION['randomQuestion']));
-            }
+        if (empty($_SESSION['randomQuestion'])) {
+            $question = $this->repository->getQuestion();
+            $_SESSION['randomQuestion'] = $question;
+        }
+        if (sizeof($_SESSION['randomQuestion']) > 200) {
+            echo json_encode(200);
+        } else {
+            echo json_encode(sizeof($_SESSION['randomQuestion']));
         }
     }
 
