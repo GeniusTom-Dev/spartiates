@@ -30,7 +30,7 @@ class Admin extends Entity
     /**
      * @return mixed
      */
-    public function get_id(): mixed
+    public function getId(): mixed
     {
         return $this->id;
     }
@@ -38,7 +38,7 @@ class Admin extends Entity
     /**
      * @param mixed $id
      */
-    public function set_id(mixed $id): void
+    public function setId(mixed $id): void
     {
         $this->id = $id;
     }

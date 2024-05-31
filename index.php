@@ -101,11 +101,13 @@ $actionController->registerAction("changeStar", ['fields' => ['spartanId']], "Sp
 
 $actionController->registerAction("createQuestion", ['fields' => ['text', 'true', 'false1', 'false2']], "QuestionsController", '/questions', true);
 $actionController->registerAction("updateQuestion", ['idField' => 'id', 'fields' => ['text', 'true', 'false1', 'false2']], "QuestionsController", '/questions', true);
-$actionController->registerAction("deleteQuestion", ['idField' => 'id'], "questionsController", '/questions', true);
-$actionController->registerAction("getRandomQuestion", [], "QuestionsController", null);
+$actionController->registerAction("deleteQuestion", ['idField' => 'id'], "QuestionsController", '/questions', true);
+$actionController->registerAction("getQuestion", ['fields' => ['index']], "QuestionsController", null);
+$actionController->registerAction("getQuestionsNumber", [], "QuestionsController", null);
+$actionController->registerAction("getAnswer", ['fields' => ['index']], "QuestionsController", null);
 $actionController->registerAction("searchQuestion", ['fields' => ['searchTerm']], "QuestionsController", null, true);
 
-$actionController->registerAction("checkSessionCode", ['fields' => ['code']], "CodesController", null,false,  ['error' => ['success' => false, 'error' => 'code incorrect']], ['sessionHasEnded' => ['success' => false, 'error' => 'La session est finis']], ['needResponse' => true]);
+$actionController->registerAction("checkSessionCode", ['fields' => ['code']], "CodesController", null, false, ['success' => ['success' => true, 'url' => '/username']], ['error' => ['success' => false, 'error' => 'code incorrect']], ['sessionHasEnded' => ['success' => false, 'error' => 'La session est finis']], ['needResponse' => true]);
 $actionController->registerAction("getSessionCode", [], "CodesController", null, true);
 
 $actionController->registerAction("start", [], "CodesController", null, true);
@@ -134,5 +136,6 @@ $actionController->registerAction("showEndGame", ['fields' => ['score']], "Sessi
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest' && !empty($_POST['action'])) {
     $actionController->handleAction();
 }else{
+    //$actionController->handleAction();
     $routeController->displayRoutes($url);
 }

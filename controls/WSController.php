@@ -22,4 +22,14 @@ class WSController
 
         echo $jsonIdentificationMessage;
     }
+
+    public function startWS(): void
+    {
+        echo "start";
+    }
+
+    public function stopWS(): void
+    {
+        echo "stop";
+    }
 }

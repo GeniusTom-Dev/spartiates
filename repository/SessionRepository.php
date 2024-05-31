@@ -71,14 +71,14 @@ class SessionRepository extends AbstractRepository
         }
     }
 
-    public function addScore($id, $score): void
+    public function addScore($id, $scoreToAdd): void
     {
         //On ajoute le score à l'utilisateur
-        $query = 'UPDATE PLAYER SET SCORE = SCORE + :score WHERE ID = :id';
+        $query = 'UPDATE PLAYER SET SCORE = SCORE + :scoreToAdd WHERE ID = :id';
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             'id' => $id,
-            'score' => $score
+            'scoreToAdd' => $scoreToAdd
         ]);
     }
 

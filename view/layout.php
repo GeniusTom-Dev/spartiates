@@ -12,7 +12,7 @@
     <script src="/dist/bundle.js"></script>
     <script src="/dist/jquery.min.js"></script>
     <script src="/assets/index.js" defer></script>
-<!--    <script src="/assets/gameController.js" type="module"></script>-->
+    <script src="/assets/gameController.js" type="module"></script>
 </head>
 
 <body class="bg-[var(--color-bg)] flex flex-col min-h-screen">

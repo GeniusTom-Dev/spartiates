@@ -11,7 +11,7 @@ use exception\NotFoundException;
  *
  * The $name and $image are usually like this :
  * ```php
- * $name = $firstName . ' ' . $lastName;
+ * $name = $firstName . '_' . $lastName;
  * $image = $_FILES['filesToUpload']['tmp_name']
  * ```
  *

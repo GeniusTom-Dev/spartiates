@@ -11,6 +11,9 @@ class ActionController{
         $newAction = new \stdClass();
         $newAction->name = $name;
         $newAction->fields = $fields['fields'] ?? [];
+        if (isset($fields['idField'])) {
+            $newAction->idField = $fields['idField'];
+        }
         $newAction->controller = $controller;
         $newAction->redirect = $redirect;
         $newAction->adminOnly = $adminOnly;
@@ -32,7 +35,10 @@ class ActionController{
         $postData = $_POST;
         $files = $_FILES;
         $action = $_POST['action'];
+
         if (isset($this->actions[$action])) {
+
+            // Récupère l'array correspondant à l'action devant être effectuée
             $mapping = $this->actions[$action];
 
             // Vérifier si l'action nécessite des privilèges administratifs
@@ -108,7 +114,7 @@ class ActionController{
         } else {
 
             // Gérer les actions non valides
-            echo 'Action non valide';
+            echo 'Action non initialisée';
         }
     }
 }
