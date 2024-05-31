@@ -2,6 +2,7 @@
 
 namespace controls;
 
+use classes\data\server\SpartanImage;
 use exception\CannotCreateException;
 use exception\NotFoundException;
 use repository\SpartanRepository;
@@ -13,6 +14,7 @@ class SpartanController
      * @var mixed
      */
     private mixed $repository;
+    private SpartanImage $spartImg;
 
     public function __construct()
     {
@@ -50,13 +52,26 @@ class SpartanController
         }
     }
 
-    public function updateSpartan($id, $lastName, $name): void
+    public function updateSpartan($id, $lastName, $name, $image = null): void
     {
         try {
+            $spartan = $this->repository->getById($id);
+            $currentFormattedName = strtolower($spartan->getLastname() . '_' . $spartan->getName());
+            $newFormattedName = strtolower(trim($lastName) . '_' . trim($name));
+
             $this->repository->updateSpartanById($id, trim($lastName), trim($name));
+
+            if (!empty($image['tmp_name'])) {
+                SpartanImage::update($currentFormattedName, $newFormattedName, $image['tmp_name']);
+            } elseif ($currentFormattedName !== $newFormattedName) {
+                SpartanImage::updateName($currentFormattedName, $newFormattedName);
+            }
         } catch (NotFoundException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
             echo $ERROR->getMessage();
+        } catch (Exception $e) {
+            file_put_contents('log/HockeyGame.log', $e->getMessage() . "\n", FILE_APPEND | LOCK_EX);
+            echo $e->getMessage();
         }
     }
 
