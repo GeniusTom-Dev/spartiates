@@ -5,12 +5,8 @@
     <form class="flex flex-col space-y-14 px-5 py-3 w-full sm:w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2 bg-white rounded sm:h-auto md:h-auto lg:h-auto xl:h-auto" id="form" method="post">
         <input type="hidden" name="action" value="addSessionPlayer">
 
-        <label for="familyName"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Nom :</span>
-            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl border-gray-300" maxlength="32" minlength="2" type="text" id="familyName" name="familyName" required>
-        </label>
-
-        <label for="firstName"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Prénom :</span>
-            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl border-gray-300" maxlength="32" minlength="2" type="text" id="firstName" name="firstName" required>
+        <label for="name"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Prénom et nom :</span>
+            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl border-gray-300" maxlength="32" minlength="2" type="text" id="name" name="name" required>
         </label>
 
         <label for="phoneNumber"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Numéro de téléphone :</span>

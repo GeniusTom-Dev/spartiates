@@ -36,12 +36,11 @@ class SessionController
      * @return void
      */
 
-    public function addSessionPlayer(string $firstName, string $lastName, string $email, string $phone): void
+    public function addSessionPlayer(string $name, string $email, string $phone): void
     {
         $personalInfo = new PersonalInfo();
         $personalInfo
-            ->setFirstName($firstName)
-            ->setLastName($lastName)
+            ->setName($name)
             ->setEmail($email)
             ->setPhoneNumber($phone);
         $this->personalInfoTable->insert($personalInfo);
@@ -52,10 +51,8 @@ class SessionController
             ->setPersonalInfo($personalInfo);
         $this->playerTable->insert($player);
 
-        $username = trim($firstName) . ' ' . trim($lastName);
-
         $_SESSION['id'] = $player->getId();
-        $_SESSION['username'] = $username;
+        $_SESSION['username'] = $name;
     }
 
     public function showRanking(): void

@@ -22,10 +22,9 @@ class PersonalInfoTable extends AbstractRepository
             $query .= ' WHERE Id = :id';
             $values = ['id' => $key];
         } else if ($key instanceof PersonalInfo) {
-            $query .= ' WHERE FirstName = :firstName AND LastName = :lastName AND PhoneNumber = :phoneNumber AND Email = :email';
+            $query .= ' WHERE Name = :name AND PhoneNumber = :phoneNumber AND Email = :email';
             $values = [
-                'firstName' => $key->getFirstName(),
-                'lastName' => $key->getLastName(),
+                'name' => $key->getName(),
                 'phoneNumber' => $key->getPhoneNumber(),
                 'email' => $key->getEmail()
             ];
@@ -67,12 +66,11 @@ class PersonalInfoTable extends AbstractRepository
         }
 
         $query = <<<SQL
-                INSERT INTO PERSONAL_INFO (FirstName, LastName, PhoneNumber, Email)
-                VALUES (:firstName, :lastName, :phoneNumber, :email)
+                INSERT INTO PERSONAL_INFO (Name, PhoneNumber, Email)
+                VALUES (:name, :phoneNumber, :email)
         SQL;
         $values = [
-            'firstName' => $personalInfo->getFirstName(),
-            'lastName' => $personalInfo->getLastName(),
+            'name' => $personalInfo->getName(),
             'phoneNumber' => $personalInfo->getPhoneNumber(),
             'email' => $personalInfo->getEmail(),
         ];
@@ -99,13 +97,12 @@ class PersonalInfoTable extends AbstractRepository
 
         $query = <<<SQL
             UPDATE PERSONAL_INFO
-            SET FirstName = :firstName, LastName = :lastName, PhoneNumber :phoneNumber, Email = :email
+            SET FirstName = :name, PhoneNumber :phoneNumber, Email = :email
             WHERE Id = :id
         SQL;
 
         $values = [
-            'firstName' => $personalInfo->getFirstName(),
-            'lastName' => $personalInfo->getLastName(),
+            'name' => $personalInfo->getName(),
             'phoneNumber' => $personalInfo->getPhoneNumber(),
             'email' => $personalInfo->getEmail(),
             'id' => $existingPersonalInfo->getId(),

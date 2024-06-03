@@ -7,8 +7,7 @@ use class\AbstractEntity;
 class PersonalInfo extends AbstractEntity
 {
     private int $id;
-    private string $firstName;
-    private string $lastName;
+    private string $name;
     private string $phoneNumber;
     private string $email;
 
@@ -20,28 +19,6 @@ class PersonalInfo extends AbstractEntity
     public function setId(int $id): PersonalInfo
     {
         $this->id = $id;
-        return $this;
-    }
-
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
-
-    public function setFirstName(string $firstName): PersonalInfo
-    {
-        $this->firstName = $firstName;
-        return $this;
-    }
-
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName(string $lastName): PersonalInfo
-    {
-        $this->lastName = $lastName;
         return $this;
     }
 
@@ -68,12 +45,21 @@ class PersonalInfo extends AbstractEntity
     }
     public function equals(PersonalInfo $personalInfo): bool
     {
-        if($personalInfo->getFirstName() !== $this->getFirstName()
-            || $personalInfo->getLastName() !== $this->getLastName()
+        if($personalInfo->getName() !== $this->getName()
             || $personalInfo->getPhoneNumber() !== $this->getPhoneNumber()
             || $personalInfo->getEmail() !== $this->getEmail()) {
             return FALSE;
         }
         return TRUE;
+    }
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): PersonalInfo
+    {
+        $this->name = $name;
+        return $this;
     }
 }

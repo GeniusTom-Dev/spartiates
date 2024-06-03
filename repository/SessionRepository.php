@@ -8,7 +8,7 @@ use PDO;
 
 class SessionRepository extends AbstractRepository
 {
-    public function addSessionPlayer($firstName, $lastName, $email, $phoneNumber): false|string
+    public function addSessionPlayer($username, $email, $phoneNumber): false|string
     {
         $queryDoesEmailExist = 'SELECT id FROM EMAIL WHERE email = :email';
         $statement = $this->connexion->prepare($queryDoesEmailExist);
