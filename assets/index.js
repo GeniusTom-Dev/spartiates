@@ -1,26 +1,4 @@
 $(document).ready(function (e) {
-    $(document).on("click", ".star", function () {
-        // Toggle l'état rempli/vide de l'étoile
-        let filled = !$(this).data("filled");
-        $(this).data("filled", filled);
-        // Récupérer l'ID du joueur associé
-        let spartanId = $(this).data("spartiate-id");
-        // Mettre à jour l'image en fonction de l'état rempli/vide
-        let imageUrl = filled ? "/assets/images/fullStar.svg" : "/assets/images/emptyStar.svg";
-        $(this).attr("src", imageUrl);
-
-        $.ajax({
-            type: "POST",
-            url: "/index.php",
-            data: {
-                action: "changeStar",
-                spartanId: spartanId
-            },
-            dataType: "json",
-            success: function (response) {
-            }
-        });
-    });
 
     function handleSearch(inputSelector) {
         $(inputSelector).on('input', function () {
@@ -40,13 +18,9 @@ $(document).ready(function (e) {
                         // Affiche le résultat de la recherche
                         if (result === "")
                             result = "Aucun résultat";
-                        $('.result').hide();
-                        $('.searchedResult').show().html(result);
                     }
                 });
             } else {
-                $('.searchedResult').hide();
-                $('.result').show();
             }
         });
     }

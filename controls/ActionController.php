@@ -97,7 +97,7 @@ class ActionController{
 
             // Si le formulaire nécessite de déposer un fichier (ex: image d'un spartiate)
             if (isset($files["fileToUpload"])) {
-                $target_dir = "../assets/spartImage/";
+                $target_dir = realpath(".") . "/assets/spartImage/";
                 $imageFileType = strtolower(pathinfo(basename($files["fileToUpload"]["name"]), PATHINFO_EXTENSION));
                 $target_file = $target_dir . strtolower($postData['lastName']) . "_" . strtolower($postData['name'] . "." . $imageFileType);
 
@@ -105,6 +105,7 @@ class ActionController{
                 if ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg" || $imageFileType == "gif") {
                     move_uploaded_file(str_replace("\\\\", "\\", $files["fileToUpload"]["tmp_name"]), $target_file);
                 }
+
             }
 
             // Redirection

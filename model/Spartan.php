@@ -10,23 +10,6 @@ class Spartan extends Entity
     private mixed $lastName;
     private mixed $name;
     private mixed $number;
-    private mixed $star;
-
-    /**
-     * @return mixed
-     */
-    public function isStarred(): mixed
-    {
-        return $this->star;
-    }
-
-    /**
-     * @param mixed $star
-     */
-    public function setStar(mixed $star): void
-    {
-        $this->star = $star;
-    }
 
     /**
      * @return mixed
