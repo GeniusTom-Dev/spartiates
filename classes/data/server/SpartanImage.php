@@ -22,7 +22,7 @@ class SpartanImage
     /**
      * Directory where the spartan images are put.
      */
-    const SPARTAN_IMAGES_DIRECTORY = __DIR__ . '../../assets/images/spartan';
+    const SPARTAN_IMAGES_DIRECTORY = __DIR__ . '/assets/spartImage/';
     /**
      * The allowed files extension for the spartan images.
      */
@@ -129,7 +129,7 @@ class SpartanImage
     {
         $name = self::formatName($name);
         $file = self::getSpartan($name);
-        return move_uploaded_file($image, $file) ?? TRUE;
+        return rename($file, $image) ?? TRUE;
     }
 
     /**
