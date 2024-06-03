@@ -35,8 +35,11 @@ class Player
         return $this->personalInfo;
     }
 
-    public function setPersonalInfo(int $personalInfo): Player
+    public function setPersonalInfo(int|PersonalInfo $personalInfo): Player
     {
+        if($personalInfo instanceof PersonalInfo) {
+            $personalInfo = $personalInfo->getId();
+        }
         $this->personalInfo = $personalInfo;
         return $this;
     }

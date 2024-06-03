@@ -2,6 +2,10 @@
 
 namespace controls;
 
+use class\data\database\PersonalInfoTable;
+use classe\data\database\PlayerTable;
+use classe\entity\PersonalInfo;
+use classe\entity\Player;
 use classe\exception\NotFoundException;
 use repository\SessionRepository;
 
@@ -11,16 +15,46 @@ class SessionController
      * @var mixed
      */
     private mixed $repository;
+    private PlayerTable $playerTable;
+    private PersonalInfoTable $personalInfoTable;
 
     public function __construct()
     {
         $this->repository = new SessionRepository();
+        $this->playerTable = new PlayerTable();
+        $this->personalInfoTable = new PersonalInfoTable();
+
     }
 
-    public function addSessionPlayer($firstName, $familyName, $email, $phone): void
+    /**
+     * Create a new player and initiate its session
+     *
+     * @param string $firstName The player's first name
+     * @param string $lastName The player's last name
+     * @param string $email The player's email address
+     * @param string $phone The player's phone number
+     * @return void
+     */
+
+    public function addSessionPlayer(string $firstName, string $lastName, string $email, string $phone): void
     {
-        $username = trim($firstName) . ' ' . trim($familyName);
-        $_SESSION['id'] = $this->repository->addSessionPlayer($username, trim($email), $_SESSION['code']);
+        $personalInfo = new PersonalInfo();
+        $personalInfo
+            ->setFirstName($firstName)
+            ->setLastName($lastName)
+            ->setEmail($email)
+            ->setPhoneNumber($phone);
+        $this->personalInfoTable->insert($personalInfo);
+
+        $player = new Player();
+        $player
+            ->setScore(0)
+            ->setPersonalInfo($personalInfo);
+        $this->playerTable->insert($player);
+
+        $username = trim($firstName) . ' ' . trim($lastName);
+
+        $_SESSION['id'] = $player->getId();
         $_SESSION['username'] = $username;
     }
 
