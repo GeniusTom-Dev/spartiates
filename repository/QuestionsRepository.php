@@ -2,8 +2,8 @@
 
 namespace repository;
 
-use exception\MoreThanOneException;
-use exception\NotFoundException;
+use classe\exception\MoreThanOneException;
+use classe\exception\NotFoundException;
 use model\Question;
 use PDO;
 

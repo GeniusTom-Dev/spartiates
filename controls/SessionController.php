@@ -2,7 +2,7 @@
 
 namespace controls;
 
-use exception\NotFoundException;
+use classe\exception\NotFoundException;
 use repository\SessionRepository;
 
 class SessionController

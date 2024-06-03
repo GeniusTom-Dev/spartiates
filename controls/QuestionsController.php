@@ -2,8 +2,8 @@
 
 namespace controls;
 
-use exception\CannotCreateException;
-use exception\NotFoundException;
+use classe\exception\CannotCreateException;
+use classe\exception\NotFoundException;
 use repository\QuestionsRepository;
 use view\View;
 

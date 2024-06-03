@@ -2,7 +2,7 @@
 
 namespace repository;
 
-use exception\NotFoundException;
+use classe\exception\NotFoundException;
 use model\SessionPlayer;
 use PDO;
 
