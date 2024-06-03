@@ -9,7 +9,7 @@ class Spartan extends Entity
     private mixed $id;
     private mixed $lastName;
     private mixed $name;
-    private mixed $number;
+    private mixed $num;
 
     /**
      * @return mixed
@@ -62,17 +62,17 @@ class Spartan extends Entity
     /**
      * @return mixed
      */
-    public function getNumber(): mixed
+    public function getNum(): mixed
     {
-        return $this->number;
+        return $this->num;
     }
 
     /**
      * @param mixed $number
      */
-    public function setNumber(mixed $number): void
+    public function setNum(mixed $number): void
     {
-        $this->number = $number;
+        $this->num = $number;
     }
 
 
