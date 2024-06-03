@@ -79,6 +79,8 @@ try {
     $routeController->addRoute("users", "users", true);
     $routeController->addRoute("qrcode", "qrcode", true);
 
+    $routeController->addRoute("download", "download", true);
+
     $routeController->addRoute("updateQuestion", "updateQuestion", true,$questionsController,"showUpdateForm");
     $routeController->addRoute("updateSpartan", "updateSpartan", true,$spartanController,"showUpdateForm");
 
@@ -117,17 +119,19 @@ $actionController->registerAction("addSessionPlayer", ['fields' => ['username', 
 
 $actionController->registerAction("addScore", ['fields' => ['score']], "SessionController", null);
 
+$actionController->registerAction("dlData", [], "DownloadController", "/download", true);
+
+
 $actionController->registerAction("startWS", [], "WSController", null, true);
 $actionController->registerAction("stopWS", [], "WSController", null, true);
 $actionController->registerAction("connexionWS", [], "WSController", null);
 
 $actionController->registerAction("logIn", ['fields' => ['login', 'password']], "UsersController", null,false, ['success' => ['success' => true, 'url' => '/users']], ['error' => ['success' => false, 'error' => 'Identifiant ou mot de passe incorrect']], ['needResponse' => true]);
+$actionController->registerAction("disconnect", [], "UsersController", null,false, ['success' => ['success' => true, 'url' => '/']], ['needResponse' => true]);
 $actionController->registerAction("deleteUser", ['idField' => 'id'], "SessionController", '', true);
 
 $actionController->registerAction("showRanking", [], "SessionController", null, true);
 $actionController->registerAction("showEndGame", ['fields' => ['score']], "SessionController", null);
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Check Action or Display
