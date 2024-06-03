@@ -83,8 +83,15 @@ $(document).ready(function (e) {
                 id: id,
             },
         }).done(function (response) {
-            if (response !== "")
-                window.location.href = response;
+            if (response !== ""){
+                if(typeof response === 'object'){
+                    if(response.success && response.url !== "" && response.url[0] === "/"){
+                        window.location.href = response.url;
+                    }
+                }else if(typeof response === 'string' && response[0] === "/"){
+                    window.location.href = response;
+                }
+            }
         });
     });
 

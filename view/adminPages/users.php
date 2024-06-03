@@ -5,8 +5,8 @@
 </a>
 
 <a class="absolute right-5 top-4 w-12 md:w-16 h-12 md:h-16 cursor-pointer">
-    <img class="p-2 bg-customBlue rounded-xl actionButton" src="/assets/images/deconnect.svg"
-         data-action="deconnect" alt="Disconnect">
+    <img class="p-2 bg-customBlue rounded-xl actionButton" src="../../assets/images/disconnect.svg"
+         data-action="disconnect" alt="Disconnect">
 </a>
 
 <div class="w-full p-4">

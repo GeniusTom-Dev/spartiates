@@ -2,8 +2,8 @@
     <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Delete">
 </a>
 <a class="absolute right-5 top-5 md:top-4 w-12 md:w-16 h-12 md:h-16">
-    <img class="p-2 bg-customBlue rounded-xl actionButton cursor-pointer" src="/assets/images/deconnect.svg"
-         data-action="deconnect" alt="deconnect">
+    <img class="p-2 bg-customBlue rounded-xl actionButton cursor-pointer" src="../../assets/images/disconnect.svg"
+         data-action="disconnect" alt="disconnect">
 </a>
 
 <div class="w-full p-4">
