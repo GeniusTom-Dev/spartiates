@@ -62,8 +62,6 @@ class SpartanImage
 
     public static function add(string $name, string $image) : bool
     {
-        var_dump($_POST);
-        return $_FILES['files']['tmp_name'];
         self::checkImage($image);
         $name = self::formatName($name);
         try {

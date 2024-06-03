@@ -12,7 +12,7 @@
     </h1>
     <div class="w-full flex flex-row justify-center items-center space-x-2 mb-4">
         <a class="bg-white lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer" href='/users'><span>Utilisateurs</span></a>
-        <a class="bg-white lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer" href='/spartans'><span>Sportifs</span></a>
+        <a class="bg-white lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer" href='/spartans'><span>Spartiates</span></a>
     </div>
 
     <div class="flex flex-col items-center justify-center">

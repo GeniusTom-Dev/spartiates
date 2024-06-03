@@ -8,11 +8,8 @@ use PDO;
 
 class SessionRepository extends AbstractRepository
 {
-
-    public function addSessionPlayer($username, $email, $code): false|string
+    public function addSessionPlayer($firstName, $lastName, $email, $phoneNumber): false|string
     {
-        // We checked if the email already exist
-
         $queryDoesEmailExist = 'SELECT id FROM EMAIL WHERE email = :email';
         $statement = $this->connexion->prepare($queryDoesEmailExist);
         $statement->execute([
@@ -22,7 +19,6 @@ class SessionRepository extends AbstractRepository
         if ($statement->rowCount() === 1) {
             $emailId = $statement->fetchAll(PDO::FETCH_ASSOC);
         } else {
-            // If the email doesn't already exist, we insert it in EMAIL
             $query1 = 'INSERT INTO EMAIL (EMAIL ) VALUES (:email )';
             $statement = $this->connexion->prepare($query1);
             $statement->execute([

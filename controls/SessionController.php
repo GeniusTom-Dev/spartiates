@@ -17,11 +17,11 @@ class SessionController
         $this->repository = new SessionRepository();
     }
 
-    public function addSessionPlayer($username, $email): void
+    public function addSessionPlayer($firstName, $familyName, $email, $phone): void
     {
-        $_SESSION['id'] = $this->repository->addSessionPlayer(trim($username), trim($email), $_SESSION['code']);
+        $username = trim($firstName) . ' ' . trim($familyName);
+        $_SESSION['id'] = $this->repository->addSessionPlayer($username, trim($email), $_SESSION['code']);
         $_SESSION['username'] = $username;
-        $_SESSION['email'] = $email;
     }
 
     public function showRanking(): void
