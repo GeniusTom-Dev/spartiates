@@ -69,9 +69,9 @@ class PersonalInfo extends AbstractEntity
     public function equals(PersonalInfo $personalInfo): bool
     {
         if($personalInfo->getFirstName() !== $this->getFirstName()
-            && $personalInfo->getLastName() !== $this->getLastName()
-            && $personalInfo->getPhoneNumber() !== $this->getPhoneNumber()
-            && $personalInfo->getEmail() !== $this->getEmail()) {
+            || $personalInfo->getLastName() !== $this->getLastName()
+            || $personalInfo->getPhoneNumber() !== $this->getPhoneNumber()
+            || $personalInfo->getEmail() !== $this->getEmail()) {
             return FALSE;
         }
         return TRUE;
