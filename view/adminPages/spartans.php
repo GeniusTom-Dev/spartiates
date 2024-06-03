@@ -32,8 +32,10 @@
             <?php foreach ($data as $spartan) { ?>
                 <div class="spartan-card flex flex-col items-center justify-center w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md">
                     <?php
-                    if ($fileName = glob('assets/spartImage/' . strtolower($spartan->getLastname()) . '_' . strtolower($spartan->getName()) . '.*')) {
+                    if ($fileName = glob('assets/spartImage/' . $spartan->getFormattedName() . '.*')) {
                         echo '<img class="w-24 h-32 rounded-3xl object-contain" src="' . $fileName[0] . '" alt="image du spartiate">';
+                    }else{
+                        echo 'assets/spartImage/' . $spartan->getFormattedName() . '.*';
                     }
                     ?>
 
