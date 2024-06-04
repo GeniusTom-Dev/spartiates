@@ -128,7 +128,7 @@ class ActionController{
 
             // If the form requires uploading a file (e.g., image of a Spartan)
             if (isset($files["fileToUpload"])) {
-                $target_dir = realpath(".") . "/assets/spartImage/";
+                $target_dir = realpath(".") . "/assets/images/spartian/";
                 $imageFileType = strtolower(pathinfo(basename($files["fileToUpload"]["name"]), PATHINFO_EXTENSION));
                 $target_file = $target_dir . strtolower($postData['lastName']) . "_" . strtolower($postData['name'] . "." . $imageFileType);
 

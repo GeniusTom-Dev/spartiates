@@ -1,5 +1,5 @@
 <a href="/home" class="absolute left-5 top-4 md:top-5 w-12 md:w-16 h-12 md:h-16">
-    <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Home">
+    <img class="p-2 bg-customBlue rounded-xl" src="../../assets/images/icon/home.svg" alt="Home">
 </a>
 <form class="bg-white p-6 md:p-10 rounded-md drop-shadow-xl flex flex-col justify-center items-center space-y-5 w-full max-w-lg mx-auto" id="form" method="post" enctype="multipart/form-data">
     <input type="hidden" name="action" value="createSpartan">

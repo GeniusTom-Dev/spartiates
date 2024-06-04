@@ -21,7 +21,6 @@ class DownloadController{
 
         $file = fopen($filePath, 'w');
 
-
         $header = ['Nom', 'Email', 'Telephone'];
         fputcsv($file, $header, $separator);
 

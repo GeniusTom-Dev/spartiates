@@ -12,10 +12,10 @@ class PlayerTable extends AbstractRepository
     /**
      * Select a tuple from the Player table
      *
-     * @param null|int|Player $id Either the Id or null if you wish to select them all, or the whole Player.
+     * @param int|Player|string|null $id Either the Id or null if you wish to select them all, or the whole Player.
      * @return Player|Player[]|FALSE One or more Player
      */
-    public function select(null|int|Player $id): Player|array|false
+    public function select(null|int|Player|string $id): Player|array|false
     {
         $query = 'SELECT * FROM PLAYER';
         $values = array();
@@ -124,11 +124,11 @@ class PlayerTable extends AbstractRepository
     /**
      * Delete a player
      *
-     * @param int|Player $key Either its key or the Player
+     * @param int|Player|string $key Either its key or the Player
      * @return void
      */
 
-    public function delete(int|Player $key): void
+    public function delete(int|Player|string $key): void
     {
         $existingPlayer = $this->select($key);
 

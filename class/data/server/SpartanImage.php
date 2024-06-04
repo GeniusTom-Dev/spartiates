@@ -22,7 +22,7 @@ class SpartanImage
     /**
      * Directory where the spartan images are put.
      */
-    const SPARTAN_IMAGES_DIRECTORY = '/assets/spartImage/';
+    const SPARTAN_IMAGES_DIRECTORY = '/assets/images/spartian/';
     /**
      * The allowed files extension for the spartan images.
      */
