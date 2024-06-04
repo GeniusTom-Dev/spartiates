@@ -12,12 +12,18 @@ class DownloadController{
         $this->personalInfoTable = new PersonalInfoTable();
     }
 
-    public function dlData(){
-        $fileLocation = realpath(".") . '/assets/data/download/emails.csv';
-        $file = fopen($fileLocation, 'w');
+    public function dlData(string $separator = ';'){
+        $filePath = realpath(".") . '/assets/data/download/emails.csv';
+
+        if(file_exists($filePath)){
+            unlink($filePath);
+        }
+
+        $file = fopen($filePath, 'w');
+
 
         $header = ['Nom', 'Email', 'Telephone'];
-        fputcsv($file, $header);
+        fputcsv($file, $header, $separator);
 
         foreach ($this->personalInfoTable->select() as $personalInfo){
             $fields = [
@@ -25,7 +31,7 @@ class DownloadController{
                 $personalInfo->getEmail(),
                 $personalInfo->getPhoneNumber(),
             ];
-            fputcsv($file, $fields);
+            fputcsv($file, $fields, $separator);
         }
         fclose($file);
     }

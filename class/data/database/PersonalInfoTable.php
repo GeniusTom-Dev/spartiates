@@ -13,7 +13,7 @@ class PersonalInfoTable extends AbstractRepository
      * @param null|int|PersonalInfo $key Either the Id, the personal info, or null if you wish to select all.
      * @return PersonalInfo|PersonalInfo[]|FALSE One or more PersonalInfo
      */
-    public function select(null|int|PersonalInfo $key): PersonalInfo|array|FALSE
+    public function select(null|int|PersonalInfo $key = null): PersonalInfo|array|FALSE
     {
         $query = 'SELECT * FROM PERSONAL_INFO';
         $values = array();
