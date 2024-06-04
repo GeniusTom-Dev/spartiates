@@ -24,10 +24,11 @@ if (allElementsLoaded){
 
             disableButtons();
 
-            await game.checkedAnswer(answer);
             await game.startSpartiateAnnimation(answer);
+            await game.checkedAnswer(answer);
+            await game.sleep(2000)
+            game.resetPuck();
             await game.getQuestion();
-
             enableButtons();
         });
     }
@@ -47,4 +48,35 @@ if (allElementsLoaded){
         answerB.disabled = false;
         answerC.disabled = false;
     }
+
+    function endGame(message) {
+
+        switch (message) {
+            case "stop":
+                $("#endGame").show();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/controls/actionController.php",
+                    data: {
+                        action: "showEndGame",
+                        score: parseInt(sessionStorage.getItem("score")),
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        $("#pseudo").text(response.pseudo);
+                        $("#scoreEnd").text(response.score.toString());
+                        $("#rank").text(response.rank.toString());
+                        sessionStorage.setItem("score", 0);
+                    }
+                });
+                break;
+            default:
+                break;
+        }
+
+
+    }
+
+    window.endGame = endGame;
 }

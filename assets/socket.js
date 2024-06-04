@@ -18,15 +18,17 @@ socket.addEventListener('open', (event) => {
 let messageMapping = [
     "stop",
     "start",
-    "reset",
+    // "reset",
 ];
 
 socket.addEventListener('message', (event) => {
     console.log('Message reçu:', event.data);
     const message = event.data;
     if (messageMapping.includes(message)) {
-        if (typeof window.sessionStatus === 'function')
-            window.sessionStatus(message);
+        console.log('recu', message);
+        if (typeof window.endGame === 'function')
+            console.log('endGame', window.endGame);
+            window.endGame(message);
     } else {
         WSRanking(message);
     }
