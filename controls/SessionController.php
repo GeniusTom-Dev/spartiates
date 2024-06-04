@@ -3,11 +3,12 @@
 namespace controls;
 
 use class\data\database\PersonalInfoTable;
-use classe\data\database\PlayerTable;
-use classe\entity\PersonalInfo;
-use classe\entity\Player;
-use classe\exception\NotFoundException;
+use class\data\database\PlayerTable;
+use class\entity\PersonalInfo;
+use class\entity\Player;
+use class\exception\NotFoundException;
 use repository\SessionRepository;
+use repository\SpartanRepository;
 
 class SessionController
 {
@@ -15,6 +16,7 @@ class SessionController
      * @var mixed
      */
     private mixed $repository;
+    private SpartanRepository $spartanRepository;
     private PlayerTable $playerTable;
     private PersonalInfoTable $personalInfoTable;
 
@@ -23,7 +25,7 @@ class SessionController
         $this->repository = new SessionRepository();
         $this->playerTable = new PlayerTable();
         $this->personalInfoTable = new PersonalInfoTable();
-
+        $this->spartanRepository = new SpartanRepository();
     }
 
     /**
@@ -120,6 +122,7 @@ class SessionController
     {
         if (isset($_SESSION['id']) && $this->repository->isInSession($_SESSION['id'])) {
             $_SESSION['spartanId'] = $spartanId;
+            $this->spartanRepository->incrementSpartanChoose($spartanId);
         }
     }
 

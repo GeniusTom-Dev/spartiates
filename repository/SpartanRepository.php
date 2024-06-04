@@ -91,4 +91,13 @@ class SpartanRepository extends AbstractRepository
         }
         return $spartiates;
     }
+
+    public function incrementSpartanChoose(int $id) {
+        if($this->getById($id) instanceof Spartan){
+            $query = "UPDATE SPARTAN SET NUM = NUM + 1 WHERE ID = :id";
+            $statement = $this->connexion->prepare($query);
+            $statement->execute(['id' => $id]);
+        }
+
+    }
 }
