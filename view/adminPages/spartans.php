@@ -34,8 +34,6 @@
                     <?php
                     if ($fileName = glob('assets/spartImage/' . $spartan->getFormattedName() . '.*')) {
                         echo '<img class="w-24 h-32 rounded-3xl object-contain" src="' . $fileName[0] . '" alt="image du spartiate">';
-                    }else{
-                        echo 'assets/spartImage/' . $spartan->getFormattedName() . '.*';
                     }
                     ?>
 

@@ -2,6 +2,8 @@
 
 namespace class\entity;
 
+use class\entity\AbstractEntity;
+
 class PersonalInfo extends AbstractEntity
 {
     private int $id;
