@@ -265,8 +265,18 @@ class PlayerTable extends AbstractRepository
         }
 
         $query = <<<SQL
+            SELECT Name 
+            FROM PERSONAL_INFO
+            WHERE Id = :id
+        SQL;
 
-SQL;
+        $values = [
+            'id' => $player,
+        ];
 
+        $statement = $this->connexion->prepare($query);
+        $statement->execute($values);
+
+        return $statement->fetch()[0];
     }
 }
