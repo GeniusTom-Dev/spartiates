@@ -2,9 +2,10 @@
 
 namespace controls;
 
-use exception\MoreThanOneException;
+use class\data\database\PersonalInfoTable;
+use class\data\database\PlayerTable;
+use class\exception\MoreThanOneException;
 use repository\CodesRepository;
-use repository\SessionRepository;
 
 class CodesController
 {
@@ -52,8 +53,8 @@ class CodesController
         $randomCode = rand(10000, 99999);
         if ($this->repository->isSessionCode()) {
             $this->repository->reset();
-            $sessionRepo = new SessionRepository();
-            $sessionRepo->deleteSession();
+            $playerTable = new PlayerTable();
+            $playerTable->clear();
         }
         $this->repository->start($randomCode);
         echo $randomCode;
@@ -63,19 +64,20 @@ class CodesController
     public function stop(): void
     {
         $this->repository->stop();
-        $sessionRepo = new SessionRepository();
-        $data = $sessionRepo->getMailAndUsernameOfHighestScore();
-        if (!empty($data)) {
-            foreach ($data as $row) {
-                if (!empty($row['email']) && !empty($row['username'])) {
-                    $to = $row['email'];
-                    $who = $row['username'];
-                    $subject = 'Jeu Spartan';
-                    $headers = 'De: Spartiates <jeuspartiates@alwaysdata.net>' . "\r\n";
-                    $message = 'Bonjour ' . $who . ' vous avez fait le meilleur score gardez ce mail pour récupérer votre prix';
-                    mail($to, $subject, $message, $headers);
-                }
-            }
+        $playerTable = new PlayerTable();
+        $winners = $playerTable->getWinners();
+
+        $personalInfoTable = new PersonalInfoTable();
+        foreach ($winners as $winner) {
+            $personalInfo = $personalInfoTable->select($winner->getPersonalInfo());
+
+            $to = $personalInfo->getEmail();
+            $who = $personalInfo->getName();
+            $subject = 'Jeu Spartan';
+            $headers = 'De: Spartiates <jeuspartiates@alwaysdata.net>' . "\r\n";
+            $message = 'Bonjour ' . $who . ' vous avez fait le meilleur score gardez ce mail pour récupérer votre prix';
+
+            mail($to, $subject, $message, $headers);
         }
 
         echo 'Pas de session en cours';

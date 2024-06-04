@@ -2,34 +2,58 @@
 
 namespace controls;
 
-use exception\NotFoundException;
-use repository\SessionRepository;
+use class\data\database\PersonalInfoTable;
+use class\data\database\PlayerTable;
+use class\entity\PersonalInfo;
+use class\entity\Player;
+use class\exception\NotFoundException;
 use repository\SpartanRepository;
 
 class SessionController
 {
-    /**
-     * @var mixed
-     */
-    private mixed $repository;
     private SpartanRepository $spartanRepository;
+    private PlayerTable $playerTable;
+    private PersonalInfoTable $personalInfoTable;
 
     public function __construct()
     {
-        $this->repository = new SessionRepository();
+        $this->playerTable = new PlayerTable();
+        $this->personalInfoTable = new PersonalInfoTable();
         $this->spartanRepository = new SpartanRepository();
     }
 
-    public function addSessionPlayer($username, $email): void
+    /**
+     * Create a new player and initiate its session
+     *
+     * @param string $firstName The player's first name
+     * @param string $lastName The player's last name
+     * @param string $email The player's email address
+     * @param string $phone The player's phone number
+     * @return void
+     */
+
+    public function addSessionPlayer(string $name, string $email, string $phone): void
     {
-        $_SESSION['id'] = $this->repository->addSessionPlayer(trim($username), trim($email), $_SESSION['code']);
-        $_SESSION['username'] = $username;
-        $_SESSION['email'] = $email;
+        $personalInfo = new PersonalInfo();
+        $personalInfo
+            ->setName($name)
+            ->setEmail($email)
+            ->setPhoneNumber($phone);
+        $id = $this->personalInfoTable->insert($personalInfo);
+
+        $player = new Player();
+        $player
+            ->setScore(0)
+            ->setPersonalInfo($id);
+        $this->playerTable->insert($player);
+
+        $_SESSION['id'] = $player->getId();
+        $_SESSION['username'] = $name;
     }
 
     public function showRanking(): void
     {
-        $data = $this->repository->getRanking();
+        $data = $this->playerTable->getRanking();
         $i = 1;
         foreach ($data as $sessionUser) {
             echo '
@@ -50,7 +74,7 @@ class SessionController
     public function deleteUser($id): void
     {
         try {
-            $this->repository->deleteUserById($id);
+            $this->playerTable->deleteUserById($id);
         } catch (NotFoundException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
             echo $ERROR->getMessage();
@@ -60,9 +84,9 @@ class SessionController
     public function isInActiveSession(): void
     {
         $codesController = new CodesController();
-        if (!empty($_SESSION['code'] && $codesController->codeIsActive($_SESSION['code'])) && $this->repository->isInSession($_SESSION['id'])) {
+        if (!empty($_SESSION['code'] && $codesController->codeIsActive($_SESSION['code'])) && $this->playerTable->isInSession($_SESSION['id'])) {
             echo 'true';
-        } elseif (!empty($_SESSION['code'] && isset($_SESSION['id']) && $this->repository->isInSession($_SESSION['id']))) {
+        } elseif (!empty($_SESSION['code'] && isset($_SESSION['id']) && $this->playerTable->isInSession($_SESSION['id']))) {
             echo 'notActive';
 
         } else {
@@ -76,10 +100,10 @@ class SessionController
     {
         try {
             if ($score == 0)
-                $score = $this->repository->getScore($_SESSION['id']);
-            if (isset($_SESSION['id']) && $this->repository->isInSession($_SESSION['id'])) {
-                $this->repository->setScore($_SESSION['id'], $score);
-                $sessionUser = $this->repository->getSessionUser($_SESSION['id']);
+                $score = $this->playerTable->getScore($_SESSION['id']);
+            if (isset($_SESSION['id']) && $this->playerTable->isInSession($_SESSION['id'])) {
+                $this->playerTable->setScore($_SESSION['id'], $score);
+                $sessionUser = $this->playerTable->getSessionUser($_SESSION['id']);
                 echo json_encode($sessionUser);
             }
         } catch (NotFoundException $ERROR) {
@@ -90,7 +114,7 @@ class SessionController
 
     public function setSessionSpart($spartanId): void
     {
-        if (isset($_SESSION['id']) && $this->repository->isInSession($_SESSION['id'])) {
+        if (isset($_SESSION['id']) && $this->playerTable->isInSession($_SESSION['id'])) {
             $_SESSION['spartanId'] = $spartanId;
             $this->spartanRepository->incrementSpartanChoose($spartanId);
         }

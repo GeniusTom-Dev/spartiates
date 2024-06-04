@@ -1,17 +1,17 @@
 <?php
 
-namespace classes\data\server;
+namespace class\data\server;
 
+use class\exception\NotFoundException;
 use Exception;
 use InvalidArgumentException;
-use exception\NotFoundException;
 
 /**
  * Contains static methods and constants used to get, add, update and delete spartan images from the server.
  *
  * The $name and $image are usually like this :
  * ```php
- * $name = $firstName . '_' . $lastName;
+ * $name = $firstName . ' ' . $lastName;
  * $image = $_FILES['filesToUpload']['tmp_name']
  * ```
  *
@@ -40,9 +40,8 @@ class SpartanImage
      * @throws NotFoundException When no files match the name.
      */
 
-    public static function getSpartan(string $name) : string
+    public static function get(string $name) : string
     {
-
         foreach (self::ALLOWED_EXTENSIONS as $extension) {
             $file = realpath(".") . self::SPARTAN_IMAGES_DIRECTORY . $name . "." . $extension;
             if (file_exists($file)) {
@@ -61,12 +60,12 @@ class SpartanImage
      * @throws Exception If the file is too big or the extension is invalid
      */
 
-    public static function addSpartan(string $name, string $image) : bool
+    public static function add(string $name, string $image) : bool
     {
         self::checkImage($image);
         $name = self::formatName($name);
         try {
-            self::getSpartan($name);
+            self::get($name);
             self::updateImage($name, $image);
         } catch(NotFoundException) {
             $extension = self::getExtension(basename($image));
@@ -112,7 +111,7 @@ class SpartanImage
     {
         $currentName = self::formatName($currentName);
         $newName = self::formatName($newName);
-        $file = self::getSpartan($currentName);
+        $file = self::get($currentName);
         $extension = self::getExtension($file);
         $newName = realpath(".") . self::SPARTAN_IMAGES_DIRECTORY . $newName . "." . $extension;
         return rename($file, $newName);
@@ -129,7 +128,7 @@ class SpartanImage
     public static function updateImage(string $name, string $image) : bool
     {
         $name = self::formatName($name);
-        $file = self::getSpartan($name);
+        $file = self::get($name);
         return rename($file, $image) ?? TRUE;
     }
 
@@ -140,10 +139,10 @@ class SpartanImage
      * @return bool TRUE on success OR if nothing matches, FALSE on failure.
      */
 
-    public static function deleteSpartan(string $name) : bool
+    public static function delete(string $name) : bool
     {
         $name = self::formatName($name);
-        $file = self::getSpartan($name);
+        $file = self::get($name);
         return unlink($file);
     }
 

@@ -2,9 +2,9 @@
 
 namespace controls;
 
-use classes\data\server\SpartanImage;
-use exception\CannotCreateException;
-use exception\NotFoundException;
+use class\exception\CannotCreateException;
+use class\exception\NotFoundException;
+use class\data\server\SpartanImage;
 use repository\SpartanRepository;
 use view\View;
 

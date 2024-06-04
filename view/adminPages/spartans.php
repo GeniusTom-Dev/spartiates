@@ -21,7 +21,7 @@
 
     <div class="flex flex-col items-center justify-center space-y-4 mb-4">
         <button class="bg-customBlue lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer"
-                onclick="window.location.href='/newSpartan'">Nouveau Joueur</button>
+                onclick="window.location.href='/newSpartan'">Nouveau Spartiate</button>
         <div class="flex flex-row items-center justify-between w-full px-4 py-2 border-b border-gray-200">
             <input type="text" placeholder="Rechercher" id="searchSpartan"
                    class="w-full px-4 py-2 text-gray-700 bg-gray-200 border border-gray-200 rounded-lg focus:outline-none focus:bg-white focus:border-gray-500">

@@ -5,8 +5,6 @@ namespace view;
 abstract class View
 {
     public static function display(string $title, string $path = null, $data = null, $showLayout = true) : void {
-
-
         if (empty($title) && empty($path)){
             header('refresh:0;url=/error');
             exit;
@@ -14,7 +12,7 @@ abstract class View
 
         if($showLayout === false){
             require $path;
-        }else{
+        } else {
             extract(array('data' => $data));
             ob_start();
             require $path;

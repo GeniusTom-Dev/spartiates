@@ -2,7 +2,7 @@
 
 namespace repository;
 
-use exception\MoreThanOneException;
+use class\exception\MoreThanOneException;
 
 
 class CodesRepository extends AbstractRepository
