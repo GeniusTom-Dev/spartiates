@@ -44,7 +44,6 @@ $(document).ready(function (e) {
             console.log(response)
             if (response.success) {
                 // Si l'authentification est réussie, changer l'URL et recharger la page
-                console.log(response)
                 window.location.href = response.url;
             } else {
                 // Si l'authentification échoue, afficher l'erreur
@@ -122,7 +121,7 @@ $(document).ready(function (e) {
         });
     });
 
-    $(".btnAdmin").on("click", function () {
+    $(".btnWS").on("click", function () {
         let action = $(this).data("action");
         // Effectuer la requête AJAX
         $.ajax({

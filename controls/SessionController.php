@@ -4,6 +4,7 @@ namespace controls;
 
 use exception\NotFoundException;
 use repository\SessionRepository;
+use repository\SpartanRepository;
 
 class SessionController
 {
@@ -11,10 +12,12 @@ class SessionController
      * @var mixed
      */
     private mixed $repository;
+    private SpartanRepository $spartanRepository;
 
     public function __construct()
     {
         $this->repository = new SessionRepository();
+        $this->spartanRepository = new SpartanRepository();
     }
 
     public function addSessionPlayer($username, $email): void
@@ -89,6 +92,7 @@ class SessionController
     {
         if (isset($_SESSION['id']) && $this->repository->isInSession($_SESSION['id'])) {
             $_SESSION['spartanId'] = $spartanId;
+            $this->spartanRepository->incrementSpartanChoose($spartanId);
         }
     }
 
