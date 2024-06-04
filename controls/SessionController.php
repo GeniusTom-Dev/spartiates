@@ -53,20 +53,25 @@ class SessionController
 
     public function showRanking(): void
     {
-        $data = $this->playerTable->getRanking();
+        $players = $this->playerTable->getRanking();
         $i = 1;
-        foreach ($data as $sessionUser) {
-            echo '
+        foreach ($players as $player) {
+            $name = $this->personalInfoTable->select($player->getPersonalInfo())->getName();
+            $score = $player->getScore();
+            $id = $player->getId();
+
+            echo <<<HTML
             <tr class="bg-white">
-                <td class="px-4 py-2 border-t border-b text-center font-bold">' . $i . '</td>
-                <td class="px-4 py-2 border-t border-b text-center">' . $sessionUser->getName() . '</td>
-                <td class="px-4 py-2 border-t border-b text-center">' . $sessionUser->getScore() . '</td>
+                <td class="px-4 py-2 border-t border-b text-center font-bold">$i</td>
+                <td class="px-4 py-2 border-t border-b text-center">$name</td>
+                <td class="px-4 py-2 border-t border-b text-center">$score</td>
                 <td class="p-2 border bg-[var(--color-bg)] text-center">
-                    <button data-id="' . $sessionUser->getId() . '" data-action="deleteUser" class="deleteButton actionButton inline-block w-8 h-8 bg-red-500 hover:bg-red-700 rounded" type="button">
+                    <button data-id="'$id'" data-action="deleteUser" class="deleteButton actionButton inline-block w-8 h-8 bg-red-500 hover:bg-red-700 rounded" type="button">
                         <img class="p-1" src="/assets/images/trashcan.svg" alt="Delete">
                     </button>
                 </td>
-            </tr>';
+            </tr>
+            HTML;
             $i++;
         }
     }

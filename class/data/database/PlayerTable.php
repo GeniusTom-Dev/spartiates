@@ -179,6 +179,10 @@ class PlayerTable extends AbstractRepository
         return $winners;
     }
 
+    /**
+     * @return Player[]
+     */
+
     public function getRanking(): array
     {
         $query = 'SELECT * FROM PLAYER ORDER BY SCORE DESC limit 10';
@@ -256,27 +260,5 @@ class PlayerTable extends AbstractRepository
             throw new NotFoundException('Aucun USER trouvé');
         }
         return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function getPlayerName(Player|int $player)
-    {
-        if($player instanceof Player) {
-            $player = $player->getId();
-        }
-
-        $query = <<<SQL
-            SELECT Name 
-            FROM PERSONAL_INFO
-            WHERE Id = :id
-        SQL;
-
-        $values = [
-            'id' => $player,
-        ];
-
-        $statement = $this->connexion->prepare($query);
-        $statement->execute($values);
-
-        return $statement->fetch()[0];
     }
 }
