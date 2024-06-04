@@ -99,7 +99,6 @@ $actionController->registerAction("updateSpartan", ['idField' => 'id', 'fields' 
 $actionController->registerAction("deleteSpartan", ['idField' => 'id'], "SpartanController", '/spartans', true);
 $actionController->registerAction("setSessionSpart", ['fields' => ['spartanId']], "SessionController", null);
 $actionController->registerAction("searchSpartan", ['fields' => ['searchTerm']], "SpartanController", null, true);
-$actionController->registerAction("changeStar", ['fields' => ['spartanId']], "SpartanController", null, true);
 
 $actionController->registerAction("createQuestion", ['fields' => ['text', 'true', 'false1', 'false2']], "QuestionsController", '/questions', true);
 $actionController->registerAction("updateQuestion", ['idField' => 'id', 'fields' => ['text', 'true', 'false1', 'false2']], "QuestionsController", '/questions', true);
@@ -121,7 +120,6 @@ $actionController->registerAction("addScore", ['fields' => ['score']], "SessionC
 
 $actionController->registerAction("dlData", [], "DownloadController", "/download", true);
 
-
 $actionController->registerAction("startWS", [], "WSController", null, true);
 $actionController->registerAction("stopWS", [], "WSController", null, true);
 $actionController->registerAction("connexionWS", [], "WSController", null);
@@ -140,6 +138,5 @@ $actionController->registerAction("showEndGame", ['fields' => ['score']], "Sessi
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest' && !empty($_POST['action'])) {
     $actionController->handleAction();
 }else{
-    //$actionController->handleAction();
     $routeController->displayRoutes($url);
 }

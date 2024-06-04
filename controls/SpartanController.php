@@ -75,21 +75,6 @@ class SpartanController
         }
     }
 
-    public function changeStar($id): void
-    {
-        try {
-            if ($this->repository->isStarredById($id) === 1)
-                $this->repository->changeSpartanStarById($id, 0);
-            else
-                $this->repository->changeSpartanStarById($id, 1);
-
-        } catch (NotFoundException $ERROR) {
-            file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
-            echo $ERROR->getMessage();
-        }
-    }
-
-
     public function showUpdateForm($url, $id): void
     {
         $path = 'view/forms/' . $url . '.php';
