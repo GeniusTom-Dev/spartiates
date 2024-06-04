@@ -1,3 +1,5 @@
+<script src="/assets/socket.js"></script>
+
 <div class="w-full lg:w-2/3 h-full flex flex-col">
     <div class="w-full h-[12vh] flex justify-center items-center text-center">
         <h2 id="question">Lorem ipsum dolor sit amet. C’est juste un texte exemple pour visualiser les choses ?</h2>
@@ -19,4 +21,24 @@
         <button class="w-full h-1/3 shadow-inner bg-customBlue border-x-2 flex justify-center items-center cursor-pointer my-2" id="answerB"></button>
         <button class="w-full h-1/3 shadow-inner bg-customBlue border-2 flex justify-center items-center cursor-pointer my-2" id="answerC"></button>
     </div>
+</div>
+
+<div class="absolute w-full h-full z-50 top-0 bg-customBlueDark opacity-95 flex flex-col items-center justify-center space-y-5 text-white"
+     id="endGame" style="display: none">
+    <span>
+        <label class="text-5xl">Felicitation </label>
+        <label class="text-5xl" id="username"></label>
+        <label class="text-5xl">!</label>
+    </span>
+    <span>
+        <label class="text-5xl">Score : </label>
+        <label class="text-5xl" id="scoreEnd"></label>
+    </span>
+    <span>
+        <label class="text-5xl">Classement : #</label>
+        <label class="text-5xl" id="rank"></label>
+    </span>
+    <a href="/home" class="p-5 bg-customBlue rounded-xl text-4xl">
+        Retour à l'accueil
+    </a>
 </div>

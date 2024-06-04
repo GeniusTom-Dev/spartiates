@@ -2,23 +2,36 @@
 
 namespace controls;
 
-use repository\EmailRepository;
+use class\data\database\PersonalInfoTable;
 
 class DownloadController{
 
-    private mixed $repository;
+    private PersonalInfoTable $personalInfoTable;
 
     public function __construct(){
-        $this->repository = new EmailRepository();
+        $this->personalInfoTable = new PersonalInfoTable();
     }
 
-    public function dlData(){
-        $fileLocation = realpath(".") . '/assets/data/download/emails.csv';
+    public function dlData(string $separator = ';'){
+        $filePath = realpath(".") . '/assets/data/download/emails.csv';
 
-        $emails = $this->repository->getAllEmails();
-        $file = fopen($fileLocation, 'w+');
-        foreach ($emails as $email){
-            fputcsv($file, [$email['Email']]);
+        if(file_exists($filePath)){
+            unlink($filePath);
+        }
+
+        $file = fopen($filePath, 'w');
+
+
+        $header = ['Nom', 'Email', 'Telephone'];
+        fputcsv($file, $header, $separator);
+
+        foreach ($this->personalInfoTable->select() as $personalInfo){
+            $fields = [
+                $personalInfo->getName(),
+                $personalInfo->getEmail(),
+                $personalInfo->getPhoneNumber(),
+            ];
+            fputcsv($file, $fields, $separator);
         }
         fclose($file);
     }
