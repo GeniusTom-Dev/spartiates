@@ -121,7 +121,7 @@ $(document).ready(function (e) {
         });
     });
 
-    $(".btnAdmin").on("click", function () {
+    $(".btnWS").on("click", function () {
         let action = $(this).data("action");
         // Effectuer la requête AJAX
         $.ajax({
