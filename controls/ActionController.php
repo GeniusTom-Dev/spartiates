@@ -50,7 +50,7 @@ class ActionController{
             // Vérifier si tous les champs requis pour les actions de type POST sont présents
             if (isset($mapping->fields)) {
                 foreach ($mapping->fields as $field) {
-                    if (empty(trim($postData[$field])) && $postData[$field] !== "0" && $field != 'mail') {
+                    if (empty(trim($postData[$field])) && $postData[$field] !== "0" && $field !== 'phone') {
                         echo "Champ $field manquant";
                         return;
                     }
