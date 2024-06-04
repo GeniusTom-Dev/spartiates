@@ -7,6 +7,7 @@ class Player extends AbstractEntity
     private int $id;
     private int $score;
     private int $personalInfo;
+    private string $name;
 
     public function getId(): int|null
     {
@@ -48,6 +49,16 @@ class Player extends AbstractEntity
             return FALSE;
         }
         return TRUE;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name ?? null;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 
 }
