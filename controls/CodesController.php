@@ -12,11 +12,13 @@ class CodesController
     /**
      * @var mixed
      */
-    private mixed $repository;
+    private CodesRepository $repository;
+    private PlayerTable $playerTable;
 
     public function __construct()
     {
         $this->repository = new CodesRepository();
+        $this->playerTable = new PlayerTable();
     }
 
     public function codeIsActive($code): bool
@@ -53,8 +55,7 @@ class CodesController
         $randomCode = rand(10000, 99999);
         if ($this->repository->isSessionCode()) {
             $this->repository->reset();
-            $playerTable = new PlayerTable();
-            $playerTable->clear();
+            $this->playerTable->clear();
         }
         $this->repository->start($randomCode);
         echo $randomCode;
@@ -64,8 +65,7 @@ class CodesController
     public function stop(): void
     {
         $this->repository->stop();
-        $playerTable = new PlayerTable();
-        $winners = $playerTable->getWinners();
+        $winners = $this->playerTable->getWinners();
 
         $personalInfoTable = new PersonalInfoTable();
         foreach ($winners as $winner) {
