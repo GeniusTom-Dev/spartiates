@@ -52,7 +52,7 @@ class RouteController{
             }
 
         }else{
-            View::display("error", $this->findFile("error"));
+            View::display("", "");
         }
     }
 

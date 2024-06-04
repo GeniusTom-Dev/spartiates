@@ -9,13 +9,13 @@
         <textarea id="question" class="w-full rounded-xl mt-2 p-2 border-gray-300" name="text" required></textarea>
     </label>
     <label class="w-full">Bonne réponse :
-        <textarea id="goodAnswer" class="w-full rounded-xl mt-2 p-2 border-gray-300" name="true" required></textarea>
+        <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="true" id="goodAnswer" type="text" pattern=".*\S.*" required/>
     </label>
     <label class="w-full">Mauvaise réponse 1 :
-        <textarea id="badAnswer1" class="w-full rounded-xl mt-2 p-2 border-gray-300" name="false1" required></textarea>
+        <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="false1" id="badAnswer1" type="text" pattern=".*\S.*" required/>
     </label>
     <label class="w-full">Mauvaise réponse 2 :
-        <textarea id="badAnswer2" class="w-full rounded-xl mt-2 p-2 border-gray-300" name="false2" required></textarea>
+        <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="false2" id="badAnswer2" type="text" pattern=".*\S.*" required/>
     </label>
     <input id="createQuestion" class="bg-customBlue hover:bg-sky-300 rounded-xl text-lg py-4 px-8" type="submit" name="create" value="Créer">
 </form>

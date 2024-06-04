@@ -19,6 +19,7 @@ $url = $_GET['url'] ?? '';
 ///////////////////////////////////////////////////////////////////////////////
 
 ini_set('session.gc_lifetime', 5);
+ini_set('session.use_only_cookies', false);
 if (!isset($_SESSION))
     session_start();
 if (isset($_SESSION['last_activity']) && time() - $_SESSION['last_activity'] > 1800) {

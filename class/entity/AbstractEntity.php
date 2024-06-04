@@ -7,9 +7,9 @@ abstract class AbstractEntity
     /**
      * Abstract construct
      *
-     * @param array $data An indexed array to hydrate itself
+     * @param array|null $data An indexed array to hydrate itself
      */
-    public function __construct(?array $data = null)
+    public function __construct(array $data = null)
     {
         if(is_array($data)) {
             $this->hydrate($data);

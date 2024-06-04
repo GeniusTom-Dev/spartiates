@@ -14,19 +14,19 @@
 
     <div class="w-full">
         <label>Bonne réponse :
-            <textarea class="w-full rounded-xl mt-2 p-2 border-gray-300" type="text" name="true" required><?= $data->getAnswer() ?></textarea>
+            <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="true" type="text" pattern=".*\S.*" required value="<?= $data->getAnswer() ?>" />
         </label>
     </div>
 
     <div class="w-full">
         <label>Mauvaise réponse 1 :
-            <textarea class="w-full rounded-xl mt-2 p-2 border-gray-300" type="text" name="false1" required><?= $data->getFalse1() ?></textarea>
+            <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="false1" type="text" pattern=".*\S.*" required value="<?= $data->getFalse1() ?>" />
         </label>
     </div>
 
     <div class="w-full">
         <label>Mauvaise réponse 2 :
-            <textarea class="w-full rounded-xl mt-2 p-2 border-gray-300" type="text" name="false2" required><?= $data->getFalse2() ?></textarea>
+            <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="false2" type="text" pattern=".*\S.*" required value="<?= $data->getFalse2() ?>" />
         </label>
     </div>
 
