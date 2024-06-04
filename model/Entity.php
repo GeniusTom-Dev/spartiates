@@ -5,7 +5,7 @@ namespace model;
 
 abstract class Entity
 {
-    // Constructeur
+    // Constructor
     public function __construct(array $data)
     {
         $this->hydrate($data);

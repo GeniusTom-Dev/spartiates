@@ -8,10 +8,11 @@ if ($email) {
     $tokenRepository = new TokenRepository();
     $token = $tokenRepository->generateToken($email);
 
-    $resetLink = "http://spartiatesdev.alwaysdata.net/reset?token=$token";
+    // TODO mettre le bon lien
+    $resetLink = "https://spartiatesdev.alwaysdata.net/reset?token=$token";
 
     // Assuming you have a mail function setup
-    $to = "sokhna.diop.1@etu.univ-amu.fr";
+    $to = "mathieu.leroux130304@gmail.com";
     $subject = "Password Reset Request";
     $message = "Cliquez sur ce lien pour réinitialiser le mot de passe: $resetLink";
     $headers = "From: no-reply@spartiates.com";
@@ -23,4 +24,3 @@ if ($email) {
 } else {
     echo json_encode(['success' => false]);
 }
-?>

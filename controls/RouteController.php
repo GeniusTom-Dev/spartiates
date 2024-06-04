@@ -2,6 +2,9 @@
 
 namespace controls;
 
+use Exception;
+use JetBrains\PhpStorm\NoReturn;
+use stdClass;
 use view\View;
 
 class RouteController{
@@ -11,7 +14,7 @@ class RouteController{
 
     private string $url;
 
-    private \stdClass $route;
+    private stdClass $route;
 
     public function __construct(){
         $this->getAllTitles();
@@ -20,8 +23,8 @@ class RouteController{
     public function displayRoutes($url): void{
         $this->url = $url;
         $route = $this->getRoute();
-        $this->route = $route;
         if($route !== null) {
+            $this->route = $route;
             if ($route->isAdminPage === true && empty($_SESSION['admin'])){
                 header('refresh:0;url=/connect');
             }else{
@@ -49,7 +52,7 @@ class RouteController{
             }
 
         }else{
-            View::display("", "");
+            View::display("error", $this->findFile("error"));
         }
     }
 
@@ -65,7 +68,7 @@ class RouteController{
 
 
     public function addRoute(string|array $routes, string $fileName, bool $isAdminPage = false,  mixed $controller = null, string $method = null): void{
-        $route = new \stdClass();
+        $route = new stdClass();
 
         if(is_array($routes) === false){
             $route->routes = [$routes];
@@ -76,7 +79,7 @@ class RouteController{
         $route->filePath = $this->findFile($fileName);
 
         if(empty($route->filePath) || file_exists($route->filePath) === false){
-            throw new \Exception("File : " . $fileName . " not found");
+            throw new Exception("File : " . $fileName . " not found");
         }
 
         $route->controller = $controller;
@@ -93,7 +96,7 @@ class RouteController{
 
     }
 
-    public function setRoute($route){
+    #[NoReturn] public function setRoute($route): void {
         header('refresh:0;url=/' . $route);
         exit;
     }
@@ -108,7 +111,7 @@ class RouteController{
             if (!is_dir($path)) {
                 $explodedPath = explode("/", $path);
                 if(end($explodedPath) == $file . ".php"){
-                    $findValue = implode("/", array_slice($explodedPath, 4));;
+                    $findValue = implode("/", array_slice($explodedPath, 4));
                     break;
                 }
             } else if ($value != "." && $value != "..") {
@@ -126,7 +129,7 @@ class RouteController{
         $this->titles = json_decode(file_get_contents("./assets/data/titles.json"), true);
     }
 
-    private function game(){
+    private function game(): void {
         $codesController = new CodesController();
         if (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code'])) {
             $_SESSION['username'] = null;
@@ -141,7 +144,7 @@ class RouteController{
 
     }
 
-    public function forms(){
+    public function forms(): void {
         $codesController = new CodesController();
         if ($this->url != "username" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']))) {
             $_SESSION['spartanId'] = null;

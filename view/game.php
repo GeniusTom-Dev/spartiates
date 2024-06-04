@@ -38,7 +38,7 @@
         <label class="text-5xl">Classement : #</label>
         <label class="text-5xl" id="rank"></label>
     </span>
-    <a href="/home" class="p-5 bg-customBlue rounded-xl text-4xl">
+    <a href="/home" class="p-5 bg-customBlue opacity-100 rounded-xl text-4xl">
         Retour à l'accueil
     </a>
 </div>

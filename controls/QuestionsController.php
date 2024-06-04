@@ -10,9 +10,9 @@ use view\View;
 class QuestionsController
 {
     /**
-     * @var mixed
+     * @var QuestionsRepository
      */
-    private mixed $repository;
+    private QuestionsRepository $repository;
 
     public function __construct()
     {

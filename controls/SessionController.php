@@ -25,8 +25,7 @@ class SessionController
     /**
      * Create a new player and initiate its session
      *
-     * @param string $firstName The player's first name
-     * @param string $lastName The player's last name
+     * @param string $name The player's name
      * @param string $email The player's email address
      * @param string $phone The player's phone number
      * @return void

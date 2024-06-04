@@ -4,9 +4,6 @@ namespace controls;
 
 class WSController
 {
-    public function __construct()
-    {
-    }
 
     public function connexionWS(): void
     {

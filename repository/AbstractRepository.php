@@ -10,7 +10,6 @@ abstract class AbstractRepository
 
     public function __construct()
     {
-
         $this->connexion = Connexion::getInstance();
     }
 }

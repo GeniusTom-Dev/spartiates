@@ -6,81 +6,81 @@ namespace model;
  */
 class Spartan extends Entity
 {
-    private mixed $id;
-    private mixed $lastName;
-    private mixed $name;
-    private mixed $num;
+    private int $id;
+    private string $lastName;
+    private string $name;
+    private int $selectionFrequency;
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId(): mixed
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
-    public function setId(mixed $id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getLastname(): mixed
+    public function getLastname(): string
     {
         return $this->lastName;
     }
 
     /**
-     * @param mixed $lastName
+     * @param string $lastName
      */
-    public function setLastname(mixed $lastName): void
+    public function setLastname(string $lastName): void
     {
         $this->lastName = $lastName;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getName(): mixed
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
-    public function setName(mixed $name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getNum(): mixed
+    public function getSelectionFrequency(): int
     {
-        return $this->num;
+        return $this->selectionFrequency;
     }
 
     /**
-     * @param mixed $number
+     * @param int $selectionFrequency
      */
-    public function setNum(mixed $number): void
+    public function setSelectionFrequency(int $selectionFrequency): void
     {
-        $this->num = $number;
+        $this->selectionFrequency = $selectionFrequency;
     }
 
-    public function getFormattedName(){
+    public function getFormattedName(): string {
         $formattedName = $this->formatName($this->getLastname()) . "_" . $this->formatName($this->getName());
         return strtolower($formattedName);
     }
 
-    private function formatName($name){
+    private function formatName($name): array|string {
         $name = trim($name);
         $name = str_replace(' ', '_', $name);
 
