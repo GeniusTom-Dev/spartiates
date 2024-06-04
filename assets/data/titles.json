@@ -13,5 +13,6 @@
   "questions": "Les Questions",
   "reset" : "Réinitialiser le mot de passe",
   "success" : "Succès",
-  "qrcode" : "QR Code"
+  "qrcode" : "QR Code",
+  "download" : "Téléchargement"
 }

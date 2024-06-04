@@ -22,7 +22,7 @@ class SpartanImage
     /**
      * Directory where the spartan images are put.
      */
-    const SPARTAN_IMAGES_DIRECTORY = __DIR__ . '../../assets/images/spartan';
+    const SPARTAN_IMAGES_DIRECTORY = '/assets/spartImage/';
     /**
      * The allowed files extension for the spartan images.
      */
@@ -43,7 +43,7 @@ class SpartanImage
     public static function get(string $name) : string
     {
         foreach (self::ALLOWED_EXTENSIONS as $extension) {
-            $file = self::SPARTAN_IMAGES_DIRECTORY . $name . $extension;
+            $file = realpath(".") . self::SPARTAN_IMAGES_DIRECTORY . $name . "." . $extension;
             if (file_exists($file)) {
                 return $file;
             }
@@ -113,7 +113,7 @@ class SpartanImage
         $newName = self::formatName($newName);
         $file = self::get($currentName);
         $extension = self::getExtension($file);
-        $newName = self::SPARTAN_IMAGES_DIRECTORY . $newName . $extension;
+        $newName = realpath(".") . self::SPARTAN_IMAGES_DIRECTORY . $newName . "." . $extension;
         return rename($file, $newName);
     }
 
@@ -129,7 +129,7 @@ class SpartanImage
     {
         $name = self::formatName($name);
         $file = self::get($name);
-        return move_uploaded_file($image, $file) ?? TRUE;
+        return rename($file, $image) ?? TRUE;
     }
 
     /**

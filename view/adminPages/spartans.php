@@ -4,8 +4,8 @@
     <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Home">
 </a>
 <a class="absolute right-4 top-4 md:top-5 w-12 md:w-16 h-12 md:h-16 cursor-pointer">
-    <img class="p-2 bg-customBlue rounded-xl actionButton" src="/assets/images/deconnect.svg"
-         data-action="deconnect" alt="Disconnect">
+    <img class="p-2 bg-customBlue rounded-xl actionButton" src="../../assets/images/disconnect.svg"
+         data-action="disconnect" alt="Disconnect">
 </a>
 
 <div class="w-full p-4">
@@ -32,8 +32,10 @@
             <?php foreach ($data as $spartan) { ?>
                 <div class="spartan-card flex flex-col items-center justify-center w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md">
                     <?php
-                    if ($fileName = glob('assets/spartImage/' . strtolower($spartan->getLastname()) . '_' . strtolower($spartan->getName()) . '.*')) {
+                    if ($fileName = glob('assets/spartImage/' . $spartan->getFormattedName() . '.*')) {
                         echo '<img class="w-24 h-32 rounded-3xl object-contain" src="' . $fileName[0] . '" alt="image du spartiate">';
+                    }else{
+                        echo 'assets/spartImage/' . $spartan->getFormattedName() . '.*';
                     }
                     ?>
 

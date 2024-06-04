@@ -40,7 +40,11 @@ class RouteController{
                         View::display($route->title, $route->filePath);
                     }
                 }else{
-                    View::display($route->title, $route->filePath);
+                    if($route->routes[0] === "download"){
+                        View::display($route->title, $route->filePath, null, false);
+                    }else{
+                        View::display($route->title, $route->filePath);
+                    }
                 }
             }
 

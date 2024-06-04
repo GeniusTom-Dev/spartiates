@@ -35,6 +35,12 @@ class UsersController
         }
         return false;
     }
+    public function disconnect(): bool
+    {
+        $_SESSION['admin'] = false;
+        header('refresh:0;url=/');
+        return true;
+    }
 
     public function updatePassword($login, $password){
         $this->repository->updatePassword($login, $password);
