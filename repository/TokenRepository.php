@@ -5,7 +5,7 @@ namespace repository;
 use Random\RandomException;
 
 class TokenRepository {
-    private string $file = '../assets/token.json';
+    private string $file = '../assets/data/token.json';
 
     /**
      * @throws RandomException
