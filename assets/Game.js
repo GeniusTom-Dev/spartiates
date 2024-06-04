@@ -1,14 +1,17 @@
 export default class Game {
 
     constructor(spartiate, puck, container) {
-          this.spartiate = spartiate;
-          this.puck = puck;
-          this.container = container;
+        this.spartiate = spartiate;
+        this.puck = puck;
+        this.container = container;
 
-          this.multiplicator = []
-          this.multiplicator["A"] = 1;
-          this.multiplicator["B"] = 2;
-          this.multiplicator["C"] = 3;
+        this.multiplicator = []
+        this.multiplicator["A"] = 1;
+        this.multiplicator["B"] = 2;
+        this.multiplicator["C"] = 3;
+
+        this.savePuckClass = Array.from(this.puck.classList);
+
     }
 
     async initialize() {
@@ -138,6 +141,7 @@ export default class Game {
 
     movePuck = (direction) => {
         //suppresion des anciennes classes
+
         this.puck.classList.remove("bottom-[10%]", "left-1/2")
         //repositionnement
 
@@ -149,4 +153,8 @@ export default class Game {
         this.puck.classList.add("-translate-y-["+ posY +"px]", "-translate-x-["+ posX +"px]", "transition-transform")
     }
 
+    resetPuck = () => {
+        this.puck.classList.remove(...this.puck.classList);
+        this.puck.classList.add(...this.savePuckClass);
+    }
 }
