@@ -15,12 +15,12 @@ class PlayerTable extends AbstractRepository
      * @param null|int|Player $id Either the Id or null if you wish to select them all, or the whole Player.
      * @return Player|Player[]|FALSE One or more Player
      */
-    public function select(null|int|Player $id): Player|array|FALSE
+    public function select(null|int|Player $id): Player|array|false
     {
         $query = 'SELECT * FROM PLAYER';
         $values = array();
 
-        if($id instanceof Player) {
+        if ($id instanceof Player) {
             $id = $id->getId();
         }
 
@@ -82,7 +82,7 @@ class PlayerTable extends AbstractRepository
      * @return int
      */
 
-    private function newId() : int
+    private function newId(): int
     {
         $query = 'SELECT MAX(Id) FROM PLAYER';
         $statement = $this->connexion->prepare($query);
@@ -98,11 +98,11 @@ class PlayerTable extends AbstractRepository
      * @param Player $player The new data
      * @return void
      */
-    public function update(int|Player $key, Player $player) : void
+    public function update(int|Player $key, Player $player): void
     {
         $existingPlayer = $this->select($key);
 
-        if($existingPlayer === FALSE || $player->equals($existingPlayer)) {
+        if ($existingPlayer === FALSE || $player->equals($existingPlayer)) {
             return;
         }
 
@@ -132,7 +132,7 @@ class PlayerTable extends AbstractRepository
     {
         $existingPlayer = $this->select($key);
 
-        if($existingPlayer === FALSE) {
+        if ($existingPlayer === FALSE) {
             return;
         }
 
@@ -154,7 +154,7 @@ class PlayerTable extends AbstractRepository
      * @return bool TRUE on success, FALSE en failure
      */
 
-    public function clear() : bool
+    public function clear(): bool
     {
         $query = 'DELETE FROM PLAYER';
         $statement = $this->connexion->prepare($query);
@@ -180,6 +180,8 @@ class PlayerTable extends AbstractRepository
     }
 
     /**
+     * Select the top 10 players
+     *
      * @return Player[]
      */
 
@@ -195,36 +197,14 @@ class PlayerTable extends AbstractRepository
         return $sessionUsers;
     }
 
-    public function setScore($id, $score): void
-    {
-        $query = 'UPDATE PLAYER SET SCORE = :score WHERE ID = :id';
-        $statement = $this->connexion->prepare($query);
-        $statement->execute([
-            'id' => $id,
-            'score' => $score
-        ]);
-    }
+    /**
+     * Check if the given id exists or not
+     *
+     * @param int $id An ID to check
+     * @return bool TRUE if it exists, FALSE if not
+     */
 
-
-    public function getScore($id): int
-    {
-        //On ajoute le score à l'utilisateur
-        $query = 'SELECT * FROM PLAYER WHERE ID = :id';
-        $statement = $this->connexion->prepare($query);
-        $statement->execute([
-            'id' => $id,
-        ]);
-
-        //Si la requête ne rend rien ça veut dire qu'il n'y a aucun utilisateurs avec cette id
-        if ($statement->rowCount() === 0) {
-            throw new NotFoundException('Aucun USER trouvé');
-        }
-
-        $data = $statement->fetch();
-        return $data['SCORE'];
-    }
-
-    public function isInSession($id): bool
+    public function exists(int $id): bool
     {
         $query = 'SELECT * FROM PLAYER WHERE ID = :id';
         $statement = $this->connexion->prepare($query);
@@ -232,33 +212,6 @@ class PlayerTable extends AbstractRepository
             'id' => $id,
         ]);
 
-        //Si la requête ne rend rien ça veut dire qu'il n'y a aucun utilisateurs avec cette id
-        if ($statement->rowCount() === 0) {
-            return false;
-        }
-        return true;
-    }
-
-    public function getSessionUser($id): bool|array
-    {
-        $query = <<<SQL
-            SELECT PERSONAL_INFO.Name, PLAYER.Score, (
-                SELECT COUNT(DISTINCT Score) +1 
-                FROM PLAYER 
-                WHERE Score > T1.Score
-            ) AS Rank
-            FROM PLAYER T1
-            JOIN PERSONAL_INFO T2 ON Player.PersonalInfo = PERSONAL_INFO
-            WHERE Id = :id
-        SQL;
-
-        $statement = $this->connexion->prepare($query);
-        $statement->execute([
-            ':id' => $id,
-        ]);
-        if ($statement->rowCount() === 0) {
-            throw new NotFoundException('Aucun USER trouvé');
-        }
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->rowCount() !== 0;
     }
 }
