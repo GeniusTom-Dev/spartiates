@@ -9,7 +9,7 @@
             <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl border-gray-300" maxlength="32" minlength="2" type="text" id="name" name="name" required>
         </label>
 
-        <label for="phoneNumber"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Numéro de téléphone :</span>
+        <label for="phone"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Numéro de téléphone :</span>
             <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl border-gray-300" type="tel" id="phone" name="phone" pattern="\d{10}" inputmode="numeric" minlength="10" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" />
         </label>
 

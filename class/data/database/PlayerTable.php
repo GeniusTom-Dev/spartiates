@@ -1,10 +1,11 @@
 <?php
 
-namespace classe\data\database;
+namespace class\data\database;
 
-use classe\entity\Player;
+use class\entity\Player;
+use repository\AbstractRepository;
 
-class PlayerTable
+class PlayerTable extends AbstractRepository
 {
     /**
      * Select a tuple from the Player table
@@ -26,21 +27,21 @@ class PlayerTable
             $values = ['id' => $id];
         }
 
-        $result = $this->connexion->prepare($query);
-        $result->execute($values);
+        $statement = $this->connexion->prepare($query);
+        $statement->execute($values);
 
-        if ($result->rowCount() === 0) {
+        if ($statement->rowCount() === 0) {
             return FALSE;
         }
 
-        $tupleArray = $result->fetchAll();
+        $tupleArray = $statement->fetchAll();
         $playerArray = array();
 
         foreach ($tupleArray as $tuple) {
             $playerArray[] = new Player($tuple);
         }
 
-        return $result->rowCount() === 1 ? $playerArray[0] : $playerArray;
+        return $statement->rowCount() === 1 ? $playerArray[0] : $playerArray;
     }
 
     /**
@@ -62,16 +63,35 @@ class PlayerTable
         }
 
         $query = <<<SQL
-                INSERT INTO PLAYER (PersonalInfo)
-                VALUES (:personalInfo)
+                INSERT INTO PLAYER (Id, PersonalInfo)
+                VALUES (:id, :personalInfo)
         SQL;
+
+        $id = $this->newId();
+
         $values = [
+            'id' => $id,
             'personalInfo' => $player->getPersonalInfo(),
         ];
         $this->connexion->prepare($query)->execute($values);
 
-        $player->setId($this->select($player)->getId());
-        return $player->getId();
+        $player->setId($id);
+        return $id;
+    }
+
+    /**
+     * Find a new and free ID for the Player table
+     *
+     * @return int
+     */
+
+    private function newId() : int
+    {
+        $query = 'SELECT MAX(Id) FROM PLAYER';
+        $statement = $this->connexion->prepare($query);
+        $statement->execute();
+
+        return $statement->fetch() + 1;
     }
 
     /**

@@ -2,8 +2,8 @@
 
 namespace class\model;
 
-use class\AbstractEntity;
 use class\data\server\SpartanImage;
+use class\entity\AbstractEntity;
 
 class Spartan extends AbstractEntity
 {
@@ -17,7 +17,7 @@ class Spartan extends AbstractEntity
     {
         parent::__construct($data);
         $this->name = $this->firstName . ' ' . $this->lastName;
-        $this->image = SpartanImage::getSpartan($this->name);
+        $this->image = SpartanImage::get($this->name);
     }
 
     public function getFirstName(): string

@@ -2,8 +2,8 @@
 
 namespace repository;
 
-use classe\exception\MoreThanOneException;
-use classe\exception\NotFoundException;
+use class\exception\MoreThanOneException;
+use class\exception\NotFoundException;
 use model\Spartan;
 use PDO;
 

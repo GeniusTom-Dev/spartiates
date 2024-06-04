@@ -1,8 +1,6 @@
 <?php
 
-namespace classe\entity;
-
-use class\AbstractEntity;
+namespace class\entity;
 
 class PersonalInfo extends AbstractEntity
 {

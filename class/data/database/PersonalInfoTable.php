@@ -2,7 +2,7 @@
 
 namespace class\data\database;
 
-use classe\entity\PersonalInfo;
+use class\entity\PersonalInfo;
 use repository\AbstractRepository;
 
 class PersonalInfoTable extends AbstractRepository
@@ -76,8 +76,10 @@ class PersonalInfoTable extends AbstractRepository
         ];
         $this->connexion->prepare($query)->execute($values);
 
-        $personalInfo->setId($this->select($personalInfo)->getId());
-        return $personalInfo->getId();
+        $id = $this->select($personalInfo)->getId();
+
+        $personalInfo->setId($id);
+        return $id;
     }
 
     /**

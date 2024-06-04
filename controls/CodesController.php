@@ -2,7 +2,7 @@
 
 namespace controls;
 
-use classe\exception\MoreThanOneException;
+use class\exception\MoreThanOneException;
 use repository\CodesRepository;
 use repository\SessionRepository;
 

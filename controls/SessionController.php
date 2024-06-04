@@ -45,12 +45,12 @@ class SessionController
             ->setName($name)
             ->setEmail($email)
             ->setPhoneNumber($phone);
-        $this->personalInfoTable->insert($personalInfo);
+        $id = $this->personalInfoTable->insert($personalInfo);
 
         $player = new Player();
         $player
             ->setScore(0)
-            ->setPersonalInfo($personalInfo);
+            ->setPersonalInfo($id);
         $this->playerTable->insert($player);
 
         $_SESSION['id'] = $player->getId();

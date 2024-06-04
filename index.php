@@ -115,7 +115,7 @@ $actionController->registerAction("getSessionCode", [], "CodesController", null,
 $actionController->registerAction("start", [], "CodesController", null, true);
 $actionController->registerAction("stop", [], "CodesController", null, true);
 $actionController->registerAction("isInActiveSession", [], "SessionController", null);
-$actionController->registerAction("addSessionPlayer", ['fields' => ['name', 'email', 'phoneNumber']], "SessionController", '/game');
+$actionController->registerAction("addSessionPlayer", ['fields' => ['name', 'email', 'phone']], "SessionController", '/game');
 
 $actionController->registerAction("addScore", ['fields' => ['score']], "SessionController", null);
 

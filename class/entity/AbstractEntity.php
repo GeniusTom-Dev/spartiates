@@ -1,6 +1,6 @@
 <?php
 
-namespace class;
+namespace class\entity;
 
 abstract class AbstractEntity
 {
@@ -9,9 +9,11 @@ abstract class AbstractEntity
      *
      * @param array $data An indexed array to hydrate itself
      */
-    public function __construct(array $data)
+    public function __construct(?array $data = null)
     {
-        $this->hydrate($data);
+        if(is_array($data)) {
+            $this->hydrate($data);
+        }
     }
 
     /**

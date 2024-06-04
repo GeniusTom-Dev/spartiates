@@ -2,8 +2,8 @@
 
 namespace controls;
 
-use classe\exception\MoreThanOneException;
-use classe\exception\NotFoundException;
+use class\exception\MoreThanOneException;
+use class\exception\NotFoundException;
 use repository\UsersRepository;
 
 class UsersController
