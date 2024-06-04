@@ -14,18 +14,16 @@ class DownloadController{
 
     public function dlData(){
         $fileLocation = realpath(".") . '/assets/data/download/emails.csv';
-        $file = fopen($fileLocation, 'w+');
+        $file = fopen($fileLocation, 'w');
 
-        $header = [
-            'Nom', 'Email', 'Telephone'
-        ];
+        $header = ['Nom', 'Email', 'Telephone'];
         fputcsv($file, $header);
 
         foreach ($this->personalInfoTable->select() as $personalInfo){
             $fields = [
-                'name' => $personalInfo->getName(),
-                'email' => $personalInfo->getEmail(),
-                'phone' => $personalInfo->getPhoneNumber(),
+                $personalInfo->getName(),
+                $personalInfo->getEmail(),
+                $personalInfo->getPhoneNumber(),
             ];
             fputcsv($file, $fields);
         }
