@@ -2,15 +2,15 @@
 
 namespace class\entity;
 
-class Player
+class Player extends AbstractEntity
 {
     private int $id;
     private int $score;
     private int $personalInfo;
 
-    public function getId(): int
+    public function getId(): int|null
     {
-        return $this->id;
+        return $this->id ?? null;
     }
 
     public function setId(int $id): Player

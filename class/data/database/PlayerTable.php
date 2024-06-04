@@ -3,6 +3,7 @@
 namespace class\data\database;
 
 use class\entity\Player;
+use class\exception\NotFoundException;
 use repository\AbstractRepository;
 
 class PlayerTable extends AbstractRepository
@@ -56,12 +57,6 @@ class PlayerTable extends AbstractRepository
      */
     public function insert(Player &$player): int
     {
-        $existingPlayer = $this->select($player);
-
-        if ($existingPlayer !== FALSE) {
-            return $existingPlayer->getId();
-        }
-
         $query = <<<SQL
                 INSERT INTO PLAYER (Id, PersonalInfo)
                 VALUES (:id, :personalInfo)
@@ -73,6 +68,7 @@ class PlayerTable extends AbstractRepository
             'id' => $id,
             'personalInfo' => $player->getPersonalInfo(),
         ];
+
         $this->connexion->prepare($query)->execute($values);
 
         $player->setId($id);
@@ -91,7 +87,7 @@ class PlayerTable extends AbstractRepository
         $statement = $this->connexion->prepare($query);
         $statement->execute();
 
-        return $statement->fetch() + 1;
+        return $statement->fetch()[0] + 1;
     }
 
     /**
@@ -149,5 +145,164 @@ class PlayerTable extends AbstractRepository
         ];
 
         $this->connexion->prepare($query)->execute($values);
+    }
+
+    /**
+     * Clears the PLAYER table
+     *
+     * @return bool TRUE on success, FALSE en failure
+     */
+
+    public function clear() : bool
+    {
+        $query = 'DELETE FROM PLAYER';
+        $statement = $this->connexion->prepare($query);
+        return $statement->execute();
+    }
+
+    /**
+     * @return Player|Player[]
+     */
+
+    public function getWinners(): Player|array
+    {
+        $query = 'SELECT * FROM PLAYER WHERE SCORE = (SELECT MAX(SCORE) FROM PLAYER)';
+        $statement = $this->connexion->prepare($query);
+        $statement->execute();
+        $winners = [];
+        foreach ($statement->fetchAll(PDO::FETCH_ASSOC) as $player) {
+            $winners[] = new Player($player);
+        }
+        return $winners;
+    }
+
+    public function addSessionPlayer($username, $email, $phoneNumber): false|string
+    {
+        $queryDoesEmailExist = 'SELECT id FROM EMAIL WHERE email = :email';
+        $statement = $this->connexion->prepare($queryDoesEmailExist);
+        $statement->execute([
+            'email' => $email
+        ]);
+
+        if ($statement->rowCount() === 1) {
+            $emailId = $statement->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            $query1 = 'INSERT INTO EMAIL (EMAIL ) VALUES (:email )';
+            $statement = $this->connexion->prepare($query1);
+            $statement->execute([
+                'email' => $email
+            ]);
+        }
+
+        $query = 'INSERT INTO PLAYER (username, score, email) VALUES (:username, 0, (SELECT id FROM EMAIL WHERE email = :email))';
+        $statement = $this->connexion->prepare($query);
+        $statement->execute([
+            'username' => $username,
+            'email' => $email
+        ]);
+        return $this->connexion->lastInsertId();
+    }
+
+    public function deleteSession(): void
+    {
+        $query = 'DELETE FROM PLAYER';
+        $statement = $this->connexion->prepare($query);
+        $statement->execute();
+    }
+
+    public function getRanking(): array
+    {
+        $query = 'SELECT * FROM PLAYER ORDER BY SCORE DESC limit 10';
+        $statement = $this->connexion->prepare($query);
+        $statement->execute();
+        $sessionUsers = [];
+        while ($data = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $sessionUsers[] = new Player($data);
+        }
+        return $sessionUsers;
+    }
+
+    public function deleteUserById($id): void
+    {
+        //On supprime un user avec son id
+        $query = 'DELETE FROM PLAYER WHERE ID = :id';
+        $statement = $this->connexion->prepare($query);
+        $statement->execute(['id' => $id]);
+
+        //Si la requête ne rend rien ça veut dire qu'il n'y a aucun utilisateurs avec cette id
+        if ($statement->rowCount() === 0) {
+            throw new NotFoundException('Aucun USER trouvé');
+        }
+    }
+
+    public function addScore($id, $scoreToAdd): void
+    {
+        //On ajoute le score à l'utilisateur
+        $query = 'UPDATE PLAYER SET SCORE = SCORE + :scoreToAdd WHERE ID = :id';
+        $statement = $this->connexion->prepare($query);
+        $statement->execute([
+            'id' => $id,
+            'scoreToAdd' => $scoreToAdd
+        ]);
+    }
+
+    public function setScore($id, $score): void
+    {
+        $query = 'UPDATE PLAYER SET SCORE = :score WHERE ID = :id';
+        $statement = $this->connexion->prepare($query);
+        $statement->execute([
+            'id' => $id,
+            'score' => $score
+        ]);
+    }
+
+
+    public function getScore($id): int
+    {
+        //On ajoute le score à l'utilisateur
+        $query = 'SELECT * FROM PLAYER WHERE ID = :id';
+        $statement = $this->connexion->prepare($query);
+        $statement->execute([
+            'id' => $id,
+        ]);
+
+        //Si la requête ne rend rien ça veut dire qu'il n'y a aucun utilisateurs avec cette id
+        if ($statement->rowCount() === 0) {
+            throw new NotFoundException('Aucun USER trouvé');
+        }
+
+        $data = $statement->fetch();
+        return $data['SCORE'];
+    }
+
+    public function isInSession($id): bool
+    {
+        $query = 'SELECT * FROM PLAYER WHERE ID = :id';
+        $statement = $this->connexion->prepare($query);
+        $statement->execute([
+            'id' => $id,
+        ]);
+
+        //Si la requête ne rend rien ça veut dire qu'il n'y a aucun utilisateurs avec cette id
+        if ($statement->rowCount() === 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public function getSessionUser($id): bool|array
+    {
+        $query = 'SELECT username, score,
+       (SELECT COUNT(DISTINCT score) + 1 FROM PLAYER WHERE score > t1.score) AS rank
+        FROM PLAYER t1 WHERE ID = :id;';
+        $statement = $this->connexion->prepare($query);
+        $statement->execute([
+            ':id' => $id,
+        ]);
+        //Si la requête ne rend rien ça veut dire qu'il n'y a aucun utilisateurs avec cette id
+        if ($statement->rowCount() === 0) {
+            throw new NotFoundException('Aucun USER trouvé');
+        }
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
