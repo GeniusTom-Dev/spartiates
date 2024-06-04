@@ -89,9 +89,9 @@ class SessionController
     public function isInActiveSession(): void
     {
         $codesController = new CodesController();
-        if (!empty($_SESSION['code'] && $codesController->codeIsActive($_SESSION['code'])) && $this->playerTable->isInSession($_SESSION['id'])) {
+        if (!empty($_SESSION['code'] && $codesController->codeIsActive($_SESSION['code'])) && $this->playerTable->exists($_SESSION['id'])) {
             echo 'true';
-        } elseif (!empty($_SESSION['code'] && isset($_SESSION['id']) && $this->playerTable->isInSession($_SESSION['id']))) {
+        } elseif (!empty($_SESSION['code'] && isset($_SESSION['id']) && $this->playerTable->exists($_SESSION['id']))) {
             echo 'notActive';
 
         } else {
@@ -105,11 +105,12 @@ class SessionController
     {
         try {
             if ($score == 0)
-                $score = $this->playerTable->getScore($_SESSION['id']);
-            if (isset($_SESSION['id']) && $this->playerTable->isInSession($_SESSION['id'])) {
-                $this->playerTable->setScore($_SESSION['id'], $score);
-                $sessionUser = $this->playerTable->getSessionUser($_SESSION['id']);
-                echo json_encode($sessionUser);
+                $score = $this->playerTable->select($_SESSION['id']);
+            if (isset($_SESSION['id']) && $this->playerTable->exists($_SESSION['id'])) {
+                $player = $this->playerTable->select($_SESSION['id']);
+                $player->setScore($score);
+                $this->playerTable->update($_SESSION['id'], $player);
+                echo json_encode($player);
             }
         } catch (NotFoundException $ERROR) {
             echo $ERROR->getMessage();
@@ -119,7 +120,7 @@ class SessionController
 
     public function setSessionSpart($spartanId): void
     {
-        if (isset($_SESSION['id']) && $this->playerTable->isInSession($_SESSION['id'])) {
+        if (isset($_SESSION['id']) && $this->playerTable->exists($_SESSION['id'])) {
             $_SESSION['spartanId'] = $spartanId;
             $this->spartanRepository->incrementSpartanChoose($spartanId);
         }
