@@ -2,7 +2,7 @@
 
 namespace class\entity;
 
-use class\data\server\SpartanImage;
+use class\dataAccess\server\SpartanImage;
 
 /**
  * Class Spartan

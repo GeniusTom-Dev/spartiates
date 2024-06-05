@@ -1,6 +1,6 @@
 <?php
 
-namespace class\data\database;
+namespace class\dataAccess\database;
 
 use class\entity\PersonalInfo;
 use repository\AbstractRepository;

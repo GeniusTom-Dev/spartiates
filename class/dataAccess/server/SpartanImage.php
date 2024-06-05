@@ -1,6 +1,6 @@
 <?php
 
-namespace class\data\server;
+namespace class\dataAccess\server;
 
 use class\exception\NotFoundException;
 use Exception;

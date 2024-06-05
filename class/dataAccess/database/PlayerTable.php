@@ -1,9 +1,8 @@
 <?php
 
-namespace class\data\database;
+namespace class\dataAccess\database;
 
 use class\entity\Player;
-use class\exception\NotFoundException;
 use PDO;
 use repository\AbstractRepository;
 

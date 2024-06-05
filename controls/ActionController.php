@@ -94,7 +94,7 @@ class ActionController{
                 $params[] = $id;
             }
             foreach ($mapping->fields ?? [] as $field) {
-                $params[] = trim(htmlspecialchars($_POST[$field]));
+                $params[] = trim(htmlspecialchars(strip_tags($_POST[$field])));
             }
 
             if(isset($mapping->controller)){

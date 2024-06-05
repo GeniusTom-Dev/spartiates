@@ -19,8 +19,12 @@ $url = $_GET['url'] ?? '';
 
 ini_set('session.gc_lifetime', 5);
 ini_set('session.use_only_cookies', false);
+ini_set('session.cookie_httponly', 1);
+ini_set('session.use_strict_mode', 1);
 if (!isset($_SESSION))
     session_start();
+    // TODO
+    // session_regenerate_id(true);
 if (isset($_SESSION['last_activity']) && time() - $_SESSION['last_activity'] > 1800) {
     session_unset();
     session_destroy();
