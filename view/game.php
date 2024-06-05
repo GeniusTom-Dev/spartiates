@@ -1,4 +1,4 @@
-<script src="/assets/socket.js"></script>
+<script src="../assets/script/socket.js" type="module"></script>
 
 <div class="w-full lg:w-2/3 h-full flex flex-col">
     <div class="w-full h-[12vh] flex justify-center items-center text-center">

@@ -1,10 +1,10 @@
-<script src="/assets/socket.js"></script>
+<script src="../../assets/script/socket.js" type="module"></script>
 
 <a href="/home" class="absolute left-5 top-4 md:top-5 w-12 md:w-16 h-12 md:h-16">
-    <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Home">
+    <img class="p-2 bg-customBlue rounded-xl" src="../../assets/images/icon/home.svg" alt="Home">
 </a>
 <a class="absolute right-4 top-4 md:top-5 w-12 md:w-16 h-12 md:h-16 cursor-pointer">
-    <img class="p-2 bg-customBlue rounded-xl actionButton" src="../../assets/images/disconnect.svg"
+    <img class="p-2 bg-customBlue rounded-xl actionButton" src="../../assets/images/icon/disconnect.svg"
          data-action="disconnect" alt="Disconnect">
 </a>
 
@@ -32,7 +32,7 @@
             <?php foreach ($data as $spartan) { ?>
                 <div class="spartan-card flex flex-col items-center justify-center w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md">
                     <?php
-                    if ($fileName = glob('assets/spartImage/' . $spartan->getFormattedName() . '.*')) {
+                    if ($fileName = glob('assets/images/spartian/' . $spartan->getFormattedName() . '.*')) {
                         echo '<img class="w-24 h-32 rounded-3xl object-contain" src="' . $fileName[0] . '" alt="image du spartiate">';
                     }
                     ?>
@@ -40,15 +40,15 @@
                     <div class="flex flex-row items-center justify-between w-full mt-2">
                         <p class="spartan-name text-lg font-medium text-gray-800 mr-5"><?= $spartan->getLastname() ?> <?= $spartan->getName() ?> (<?= $spartan->getSelectionFrequency() ?> selections)</p>
                         <div class="flex flex-row space-x-2">
-                            <a href="/updateSpartan?id=<?= $spartan->getId() ?>"
+                            <a href="/updateSpartan&id=<?= $spartan->getId() ?>"
                                class="inline-block w-8 h-8 bg-customBlue hover:bg-blue-700 rounded">
-                                <img class="p-1" src="/assets/images/edit.svg" alt="Edit">
+                                <img class="p-1" src="../../assets/images/icon/edit.svg" alt="Edit">
                             </a>
                             <button data-id="<?= $spartan->getId() ?>"
                                     data-modal-target="deleteModalSpartiate" data-modal-toggle="deleteModalSpartiate"
                                     class="callActionButton inline-block w-8 h-8 bg-red-500 hover:bg-red-700 rounded"
                                     type="button">
-                                <img class="p-1" src="/assets/images/trashcan.svg" alt="Delete">
+                                <img class="p-1" src="../../assets/images/icon/trashcan.svg" alt="Delete">
                             </button>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                     <span class="sr-only">Close modal</span>
                 </button>
                 <img class="text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true"
-                     src="/assets/images/trashcan.svg" </img>
+                     src="../../assets/images/icon/trashcan.svg" </img>
                 <p class="mb-4 text-gray-300">Etes vous sur de vouloir supprimer ?</p>
                 <div class="flex justify-center items-center space-x-4">
                     <button data-modal-toggle="deleteModalSpartiate" type="button"
@@ -93,5 +93,5 @@
     </div>
 </div>
 
-<script src="/assets/search.js"></script>
+<script src="../../assets/script/search.js" type="module"></script>
 

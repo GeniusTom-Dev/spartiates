@@ -2,8 +2,6 @@
 
 namespace class\entity;
 
-use class\entity\AbstractEntity;
-
 /**
  * Class Player
  *
@@ -14,7 +12,7 @@ class Player extends AbstractEntity
     /**
      * @var int|null $id The Id of the player
      */
-    private int $id;
+    private ?int $id;
 
     /**
      * @var int $score The score of the player

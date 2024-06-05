@@ -1,13 +1,12 @@
 <?php
 
-namespace model;
-
+namespace class\entity;
 /**
  * Class Admin
  *
  * This class is responsible for managing the admin.
  */
-class Admin extends Entity
+class Admin extends AbstractEntity
 {
     private mixed $id;
     private mixed $password;

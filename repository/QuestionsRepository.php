@@ -4,7 +4,7 @@ namespace repository;
 
 use class\exception\MoreThanOneException;
 use class\exception\NotFoundException;
-use model\Question;
+use class\entity\Question;
 use PDO;
 
 /**
@@ -16,11 +16,11 @@ class QuestionsRepository extends AbstractRepository
 {
 
     /**
-     * QuestionsRepository constructor.
+     * Get a Questions
      *
-     * Initializes a new instance of the QuestionsRepository class.
+     * @param int $id : id of the question
      */
-    public function getById($id): Question
+    public function getById(int $id): Question
     {
         $query = 'SELECT * FROM QUESTION WHERE ID = :id';
         $statement = $this->connexion->prepare($query);
@@ -39,7 +39,7 @@ class QuestionsRepository extends AbstractRepository
     }
 
     /**
-     * Get a random question
+     * Get all the questions in a random order
      *
      * @return array : return an array of questions
      */
@@ -88,12 +88,12 @@ class QuestionsRepository extends AbstractRepository
     /**
      * Create a question
      *
-     * @param $text : text of the question
-     * @param $true : true answer
-     * @param $false1 : false answer
-     * @param $false2 : false answer
+     * @param string $text : text of the question
+     * @param string $true : true answer
+     * @param string $false1 : false answer
+     * @param string $false2 : false answer
      */
-    public function createQuestion($text, $true, $false1, $false2): void
+    public function createQuestion(string $text, string $true, string $false1, string $false2): void
     {
         $query = "INSERT INTO QUESTION (ID, TEXT, ANSWER, FALSE1, FALSE2) VALUES (NULL, :text, :true, :false1, :false2);";
         $statement = $this->connexion->prepare($query);
@@ -108,9 +108,9 @@ class QuestionsRepository extends AbstractRepository
     /**
      * Delete a question
      *
-     * @param $id : id of the question
+     * @param int $id : id of the question
      */
-    public function deleteQuestionById($id): void
+    public function deleteQuestionById(int $id): void
     {
         //On supprime une question avec son id
         $query = 'DELETE FROM QUESTION WHERE ID = :id';
@@ -126,13 +126,13 @@ class QuestionsRepository extends AbstractRepository
     /**
      * Update a question
      *
-     * @param $id : id of the question
-     * @param $text : text of the question
-     * @param $answer : true answer
-     * @param $false1 : false answer
-     * @param $false2 : false answer
+     * @param int $id : id of the question
+     * @param string $text : text of the question
+     * @param string $answer : true answer
+     * @param string $false1 : false answer
+     * @param string $false2 : false answer
      */
-    public function updateQuestionById($id, $text, $answer, $false1, $false2): void
+    public function updateQuestionById(int $id, string $text, string $answer, string $false1, string $false2): void
     {
         $query = "UPDATE QUESTION SET TEXT = :text, ANSWER= :answer, FALSE1= :false1, FALSE2= :false2  WHERE ID = :id;";
         $statement = $this->connexion->prepare($query);
@@ -147,10 +147,10 @@ class QuestionsRepository extends AbstractRepository
     /**
      * Search a question
      *
-     * @param $searchTerm : term to search
+     * @param string $searchTerm : term to search
      * @return array : return an array of questions
      */
-    public function search($searchTerm): array
+    public function search(string $searchTerm): array
     {
         $query = "SELECT * FROM QUESTION WHERE TEXT LIKE :searchTerm LIMIT 10";
         $statement = $this->connexion->prepare($query);

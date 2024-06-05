@@ -16,7 +16,7 @@ class UsersController
     /**
      * @var mixed
      */
-    private mixed $repository;
+    private UsersRepository $repository;
 
     /**
      * UsersController constructor.
@@ -31,12 +31,12 @@ class UsersController
     /**
      * Log in a user.
      *
-     * @param mixed $login The user's login.
-     * @param mixed $password The user's password.
+     * @param string $login The user's login.
+     * @param string $password The user's password.
      *
      * @return bool True if the user is logged in, false otherwise.
      */
-    public function logIn($login, $password): bool
+    public function logIn(string $login, string $password): bool
     {
         //on récupère les informations rentrées dans le formulaire
         try {
@@ -69,12 +69,12 @@ class UsersController
     /**
      * Updates a user's password.
      *
-     * @param mixed $login The user's login.
-     * @param mixed $password The user's password.
+     * @param string $login The user's login.
+     * @param string $password The user's password.
      *
      * @return void
      */
-    public function updatePassword($login, $password): void {
+    public function updatePassword(string $login, string $password): void {
         $this->repository->updatePassword($login, $password);
     }
 

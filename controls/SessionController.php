@@ -2,8 +2,8 @@
 
 namespace controls;
 
-use class\data\database\PersonalInfoTable;
-use class\data\database\PlayerTable;
+use class\dataAccess\database\PersonalInfoTable;
+use class\dataAccess\database\PlayerTable;
 use class\entity\PersonalInfo;
 use class\entity\Player;
 use class\exception\NotFoundException;
@@ -91,7 +91,7 @@ class SessionController
                 <td class="px-4 py-2 border-t border-b text-center">$score</td>
                 <td class="p-2 border bg-[var(--color-bg)] text-center">
                     <button data-id="'$id'" data-action="deleteUser" class="deleteButton actionButton inline-block w-8 h-8 bg-red-500 hover:bg-red-700 rounded" type="button">
-                        <img class="p-1" src="/assets/images/trashcan.svg" alt="Delete">
+                        <img class="p-1" src="/assets/images/icon/trashcan.svg" alt="Delete">
                     </button>
                 </td>
             </tr>
@@ -103,10 +103,10 @@ class SessionController
     /**
      * Delete a user by their ID
      *
-     * @param int $id The ID of the user
+     * @param mixed $id The ID of the user
      * @return void
      */
-    public function deleteUser($id): void
+    public function deleteUser(mixed $id): void
     {
         try {
             $this->playerTable->delete($id);
@@ -142,7 +142,7 @@ class SessionController
      * @param int $score The player's score
      * @return void
      */
-    public function showEndGame($score): void
+    public function showEndGame(int $score): void
     {
         try {
             if ($score == 0)
@@ -165,7 +165,7 @@ class SessionController
      * @param int $spartanId The ID of the spartan
      * @return void
      */
-    public function setSessionSpart($spartanId): void
+    public function setSessionSpart(int $spartanId): void
     {
         if (isset($_SESSION['id']) && $this->playerTable->exists($_SESSION['id'])) {
             $_SESSION['spartanId'] = $spartanId;

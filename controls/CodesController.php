@@ -2,8 +2,8 @@
 
 namespace controls;
 
-use class\data\database\PersonalInfoTable;
-use class\data\database\PlayerTable;
+use class\dataAccess\database\PersonalInfoTable;
+use class\dataAccess\database\PlayerTable;
 use class\exception\MoreThanOneException;
 use repository\CodesRepository;
 

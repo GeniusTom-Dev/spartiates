@@ -2,7 +2,7 @@
 
 namespace controls;
 
-use class\data\database\PersonalInfoTable;
+use class\dataAccess\database\PersonalInfoTable;
 
 /**
  * Class DownloadController

@@ -4,7 +4,7 @@ namespace controls;
 
 use class\exception\CannotCreateException;
 use class\exception\NotFoundException;
-use class\data\server\SpartanImage;
+use class\dataAccess\server\SpartanImage;
 use Exception;
 use repository\SpartanRepository;
 use view\View;
@@ -17,9 +17,9 @@ use view\View;
 class SpartanController
 {
     /**
-     * @var mixed
+     * @var SpartanRepository
      */
-    private mixed $repository;
+    private SpartanRepository $repository;
 
     /**
      * @var SpartanImage
@@ -60,7 +60,7 @@ class SpartanController
      *
      * @return void
      */
-    public function createSpartan($lastName, $name): void
+    public function createSpartan(string $lastName, string $name): void
     {
         try {
             $this->repository->createSpartan(trim($lastName), trim($name));
@@ -73,11 +73,11 @@ class SpartanController
     /**
      * Delete a Spartan.
      *
-     * @param mixed $id The Spartan's ID.
+     * @param int $id The Spartan's ID.
      *
      * @return void
      */
-    public function deleteSpartan($id): void
+    public function deleteSpartan(int $id): void
     {
         try {
             $this->repository->deleteSpartanById($id);
@@ -90,26 +90,26 @@ class SpartanController
     /**
      * Update a Spartan.
      *
-     * @param mixed $id The Spartan's ID.
+     * @param int $id The Spartan's ID.
      * @param string $lastName The Spartan's last name.
      * @param string $name The Spartan's name.
-     * @param mixed $image The Spartan's image.
+     * @param string|null $image The Spartan's path image.
      *
      * @return void
      */
-    public function updateSpartan($id, $lastName, $name, $image = null): void
+    public function updateSpartan(int $id, string $lastName, string $name, string $image = null): void
     {
         try {
             $spartan = $this->repository->getById($id);
-            $currentFormattedName = strtolower($spartan->getLastname() . '_' . $spartan->getName());
+            $currentFormattedName = strtolower($spartan->getLastname() . '_' . $spartan->getFormattedName());
             $newFormattedName = strtolower(trim($lastName) . '_' . trim($name));
 
             $this->repository->updateSpartanById($id, trim($lastName), trim($name));
 
-            if (!empty($image['tmp_name'])) {
+            if (empty($image['tmp_name']) === false && is_null($image) === false) {
                 SpartanImage::update($currentFormattedName, $newFormattedName, $image['tmp_name']);
             } elseif ($currentFormattedName !== $newFormattedName) {
-                SpartanImage::updateName($currentFormattedName, $newFormattedName);
+                SpartanImage::update($currentFormattedName, $newFormattedName);
             }
         } catch (NotFoundException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
@@ -123,11 +123,11 @@ class SpartanController
     /**
      * Show the form to create a new Spartan.
      *
-     * @param $url
-     * @param $id
+     * @param string $url
+     * @param int $id
      * @return void
      */
-    public function showUpdateForm($url, $id): void
+    public function showUpdateForm(string $url, int $id): void
     {
         $path = 'view/forms/' . $url . '.php';
         View::display('MISE A JOUR', $path, $this->repository->getById($id));

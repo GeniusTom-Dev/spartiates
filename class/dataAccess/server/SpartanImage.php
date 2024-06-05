@@ -1,6 +1,6 @@
 <?php
 
-namespace class\data\server;
+namespace class\dataAccess\server;
 
 use class\exception\NotFoundException;
 use Exception;
@@ -22,7 +22,7 @@ class SpartanImage
     /**
      * Directory where the spartan images are put.
      */
-    const SPARTAN_IMAGES_DIRECTORY = '/assets/spartImage/';
+    const SPARTAN_IMAGES_DIRECTORY = '/assets/images/spartian/';
     /**
      * The allowed files extension for the spartan images.
      */
@@ -48,7 +48,9 @@ class SpartanImage
                 return $file;
             }
         }
-        throw new NotFoundException("Aucun spartiate ne correspond à $name");
+        // TODO
+        //throw new NotFoundException("Aucun spartiate ne correspond à $name");
+        return "";
     }
 
     /**
@@ -159,7 +161,7 @@ class SpartanImage
     private static function getExtension(string $directory) : string
     {
         $extension = strtolower(pathinfo($directory, PATHINFO_EXTENSION));
-        if(!in_array($extension, self::ALLOWED_EXTENSIONS)) {
+        if(!empty($extension) && !in_array($extension, self::ALLOWED_EXTENSIONS)) {
             throw new Exception("L'extension $extension ne convient pas, essayer plutôt : .png .jpg .gif .jpeg ");
         }
         return $extension;
@@ -177,20 +179,20 @@ class SpartanImage
 
     private static function formatName(string $name) : string
     {
-        $name = trim( transliterator_transliterate('Any-Latin; Latin-ASCII', $name));
+        //$name = trim( transliterator_transliterate('Any-Latin; Latin-ASCII', $name));
         // TODO vérifier fonctionnement
         $name = str_replace(' ', '_', $name);
-
-        /*$specialChars =
+        $specialChars =
             array('à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', 'À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Ù', 'Ú', 'Û', 'Ü', 'Ý');
         $replacements =
             array('a', 'a', 'a', 'a', 'a', 'a', 'ae', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'A', 'A', 'A', 'A', 'A', 'AE', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y');
-        $name = str_replace($specialChars, $replacements, $name);*/
+        $name = str_replace($specialChars, $replacements, $name);
 
         // Check if the name contains only alphanumeric characters and underscores
-        if (!preg_match('/^[a-zA-Z0-9_]+$/', $name)) {
+        // TODO
+        /*if (!preg_match('/^[a-zA-Z0-9_]+$/', $name)) {
             throw new InvalidArgumentException('Invalid characters in the name.');
-        }
+        }*/
 
         return $name;
     }
