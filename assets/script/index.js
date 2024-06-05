@@ -66,7 +66,18 @@ $(document).ready(function (e) {
             contentType: false,
             processData: false
         }).done(function (response) {
-            window.location.href = response;
+            if (response !== ""){
+                if(typeof response === 'object'){
+                    if(response.success && response.url !== "" && response.url[0] === "/"){
+                        window.location.href = response.url;
+                    }
+                }else if(typeof response === 'string' && response[0] === "/"){
+                    window.location.href = response;
+                } else {
+                    alert(response)
+                    //window.location.reload()
+                }
+            }
         });
     });
 
@@ -89,6 +100,9 @@ $(document).ready(function (e) {
                     }
                 }else if(typeof response === 'string' && response[0] === "/"){
                     window.location.href = response;
+                } else {
+                    alert(response)
+                    window.location.reload()
                 }
             }
         });

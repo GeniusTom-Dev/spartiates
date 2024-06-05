@@ -62,10 +62,10 @@ class SpartanController
 
             $this->repository->updateSpartanById($id, trim($lastName), trim($name));
 
-            if (!empty($image['tmp_name'])) {
+            if (empty($image['tmp_name']) === false && is_null($image) === false) {
                 SpartanImage::update($currentFormattedName, $newFormattedName, $image['tmp_name']);
             } elseif ($currentFormattedName !== $newFormattedName) {
-                SpartanImage::updateName($currentFormattedName, $newFormattedName);
+                SpartanImage::update($currentFormattedName, $newFormattedName);
             }
         } catch (NotFoundException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);

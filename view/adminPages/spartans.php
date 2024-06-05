@@ -40,7 +40,7 @@
                     <div class="flex flex-row items-center justify-between w-full mt-2">
                         <p class="spartan-name text-lg font-medium text-gray-800 mr-5"><?= $spartan->getLastname() ?> <?= $spartan->getName() ?> (<?= $spartan->getSelectionFrequency() ?> selections)</p>
                         <div class="flex flex-row space-x-2">
-                            <a href="/updateSpartan?id=<?= $spartan->getId() ?>"
+                            <a href="/updateSpartan&id=<?= $spartan->getId() ?>"
                                class="inline-block w-8 h-8 bg-customBlue hover:bg-blue-700 rounded">
                                 <img class="p-1" src="../../assets/images/icon/edit.svg" alt="Edit">
                             </a>
