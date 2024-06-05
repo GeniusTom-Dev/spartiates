@@ -2,19 +2,19 @@
     <img class="p-2 bg-customBlue rounded-xl" src="../../assets/images/icon/home.svg" alt="Home">
 </a>
 <div class="w-full flex flex-col justify-center items-center">
-    <form class="flex flex-col space-y-14 px-5 py-3 w-full sm:w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2 bg-white rounded sm:h-auto md:h-auto lg:h-auto xl:h-auto" id="form" method="post">
+    <form class="flex flex-col space-y-8 px-5 py-3 w-full sm:w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2 bg-white rounded sm:h-auto md:h-auto lg:h-auto xl:h-auto" id="form" method="post">
         <input type="hidden" name="action" value="addSessionPlayer">
 
-        <label for="name"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Prénom et nom :</span>
-            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl border-gray-300" maxlength="32" minlength="2" type="text" id="name" name="name" required>
+        <label for="name"><span class="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">Prénom et Nom :</span>
+            <input class="rounded-xl w-full text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl border-gray-300" maxlength="64" minlength="2" type="text" id="name" name="name" required>
         </label>
 
-        <label for="phone"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Numéro de téléphone :</span>
-            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl border-gray-300" type="tel" id="phone" name="phone" pattern="\d{10}" inputmode="numeric" minlength="10" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" />
+        <label for="phone"><span class="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">Numéro de téléphone :</span>
+            <input class="rounded-xl w-full text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl border-gray-300" type="tel" id="phone" name="phone" pattern="\d{10}" inputmode="numeric" minlength="10" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" />
         </label>
 
-        <label for="email"><span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Entrez votre mail :</span>
-            <input class="rounded-xl w-full text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl border-gray-300" maxlength="32" type="email" id="email" name="email" required>
+        <label for="email"><span class="text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">Entrez votre mail :</span>
+            <input class="rounded-xl w-full text-md sm:text-lg md:text-xl lg:text-2xl xl:text-3xl border-gray-300" maxlength="255" type="email" id="email" name="email" required>
         </label>
 
         <div class="w-full flex flex-row items-center space-x-4">

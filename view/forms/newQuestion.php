@@ -8,6 +8,9 @@
     <label class="w-full">Question :
         <textarea id="question" class="w-full rounded-xl mt-2 p-2 border-gray-300" name="text" required></textarea>
     </label>
+
+    <p id="counter" class="text-[2vh] text-gray-600 text-right w-full">0/150</p>
+
     <label class="w-full">Bonne réponse :
         <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="true" id="goodAnswer" type="text" pattern=".*\S.*" required/>
     </label>
@@ -19,3 +22,21 @@
     </label>
     <input id="createQuestion" class="bg-customBlue hover:bg-sky-300 rounded-xl text-lg py-4 px-8" type="submit" name="create" value="Créer">
 </form>
+
+<script>
+    document.getElementById("question").addEventListener("input", function() {
+        const counter = document.getElementById("counter");
+        const submitButton = document.getElementById("createQuestion");
+        if (this.value.length >= 150) {
+            counter.style.color = "red";
+            submitButton.disabled = true;
+        } else {
+            counter.style.color = "grey";
+            submitButton.disabled = false;
+        }
+    });
+
+    document.getElementById("question").addEventListener("input", function() {
+        document.getElementById("counter").innerHTML = this.value.length + "/150";
+    });
+</script>

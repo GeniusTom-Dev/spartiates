@@ -7,9 +7,19 @@ use class\exception\NotFoundException;
 use class\entity\Question;
 use PDO;
 
+/**
+ * Class QuestionsRepository
+ *
+ * This class is responsible for managing the question repository.
+ */
 class QuestionsRepository extends AbstractRepository
 {
 
+    /**
+     * QuestionsRepository constructor.
+     *
+     * Initializes a new instance of the QuestionsRepository class.
+     */
     public function getById($id): Question
     {
         $query = 'SELECT * FROM QUESTION WHERE ID = :id';
@@ -28,6 +38,11 @@ class QuestionsRepository extends AbstractRepository
         return new Question($question);
     }
 
+    /**
+     * Get a random question
+     *
+     * @return array : return an array of questions
+     */
     public function getQuestion(): array
     {
         $query = 'SELECT * FROM QUESTION ORDER BY RAND();';
@@ -47,6 +62,11 @@ class QuestionsRepository extends AbstractRepository
         return $arrayQuestions;
     }
 
+    /**
+     * Get all questions
+     *
+     * @return array : return an array of questions
+     */
     public function getAll(): array
     {
         $query = 'SELECT * FROM QUESTION';
@@ -65,6 +85,14 @@ class QuestionsRepository extends AbstractRepository
         return $arrayQuestions;
     }
 
+    /**
+     * Create a question
+     *
+     * @param $text : text of the question
+     * @param $true : true answer
+     * @param $false1 : false answer
+     * @param $false2 : false answer
+     */
     public function createQuestion($text, $true, $false1, $false2): void
     {
         $query = "INSERT INTO QUESTION (ID, TEXT, ANSWER, FALSE1, FALSE2) VALUES (NULL, :text, :true, :false1, :false2);";
@@ -77,6 +105,11 @@ class QuestionsRepository extends AbstractRepository
 
     }
 
+    /**
+     * Delete a question
+     *
+     * @param $id : id of the question
+     */
     public function deleteQuestionById($id): void
     {
         //On supprime une question avec son id
@@ -90,6 +123,15 @@ class QuestionsRepository extends AbstractRepository
         }
     }
 
+    /**
+     * Update a question
+     *
+     * @param $id : id of the question
+     * @param $text : text of the question
+     * @param $answer : true answer
+     * @param $false1 : false answer
+     * @param $false2 : false answer
+     */
     public function updateQuestionById($id, $text, $answer, $false1, $false2): void
     {
         $query = "UPDATE QUESTION SET TEXT = :text, ANSWER= :answer, FALSE1= :false1, FALSE2= :false2  WHERE ID = :id;";
@@ -102,6 +144,12 @@ class QuestionsRepository extends AbstractRepository
             ':false2' => $false2]);
     }
 
+    /**
+     * Search a question
+     *
+     * @param $searchTerm : term to search
+     * @return array : return an array of questions
+     */
     public function search($searchTerm): array
     {
         $query = "SELECT * FROM QUESTION WHERE TEXT LIKE :searchTerm LIMIT 10";

@@ -2,7 +2,9 @@
 
 namespace class\entity;
 /**
- * La classe User permet de gérer les utilisateurs
+ * Class Admin
+ *
+ * This class is responsible for managing the admin.
  */
 class Admin extends AbstractEntity
 {
@@ -12,7 +14,9 @@ class Admin extends AbstractEntity
     private mixed $active;
 
     /**
-     * @return mixed
+     * Admin constructor.
+     *
+     * Initializes a new instance of the Admin class.
      */
     public function isAdminActive(): mixed
     {

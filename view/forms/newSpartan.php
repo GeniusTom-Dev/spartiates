@@ -5,10 +5,10 @@
     <input type="hidden" name="action" value="createSpartan">
     <h1 class="text-2xl md:text-3xl lg:text-4xl mb-4" id="username">Nouveau Spartiate</h1>
     <label class="w-full text-lg md:text-xl">Nom :
-        <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="lastName" id="lastName" type="text" pattern=".*\S.*" required/>
+        <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="lastName" id="lastName" type="text" pattern=".*\S.*" maxlength="32" required/>
     </label>
     <label class="w-full text-lg md:text-xl">Prénom :
-        <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="name" id="name" type="text" pattern=".*\S.*" required/>
+        <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="name" id="name" type="text" pattern=".*\S.*" maxlength="32" required/>
     </label>
     <label class="w-full text-lg md:text-xl">Télécharger une photo :
         <input class="rounded w-full mt-2 p-1" type="file" name="fileToUpload" id="fileToUpload" required accept="image/png, image/jpeg, image/jpg">

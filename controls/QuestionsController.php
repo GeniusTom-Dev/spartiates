@@ -14,12 +14,22 @@ class QuestionsController
      */
     private QuestionsRepository $repository;
 
+    /**
+     * QuestionsController constructor.
+     *
+     * Initializes a new instance of the QuestionsController class.
+     */
     public function __construct()
     {
         $this->repository = new QuestionsRepository();
     }
 
 
+    /**
+     * Displays all questions.
+     *
+     * @return void
+     */
     public function showQuestions(): void
     {
         try {
@@ -85,6 +95,16 @@ class QuestionsController
         }
     }
 
+    /**
+     * Creates a new question.
+     *
+     * @param string $text The text of the question.
+     * @param string $true The correct answer.
+     * @param string $false1 The first incorrect answer.
+     * @param string $false2 The second incorrect answer.
+     *
+     * @return void
+     */
     public function createQuestion($text, $true, $false1, $false2): void
     {
         try {
@@ -95,6 +115,14 @@ class QuestionsController
         }
     }
 
+
+    /**
+     * Deletes a question by its ID.
+     *
+     * @param int $id The ID of the question.
+     *
+     * @return void
+     */
     public function deleteQuestion($id): void
     {
         try {
@@ -105,6 +133,17 @@ class QuestionsController
         }
     }
 
+    /**
+     * Updates a question by its ID.
+     *
+     * @param int $id The ID of the question.
+     * @param string $text The new text of the question.
+     * @param string $true The new correct answer.
+     * @param string $false1 The new first incorrect answer.
+     * @param string $false2 The new second incorrect answer.
+     *
+     * @return void
+     */
     public function updateQuestion($id, $text, $true, $false1, $false2): void
     {
         try {
@@ -115,6 +154,13 @@ class QuestionsController
         }
     }
 
+    /**
+     * Searches for questions that match a search term.
+     *
+     * @param string $searchTerm The term to search for.
+     *
+     * @return void
+     */
     public function searchQuestion($searchTerm): void
     {
         $questions = $this->repository->search($searchTerm);
@@ -136,6 +182,14 @@ class QuestionsController
         }
     }
 
+    /**
+     * Displays the form to update a question.
+     *
+     * @param string $url The URL of the form.
+     * @param int $id The ID of the question.
+     *
+     * @return void
+     */
     public function showUpdateForm($url, $id): void
     {
         $path = 'view/forms/' . $url . '.php';

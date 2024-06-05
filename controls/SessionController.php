@@ -9,12 +9,33 @@ use class\entity\Player;
 use class\exception\NotFoundException;
 use repository\SpartanRepository;
 
+/**
+ * Class SessionController
+ *
+ * This class is responsible for managing sessions.
+ */
 class SessionController
 {
+    /**
+     * @var SpartanRepository An instance of the SpartanRepository class.
+     */
     private SpartanRepository $spartanRepository;
+
+    /**
+     * @var PlayerTable An instance of the PlayerTable class.
+     */
     private PlayerTable $playerTable;
+    /**
+     * @var PersonalInfoTable An instance of the PersonalInfoTable class.
+     */
     private PersonalInfoTable $personalInfoTable;
 
+
+    /**
+     * SessionController constructor.
+     *
+     * Initializes a new instance of the SessionController class.
+     */
     public function __construct()
     {
         $this->playerTable = new PlayerTable();
@@ -30,7 +51,6 @@ class SessionController
      * @param string $phone The player's phone number
      * @return void
      */
-
     public function addSessionPlayer(string $name, string $email, string $phone): void
     {
         $personalInfo = new PersonalInfo();
@@ -50,6 +70,11 @@ class SessionController
         $_SESSION['username'] = $name;
     }
 
+    /**
+     * Show the ranking of players
+     *
+     * @return void
+     */
     public function showRanking(): void
     {
         $players = $this->playerTable->getRanking();
@@ -75,6 +100,12 @@ class SessionController
         }
     }
 
+    /**
+     * Delete a user by their ID
+     *
+     * @param int $id The ID of the user
+     * @return void
+     */
     public function deleteUser($id): void
     {
         try {
@@ -85,6 +116,11 @@ class SessionController
         }
     }
 
+    /**
+     * Check if the player is in an active session
+     *
+     * @return void
+     */
     public function isInActiveSession(): void
     {
         $codesController = new CodesController();
@@ -100,6 +136,12 @@ class SessionController
         }
     }
 
+    /**
+     * Show the end game screen
+     *
+     * @param int $score The player's score
+     * @return void
+     */
     public function showEndGame($score): void
     {
         try {
@@ -117,6 +159,12 @@ class SessionController
         }
     }
 
+    /**
+     * Set the session spartan
+     *
+     * @param int $spartanId The ID of the spartan
+     * @return void
+     */
     public function setSessionSpart($spartanId): void
     {
         if (isset($_SESSION['id']) && $this->playerTable->exists($_SESSION['id'])) {

@@ -4,6 +4,11 @@ namespace repository;
 
 use Random\RandomException;
 
+/**
+ * Class TokenRepository
+ *
+ * This class is responsible for managing the token repository.
+ */
 class TokenRepository {
     private string $file = '../assets/data/token.json';
 
@@ -29,6 +34,10 @@ class TokenRepository {
         return $token;
     }
 
+    /**
+     * @param $token
+     * @return bool|int|string
+     */
     public function validateToken($token): bool|int|string
     {
         if (!file_exists($this->file)) {
@@ -46,6 +55,9 @@ class TokenRepository {
         return false;
     }
 
+    /**
+     * @param $email
+     */
     public function removeToken($email): void
     {
         if (!file_exists($this->file)) {

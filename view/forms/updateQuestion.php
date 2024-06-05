@@ -8,27 +8,59 @@
 
     <div class="w-full">
         <label>Question :
-            <textarea class="w-full rounded-xl mt-2 p-2 border-gray-300" type="text" name="text" required><?= $data->getText() ?></textarea>
+            <textarea id="question" class="w-full rounded-xl mt-2 p-2 border-gray-300" type="text" name="text" required><?= $data->getText() ?></textarea>
         </label>
+        <p id="counter" class="text-[2vh] text-gray-600 text-right w-full">0/150</p>
     </div>
 
     <div class="w-full">
         <label>Bonne réponse :
-            <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="true" type="text" pattern=".*\S.*" required value="<?= $data->getAnswer() ?>" />
+            <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="true" type="text" pattern=".*\S.*" required maxlength="25" value="<?= $data->getAnswer() ?>" />
         </label>
     </div>
 
     <div class="w-full">
         <label>Mauvaise réponse 1 :
-            <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="false1" type="text" pattern=".*\S.*" required value="<?= $data->getFalse1() ?>" />
+            <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="false1" type="text" pattern=".*\S.*" required maxlength="25" value="<?= $data->getFalse1() ?>" />
         </label>
     </div>
 
     <div class="w-full">
         <label>Mauvaise réponse 2 :
-            <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="false2" type="text" pattern=".*\S.*" required value="<?= $data->getFalse2() ?>" />
+            <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="false2" type="text" pattern=".*\S.*" required maxlength="25" value="<?= $data->getFalse2() ?>" />
         </label>
     </div>
 
-    <input class="bg-customBlue hover:bg-sky-300 rounded-xl text-lg py-4 px-8" type="submit" name="update" value="Mettre à jour">
+    <input id="updateQuestion" class="bg-customBlue hover:bg-sky-300 rounded-xl text-lg py-4 px-8" type="submit" name="update" value="Mettre à jour">
 </form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const question = document.getElementById("question");
+        const counter = document.getElementById("counter");
+        const submitButton = document.getElementById("updateQuestion");
+
+
+        counter.innerHTML = question.value.length + "/150";
+        if (question.value.length >= 150) {
+            counter.style.color = "red";
+            submitButton.disabled = true;
+        } else {
+            counter.style.color = "grey";
+            submitButton.disabled = false;
+        }
+
+        question.addEventListener("input", function() {
+            const charCount = this.value.length;
+            counter.innerHTML = charCount + "/200";
+
+            if (charCount >= 200) {
+                counter.style.color = "red";
+                submitButton.disabled = true;
+            } else {
+                counter.style.color = "grey";
+                submitButton.disabled = false;
+            }
+        });
+    });
+</script>

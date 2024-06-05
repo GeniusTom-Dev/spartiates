@@ -8,10 +8,29 @@ namespace class\entity;
  * @author BELABBAS-Rayane-2225010aa <Belabbas.rayane[@]etu.univ-amu.fr>
  */
 class Question extends AbstractEntity {
+    /**
+     * @var int
+     */
     private int $id;
+
+    /**
+     * @var string
+     */
     private string $text;
+
+    /**
+     * @var string
+     */
     private string $answer;
+
+    /**
+     * @var string
+     */
     private string $false1;
+
+    /**
+     * @var string
+     */
     private string $false2;
 
     /**

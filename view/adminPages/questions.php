@@ -25,7 +25,7 @@
             <?php foreach ($data as $question) { ?>
                 <div class="question-card flex flex-col items-center justify-center w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md">
                     <div class="flex flex-row items-center justify-between w-full mt-2">
-                        <p class="question-text text-lg font-medium text-gray-800 mr-5"><?= $question->getText() ?></p>
+                        <p class="question-text text-lg font-sans text-gray-800 mr-5"><?= $question->getText() ?></p>
                         <div class="flex flex-row space-x-2">
                             <a href="/updateQuestion&id=<?= $question->getId() ?>" class="inline-block w-8 h-8 bg-customBlue hover:bg-blue-700 rounded cursor-pointer">
                                 <img class="p-1" src="../../assets/images/icon/edit.svg" alt="Delete">

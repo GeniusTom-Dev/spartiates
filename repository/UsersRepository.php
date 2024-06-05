@@ -6,9 +6,20 @@ use class\exception\MoreThanOneException;
 use class\exception\NotFoundException;
 use class\entity\Admin;
 
+/**
+ * Class UsersRepository
+ *
+ * This class is responsible for managing the users repository.
+ */
 class UsersRepository extends AbstractRepository
 {
-
+    /**
+     * @param $login
+     * @param $password
+     * @return Admin|null
+     * @throws MoreThanOneException
+     * @throws NotFoundException
+     */
     public function logIn($login, $password): ?Admin
     {
         // On récupère tous les Users avec le même nom d'utilisateur et le même mot de passe
@@ -28,6 +39,11 @@ class UsersRepository extends AbstractRepository
         return new Admin($user);
     }
 
+    /**
+     * @param $login
+     * @param $password
+     * @return void
+     */
     public function updatePassword($login, $password): void {
         $query = 'UPDATE ADMIN SET PASSWORD = :password WHERE LOGIN = :login';
         $result = $this->connexion->prepare($query);

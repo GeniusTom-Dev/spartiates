@@ -7,9 +7,18 @@ use class\exception\NotFoundException;
 use class\entity\Spartan;
 use PDO;
 
+/**
+ * Class SpartanRepository
+ *
+ * This class is responsible for managing the Spartans repository.
+ */
 class SpartanRepository extends AbstractRepository
 {
-
+    /**
+     * SpartanRepository constructor.
+     *
+     * Initializes a new instance of the SpartanRepository class.
+     */
     public function getById($id): Spartan
     {
         $query = 'SELECT * FROM SPARTAN WHERE ID = :id';
@@ -28,6 +37,11 @@ class SpartanRepository extends AbstractRepository
         return new Spartan($spartan);
     }
 
+    /**
+     * Get all Spartans
+     *
+     * @return array : return an array of Spartans
+     */
     public function getAll(): array
     {
         $query = 'SELECT * FROM SPARTAN';
@@ -46,6 +60,12 @@ class SpartanRepository extends AbstractRepository
         return $arrayUser;
     }
 
+    /**
+     * Create a Spartan
+     *
+     * @param $lastname : lastname of the Spartan
+     * @param $name : name of the Spartan
+     */
     public function createSpartan($lastname, $name): void
     {
         $query = "INSERT INTO SPARTAN (LASTNAME, NAME) VALUES (:lastName, :name);";
@@ -55,6 +75,11 @@ class SpartanRepository extends AbstractRepository
             ':name' => $name]);
     }
 
+    /**
+     * Delete a Spartan by ID
+     *
+     * @param $id : id of the Spartan
+     */
     public function deleteSpartanById($id): void
     {
         // On supprime un spartiate avec son id
@@ -68,6 +93,13 @@ class SpartanRepository extends AbstractRepository
         }
     }
 
+    /**
+     * Update a Spartan by ID
+     *
+     * @param $id : id of the Spartan
+     * @param $lastName : lastname of the Spartan
+     * @param $name : name of the Spartan
+     */
     public function updateSpartanById($id, $lastName, $name): void
     {
         $query = "UPDATE SPARTAN SET LASTNAME = :lastName, NAME = :name WHERE ID = :id;";
@@ -79,6 +111,12 @@ class SpartanRepository extends AbstractRepository
 
     }
 
+    /**
+     * Search a Spartan by name
+     *
+     * @param $searchTerm : name of the Spartan
+     * @return array : return an array of Spartans
+     */
     public function search($searchTerm): array
     {
         $query = "SELECT * FROM SPARTAN WHERE LASTNAME LIKE :searchTerm OR NAME LIKE :searchTerm LIMIT 10";
@@ -92,6 +130,11 @@ class SpartanRepository extends AbstractRepository
         return $spartiates;
     }
 
+    /**
+     * Increment the selection frequency of a Spartan
+     *
+     * @param $id : id of the Spartan
+     */
     public function incrementSpartanChoose(int $id): void {
         if($this->getById($id) instanceof Spartan){
             $query = "UPDATE SPARTAN SET SelectionFrequency = SelectionFrequency + 1 WHERE ID = :id";

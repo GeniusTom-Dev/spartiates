@@ -7,19 +7,48 @@ use JetBrains\PhpStorm\NoReturn;
 use stdClass;
 use view\View;
 
+/**
+ * Class RouteController
+ *
+ * This class is responsible for managing routes.
+ */
 class RouteController{
-
+    /**
+     * @var array The array of routes.
+     */
     private array $routes = [];
+
+    /**
+     * @var array The array of titles.
+     */
     private array $titles = [];
 
+    /**
+     * @var string The URL.
+     */
     private string $url;
 
+    /**
+     * @var stdClass The route.
+     */
     private stdClass $route;
 
+    /**
+     * RouteController constructor.
+     *
+     * Initializes a new instance of the RouteController class.
+     */
     public function __construct(){
         $this->getAllTitles();
     }
 
+    /**
+     * Displays routes.
+     *
+     * @param string $url The URL.
+     *
+     * @return void
+     */
     public function displayRoutes($url): void{
         $this->url = $url;
         $route = $this->getRoute();
@@ -56,6 +85,11 @@ class RouteController{
         }
     }
 
+    /**
+     * Gets a route.
+     *
+     * @return stdClass|null The route.
+     */
     private function getRoute(){
         foreach($this->routes as $route){
             if (in_array($this->url, $route->routes)){
@@ -67,6 +101,18 @@ class RouteController{
     }
 
 
+    /**
+     * Adds a route.
+     *
+     * @param string|array $routes The routes.
+     * @param string $fileName The file name.
+     * @param bool $isAdminPage Whether the page is an admin page.
+     * @param mixed $controller The controller.
+     * @param string|null $method The method.
+     *
+     * @return void
+     * @throws Exception
+     */
     public function addRoute(string|array $routes, string $fileName, bool $isAdminPage = false,  mixed $controller = null, string $method = null): void{
         $route = new stdClass();
 
@@ -96,11 +142,26 @@ class RouteController{
 
     }
 
+    /**
+     * Sets a route.
+     *
+     * @param string $route The route.
+     *
+     * @return void
+     */
     #[NoReturn] public function setRoute($route): void {
         header('refresh:0;url=/' . $route);
         exit;
     }
 
+    /**
+     * Finds a file.
+     *
+     * @param string $file The file.
+     * @param string|null $subDir The subdirectory.
+     *
+     * @return string The file path.
+     */
     public function findFile($file, $subDir = null) {
         $dir = $subDir ?? "view";
         $files = scandir($dir);
@@ -125,10 +186,20 @@ class RouteController{
         return $findValue;
     }
 
+    /**
+     * Gets all titles.
+     *
+     * @return void
+     */
     private function getAllTitles(): void{
         $this->titles = json_decode(file_get_contents("./assets/data/titles.json"), true);
     }
 
+    /**
+     * Handles the game route.
+     *
+     * @return void
+     */
     private function game(): void {
         $codesController = new CodesController();
         if (!isset($_SESSION['code']) || !$codesController->checkSessionCode($_SESSION['code'])) {
@@ -144,6 +215,11 @@ class RouteController{
 
     }
 
+    /**
+     * Handles the forms route.
+     *
+     * @return void
+     */
     public function forms(): void {
         $codesController = new CodesController();
         if ($this->url != "username" || (!empty($_SESSION['code']) && $codesController->checkSessionCode($_SESSION['code']))) {
@@ -154,6 +230,11 @@ class RouteController{
 
     }
 
+    /**
+     * Handles the reset password route.
+     *
+     * @return void
+     */
     public function resetPassword(): void {
         $token = $_GET['token'] ?? null;
         if ($token) {
