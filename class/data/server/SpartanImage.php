@@ -161,7 +161,7 @@ class SpartanImage
     private static function getExtension(string $directory) : string
     {
         $extension = strtolower(pathinfo($directory, PATHINFO_EXTENSION));
-        if(!in_array($extension, self::ALLOWED_EXTENSIONS)) {
+        if(!empty($extension) && !in_array($extension, self::ALLOWED_EXTENSIONS)) {
             throw new Exception("L'extension $extension ne convient pas, essayer plutôt : .png .jpg .gif .jpeg ");
         }
         return $extension;
