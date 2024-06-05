@@ -39,7 +39,6 @@ socket.addEventListener('close', (event) => {
 });
 
 function sendMessage(message) {
-    // console.log('Envoi du message:', message);
     if (message === "stop" || message === "start") {
         const JsonMessage = {
             action: 'resetScore',

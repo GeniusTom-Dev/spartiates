@@ -4,7 +4,7 @@ namespace repository;
 
 use class\exception\MoreThanOneException;
 use class\exception\NotFoundException;
-use model\Question;
+use class\entity\Question;
 use PDO;
 
 class QuestionsRepository extends AbstractRepository

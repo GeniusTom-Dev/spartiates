@@ -2,8 +2,6 @@
 
 namespace class\entity;
 
-use class\entity\AbstractEntity;
-
 class Player extends AbstractEntity
 {
     private int $id;

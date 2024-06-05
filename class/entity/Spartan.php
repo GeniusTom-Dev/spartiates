@@ -1,33 +1,45 @@
 <?php
 
-namespace class\model;
+namespace class\entity;
 
 use class\data\server\SpartanImage;
-use class\entity\AbstractEntity;
 
 class Spartan extends AbstractEntity
 {
-    private mixed $id;
-    private string $firstName;
-    private string $lastName;
+    private int $id;
     private string $name;
+    private string $lastName;
+
+    // nom img
+    private string $formattedName;
+    // chemin img
     private string $image;
+
+    private int $selectionFrequency;
+
+    public function getSelectionFrequency(): int {
+        return $this->selectionFrequency;
+    }
+
+    public function setSelectionFrequency(int $selectionFrequency): void {
+        $this->selectionFrequency = $selectionFrequency;
+    }
 
     public function __construct(array $data)
     {
         parent::__construct($data);
-        $this->name = $this->firstName . ' ' . $this->lastName;
-        $this->image = SpartanImage::get($this->name);
+        $this->formattedName = $this->name . ' ' . $this->lastName;
+        $this->image = SpartanImage::get($this->formattedName);
     }
 
-    public function getFirstName(): string
+    public function getName(): string
     {
-        return $this->firstName;
+        return $this->name;
     }
 
-    public function setFirstName(string $firstName): Spartan
+    public function setName(string $name): Spartan
     {
-        $this->firstName = $firstName;
+        $this->name = $name;
         return $this;
     }
 
@@ -42,14 +54,14 @@ class Spartan extends AbstractEntity
         return $this;
     }
 
-    public function getName(): string
+    public function getFormattedName(): string
     {
-        return $this->name;
+        return $this->formattedName;
     }
 
-    public function setName(string $name): Spartan
+    public function setFormattedName(string $formattedName): Spartan
     {
-        $this->name = $name;
+        $this->formattedName = $formattedName;
         return $this;
     }
 
@@ -64,13 +76,13 @@ class Spartan extends AbstractEntity
         return $this;
     }
 
-    public function setId(mixed $id): Spartan
+    public function setId(int $id): Spartan
     {
         $this->id = $id;
         return $this;
     }
 
-    public function getId(): mixed
+    public function getId(): int
     {
         return $this->id;
     }

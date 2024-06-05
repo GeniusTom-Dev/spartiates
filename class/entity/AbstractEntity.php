@@ -11,9 +11,9 @@ abstract class AbstractEntity
      */
     public function __construct(array $data = null)
     {
-        if(is_array($data)) {
+        //if(is_array($data)) {
             $this->hydrate($data);
-        }
+        //}
     }
 
     /**

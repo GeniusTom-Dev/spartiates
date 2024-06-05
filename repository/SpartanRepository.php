@@ -4,7 +4,7 @@ namespace repository;
 
 use class\exception\MoreThanOneException;
 use class\exception\NotFoundException;
-use model\Spartan;
+use class\entity\Spartan;
 use PDO;
 
 class SpartanRepository extends AbstractRepository
@@ -48,7 +48,7 @@ class SpartanRepository extends AbstractRepository
 
     public function createSpartan($lastname, $name): void
     {
-        $query = "INSERT INTO SPARTAN (ID, LASTNAME, NAME) VALUES (NULL, :lastName, :name);";
+        $query = "INSERT INTO SPARTAN (LASTNAME, NAME) VALUES (:lastName, :name);";
         $statement = $this->connexion->prepare($query);
         $statement->execute([
             ':lastName' => $lastname,

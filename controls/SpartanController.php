@@ -57,7 +57,7 @@ class SpartanController
     {
         try {
             $spartan = $this->repository->getById($id);
-            $currentFormattedName = strtolower($spartan->getLastname() . '_' . $spartan->getName());
+            $currentFormattedName = strtolower($spartan->getLastname() . '_' . $spartan->getFormattedName());
             $newFormattedName = strtolower(trim($lastName) . '_' . trim($name));
 
             $this->repository->updateSpartanById($id, trim($lastName), trim($name));

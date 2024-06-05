@@ -4,7 +4,7 @@ namespace repository;
 
 use class\exception\MoreThanOneException;
 use class\exception\NotFoundException;
-use model\Admin;
+use class\entity\Admin;
 
 class UsersRepository extends AbstractRepository
 {

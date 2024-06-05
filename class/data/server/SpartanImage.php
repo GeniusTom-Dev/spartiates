@@ -48,7 +48,9 @@ class SpartanImage
                 return $file;
             }
         }
-        throw new NotFoundException("Aucun spartiate ne correspond à $name");
+        // TODO
+        //throw new NotFoundException("Aucun spartiate ne correspond à $name");
+        return "";
     }
 
     /**
