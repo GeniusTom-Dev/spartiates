@@ -2,6 +2,8 @@
 
 namespace controls;
 
+use stdClass;
+
 /**
  * Class ActionController
  *
@@ -31,7 +33,7 @@ class ActionController{
      */
     public function registerAction(string $name, array $fields, string $controller, ?string $redirect, bool $adminOnly = false, mixed ...$bonusArgs): void{
 
-        $newAction = new \stdClass();
+        $newAction = new stdClass();
         $newAction->name = $name;
         $newAction->fields = $fields['fields'] ?? [];
 
@@ -94,7 +96,7 @@ class ActionController{
                 $params[] = $id;
             }
             foreach ($mapping->fields ?? [] as $field) {
-                $params[] = htmlspecialchars($postData[$field]);
+                $params[] = trim(htmlspecialchars($postData[$field]));
             }
 
             if(isset($mapping->controller)){

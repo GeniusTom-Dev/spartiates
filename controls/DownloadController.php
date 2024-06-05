@@ -12,7 +12,7 @@ class DownloadController{
         $this->personalInfoTable = new PersonalInfoTable();
     }
 
-    public function dlData(string $separator = ';'){
+    public function dlData(string $separator = ';'): void {
         $filePath = realpath(".") . '/assets/data/download/emails.csv';
 
         if(file_exists($filePath)){

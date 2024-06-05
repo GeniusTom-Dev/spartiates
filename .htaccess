@@ -16,4 +16,4 @@ RewriteBase /
 RewriteRule ^(.+)$ index.php?url=$1 [NC,L]
 
 # Accès direct à index.php autorisé
-RewriteRule ^index\.php$ - [L]b
+RewriteRule ^index\.php$ - [L]

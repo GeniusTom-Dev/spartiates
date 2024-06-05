@@ -8,88 +8,88 @@ namespace model;
  */
 class Question extends Entity
 {
-    private mixed $id;
-    private mixed $text;
-    private mixed $answer;
-    private mixed $false1;
-    private mixed $false2;
+    private int $id;
+    private string $text;
+    private string $answer;
+    private string $false1;
+    private string $false2;
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getAnswer(): mixed
+    public function getAnswer(): string
     {
         return $this->answer;
     }
 
     /**
-     * @param mixed $answer
+     * @param string $answer
      */
-    public function setAnswer(mixed $answer): void
+    public function setAnswer(string $answer): void
     {
         $this->answer = html_entity_decode($answer);
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getFalse1(): mixed
+    public function getFalse1(): string
     {
         return $this->false1;
     }
 
     /**
-     * @param mixed $false1
+     * @param string $false1
      */
-    public function setFalse1(mixed $false1): void
+    public function setFalse1(string $false1): void
     {
         $this->false1 = html_entity_decode($false1);
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getFalse2(): mixed
+    public function getFalse2(): string
     {
         return $this->false2;
     }
 
     /**
-     * @param mixed $false2
+     * @param string $false2
      */
-    public function setFalse2(mixed $false2): void
+    public function setFalse2(string $false2): void
     {
         $this->false2 = html_entity_decode($false2);
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId(): mixed
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
-    public function setId(mixed $id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getText(): mixed
+    public function getText(): string
     {
         return $this->text;
     }
 
     /**
-     * @param mixed $text
+     * @param string $text
      */
-    public function setText(mixed $text): void
+    public function setText(string $text): void
     {
         $this->text = html_entity_decode($text);
     }

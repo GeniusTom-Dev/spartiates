@@ -28,7 +28,7 @@ class UsersRepository extends AbstractRepository
         return new Admin($user);
     }
 
-    public function updatePassword($login, $password){
+    public function updatePassword($login, $password): void {
         $query = 'UPDATE ADMIN SET PASSWORD = :password WHERE LOGIN = :login';
         $result = $this->connexion->prepare($query);
         $result->execute(['login' => $login, 'password' => $password]);

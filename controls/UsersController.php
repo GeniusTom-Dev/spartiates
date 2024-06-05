@@ -42,19 +42,21 @@ class UsersController
         return true;
     }
 
-    public function updatePassword($login, $password){
+    public function updatePassword($login, $password): void {
         $this->repository->updatePassword($login, $password);
     }
 
-    public function handleResetPasswordForm() {
+    public function handleResetPasswordForm(): void {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $newPassword = $_POST['newPassword'];
             $confirmPassword = $_POST['confirmPassword'];
+            // TODO not used ?
             $token = $_POST['token'];
 
             // Vérifiez si les mots de passe correspondent
             if ($newPassword === $confirmPassword) {
                 $login = "admin";
+                // TODO condition tjrs true
                 if ($login) {
                     $this->updatePassword($login, $newPassword);
                     header('Location: /success');
