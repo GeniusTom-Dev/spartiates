@@ -1,6 +1,6 @@
 <?php
 
-namespace controls;
+namespace class\controls;
 
 use stdClass;
 
@@ -98,7 +98,7 @@ class ActionController{
             }
 
             if(isset($mapping->controller)){
-                $mapping->controller = "controls\\" . $mapping->controller;
+                $mapping->controller = "class\controls\\" . $mapping->controller;
                 $mapping->controller = new $mapping->controller();
             }
 

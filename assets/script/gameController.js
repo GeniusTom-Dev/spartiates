@@ -57,7 +57,7 @@ if (allElementsLoaded){
 
                 $.ajax({
                     type: "POST",
-                    url: "/controls/actionController.php",
+                    url: "/class/controls/actionController.php",
                     data: {
                         action: "showEndGame",
                         score: parseInt(sessionStorage.getItem("score")),

@@ -1,6 +1,6 @@
 <?php
 
-namespace controls;
+namespace class\controls;
 
 use Exception;
 use JetBrains\PhpStorm\NoReturn;

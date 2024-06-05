@@ -1,6 +1,6 @@
 <?php
 
-namespace controls;
+namespace class\controls;
 
 /**
  * Class WSController

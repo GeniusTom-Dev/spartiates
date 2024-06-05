@@ -1,6 +1,6 @@
 <?php
 
-namespace controls;
+namespace class\controls;
 
 use class\dataAccess\database\CodesTable;
 use class\dataAccess\database\PersonalInfoTable;

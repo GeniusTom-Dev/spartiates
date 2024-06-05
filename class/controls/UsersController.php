@@ -1,6 +1,6 @@
 <?php
 
-namespace controls;
+namespace class\controls;
 
 use class\dataAccess\database\UsersTable;
 use class\exception\MoreThanOneException;

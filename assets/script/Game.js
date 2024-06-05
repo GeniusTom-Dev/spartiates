@@ -30,7 +30,7 @@ export default class Game {
     async getQuestionsNumber() {
         return await $.ajax({
             type: "POST",
-            url: "/controls/actionController.php",
+            url: "/class/controls/actionController.php",
             data: {
                 action: "getQuestionsNumber",
             },
@@ -56,7 +56,7 @@ export default class Game {
         // Send Ajax request in order to get the question's information
         $.ajax({
             type: "POST",
-            url: "/controls/actionController.php",
+            url: "/class/controls/actionController.php",
             data: {
                 action: "getQuestion",
                 index: this.questionIndexes[0]
@@ -95,7 +95,7 @@ export default class Game {
     checkedAnswer(playerAnswer) {
             $.ajax({
                 type: "POST",
-                url: "/controls/actionController.php",
+                url: "/class/controls/actionController.php",
                 data: {
                     action: "getAnswer",
                     index: this.questionIndexes[0]

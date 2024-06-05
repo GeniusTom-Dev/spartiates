@@ -4,7 +4,11 @@
 /// Load classes
 ///////////////////////////////////////////////////////////////////////////////
 
-use controls\{QuestionsController, SpartanController, RouteController, ActionController, UsersController};
+use class\controls\{RouteController};
+use class\controls\ActionController;
+use class\controls\QuestionsController;
+use class\controls\SpartanController;
+use class\controls\UsersController;
 
 require_once "autoloader.php";
 
