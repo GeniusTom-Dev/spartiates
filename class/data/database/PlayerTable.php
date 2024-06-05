@@ -132,6 +132,10 @@ class PlayerTable extends AbstractRepository
     {
         $existingPlayer = $this->select($key);
 
+        if(is_array($existingPlayer)) {
+            $existingPlayer = $existingPlayer[0];
+        }
+
         if ($existingPlayer === FALSE) {
             return;
         }

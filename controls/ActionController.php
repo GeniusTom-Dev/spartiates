@@ -64,8 +64,6 @@ class ActionController{
      */
     public function handleAction(): void
     {
-        $postData = $_POST;
-        $files = $_FILES;
         $action = $_POST['action'];
 
         if (isset($this->actions[$action])) {
@@ -82,7 +80,7 @@ class ActionController{
             // Check if all required fields for POST actions are present
             if (isset($mapping->fields)) {
                 foreach ($mapping->fields as $field) {
-                    if (empty(trim($postData[$field])) && $postData[$field] !== "0" && $field !== 'phone') {
+                    if (empty(trim($_POST[$field])) && $_POST[$field] !== "0" && $field !== 'phone') {
                         echo "Champ $field manquant";
                         return;
                     }
@@ -96,7 +94,7 @@ class ActionController{
                 $params[] = $id;
             }
             foreach ($mapping->fields ?? [] as $field) {
-                $params[] = trim(htmlspecialchars($postData[$field]));
+                $params[] = trim(htmlspecialchars($_POST[$field]));
             }
 
             if(isset($mapping->controller)){
@@ -127,14 +125,14 @@ class ActionController{
             }
 
             // If the form requires uploading a file (e.g., image of a Spartan)
-            if (isset($files["fileToUpload"])) {
+            if (isset($_FILES["fileToUpload"])) {
                 $target_dir = realpath(".") . "/assets/images/spartian/";
-                $imageFileType = strtolower(pathinfo(basename($files["fileToUpload"]["name"]), PATHINFO_EXTENSION));
-                $target_file = $target_dir . strtolower($postData['lastName']) . "_" . strtolower($postData['name'] . "." . $imageFileType);
+                $imageFileType = strtolower(pathinfo(basename($_FILES["fileToUpload"]["name"]), PATHINFO_EXTENSION));
+                $target_file = $target_dir . strtolower($_POST['lastName']) . "_" . strtolower($_POST['name'] . "." . $imageFileType);
 
                 // Restrict to image extensions
                 if ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg" || $imageFileType == "gif") {
-                    move_uploaded_file(str_replace("\\\\", "\\", $files["fileToUpload"]["tmp_name"]), $target_file);
+                    move_uploaded_file(str_replace("\\\\", "\\", $_FILES["fileToUpload"]["tmp_name"]), $target_file);
                 }
 
             }
