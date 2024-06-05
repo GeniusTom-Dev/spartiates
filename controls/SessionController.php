@@ -103,10 +103,10 @@ class SessionController
     /**
      * Delete a user by their ID
      *
-     * @param int $id The ID of the user
+     * @param mixed $id The ID of the user
      * @return void
      */
-    public function deleteUser($id): void
+    public function deleteUser(mixed $id): void
     {
         try {
             $this->playerTable->delete($id);
@@ -142,7 +142,7 @@ class SessionController
      * @param int $score The player's score
      * @return void
      */
-    public function showEndGame($score): void
+    public function showEndGame(int $score): void
     {
         try {
             if ($score == 0)
@@ -165,7 +165,7 @@ class SessionController
      * @param int $spartanId The ID of the spartan
      * @return void
      */
-    public function setSessionSpart($spartanId): void
+    public function setSessionSpart(int $spartanId): void
     {
         if (isset($_SESSION['id']) && $this->playerTable->exists($_SESSION['id'])) {
             $_SESSION['spartanId'] = $spartanId;

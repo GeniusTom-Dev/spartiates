@@ -105,7 +105,7 @@ class QuestionsController
      *
      * @return void
      */
-    public function createQuestion($text, $true, $false1, $false2): void
+    public function createQuestion(string $text, string $true, string $false1, string $false2): void
     {
         try {
             $this->repository->createQuestion(trim($text), trim($true), trim($false1), trim($false2));
@@ -123,7 +123,7 @@ class QuestionsController
      *
      * @return void
      */
-    public function deleteQuestion($id): void
+    public function deleteQuestion(int $id): void
     {
         try {
             $this->repository->deleteQuestionById($id);
@@ -144,7 +144,7 @@ class QuestionsController
      *
      * @return void
      */
-    public function updateQuestion($id, $text, $true, $false1, $false2): void
+    public function updateQuestion(int $id, string $text, string $true, string $false1, string $false2): void
     {
         try {
             $this->repository->updateQuestionById($id, trim($text), trim($true), trim($false1), trim($false2));
@@ -161,7 +161,7 @@ class QuestionsController
      *
      * @return void
      */
-    public function searchQuestion($searchTerm): void
+    public function searchQuestion(string $searchTerm): void
     {
         $questions = $this->repository->search($searchTerm);
         foreach ($questions as $question) {
@@ -190,7 +190,7 @@ class QuestionsController
      *
      * @return void
      */
-    public function showUpdateForm($url, $id): void
+    public function showUpdateForm(string $url, int $id): void
     {
         $path = 'view/forms/' . $url . '.php';
         View::display('MISE A JOUR', $path, $this->repository->getById($id));

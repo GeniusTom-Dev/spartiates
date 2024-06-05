@@ -9,27 +9,27 @@ namespace class\entity;
  */
 class Question extends AbstractEntity {
     /**
-     * @var int
+     * @var int The id of the question
      */
     private int $id;
 
     /**
-     * @var string
+     * @var string The question
      */
     private string $text;
 
     /**
-     * @var string
+     * @var string The answer fo the question
      */
     private string $answer;
 
     /**
-     * @var string
+     * @var string A bad answer
      */
     private string $false1;
 
     /**
-     * @var string
+     * @var string An another bad answer
      */
     private string $false2;
 

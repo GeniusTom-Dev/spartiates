@@ -42,9 +42,7 @@ class Spartan extends AbstractEntity
      */
     private int $selectionFrequency;
 
-    /**
-     * Spartan constructor
-     *
+    /***
      * @param array $data An indexed array to hydrate itself
      */
 
@@ -55,28 +53,23 @@ class Spartan extends AbstractEntity
         $this->image = SpartanImage::get($this->formattedName);
     }
 
-    /**
-     * Spartan constructor
-     *
+    /***
      * @return int
      */
     public function getSelectionFrequency(): int {
         return $this->selectionFrequency;
     }
 
-    /**
-     * Spartan constructor
-     *
+    /***
+     * @param int $selectionFrequency
      * @return Spartan
      */
     public function setSelectionFrequency(int $selectionFrequency): Spartan {
         $this->selectionFrequency = $selectionFrequency;
-        return this;
+        return $this;
     }
 
-    /**
-     * Spartan constructor
-     *
+    /***
      * @return string
      */
     public function getName(): string
@@ -84,9 +77,7 @@ class Spartan extends AbstractEntity
         return $this->name;
     }
 
-    /**
-     * Spartan constructor
-     *
+    /***
      * @param string $name
      * @return Spartan
      */
@@ -96,9 +87,7 @@ class Spartan extends AbstractEntity
         return $this;
     }
 
-    /**
-     * Spartan constructor
-     *
+    /***
      * @return string
      */
     public function getLastName(): string
@@ -107,8 +96,6 @@ class Spartan extends AbstractEntity
     }
 
     /**
-     * Spartan constructor
-     *
      * @param string $lastName
      * @return Spartan
      */
@@ -119,8 +106,6 @@ class Spartan extends AbstractEntity
     }
 
     /**
-     * Spartan constructor
-     *
      * @return string
      */
     public function getFormattedName(): string
@@ -129,8 +114,6 @@ class Spartan extends AbstractEntity
     }
 
     /**
-     * Spartan constructor
-     *
      * @param string $formattedName
      * @return Spartan
      */
@@ -141,8 +124,6 @@ class Spartan extends AbstractEntity
     }
 
     /**
-     * Spartan constructor
-     *
      * @return string
      */
     public function getImage(): string
@@ -151,8 +132,6 @@ class Spartan extends AbstractEntity
     }
 
     /**
-     * Spartan constructor
-     *
      * @param string $image
      * @return Spartan
      */
@@ -163,8 +142,6 @@ class Spartan extends AbstractEntity
     }
 
     /**
-     * Spartan constructor
-     *
      * @param int $id
      * @return Spartan
      */
@@ -175,8 +152,6 @@ class Spartan extends AbstractEntity
     }
 
     /**
-     * Spartan constructor
-     *
      * @return int
      */
     public function getId(): int

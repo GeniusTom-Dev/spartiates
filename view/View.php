@@ -18,7 +18,7 @@ abstract class View
      * @param bool $showLayout The layout of the view
      * @return void
      */
-    public static function display(string $title, string $path = null, $data = null, $showLayout = true) : void {
+    public static function display(string $title, string $path = null, mixed $data = null, bool $showLayout = true) : void {
         if (empty($title) && empty($path)){
             header('refresh:0;url=/error');
             exit;

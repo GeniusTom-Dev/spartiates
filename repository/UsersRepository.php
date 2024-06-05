@@ -14,13 +14,13 @@ use class\entity\Admin;
 class UsersRepository extends AbstractRepository
 {
     /**
-     * @param $login
-     * @param $password
+     * @param string $login
+     * @param string $password
      * @return Admin|null
      * @throws MoreThanOneException
      * @throws NotFoundException
      */
-    public function logIn($login, $password): ?Admin
+    public function logIn(string $login, string $password): ?Admin
     {
         // On récupère tous les Users avec le même nom d'utilisateur et le même mot de passe
         $query = 'SELECT * FROM ADMIN WHERE LOGIN = :login and PASSWORD = :password';
@@ -40,11 +40,11 @@ class UsersRepository extends AbstractRepository
     }
 
     /**
-     * @param $login
-     * @param $password
+     * @param string $login
+     * @param string $password
      * @return void
      */
-    public function updatePassword($login, $password): void {
+    public function updatePassword(string $login, string $password): void {
         $query = 'UPDATE ADMIN SET PASSWORD = :password WHERE LOGIN = :login';
         $result = $this->connexion->prepare($query);
         $result->execute(['login' => $login, 'password' => $password]);

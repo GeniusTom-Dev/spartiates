@@ -13,9 +13,11 @@ class TokenRepository {
     private string $file = '../assets/data/token.json';
 
     /**
+     * @param string $email
+     * @return string : the token generated
      * @throws RandomException
      */
-    public function generateToken($email): string
+    public function generateToken(string $email): string
     {
         $token = bin2hex(random_bytes(16));
         $tokens = [];
@@ -35,10 +37,10 @@ class TokenRepository {
     }
 
     /**
-     * @param $token
+     * @param string $token
      * @return bool|int|string
      */
-    public function validateToken($token): bool|int|string
+    public function validateToken(string $token): bool|int|string
     {
         if (!file_exists($this->file)) {
             return false;
@@ -56,9 +58,9 @@ class TokenRepository {
     }
 
     /**
-     * @param $email
+     * @param string $email
      */
-    public function removeToken($email): void
+    public function removeToken(string $email): void
     {
         if (!file_exists($this->file)) {
             return;

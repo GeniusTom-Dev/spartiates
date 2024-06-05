@@ -15,11 +15,11 @@ use PDO;
 class SpartanRepository extends AbstractRepository
 {
     /**
-     * SpartanRepository constructor.
+     * Get a Spartan
      *
-     * Initializes a new instance of the SpartanRepository class.
+     * @param int $id : id of the spartan
      */
-    public function getById($id): Spartan
+    public function getById(int $id): Spartan
     {
         $query = 'SELECT * FROM SPARTAN WHERE ID = :id';
         $statement = $this->connexion->prepare($query);
@@ -63,10 +63,10 @@ class SpartanRepository extends AbstractRepository
     /**
      * Create a Spartan
      *
-     * @param $lastname : lastname of the Spartan
-     * @param $name : name of the Spartan
+     * @param string $lastname : lastname of the Spartan
+     * @param string $name : name of the Spartan
      */
-    public function createSpartan($lastname, $name): void
+    public function createSpartan(string $lastname, string $name): void
     {
         $query = "INSERT INTO SPARTAN (LASTNAME, NAME) VALUES (:lastName, :name);";
         $statement = $this->connexion->prepare($query);
@@ -78,9 +78,9 @@ class SpartanRepository extends AbstractRepository
     /**
      * Delete a Spartan by ID
      *
-     * @param $id : id of the Spartan
+     * @param int $id : id of the Spartan
      */
-    public function deleteSpartanById($id): void
+    public function deleteSpartanById(int $id): void
     {
         // On supprime un spartiate avec son id
         $query = 'DELETE FROM SPARTAN WHERE ID = :id';
@@ -96,11 +96,11 @@ class SpartanRepository extends AbstractRepository
     /**
      * Update a Spartan by ID
      *
-     * @param $id : id of the Spartan
-     * @param $lastName : lastname of the Spartan
-     * @param $name : name of the Spartan
+     * @param int $id : id of the Spartan
+     * @param string $lastName : lastname of the Spartan
+     * @param string $name : name of the Spartan
      */
-    public function updateSpartanById($id, $lastName, $name): void
+    public function updateSpartanById(int $id, string $lastName, string $name): void
     {
         $query = "UPDATE SPARTAN SET LASTNAME = :lastName, NAME = :name WHERE ID = :id;";
         $statement = $this->connexion->prepare($query);
@@ -114,10 +114,10 @@ class SpartanRepository extends AbstractRepository
     /**
      * Search a Spartan by name
      *
-     * @param $searchTerm : name of the Spartan
+     * @param string $searchTerm : name of the Spartan
      * @return array : return an array of Spartans
      */
-    public function search($searchTerm): array
+    public function search(string $searchTerm): array
     {
         $query = "SELECT * FROM SPARTAN WHERE LASTNAME LIKE :searchTerm OR NAME LIKE :searchTerm LIMIT 10";
         $statement = $this->connexion->prepare($query);
@@ -133,7 +133,7 @@ class SpartanRepository extends AbstractRepository
     /**
      * Increment the selection frequency of a Spartan
      *
-     * @param $id : id of the Spartan
+     * @param int $id : id of the Spartan
      */
     public function incrementSpartanChoose(int $id): void {
         if($this->getById($id) instanceof Spartan){

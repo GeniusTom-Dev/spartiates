@@ -90,7 +90,7 @@ class RouteController{
      *
      * @return stdClass|null The route.
      */
-    private function getRoute(){
+    private function getRoute(): ?stdClass {
         foreach($this->routes as $route){
             if (in_array($this->url, $route->routes)){
                 return $route;
@@ -149,7 +149,7 @@ class RouteController{
      *
      * @return void
      */
-    #[NoReturn] public function setRoute($route): void {
+    #[NoReturn] public function setRoute(string $route): void {
         header('refresh:0;url=/' . $route);
         exit;
     }
@@ -162,7 +162,7 @@ class RouteController{
      *
      * @return string The file path.
      */
-    public function findFile($file, $subDir = null) {
+    public function findFile(string $file, string $subDir = null): string {
         $dir = $subDir ?? "view";
         $files = scandir($dir);
         $findValue = "";

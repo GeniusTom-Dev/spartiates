@@ -6,9 +6,9 @@
     <input type="hidden" name="id" value="<?= $data->getId() ?>">
     <h1 class="text-2xl">Mise à jour question Spartiate</h1>
     <label for="lastName" class="text-left">Nom :</label>
-    <input name="lastName" id="lastName" type="text" value="<?= $data->getLastname() ?>" pattern=".*\S.*" required class="rounded-xl border-gray-300 border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    <input name="lastName" id="lastName" type="text" value="<?= $data->getLastname() ?>" pattern=".*\S.*" maxlength="32" required class="rounded-xl border-gray-300 border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
     <label for="name" class="text-left">Prénom :</label>
-    <input name="name" id="name" type="text" value="<?= $data->getName() ?>" pattern=".*\S.*" required class="rounded-xl border-gray-300 border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    <input name="name" id="name" type="text" value="<?= $data->getName() ?>" pattern=".*\S.*" maxlength="32" required class="rounded-xl border-gray-300 border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
     <label class="w-full text-lg md:text-xl">Nouvelle photo :
         <input class="rounded w-full mt-2 p-1" type="file" name="fileToUpload" id="fileToUpload" accept="image/png, image/jpeg, image/jpg">
     </label>

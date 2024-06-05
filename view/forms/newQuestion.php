@@ -12,13 +12,13 @@
     <p id="counter" class="text-[2vh] text-gray-600 text-right w-full">0/150</p>
 
     <label class="w-full">Bonne réponse :
-        <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="true" id="goodAnswer" type="text" pattern=".*\S.*" required/>
+        <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="true" id="goodAnswer" type="text" pattern=".*\S.*" maxlength="25" required/>
     </label>
     <label class="w-full">Mauvaise réponse 1 :
-        <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="false1" id="badAnswer1" type="text" pattern=".*\S.*" required/>
+        <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="false1" id="badAnswer1" type="text" pattern=".*\S.*" maxlength="25" required/>
     </label>
     <label class="w-full">Mauvaise réponse 2 :
-        <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="false2" id="badAnswer2" type="text" pattern=".*\S.*" required/>
+        <input class="rounded-xl w-full mt-2 p-2 border-gray-300" name="false2" id="badAnswer2" type="text" pattern=".*\S.*" maxlength="25" required/>
     </label>
     <input id="createQuestion" class="bg-customBlue hover:bg-sky-300 rounded-xl text-lg py-4 px-8" type="submit" name="create" value="Créer">
 </form>

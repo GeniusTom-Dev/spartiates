@@ -90,7 +90,7 @@ class ActionController{
             // Retrieve the parameters of the action
             $params = [];
             if (isset($mapping->idField)) {
-                $id = htmlspecialchars($_POST[$mapping->idField]);
+                $id = $_POST[$mapping->idField];
                 $params[] = $id;
             }
             foreach ($mapping->fields ?? [] as $field) {

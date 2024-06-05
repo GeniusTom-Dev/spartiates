@@ -7,7 +7,7 @@ use PDO;
 /**
  * Class Connexion
  *
- * This class is responsible for managing the connection.
+ * This class is responsible for managing the connexion.
  */
 class Connexion
 {
