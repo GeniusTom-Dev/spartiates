@@ -133,7 +133,7 @@ export default class Game {
 
     startSpartiateAnnimation = async (direction) => {
         this.spartiate.src = "./assets/images/annimation_spartiates.gif"
-        await this.sleep(1700)
+        await this.sleep(1650)
         this.movePuck(direction)
         await this.sleep(300)
         this.spartiate.src = "./assets/images/default_spartiates.png"

@@ -18,7 +18,7 @@
     <div class="w-full flex justify-center items-center text-xl md:text-2xl lg:text-4xl mb-4 space-x-6">
         <h2 class="bg-customBlue p-4 md:p-5 rounded-xl" id="code"></h2>
         <div class="bg-customBlue w-[15vw] sm:w-[10vw] md:w-[8.5vw] lg:w-[7vw] xl:w-[5.5vw] 2xl:w-[7vw] p-3 rounded">
-            <a id="linkCode"><img src="/assets/images/qr-code.png" class="w-full items-center" alt="qr-code"></a></div>
+            <a id="linkCode"><img src="../../assets/images/icon/qr-code.png" class="w-full items-center" alt="qr-code"></a></div>
     </div>
     <div class="px-5 w-full flex flex-col lg:flex-row justify-center items-center space-y-4 lg:space-y-0 lg:space-x-4 mb-4">
         <a class="bg-white lg:w-1/3 w-full h-[8vh] py-4 md:py-6 lg:py-8 drop-shadow-xl text-xl md:text-2xl lg:text-4xl rounded-lg flex justify-center items-center cursor-pointer btnWS"

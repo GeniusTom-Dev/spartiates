@@ -26,7 +26,7 @@ if (allElementsLoaded){
 
             await game.startSpartiateAnnimation(answer);
             await game.checkedAnswer(answer);
-            await game.sleep(2000)
+            await game.sleep(1000)
             game.resetPuck();
             await game.getQuestion();
             enableButtons();
