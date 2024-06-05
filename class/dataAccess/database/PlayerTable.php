@@ -4,9 +4,8 @@ namespace class\dataAccess\database;
 
 use class\entity\Player;
 use PDO;
-use repository\AbstractRepository;
 
-class PlayerTable extends AbstractRepository
+class PlayerTable extends AbstractTable
 {
     /**
      * Select a tuple from the Player table

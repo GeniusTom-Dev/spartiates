@@ -1,17 +1,17 @@
 <?php
 
-namespace repository;
+namespace class\dataAccess\database;
 
+use class\entity\Admin;
 use class\exception\MoreThanOneException;
 use class\exception\NotFoundException;
-use class\entity\Admin;
 
 /**
- * Class UsersRepository
+ * Class UsersTable
  *
  * This class is responsible for managing the users repository.
  */
-class UsersRepository extends AbstractRepository
+class UsersTable extends AbstractTable
 {
     /**
      * @param string $login

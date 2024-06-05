@@ -1,6 +1,6 @@
 <?php
 
-namespace repository;
+namespace class\dataAccess\database;
 
 use PDO;
 

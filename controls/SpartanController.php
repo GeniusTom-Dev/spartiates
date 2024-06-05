@@ -2,11 +2,11 @@
 
 namespace controls;
 
+use class\dataAccess\database\SpartanTable;
+use class\dataAccess\server\SpartanImage;
 use class\exception\CannotCreateException;
 use class\exception\NotFoundException;
-use class\dataAccess\server\SpartanImage;
 use Exception;
-use repository\SpartanRepository;
 use view\View;
 
 /**
@@ -17,9 +17,9 @@ use view\View;
 class SpartanController
 {
     /**
-     * @var SpartanRepository
+     * @var SpartanTable
      */
-    private SpartanRepository $repository;
+    private SpartanTable $repository;
 
     /**
      * @var SpartanImage
@@ -33,7 +33,7 @@ class SpartanController
      */
     public function __construct()
     {
-        $this->repository = new SpartanRepository();
+        $this->repository = new SpartanTable();
     }
 
     /**

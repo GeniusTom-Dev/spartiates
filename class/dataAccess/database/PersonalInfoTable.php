@@ -3,9 +3,8 @@
 namespace class\dataAccess\database;
 
 use class\entity\PersonalInfo;
-use repository\AbstractRepository;
 
-class PersonalInfoTable extends AbstractRepository
+class PersonalInfoTable extends AbstractTable
 {
     /**
      * Select a tuple from the PersonalInfo table

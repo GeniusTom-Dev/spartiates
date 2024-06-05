@@ -2,17 +2,17 @@
 
 namespace controls;
 
+use class\dataAccess\database\QuestionsTable;
 use class\exception\CannotCreateException;
 use class\exception\NotFoundException;
-use repository\QuestionsRepository;
 use view\View;
 
 class QuestionsController
 {
     /**
-     * @var QuestionsRepository
+     * @var QuestionsTable
      */
-    private QuestionsRepository $repository;
+    private QuestionsTable $repository;
 
     /**
      * QuestionsController constructor.
@@ -21,7 +21,7 @@ class QuestionsController
      */
     public function __construct()
     {
-        $this->repository = new QuestionsRepository();
+        $this->repository = new QuestionsTable();
     }
 
 

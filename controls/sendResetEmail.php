@@ -1,6 +1,7 @@
 <?php
 include_once "../autoloader.php";
-use repository\TokenRepository;
+
+use class\dataAccess\server\TokenRepository;
 
 /**
  * This script is responsible for sending a password reset email.

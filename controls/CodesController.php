@@ -2,10 +2,10 @@
 
 namespace controls;
 
+use class\dataAccess\database\CodesTable;
 use class\dataAccess\database\PersonalInfoTable;
 use class\dataAccess\database\PlayerTable;
 use class\exception\MoreThanOneException;
-use repository\CodesRepository;
 
 /**
  * Class CodesController
@@ -17,12 +17,12 @@ class CodesController
     /**
      * @var mixed
      */
-    private CodesRepository $repository;
+    private CodesTable $repository;
     private PlayerTable $playerTable;
 
     public function __construct()
     {
-        $this->repository = new CodesRepository();
+        $this->repository = new CodesTable();
         $this->playerTable = new PlayerTable();
     }
 

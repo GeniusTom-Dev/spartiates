@@ -2,9 +2,9 @@
 
 namespace controls;
 
+use class\dataAccess\database\UsersTable;
 use class\exception\MoreThanOneException;
 use class\exception\NotFoundException;
-use repository\UsersRepository;
 
 /**
  * Class UsersController
@@ -16,7 +16,7 @@ class UsersController
     /**
      * @var mixed
      */
-    private UsersRepository $repository;
+    private UsersTable $repository;
 
     /**
      * UsersController constructor.
@@ -25,7 +25,7 @@ class UsersController
      */
     public function __construct()
     {
-        $this->repository = new UsersRepository();
+        $this->repository = new UsersTable();
     }
 
     /**

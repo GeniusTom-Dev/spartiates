@@ -1,18 +1,18 @@
 <?php
 
-namespace repository;
+namespace class\dataAccess\database;
 
+use class\entity\Spartan;
 use class\exception\MoreThanOneException;
 use class\exception\NotFoundException;
-use class\entity\Spartan;
 use PDO;
 
 /**
- * Class SpartanRepository
+ * Class SpartanTable
  *
  * This class is responsible for managing the Spartans repository.
  */
-class SpartanRepository extends AbstractRepository
+class SpartanTable extends AbstractTable
 {
     /**
      * Get a Spartan

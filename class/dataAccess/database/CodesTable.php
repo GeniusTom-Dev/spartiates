@@ -1,11 +1,11 @@
 <?php
 
-namespace repository;
+namespace class\dataAccess\database;
 
 use class\exception\MoreThanOneException;
 
 
-class CodesRepository extends AbstractRepository
+class CodesTable extends AbstractTable
 {
 
     /**

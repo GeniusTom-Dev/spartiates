@@ -4,10 +4,10 @@ namespace controls;
 
 use class\dataAccess\database\PersonalInfoTable;
 use class\dataAccess\database\PlayerTable;
+use class\dataAccess\database\SpartanTable;
 use class\entity\PersonalInfo;
 use class\entity\Player;
 use class\exception\NotFoundException;
-use repository\SpartanRepository;
 
 /**
  * Class SessionController
@@ -17,9 +17,9 @@ use repository\SpartanRepository;
 class SessionController
 {
     /**
-     * @var SpartanRepository An instance of the SpartanRepository class.
+     * @var SpartanTable An instance of the SpartanTable class.
      */
-    private SpartanRepository $spartanRepository;
+    private SpartanTable $spartanRepository;
 
     /**
      * @var PlayerTable An instance of the PlayerTable class.
@@ -40,7 +40,7 @@ class SessionController
     {
         $this->playerTable = new PlayerTable();
         $this->personalInfoTable = new PersonalInfoTable();
-        $this->spartanRepository = new SpartanRepository();
+        $this->spartanRepository = new SpartanTable();
     }
 
     /**

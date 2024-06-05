@@ -18,9 +18,10 @@ $url = $_GET['url'] ?? '';
 ///////////////////////////////////////////////////////////////////////////////
 
 ini_set('session.gc_lifetime', 5);
-ini_set('session.use_only_cookies', false);
+// TODO
+/*ini_set('session.use_only_cookies', false);
 ini_set('session.cookie_httponly', 1);
-ini_set('session.use_strict_mode', 1);
+ini_set('session.use_strict_mode', 1);*/
 if (!isset($_SESSION))
     session_start();
     // TODO

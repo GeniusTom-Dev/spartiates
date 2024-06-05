@@ -1,18 +1,18 @@
 <?php
 
-namespace repository;
+namespace class\dataAccess\database;
 
+use class\entity\Question;
 use class\exception\MoreThanOneException;
 use class\exception\NotFoundException;
-use class\entity\Question;
 use PDO;
 
 /**
- * Class QuestionsRepository
+ * Class QuestionsTable
  *
  * This class is responsible for managing the question repository.
  */
-class QuestionsRepository extends AbstractRepository
+class QuestionsTable extends AbstractTable
 {
 
     /**

@@ -1,15 +1,15 @@
 <?php
 
-namespace repository;
+namespace class\dataAccess\database;
 
 use PDO;
 
 /**
- * Class AbstractRepository
+ * Class AbstractTable
  *
  * This class is responsible for managing the abstract repository.
  */
-abstract class AbstractRepository
+abstract class AbstractTable
 {
     /**
      * @var PDO An instance of the PDO class.
@@ -17,9 +17,9 @@ abstract class AbstractRepository
     protected PDO $connexion;
 
     /**
-     * AbstractRepository constructor.
+     * AbstractTable constructor.
      *
-     * Initializes a new instance of the AbstractRepository class.
+     * Initializes a new instance of the AbstractTable class.
      */
     public function __construct()
     {
