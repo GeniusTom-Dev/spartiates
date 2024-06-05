@@ -2678,12 +2678,20 @@ input:checked + .toggle-bg{
     width: 10vw;
   }
 
+  .sm\:w-\[80\%\]{
+    width: 80%;
+  }
+
   .sm\:w-\[90\%\]{
     width: 90%;
   }
 
   .sm\:w-\[90vw\]{
     width: 90vw;
+  }
+
+  .sm\:max-w-\[80\%\]{
+    max-width: 80%;
   }
 
   .sm\:p-5{
@@ -2801,6 +2809,10 @@ input:checked + .toggle-bg{
 
   .md\:w-\[95vw\]{
     width: 95vw;
+  }
+
+  .md\:max-w-\[500px\]{
+    max-width: 500px;
   }
 
   .md\:grid-cols-2{

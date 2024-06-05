@@ -6,33 +6,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
     <title>%title%</title>
-    <!--   style   -->
     <link rel="stylesheet" href="/dist/output.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/dist/bundle.js"></script>
     <script src="/dist/jquery.min.js"></script>
     <script src="../assets/script/index.js" defer></script>
     <script src="../assets/script/gameController.js" type="module"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            /*overflow: hidden;*/
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+        .bg-image {
+            position: fixed;
+            width: 100%;
+            z-index: -1;
+            background-size: cover;
+            background-position: center;
+        }
+        .bg-header {
+            top: 0;
+            height: 25vh; /* Ajustez la hauteur selon vos besoins */
+            background-image: url('/assets/images/layout/newHeader.png');
+        }
+        .bg-footer {
+            bottom: 0;
+            height: 25vh; /* Ajustez la hauteur selon vos besoins */
+            background-image: url('/assets/images/layout/newFooter.png');
+        }
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            width: 100%;
+            padding: 0 5px; /* Ajustez le padding si nécessaire */
+        }
+    </style>
 </head>
 
-<body class="bg-[var(--color-bg)] flex flex-col min-h-screen">
+<body class="bg-[var(--color-bg)]">
 
-<header class="bg-cover bg-bottom bg-no-repeat h-[15vh] sm:h-[13vh] md:h-[15vh] lg:h-[20vh] xl:h-[25vh] 2xl:h-[35vh] relative mb-5"
-        style="background-image: url('/assets/images/layout/header.png')">
-    <a href="https://marseillehockeyclub.com" target="_blank">
-        <img class="mt-2 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-             src="/assets/images/logo.png" alt="lg-logo">
-    </a>
-    <img class="w-1/5 absolute bottom-0 right-0" src="../assets/images/layout/headerLines.png" alt="headerLines">
-</header>
+<div class="bg-image bg-header"></div>
 
-<div class="flex-1 px-5 flex items-center justify-center">
+<div class="content flex items-center justify-center">
     %content%
 </div>
 
-<footer class="bg-cover bg-top h-[15vh] sm:h-[13vh] md:h-[15vh] lg:h-[20vh] xl:h-[25vh] 2xl:h-[35vh] relative -z-10" style="background-image: url('/assets/images/layout/footer.png')">
-    <img class="w-1/5 absolute bottom-0 right-0" src="../assets/images/layout/headerLines.png" alt="headerLines.png">
-</footer>
+<div class="bg-image bg-footer"></div>
 
 </body>
 </html>
