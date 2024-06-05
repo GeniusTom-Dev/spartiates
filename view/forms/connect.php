@@ -4,26 +4,26 @@
     <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Home">
 </a>
 
-<div class="flex justify-center items-center min-h-screen">
+<div class="flex justify-center items-center my-6">
     <form class="mt-2 rounded-md shadow-xl flex flex-col justify-center space-y-6 py-8 px-14 bg-white w-full max-w-2xl md:w-[95vw] sm:w-[90vw]"
           id="verificationForm" method="post">
         <input type="hidden" name="action" value="logIn">
 
-        <h1 class="text-center text-[5vh]">Connexion</h1>
+        <h1 class="text-center text-[3vh]">Connexion</h1>
 
         <p class="text-[2vh] text-gray-500 text-center">Veuillez vous connecter pour accéder à l'administration.</p>
 
         <label class="text-[2.5vh] mb-5 text-left" for="login">Nom d'utilisateur :</label>
-        <input name="login" id="login" type="text" placeholder="ex. Jane Doe" class="w-full p-3 border rounded-md text-[2.5vh] mb-16 mt-5 h-[8vh]" min="3" max="20"/>
+        <input name="login" id="login" type="text" placeholder="ex. Jane Doe" class="w-full p-3 border rounded-md text-[2.5vh] mb-16 mt-5 h-[7vh]" min="3" max="20"/>
 
         <label class="text-[2.5vh] mb-5 text-left" for="password">Mot de passe :</label>
-        <input name="password" id="password" type="password" placeholder="Mot de passe" class="w-full p-3 border rounded-md text-[2.5vh] mb-5 mt-5 h-[8vh]"/>
+        <input name="password" id="password" type="password" placeholder="Mot de passe" class="w-full p-3 border rounded-md text-[2.5vh] mb-5 mt-5 h-[7vh]"/>
         <a href="/connect" id="forgot-password" class="text-[2vh] text-right hover:underline cursor-pointer">Mot de passe oublié ?</a>
 
         <p id="email-sent-message" class="text-[2.5vh] text-center hidden">Un e-mail vous a été envoyé</p>
 
         <div class="text-red-700" id="res"></div>
-        <input class="bg-customBlue text-white rounded-xl px-4 py-3 text-[2.5vh] cursor-pointer hover:bg-sky-300" type="submit" name="submit" value="Se connecter"/>
+        <input id="connectButton" class="bg-customBlue text-white rounded-xl px-4 py-3 text-[2.5vh] cursor-pointer hover:bg-sky-300" type="submit" name="submit" value="Se connecter"/>
 
     </form>
 </div>
@@ -46,5 +46,13 @@
                 }
             })
             .catch(error => console.error('Error:', error));
+    });
+
+    let connectButton = document.getElementById("connectButton");
+    connectButton.addEventListener('click', function(event) {
+        connectButton.disabled = true;
+        setTimeout(() => {
+            connectButton.disabled = false;
+        }, 3000);
     });
 </script>

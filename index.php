@@ -107,7 +107,11 @@ $actionController->registerAction("getQuestionsNumber", [], "QuestionsController
 $actionController->registerAction("getAnswer", ['fields' => ['index']], "QuestionsController", null);
 $actionController->registerAction("searchQuestion", ['fields' => ['searchTerm']], "QuestionsController", null, true);
 
-$actionController->registerAction("checkSessionCode", ['fields' => ['code']], "CodesController", null, false, ['success' => ['success' => true, 'url' => '/username']], ['error' => ['success' => false, 'error' => 'code incorrect']], ['sessionHasEnded' => ['success' => false, 'error' => 'La session est finis']], ['needResponse' => true]);
+$actionController->registerAction("checkSessionCode", ['fields' => ['code']], "CodesController", null, false,
+    ['success' => ['success' => true, 'url' => '/username']],
+    ['error' => ['success' => false, 'error' => 'Code expiré ou incorrect']],
+    ['sessionHasEnded' => ['success' => false, 'error' => 'La session est finis']],
+    ['needResponse' => true]);
 $actionController->registerAction("getSessionCode", [], "CodesController", null, true);
 
 $actionController->registerAction("start", [], "CodesController", null, true);
