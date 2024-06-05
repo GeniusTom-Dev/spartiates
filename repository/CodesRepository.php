@@ -43,6 +43,11 @@ class CodesRepository extends AbstractRepository
         return $result->rowCount() !== 0;
     }
 
+    /**
+     * Start a session
+     *
+     * @param $code : of the session
+     */
     public function start($code): void
     {
         $query = 'INSERT INTO SESSION (CODE, ACTIVE)
@@ -53,6 +58,9 @@ class CodesRepository extends AbstractRepository
         ]);
     }
 
+    /**
+     * Reset the session
+     */
     public function reset(): void
     {
         $query = 'DELETE FROM SESSION';
@@ -60,6 +68,9 @@ class CodesRepository extends AbstractRepository
         $result->execute();
     }
 
+    /**
+     * Stop the session
+     */
     public function stop(): void
     {
         $query = 'UPDATE SESSION SET ACTIVE = 0;';
@@ -67,6 +78,11 @@ class CodesRepository extends AbstractRepository
         $result->execute();
     }
 
+    /**
+     * Get the session code
+     *
+     * @return string : the code of the session
+     */
     public function getSessionCode(): string
     {
         $query = 'SELECT CODE FROM SESSION WHERE ACTIVE = 1';
@@ -80,6 +96,12 @@ class CodesRepository extends AbstractRepository
         return $data['CODE'];
     }
 
+    /**
+     * Check if a session is active
+     *
+     * @param $code : of the session
+     * @return bool : true if the session is active and false if it is not
+     */
     public function isActive($code): bool
     {
         $query = 'SELECT * FROM SESSION WHERE CODE = :code and ACTIVE = 1';

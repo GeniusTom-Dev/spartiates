@@ -1,8 +1,11 @@
 <?php
 
 namespace model;
+
 /**
- * La classe User permet de gérer les utilisateurs
+ * Class Admin
+ *
+ * This class is responsible for managing the admin.
  */
 class Admin extends Entity
 {
@@ -12,7 +15,9 @@ class Admin extends Entity
     private mixed $active;
 
     /**
-     * @return mixed
+     * Admin constructor.
+     *
+     * Initializes a new instance of the Admin class.
      */
     public function isAdminActive(): mixed
     {

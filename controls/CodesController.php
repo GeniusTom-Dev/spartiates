@@ -7,6 +7,11 @@ use class\data\database\PlayerTable;
 use class\exception\MoreThanOneException;
 use repository\CodesRepository;
 
+/**
+ * Class CodesController
+ *
+ * This class is responsible for managing codes.
+ */
 class CodesController
 {
     /**
@@ -21,6 +26,13 @@ class CodesController
         $this->playerTable = new PlayerTable();
     }
 
+    /**
+     * Checks if a code is active.
+     *
+     * @param mixed $code The code to check.
+     *
+     * @return bool True if the code is active, false otherwise.
+     */
     public function codeIsActive($code): bool
     {
         try {
@@ -35,6 +47,13 @@ class CodesController
         return false;
     }
 
+    /**
+     * Checks if a session code is valid.
+     *
+     * @param mixed $code The code to check.
+     *
+     * @return bool True if the session code is valid, false otherwise.
+     */
     public function checkSessionCode($code): bool
     {
         try {
@@ -50,6 +69,11 @@ class CodesController
         return false;
     }
 
+    /**
+     * Starts a new session with a random code.
+     *
+     * @return void
+     */
     public function start(): void
     {
         $randomCode = rand(10000, 99999);
@@ -62,6 +86,11 @@ class CodesController
     }
 
     // TODO
+    /**
+     * Stops the current session and sends an email to the winners.
+     *
+     * @return void
+     */
     public function stop(): void
     {
         $this->repository->stop();
@@ -83,6 +112,11 @@ class CodesController
         echo 'Pas de session en cours';
     }
 
+    /**
+     * Gets the current session code.
+     *
+     * @return void
+     */
     public function getSessionCode(): void
     {
         echo $this->repository->getSessionCode();

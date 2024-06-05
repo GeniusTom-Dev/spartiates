@@ -9,19 +9,38 @@ use Exception;
 use repository\SpartanRepository;
 use view\View;
 
+/**
+ * Class SpartanController
+ *
+ * This class is responsible for managing Spartans.
+ */
 class SpartanController
 {
     /**
      * @var mixed
      */
     private mixed $repository;
+
+    /**
+     * @var SpartanImage
+     */
     private SpartanImage $spartImg;
 
+    /**
+     * SpartanController constructor.
+     *
+     * Initializes a new instance of the SpartanController class.
+     */
     public function __construct()
     {
         $this->repository = new SpartanRepository();
     }
 
+    /**
+     * Displays Spartans.
+     *
+     * @return void
+     */
     public function showSpartans(): void
     {
         try {
@@ -33,6 +52,14 @@ class SpartanController
         }
     }
 
+    /**
+     * Create a new Spartan.
+     *
+     * @param string $lastName The Spartan's last name.
+     * @param string $name The Spartan's name.
+     *
+     * @return void
+     */
     public function createSpartan($lastName, $name): void
     {
         try {
@@ -43,6 +70,13 @@ class SpartanController
         }
     }
 
+    /**
+     * Delete a Spartan.
+     *
+     * @param mixed $id The Spartan's ID.
+     *
+     * @return void
+     */
     public function deleteSpartan($id): void
     {
         try {
@@ -53,6 +87,16 @@ class SpartanController
         }
     }
 
+    /**
+     * Update a Spartan.
+     *
+     * @param mixed $id The Spartan's ID.
+     * @param string $lastName The Spartan's last name.
+     * @param string $name The Spartan's name.
+     * @param mixed $image The Spartan's image.
+     *
+     * @return void
+     */
     public function updateSpartan($id, $lastName, $name, $image = null): void
     {
         try {
@@ -76,12 +120,24 @@ class SpartanController
         }
     }
 
+    /**
+     * Show the form to create a new Spartan.
+     *
+     * @param $url
+     * @param $id
+     * @return void
+     */
     public function showUpdateForm($url, $id): void
     {
         $path = 'view/forms/' . $url . '.php';
         View::display('MISE A JOUR', $path, $this->repository->getById($id));
     }
 
+    /**
+     * Show the form to create a new Spartan.
+     *
+     * @return void
+     */
     public function showChooseSpartan(): void
     {
         $path = 'view/chooseSpartan.php';

@@ -8,10 +8,29 @@ namespace model;
  */
 class Question extends Entity
 {
+    /**
+     * @var int
+     */
     private int $id;
+
+    /**
+     * @var string
+     */
     private string $text;
+
+    /**
+     * @var string
+     */
     private string $answer;
+
+    /**
+     * @var string
+     */
     private string $false1;
+
+    /**
+     * @var string
+     */
     private string $false2;
 
     /**
