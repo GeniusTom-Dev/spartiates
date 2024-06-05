@@ -2,16 +2,32 @@
 
 namespace model;
 
-
+/**
+ * Class Entity
+ *
+ * This class is responsible for managing entities.
+ */
 abstract class Entity
 {
-    // Constructor
+    /**
+     * Entity constructor.
+     *
+     * Initializes a new instance of the Entity class.
+     *
+     * @param array $data The data.
+     */
     public function __construct(array $data)
     {
         $this->hydrate($data);
     }
 
-    // Hydratation
+    /**
+     * Hydrates the entity.
+     *
+     * @param array $data The data.
+     *
+     * @return void
+     */
     public function hydrate($data): void
     {
         foreach ($data as $key => $value) {

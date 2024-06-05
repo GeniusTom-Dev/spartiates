@@ -6,9 +6,24 @@ namespace model;
  */
 class Spartan extends Entity
 {
+    /**
+     * @var int
+     */
     private int $id;
+
+    /**
+     * @var string
+     */
     private string $lastName;
+
+    /**
+     * @var string
+     */
     private string $name;
+
+    /**
+     * @var int
+     */
     private int $selectionFrequency;
 
     /**
@@ -75,11 +90,22 @@ class Spartan extends Entity
         $this->selectionFrequency = $selectionFrequency;
     }
 
+    /**
+     * Get the formatted name of a Spartan
+     *
+     * @return string The formatted name
+     */
     public function getFormattedName(): string {
         $formattedName = $this->formatName($this->getLastname()) . "_" . $this->formatName($this->getName());
         return strtolower($formattedName);
     }
 
+    /**
+     * Format the name of a Spartan
+     *
+     * @param string $name The name to format
+     * @return string The formatted name
+     */
     private function formatName($name): array|string {
         $name = trim($name);
         $name = str_replace(' ', '_', $name);

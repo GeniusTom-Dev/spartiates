@@ -4,10 +4,23 @@ namespace repository;
 
 use PDO;
 
+/**
+ * Class Connexion
+ *
+ * This class is responsible for managing the connection.
+ */
 class Connexion
 {
+    /**
+     * @var PDO|null An instance of the PDO class.
+     */
     private static ?PDO $instance = null;
 
+    /**
+     * Connexion constructor.
+     *
+     * Initializes a new instance of the Connexion class.
+     */
     public static function getInstance(): PDO
     {
         if (self::$instance == null) {
