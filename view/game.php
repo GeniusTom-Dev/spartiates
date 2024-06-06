@@ -3,7 +3,7 @@
 <div class="w-full lg:w-2/3 h-full flex flex-col">
     <input type="hidden" id="sessionCode" value="<?= $_SESSION['code']?>">
     <div class="w-full h-[6vh] flex justify-center text-center">
-        <h2 class="text-2xl">Score: <span class="text-customBlueDark" id="score">0</span></h2>
+        <h2 class="text-xl">Score: <span class="text-customBlueDark" id="score">0</span></h2>
     </div>
     <div class="w-full h-[10vh] md:h-[6vh] flex justify-center text-center">
         <h2 id="question"></h2>
@@ -27,7 +27,7 @@
     </div>
 </div>
 
-<div class="absolute w-full h-full z-50 top-0 bg-customBlueDark opacity-95 flex flex-col items-center justify-center space-y-5 text-white"
+<div class="fixed top-0 left-0 w-full h-full z-50 flex flex-col items-center justify-center bg-customBlueDark opacity-95 text-white"
      id="endGame" style="display: none">
     <span>
         <label class="text-4xl">Felicitation </label>
