@@ -20,7 +20,7 @@ class SessionController
     /**
      * @var SpartanTable An instance of the SpartanTable class.
      */
-    private SpartanTable $spartanRepository;
+    private SpartanTable $spartanTable;
 
     /**
      * @var PlayerTable An instance of the PlayerTable class.
