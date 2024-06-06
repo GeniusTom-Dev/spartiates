@@ -122,6 +122,7 @@ $actionController->registerAction("dlData", [], "DownloadController", "/download
 
 $actionController->registerAction("startWS", [], "WSController", null, true);
 $actionController->registerAction("stopWS", [], "WSController", null, true);
+$actionController->registerAction("saveScore", ['fields' => ['score']], "WSController", null, true);
 $actionController->registerAction("connexionWS", [], "WSController", null);
 
 $actionController->registerAction("logIn", ['fields' => ['login', 'password']], "UsersController", null,false, ['success' => ['success' => true, 'url' => '/users']], ['error' => ['success' => false, 'error' => 'Identifiant ou mot de passe incorrect']], ['needResponse' => true]);

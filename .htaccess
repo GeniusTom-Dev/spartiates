@@ -10,10 +10,4 @@ AddType application/javascript .js
 AddType application/javascript-module .mjs
 
 # Rewrite all other URLs to index.php
-RewriteBase /
-
-# Redirection vers index.php pour toutes les URLs sauf celles existantes
-RewriteRule ^(.+)$ index.php?url=$1 [NC,L]
-
-# Accès direct à index.php autorisé
-RewriteRule ^index\.php$ - [L]
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]

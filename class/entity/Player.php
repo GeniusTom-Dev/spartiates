@@ -11,6 +11,8 @@ class Player extends AbstractEntity
     private int $personalInfo;
     private string $name;
 
+    private string $rank;
+
     public function getId(): int|null
     {
         return $this->id ?? null;
@@ -61,6 +63,24 @@ class Player extends AbstractEntity
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    public function setRank(string $rank) {
+        $this->rank = $rank;
+    }
+
+    public function getRank(): string {
+        return $this->rank;
+    }
+
+    public function jsonPlayer() {
+        return json_encode([
+            'id' => $this->getId(),
+            'score' => $this->getScore(),
+            'personalInfo' => $this->getPersonalInfo(),
+            'name' => $this->getName(),
+            'rank' => $this->getRank()
+        ]);
     }
 
 }

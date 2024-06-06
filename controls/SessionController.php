@@ -8,6 +8,7 @@ use class\entity\PersonalInfo;
 use class\entity\Player;
 use class\exception\NotFoundException;
 use repository\SpartanRepository;
+use repository\UsersRepository;
 
 class SessionController
 {
@@ -100,16 +101,35 @@ class SessionController
         }
     }
 
+    private function checkRank($allRanks, $playerId) {
+        foreach ($allRanks as $rank) {
+            if ($rank['Id'] == $playerId) {
+                return $rank['Rank'];
+            }
+        }
+        return null;
+    }
+
     public function showEndGame($score): void
     {
         try {
+            $userRepository = new UsersRepository();
+            $allRanks = $userRepository->getRanking();
             if ($score == 0)
-                $score = $this->playerTable->select($_SESSION['id']);
+                $score = $this->playerTable->select($_SESSION['id'])->getScore();
             if (isset($_SESSION['id']) && $this->playerTable->exists($_SESSION['id'])) {
                 $player = $this->playerTable->select($_SESSION['id']);
                 $player->setScore($score);
                 $this->playerTable->update($_SESSION['id'], $player);
-                echo json_encode($player);
+                $rank = $this->checkRank($allRanks, $_SESSION['id']);
+                if(is_null($rank) === false){
+                    $player->setRank("#" . $rank);
+                }else{
+                    $lastPlayerRank = end($allRanks)['score'];
+                    $rank = "Vous êtes à " . ($lastPlayerRank - $player->getScore()) . " points du classement.";
+                    $player->setRank($rank);
+                }
+                echo $player->jsonPlayer();
             }
         } catch (NotFoundException $ERROR) {
             echo $ERROR->getMessage();
