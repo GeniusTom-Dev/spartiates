@@ -39,6 +39,7 @@ class UsersController
      */
     public function logIn(string $login, string $password): bool
     {
+        session_regenerate_id(true);
         //on récupère les informations rentrées dans le formulaire
         try {
             $user = $this->repository->logIn($login, $password);

@@ -21,30 +21,27 @@ $url = $_GET['url'] ?? '';
 /// Load session
 ///////////////////////////////////////////////////////////////////////////////
 
+// Configuration des paramètres de session
 ini_set('session.gc_lifetime', 5);
-// TODO
-/*ini_set('session.use_only_cookies', false);
-ini_set('session.cookie_httponly', 1);
-ini_set('session.use_strict_mode', 1);*/
-//session_set_cookie_params([
-//    'secure' => true,
-//    'httponly' => true,
-//]);
+ini_set('session.use_only_cookies', 1);
+ini_set('session.use_strict_mode', 1);
+
+// Configuration des paramètres des cookies de session
+session_set_cookie_params([
+    'secure' => true,
+    'httponly' => true,
+    'samesite' => 'Strict'
+]);
+
+// Initiation/Arrêt de session
 if (!isset($_SESSION))
     session_start();
-    // TODO
-    // session_regenerate_id(true);
 if (isset($_SESSION['last_activity']) && time() - $_SESSION['last_activity'] > 1800) {
     session_unset();
     session_destroy();
     session_start();
 } else {
     $_SESSION['last_activity'] = time();
-}
-
-if(isset($_GET['reset']) && $_GET['reset'] === "oui"){
-    session_destroy();
-    session_unset();
 }
 
 $usersController = new UsersController();

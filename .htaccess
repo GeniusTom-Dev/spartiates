@@ -6,10 +6,10 @@ RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
 # Block access to specific file types (e.g., .php, .inc, .config)
-#<FilesMatch "\.(php|inc|config)$">
-#    Order allow,deny
-#    Deny from all
-#</FilesMatch>
+<FilesMatch "\.(inc|config)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
 
 # Set MIME types for JavaScript files
 AddType application/javascript .js
