@@ -48,11 +48,11 @@
             .catch(error => console.error('Error:', error));
     });
 
-    let connectButton = document.getElementById("connectButton");
+    /*let connectButton = document.getElementById("connectButton");
     connectButton.addEventListener('click', function(event) {
         connectButton.disabled = true;
         setTimeout(() => {
             connectButton.disabled = false;
         }, 3000);
-    });
+    });*/
 </script>

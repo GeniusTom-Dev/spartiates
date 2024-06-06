@@ -13,7 +13,7 @@ if ($email) {
     $token = $tokenRepository->generateToken($email);
 
     // TODO mettre le bon lien
-    $resetLink = "https://".$_SERVER['HTTP_HOST']."/reset?token=$token";
+    $resetLink = "https://".$_SERVER['HTTP_HOST']."/reset&token=$token";
 
     $to = $email;
     $subject = "Password Reset Request";

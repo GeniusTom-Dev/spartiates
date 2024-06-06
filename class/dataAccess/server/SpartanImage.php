@@ -50,7 +50,7 @@ class SpartanImage
         }
         // TODO
         //throw new NotFoundException("Aucun spartiate ne correspond à $name");
-        return "";
+        return $file;
     }
 
     /**
@@ -111,12 +111,19 @@ class SpartanImage
 
     public static function updateName(string $currentName, string $newName) : bool
     {
+
         $currentName = self::formatName($currentName);
         $newName = self::formatName($newName);
-        $file = self::get($currentName);
+
+        try {
+            $file = self::get($currentName);
+        } catch (NotFoundException $e) {
+            throw new Exception("Le fichier pour le spartiate $currentName n'existe pas.");
+        }
+
         $extension = self::getExtension($file);
-        $newName = realpath(".") . self::SPARTAN_IMAGES_DIRECTORY . $newName . "." . $extension;
-        return rename($file, $newName);
+        $newFilePath = realpath(".") . self::SPARTAN_IMAGES_DIRECTORY . $newName . "." . $extension;
+        return rename($file, $newFilePath);
     }
 
     /**
@@ -130,9 +137,12 @@ class SpartanImage
     public static function updateImage(string $name, string $image) : bool
     {
         $name = self::formatName($name);
-        $file = self::get($name);
-        return rename($file, $image) ?? TRUE;
+        $extension = self::getExtension($image);
+        $newFilePath = realpath(".") . self::SPARTAN_IMAGES_DIRECTORY . $name . "." . $extension;
+
+        return move_uploaded_file($image, $newFilePath);
     }
+
 
     /**
      * Delete a Spartan.

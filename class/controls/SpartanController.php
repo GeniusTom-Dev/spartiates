@@ -80,6 +80,9 @@ class SpartanController
     public function deleteSpartan(int $id): void
     {
         try {
+            $spartan = $this->repository->getById($id);
+            $spartanName = strtolower($spartan->getLastName() . '_' . $spartan->getName());
+            SpartanImage::delete($spartanName);
             $this->repository->deleteSpartanById($id);
         } catch (NotFoundException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
@@ -101,15 +104,14 @@ class SpartanController
     {
         try {
             $spartan = $this->repository->getById($id);
-            $currentFormattedName = strtolower($spartan->getLastname() . '_' . $spartan->getFormattedName());
+            $currentFormattedName = strtolower($spartan->getLastName() . '_' . $spartan->getName());
             $newFormattedName = strtolower(trim($lastName) . '_' . trim($name));
-
             $this->repository->updateSpartanById($id, trim($lastName), trim($name));
 
-            if (empty($image['tmp_name']) === false && is_null($image) === false) {
+            if (!empty($image['tmp_name'])) {
                 SpartanImage::update($currentFormattedName, $newFormattedName, $image['tmp_name']);
             } elseif ($currentFormattedName !== $newFormattedName) {
-                SpartanImage::update($currentFormattedName, $newFormattedName);
+                SpartanImage::updateName($currentFormattedName, $newFormattedName);
             }
         } catch (NotFoundException $ERROR) {
             file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
@@ -119,6 +121,7 @@ class SpartanController
             echo $e->getMessage();
         }
     }
+
 
     /**
      * Show the form to create a new Spartan.
