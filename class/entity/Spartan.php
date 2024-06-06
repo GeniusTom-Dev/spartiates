@@ -1,9 +1,8 @@
 <?php
 
-namespace class\model;
+namespace class\entity;
 
-use class\data\server\SpartanImage;
-use class\entity\AbstractEntity;
+use class\dataAccess\server\SpartanImage;
 
 /**
  * Class Spartan
@@ -12,15 +11,16 @@ use class\entity\AbstractEntity;
  */
 class Spartan extends AbstractEntity
 {
-    /**
-     * @var mixed $id The id of the spartan
-     */
-    private mixed $id;
 
     /**
-     * @var string $firstName The first name of the spartan
+     * @var int $id The id of the spartan
      */
-    private string $firstName;
+    private int $id;
+
+    /**
+     * @var string $name The first name of the spartan
+     */
+    private string $name;
 
     /**
      * @var string $lastName The last name of the spartan
@@ -28,52 +28,66 @@ class Spartan extends AbstractEntity
     private string $lastName;
 
     /**
-     * @var string $name The name of the spartan
+     * @var string $formattedName The concatenation of the lastname and name, used for the image's name
      */
-    private string $name;
+    private string $formattedName;
 
     /**
-     * @var string $image The image of the spartan
+     * @var string $image The path of the image
      */
     private string $image;
 
     /**
-     * Spartan constructor
-     *
+     * @var int $selectionFrequency The number of time a spartan has been chosen
+     */
+    private int $selectionFrequency;
+
+    /***
      * @param array $data An indexed array to hydrate itself
      */
+
     public function __construct(array $data)
     {
         parent::__construct($data);
-        $this->name = $this->firstName . ' ' . $this->lastName;
-        $this->image = SpartanImage::get($this->name);
+        $this->formattedName = $this->name . ' ' . $this->lastName;
+        $this->image = SpartanImage::get($this->formattedName);
     }
 
-    /**
-     * Spartan constructor
-     *
-     * @return string
+    /***
+     * @return int
      */
-    public function getFirstName(): string
-    {
-        return $this->firstName;
+    public function getSelectionFrequency(): int {
+        return $this->selectionFrequency;
     }
 
-    /**
-     * Spartan constructor
-     *
-     * @param string $firstName
+    /***
+     * @param int $selectionFrequency
      * @return Spartan
      */
-    public function setFirstName(string $firstName): Spartan
-    {
-        $this->firstName = $firstName;
+    public function setSelectionFrequency(int $selectionFrequency): Spartan {
+        $this->selectionFrequency = $selectionFrequency;
         return $this;
     }
 
-    /**
-     * Spartan constructor
-     *
+    /***
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /***
+     * @param string $name
+     * @return Spartan
+     */
+    public function setName(string $name): Spartan
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /***
      * @return string
      */
     public function getLastName(): string
@@ -82,8 +96,6 @@ class Spartan extends AbstractEntity
     }
 
     /**
-     * Spartan constructor
-     *
      * @param string $lastName
      * @return Spartan
      */
@@ -94,30 +106,24 @@ class Spartan extends AbstractEntity
     }
 
     /**
-     * Spartan constructor
-     *
      * @return string
      */
-    public function getName(): string
+    public function getFormattedName(): string
     {
-        return $this->name;
+        return $this->formattedName;
     }
 
     /**
-     * Spartan constructor
-     *
-     * @param string $name
+     * @param string $formattedName
      * @return Spartan
      */
-    public function setName(string $name): Spartan
+    public function setFormattedName(string $formattedName): Spartan
     {
-        $this->name = $name;
+        $this->formattedName = $formattedName;
         return $this;
     }
 
     /**
-     * Spartan constructor
-     *
      * @return string
      */
     public function getImage(): string
@@ -126,8 +132,6 @@ class Spartan extends AbstractEntity
     }
 
     /**
-     * Spartan constructor
-     *
      * @param string $image
      * @return Spartan
      */
@@ -138,23 +142,19 @@ class Spartan extends AbstractEntity
     }
 
     /**
-     * Spartan constructor
-     *
-     * @param mixed $id
+     * @param int $id
      * @return Spartan
      */
-    public function setId(mixed $id): Spartan
+    public function setId(int $id): Spartan
     {
         $this->id = $id;
         return $this;
     }
 
     /**
-     * Spartan constructor
-     *
-     * @return mixed
+     * @return int
      */
-    public function getId(): mixed
+    public function getId(): int
     {
         return $this->id;
     }

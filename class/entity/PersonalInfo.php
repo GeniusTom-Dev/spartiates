@@ -2,8 +2,6 @@
 
 namespace class\entity;
 
-use class\entity\AbstractEntity;
-
 /**
  * Class PersonalInfo
  *
@@ -14,37 +12,34 @@ class PersonalInfo extends AbstractEntity
     /**
      * @var int|null $id The Id of the personal info
      */
-    private int $id;
+    private ?int $id;
 
     /**
-     * @var string $name The name of the personal info
+     * @var string $name The name of the player
      */
     private string $name;
 
     /**
-     * @var string $phoneNumber The phone number of the personal info
+     * @var string $phoneNumber The phone number of the player
      */
     private string $phoneNumber;
 
     /**
-     * @var string $email The email of the personal info
+     * @var string $email The email of the player
      */
     private string $email;
 
-    /**
-     * PersonalInfo constructor
-     *
-     * @param array|null $data An indexed array to hydrate itself
+    /***
+     * @return int|null
      */
     public function getId(): ?int
     {
         return $this->id ?? null;
     }
 
-    /**
-     * PersonalInfo constructor
-     *
-     * @param array|null $data An indexed array to hydrate itself
+    /***
+     * @param int $id
+     * @return PersonalInfo
      */
     public function setId(int $id): PersonalInfo
     {
@@ -52,9 +47,7 @@ class PersonalInfo extends AbstractEntity
         return $this;
     }
 
-    /**
-     * PersonalInfo constructor
-     *
+    /***
      * @return string
      */
     public function getPhoneNumber(): string
@@ -62,10 +55,8 @@ class PersonalInfo extends AbstractEntity
         return $this->phoneNumber;
     }
 
-    /**
-     * PersonalInfo constructor
-     *
-     * @param string $phoneNumber The phone number of the personal info
+    /***
+     * @param string $phoneNumber The phone number of the player
      * @return PersonalInfo
      */
     public function setPhoneNumber(string $phoneNumber): PersonalInfo
@@ -74,9 +65,7 @@ class PersonalInfo extends AbstractEntity
         return $this;
     }
 
-    /**
-     * PersonalInfo constructor
-     *
+    /***
      * @return string
      */
     public function getEmail(): string
@@ -84,10 +73,8 @@ class PersonalInfo extends AbstractEntity
         return $this->email;
     }
 
-    /**
-     * PersonalInfo constructor
-     *
-     * @param string $email The email of the personal info
+    /***
+     * @param string $email The email of the player
      * @return PersonalInfo
      */
     public function setEmail(string $email): PersonalInfo
@@ -96,9 +83,7 @@ class PersonalInfo extends AbstractEntity
         return $this;
     }
 
-    /**
-     * PersonalInfo constructor
-     *
+    /***
      * @param PersonalInfo $personalInfo The personal info to compare
      * @return bool
      */
@@ -112,9 +97,7 @@ class PersonalInfo extends AbstractEntity
         return TRUE;
     }
 
-    /**
-     * PersonalInfo constructor
-     *
+    /***
      * @return string
      */
     public function getName(): string
@@ -122,10 +105,8 @@ class PersonalInfo extends AbstractEntity
         return $this->name;
     }
 
-    /**
-     * PersonalInfo constructor
-     *
-     * @param string $name The name of the personal info
+    /***
+     * @param string $name The name of the player
      * @return PersonalInfo
      */
     public function setName(string $name): PersonalInfo
