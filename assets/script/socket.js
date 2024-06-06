@@ -1,5 +1,6 @@
 let socket = new WebSocket('wss://spartiates-socket-server.glitch.me/');
 
+
 socket.addEventListener('open', (event) => {
     console.log('Connexion WebSocket ouverte:', event);
 
@@ -64,6 +65,8 @@ function sendScore(score) {
     };
     socket.send(JSON.stringify(JsonMessage));
 }
+
+window.sendScore = sendScore;
 
 function sendIDMessage(message, id) {
     const JsonMessage = {

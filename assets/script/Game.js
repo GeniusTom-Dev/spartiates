@@ -130,7 +130,7 @@ export default class Game {
                     this.score += 100;
                     sessionStorage.setItem("score", this.score.toString());
                     $("#score").text(this.score);
-                    sendScore(this.score)
+                    window.sendScore(this.score)
 
                 }
 

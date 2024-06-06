@@ -3,7 +3,7 @@
 <div class="w-full lg:w-2/3 h-full flex flex-col">
     <input type="hidden" id="sessionCode" value="<?= $_SESSION['code']?>">
     <div class="w-full h-[6vh] flex justify-center text-center">
-        <h2 class="text-2xl"><?= $_SESSION['id']?>Score: <span class="text-customBlueDark" id="score">0</span></h2>
+        <h2 class="text-2xl">Score: <span class="text-customBlueDark" id="score">0</span></h2>
     </div>
     <div class="w-full h-[6vh] flex justify-center text-center">
         <h2 id="question"></h2>
