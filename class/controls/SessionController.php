@@ -5,11 +5,10 @@ namespace class\controls;
 use class\dataAccess\database\PersonalInfoTable;
 use class\dataAccess\database\PlayerTable;
 use class\dataAccess\database\SpartanTable;
+use class\dataAccess\database\UsersTable;
 use class\entity\PersonalInfo;
 use class\entity\Player;
 use class\exception\NotFoundException;
-use repository\SpartanRepository;
-use repository\UsersRepository;
 
 /**
  * Class SessionController
@@ -42,7 +41,7 @@ class SessionController
     {
         $this->playerTable = new PlayerTable();
         $this->personalInfoTable = new PersonalInfoTable();
-        $this->spartanRepository = new SpartanTable();
+        $this->spartanTable = new SpartanTable();
     }
 
     /**
@@ -151,8 +150,8 @@ class SessionController
     public function showEndGame($score): void
     {
         try {
-            $userRepository = new UsersRepository();
-            $allRanks = $userRepository->getRanking();
+            $userTable = new UsersTable();
+            $allRanks = $userTable->getRanking();
             if ($score == 0)
                 $score = $this->playerTable->select($_SESSION['id'])->getScore();
             if (isset($_SESSION['id']) && $this->playerTable->exists($_SESSION['id'])) {
@@ -185,7 +184,7 @@ class SessionController
     {
         if (isset($_SESSION['id']) && $this->playerTable->exists($_SESSION['id'])) {
             $_SESSION['spartanId'] = $spartanId;
-            $this->spartanRepository->incrementSpartanChoose($spartanId);
+            $this->spartanTable->incrementSpartanChoose($spartanId);
         }
     }
 

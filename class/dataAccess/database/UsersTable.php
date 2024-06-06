@@ -5,7 +5,6 @@ namespace class\dataAccess\database;
 use class\entity\Admin;
 use class\exception\MoreThanOneException;
 use class\exception\NotFoundException;
-use model\Admin;
 use PDO;
 
 /**

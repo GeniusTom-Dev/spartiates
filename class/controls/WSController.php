@@ -2,6 +2,8 @@
 
 namespace class\controls;
 
+use class\dataAccess\database\UsersTable;
+
 /**
  * Class WSController
  *
@@ -50,12 +52,12 @@ class WSController
     }
 
     public function saveScore($scores) {
-        $userRepository = new UsersRepository();
+        $usersTable = new UsersTable();
         $scores = htmlspecialchars_decode($scores);
         $scores = json_decode($scores, true);
         var_dump($scores);
         foreach ($scores as $score) {
-            $userRepository->updateScore($score['id'], $score['score']);
+            $usersTable->updateScore($score['id'], $score['score']);
         }
 
     }
