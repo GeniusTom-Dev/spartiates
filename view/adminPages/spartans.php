@@ -1,10 +1,10 @@
-<script src="/assets/socket.js"></script>
+<script src="../../assets/script/socket.js" type="module"></script>
 
 <a href="/home" class="absolute left-5 top-4 md:top-5 w-12 md:w-16 h-12 md:h-16">
-    <img class="p-2 bg-customBlue rounded-xl" src="/assets/images/home.svg" alt="Home">
+    <img class="p-2 bg-customBlue rounded-xl" src="../../assets/images/icon/home.svg" alt="Home">
 </a>
 <a class="absolute right-4 top-4 md:top-5 w-12 md:w-16 h-12 md:h-16 cursor-pointer">
-    <img class="p-2 bg-customBlue rounded-xl actionButton" src="../../assets/images/disconnect.svg"
+    <img class="p-2 bg-customBlue rounded-xl actionButton" src="../../assets/images/icon/disconnect.svg"
          data-action="disconnect" alt="Disconnect">
 </a>
 
@@ -32,7 +32,7 @@
             <?php foreach ($data as $spartan) { ?>
                 <div class="spartan-card flex flex-col items-center justify-center w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md">
                     <?php
-                    if ($fileName = glob('assets/spartImage/' . $spartan->getFormattedName() . '.*')) {
+                    if ($fileName = glob('assets/images/spartian/' . strtolower($spartan->getLastname()) . '_' . strtolower($spartan->getName()) . '.*')) {
                         echo '<img class="w-24 h-32 rounded-3xl object-contain" src="' . $fileName[0] . '" alt="image du spartiate">';
                     }
                     ?>
@@ -40,15 +40,15 @@
                     <div class="flex flex-row items-center justify-between w-full mt-2">
                         <p class="spartan-name text-lg font-medium text-gray-800 mr-5"><?= $spartan->getLastname() ?> <?= $spartan->getName() ?> (<?= $spartan->getSelectionFrequency() ?> selections)</p>
                         <div class="flex flex-row space-x-2">
-                            <a href="/updateSpartan?id=<?= $spartan->getId() ?>"
+                            <a href="/updateSpartan&id=<?= $spartan->getId() ?>"
                                class="inline-block w-8 h-8 bg-customBlue hover:bg-blue-700 rounded">
-                                <img class="p-1" src="/assets/images/edit.svg" alt="Edit">
+                                <img class="p-1" src="../../assets/images/icon/edit.svg" alt="Edit">
                             </a>
                             <button data-id="<?= $spartan->getId() ?>"
                                     data-modal-target="deleteModalSpartiate" data-modal-toggle="deleteModalSpartiate"
                                     class="callActionButton inline-block w-8 h-8 bg-red-500 hover:bg-red-700 rounded"
                                     type="button">
-                                <img class="p-1" src="/assets/images/trashcan.svg" alt="Delete">
+                                <img class="p-1" src="../../assets/images/icon/trashcan.svg" alt="Delete">
                             </button>
                         </div>
                     </div>
@@ -64,20 +64,9 @@
         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
             <!-- Modal content -->
             <div class="relative p-4 text-center rounded-lg shadow bg-customBlueDark sm:p-5">
-                <button type="button"
-                        class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-600 hover:text-white"
-                        data-modal-toggle="deleteModalSpartiate">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                              clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
                 <img class="text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true"
-                     src="/assets/images/trashcan.svg" </img>
-                <p class="mb-4 text-gray-300">Etes vous sur de vouloir supprimer ?</p>
+                     src="../../assets/images/icon/trashcan.svg" alt="supprimer"/>
+                <p class="mb-4 text-gray-300">Êtes-vous sûr de vouloir supprimer ?</p>
                 <div class="flex justify-center items-center space-x-4">
                     <button data-modal-toggle="deleteModalSpartiate" type="button"
                             class="py-2 px-3 text-sm font-medium rounded-lg border focus:ring-4 focus:outline-none focus:ring-primary-300 focus:z-10 bg-gray-700 text-gray-300 border-gray-500 hover:text-white hover:bg-gray-600 focus:ring-gray-600">
@@ -93,5 +82,5 @@
     </div>
 </div>
 
-<script src="/assets/search.js"></script>
+<script src="../../assets/script/search.js" type="module"></script>
 

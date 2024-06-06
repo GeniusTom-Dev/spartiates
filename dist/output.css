@@ -1362,6 +1362,10 @@ input:checked + .toggle-bg{
   height: 2.25rem;
 }
 
+.h-\[12vh\]{
+  height: 12vh;
+}
+
 .h-\[15vh\]{
   height: 15vh;
 }
@@ -1384,10 +1388,6 @@ input:checked + .toggle-bg{
 
 .h-\[50vh\]{
   height: 50vh;
-}
-
-.h-\[6vh\]{
-  height: 6vh;
 }
 
 .h-\[8vh\]{
@@ -1668,12 +1668,6 @@ input:checked + .toggle-bg{
   margin-bottom: calc(2.5rem * var(--tw-space-y-reverse));
 }
 
-.space-y-14 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-y-reverse: 0;
-  margin-top: calc(3.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(3.5rem * var(--tw-space-y-reverse));
-}
-
 .space-y-4 > :not([hidden]) ~ :not([hidden]){
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1690,6 +1684,12 @@ input:checked + .toggle-bg{
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+
+.space-y-8 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(2rem * var(--tw-space-y-reverse));
 }
 
 .overflow-hidden{
@@ -2135,11 +2135,6 @@ input:checked + .toggle-bg{
 .text-customBlue{
   --tw-text-opacity: 1;
   color: rgb(171 211 230 / var(--tw-text-opacity));
-}
-
-.text-customBlueDark{
-  --tw-text-opacity: 1;
-  color: rgb(44 87 136 / var(--tw-text-opacity));
 }
 
 .text-gray-300{
@@ -2683,12 +2678,20 @@ input:checked + .toggle-bg{
     width: 10vw;
   }
 
+  .sm\:w-\[80\%\]{
+    width: 80%;
+  }
+
   .sm\:w-\[90\%\]{
     width: 90%;
   }
 
   .sm\:w-\[90vw\]{
     width: 90vw;
+  }
+
+  .sm\:max-w-\[80\%\]{
+    max-width: 80%;
   }
 
   .sm\:p-5{
@@ -2698,6 +2701,11 @@ input:checked + .toggle-bg{
   .sm\:text-base{
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .sm\:text-lg{
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   .sm\:text-xl{
@@ -2801,6 +2809,10 @@ input:checked + .toggle-bg{
 
   .md\:w-\[95vw\]{
     width: 95vw;
+  }
+
+  .md\:max-w-\[500px\]{
+    max-width: 500px;
   }
 
   .md\:grid-cols-2{
@@ -3006,6 +3018,11 @@ input:checked + .toggle-bg{
   .xl\:text-2xl{
     font-size: 1.5rem;
     line-height: 2rem;
+  }
+
+  .xl\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .xl\:text-4xl{

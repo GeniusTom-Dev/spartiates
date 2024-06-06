@@ -4,7 +4,11 @@
 /// Load classes
 ///////////////////////////////////////////////////////////////////////////////
 
-use controls\{QuestionsController, SpartanController, RouteController, ActionController, UsersController};
+use class\ActionRouter;
+use class\controls\QuestionsController;
+use class\controls\SpartanController;
+use class\controls\UsersController;
+use class\Router;
 
 require_once "autoloader.php";
 
@@ -13,12 +17,23 @@ require_once "autoloader.php";
 ///////////////////////////////////////////////////////////////////////////////
 
 $url = $_GET['url'] ?? '';
-
 ///////////////////////////////////////////////////////////////////////////////
 /// Load session
 ///////////////////////////////////////////////////////////////////////////////
 
+// Configuration des paramètres de session
 ini_set('session.gc_lifetime', 5);
+ini_set('session.use_only_cookies', 1);
+ini_set('session.use_strict_mode', 1);
+
+// Configuration des paramètres des cookies de session
+session_set_cookie_params([
+    'secure' => true,
+    'httponly' => true,
+    'samesite' => 'Strict'
+]);
+
+// Initiation/Arrêt de session
 if (!isset($_SESSION))
     session_start();
 if (isset($_SESSION['last_activity']) && time() - $_SESSION['last_activity'] > 1800) {
@@ -27,11 +42,6 @@ if (isset($_SESSION['last_activity']) && time() - $_SESSION['last_activity'] > 1
     session_start();
 } else {
     $_SESSION['last_activity'] = time();
-}
-
-if(isset($_GET['reset']) && $_GET['reset'] === "oui"){
-    session_destroy();
-    session_unset();
 }
 
 $usersController = new UsersController();
@@ -46,8 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
 $questionsController = new QuestionsController();
 $spartanController = new SpartanController();
-$routeController = new RouteController();
-$actionController = new ActionController();
+$routeController = new Router();
+$actionController = new ActionRouter();
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -108,7 +118,11 @@ $actionController->registerAction("getQuestionsNumber", [], "QuestionsController
 $actionController->registerAction("getAnswer", ['fields' => ['index']], "QuestionsController", null);
 $actionController->registerAction("searchQuestion", ['fields' => ['searchTerm']], "QuestionsController", null, true);
 
-$actionController->registerAction("checkSessionCode", ['fields' => ['code']], "CodesController", null, false, ['success' => ['success' => true, 'url' => '/username']], ['error' => ['success' => false, 'error' => 'code incorrect']], ['sessionHasEnded' => ['success' => false, 'error' => 'La session est finis']], ['needResponse' => true]);
+$actionController->registerAction("checkSessionCode", ['fields' => ['code']], "CodesController", null, false,
+    ['success' => ['success' => true, 'url' => '/username']],
+    ['error' => ['success' => false, 'error' => 'Code expiré ou incorrect']],
+    ['sessionHasEnded' => ['success' => false, 'error' => 'La session est finis']],
+    ['needResponse' => true]);
 $actionController->registerAction("getSessionCode", [], "CodesController", null, true);
 
 $actionController->registerAction("start", [], "CodesController", null, true);
@@ -128,6 +142,7 @@ $actionController->registerAction("connexionWS", [], "WSController", null);
 $actionController->registerAction("logIn", ['fields' => ['login', 'password']], "UsersController", null,false, ['success' => ['success' => true, 'url' => '/users']], ['error' => ['success' => false, 'error' => 'Identifiant ou mot de passe incorrect']], ['needResponse' => true]);
 $actionController->registerAction("disconnect", [], "UsersController", null,false, ['success' => ['success' => true, 'url' => '/']], ['needResponse' => true]);
 $actionController->registerAction("deleteUser", ['idField' => 'id'], "SessionController", '', true);
+$actionController->registerAction("sendResetEmail", [], "UsersController", '', false);
 
 $actionController->registerAction("showRanking", [], "SessionController", null, true);
 $actionController->registerAction("showEndGame", ['fields' => ['score']], "SessionController", null);

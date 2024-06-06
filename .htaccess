@@ -5,9 +5,34 @@ RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
+# Block access to specific file types (e.g., .php, .inc, .config)
+<FilesMatch "\.(inc|config)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
 # Set MIME types for JavaScript files
 AddType application/javascript .js
 AddType application/javascript-module .mjs
+
+# Content Security Policy headers
+
+# Header set X-XSS-Protection "1; mode=block"
+# script-src 'self' 'unsafe-inline' 'unsafe-eval'; \
+# style-src 'self' 'unsafe-inline'; \
+# default-src 'self'; \
+# font-src 'self' data:; \
+### le connect-src provoque une erreur mais n'a pas crée de bug
+#<IfModule mod_headers.c>
+#    Header set Content-Security-Policy "\
+#        img-src 'self' data:; \
+#        connect-src 'self'; \
+#        object-src 'none'; \
+#        frame-ancestors 'self'; \
+#        base-uri 'self'; \
+#        form-action 'self' \
+#    "
+#</IfModule>
 
 # Rewrite all other URLs to index.php
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]

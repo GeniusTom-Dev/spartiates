@@ -1,4 +1,4 @@
-<script src="/assets/socket.js"></script>
+<script src="../assets/script/socket.js" type="module"></script>
 
 <div class="w-full lg:w-2/3 h-full flex flex-col">
     <input type="hidden" id="sessionCode" value="<?= $_SESSION['code']?>">
