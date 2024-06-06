@@ -4,8 +4,8 @@
     <img class="p-2 bg-customBlue rounded-xl" src="../../assets/images/icon/home.svg" alt="Home">
 </a>
 
-<div class="flex justify-center items-center min-h-screen">
-        <form class="mt-2 rounded-md shadow-xl flex flex-col justify-center space-y-6 py-8 px-14 bg-white w-full max-w-2xl md:w-[95vw] sm:w-[90vw]" id="verificationForm" method="post">
+<div class="inline-flex">
+        <form class="mt-2 mb-0 rounded-md shadow-xl flex flex-col justify-center space-y-6 py-8 px-14 bg-white w-full max-w-2xl md:w-[95vw] sm:w-[90vw]" id="verificationForm" method="post">
        <input type="hidden" name="action" value="logIn">
 
         <h1 class="text-center text-[3vh]">Connexion</h1>
