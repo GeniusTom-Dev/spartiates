@@ -5,14 +5,14 @@
     <div class="w-full h-[6vh] flex justify-center text-center">
         <h2 class="text-2xl">Score: <span class="text-customBlueDark" id="score">0</span></h2>
     </div>
-    <div class="w-full h-[6vh] flex justify-center text-center">
+    <div class="w-full h-[10vh] md:h-[6vh] flex justify-center text-center">
         <h2 id="question"></h2>
     </div>
     <div class="w-full h-[28vh]">
         <div class="w-full h-[8vh] flex items-center justify-around">
-            <div class="w-16 h-16 rounded-full shadow-inner bg-customBlue border-2 flex justify-center items-center cursor-pointer" id="targetA">A</div>
-            <div class="w-16 h-16 rounded-full shadow-inner bg-customBlue border-2 flex justify-center items-center cursor-pointer" id="targetB">B</div>
-            <div class="w-16 h-16 rounded-full shadow-inner bg-customBlue border-2 flex justify-center items-center cursor-pointer" id="targetC">C</div>
+            <div class="w-10 h-10 md:w-16 md:h-16 rounded-full shadow-inner bg-customBlue border-2 flex justify-center items-center cursor-pointer" id="targetA">A</div>
+            <div class="w-10 h-10 md:w-16 md:h-16 rounded-full shadow-inner bg-customBlue border-2 flex justify-center items-center cursor-pointer" id="targetB">B</div>
+            <div class="w-10 h-10 md:w-16 md:h-16 rounded-full shadow-inner bg-customBlue border-2 flex justify-center items-center cursor-pointer" id="targetC">C</div>
         </div>
 
         <div class="w-full h-[20vh] flex justify-center flex-wrap-reverse relative" id="container">
