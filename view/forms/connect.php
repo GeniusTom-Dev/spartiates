@@ -32,7 +32,7 @@
         event.preventDefault();
         $.ajax({
             type: "POST",
-            url: "/class/controls/actionController.php",
+            url: "/index.php",
             data: {
                 action: "sendResetEmail",
             },

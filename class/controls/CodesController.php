@@ -99,7 +99,7 @@ class CodesController
             mail($to, $subject, $message, $headers);
         }
 
-        echo 'Pas de session en cours';
+        echo 'Aucune session en cours';
     }
 
     /**
