@@ -7,7 +7,7 @@
     <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
     <title>%title%</title>
     <link rel="stylesheet" href="/dist/output.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!--<script src="https://cdn.tailwindcss.com"></script>-->
     <script src="/dist/bundle.js"></script>
     <script src="/dist/jquery.min.js"></script>
     <script src="../assets/script/index.js" defer></script>
