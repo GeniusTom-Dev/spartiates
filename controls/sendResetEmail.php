@@ -13,10 +13,9 @@ if ($email) {
     $token = $tokenRepository->generateToken($email);
 
     // TODO mettre le bon lien
-    $resetLink = "https://spartiatesdev.alwaysdata.net/reset?token=$token";
+    $resetLink = "https://".$_SERVER['HTTP_HOST']."/reset&token=$token";
 
-    // Assuming you have a mail function setup
-    $to = "mathieu.leroux130304@gmail.com";
+    $to = $email;
     $subject = "Password Reset Request";
     $message = "Cliquez sur ce lien pour réinitialiser le mot de passe: $resetLink";
     $headers = "From: no-reply@spartiates.com";
