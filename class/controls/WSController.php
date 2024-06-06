@@ -55,7 +55,6 @@ class WSController
         $usersTable = new UsersTable();
         $scores = htmlspecialchars_decode($scores);
         $scores = json_decode($scores, true);
-        var_dump($scores);
         foreach ($scores as $score) {
             $usersTable->updateScore($score['id'], $score['score']);
         }

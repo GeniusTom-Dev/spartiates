@@ -2,8 +2,6 @@ let socket = new WebSocket('wss://spartiates-socket-server.glitch.me/');
 
 
 socket.addEventListener('open', (event) => {
-    console.log('Connexion WebSocket ouverte:', event);
-
     $.ajax({
         type: "POST",
         url: "/index.php",
@@ -18,7 +16,6 @@ socket.addEventListener('open', (event) => {
 
 
 socket.addEventListener('message', (event) => {
-    console.log('Message reçu:', event.data);
     const message = event.data;
     if (message === "stop") {
         if (typeof window.endGame === 'function'){
@@ -30,7 +27,6 @@ socket.addEventListener('message', (event) => {
 });
 
 socket.addEventListener('close', (event) => {
-    console.log('Connexion WebSocket fermée:', event);
     window.location.reload();
 });
 

@@ -79,7 +79,6 @@ if (allElementsLoaded){
                     },
                     dataType: 'json',
                     success: function (response) {
-                        console.log(response)
                         $("#pseudo").text(response.pseudo);
                         $("#scoreEnd").text(response.score.toString());
                         $("#rank").text(response.rank.toString());
