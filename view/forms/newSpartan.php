@@ -13,5 +13,5 @@
     <label class="w-full text-lg md:text-xl">Télécharger une photo :
         <input class="rounded w-full mt-2 p-1" type="file" name="fileToUpload" id="fileToUpload" required accept="image/png, image/jpeg, image/jpg">
     </label>
-    <input class="bg-customBlue hover:bg-sky-300 text-white rounded-xl text-lg py-4 px-8 mt-4" type="submit" name="create" value="Créer">
+    <input class="bg-customBlue hover:bg-sky-300 rounded-xl text-lg py-4 px-8 mt-4" type="submit" name="create" value="Créer">
 </form>

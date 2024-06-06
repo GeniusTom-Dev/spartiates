@@ -6,7 +6,7 @@
         <h2 class="font-sans font-extralight text-base md:text-[2.5vh] mb-4 text-gray-800">Je vais t’apprendre les bases du hockey sur glace.<br>
             Alors enfiles tes patins et c’est parti !</h2>
     </div>
-    <div class="flex justify-center items-center mb-4">
+    <div class="flex justify-center items-center mb-1">
         <h2 class="bg-customBlue shadow-inner py-2 px-5 rounded-full text-lg md:text-xl">1</h2>
     </div>
     <p class="text-lg md:text-3xl text-gray-600 mb-2 font-sans px-4">

@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="w-full h-[20vh]">
-        <button class="w-full h-1/3 shadow-inner bg-customBlue border-2 flex justify-center items-center cursor-pointer my-2" id="answerA"></button>
+        <button class="w-full h-1/3 shadow-inner bg-customBlue border-2 flex justify-center items-center cursor-pointer rounded my-2" id="answerA"></button>
         <button class="w-full h-1/3 shadow-inner bg-customBlue border-x-2 flex justify-center items-center cursor-pointer my-2" id="answerB"></button>
         <button class="w-full h-1/3 shadow-inner bg-customBlue border-2 flex justify-center items-center cursor-pointer my-2" id="answerC"></button>
     </div>

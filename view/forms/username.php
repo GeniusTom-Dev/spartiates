@@ -19,7 +19,7 @@
 
         <div class="w-full flex flex-row items-center space-x-4">
             <input type="checkbox" class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 xl:w-9 xl:h-9" id="conditionsValidation" required />
-            <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">J'accepte les conditions générales d'utilisation</p>
+            <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">J'accepte les conditions générales d'utilisation<span class="text-red-600">*</span></p>
         </div>
         <p><span class="text-red-600">*</span> Ces champs sont obligatoires</p>
 
