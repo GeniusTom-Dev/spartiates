@@ -1,4 +1,4 @@
-<div class="font-light bg-gray-100 min-h-screen py-4">
+<div class="inline-block font-light bg-gray-100 py-4">
     <div class="flex justify-center items-center mb-4">
         <h1 class="bg-customBlue w-11/12 md:w-2/6 text-lg md:text-[3vh] rounded-3xl py-3 text-white mb-2 font-sans shadow-lg">Le hors jeu</h1>
     </div>
