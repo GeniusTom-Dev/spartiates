@@ -115,7 +115,7 @@ class UsersController
             $tokenRepository = new TokenRepository();
             $token = $tokenRepository->generateToken($email);
 
-            $resetLink = "https://newspartitatesgames.alwaysdata.net/reset&token=$token";
+            $resetLink = $_SERVER['HTTP_HOST'] . "/reset&token=$token";
 
             // Assuming you have a mail function setup
             $to = $email;
