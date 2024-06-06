@@ -56,36 +56,26 @@
 
     let connectButton = document.getElementById("connectButton");
     connectButton.addEventListener('click', function(event) {
-        console.log('clicked')
-        console.log(connectButton.disabled)
-        if(connectButton.disabled === false){
-            connectButton.disabled = true;
-            connectButton.value = 'Réessayez dans 3 secondes...';
-            setTimeout(() => {
-                connectButton.disabled = false;
-                connectButton.value = 'Se connecter';
-                console.log('enabled')
-            }, 3000);
-        }
-    });
-
-    /*
-     let connectButton = document.getElementById("connectButton");
-    connectButton.addEventListener('click', function(event) {
-        if (!connectButton.disabled) {
-            connectButton.disabled = true;
-            connectButton.value = 'Réessayez dans 3 secondes...';
-
-            let countdown = 3;
-            let interval = setInterval(() => {
-                countdown--;
-                connectButton.value = `Réessayez dans ${countdown} secondes...`;
-                if (countdown <= 0) {
-                    clearInterval(interval);
-                    connectButton.disabled = false;
-                    connectButton.value = 'Se connecter';
+        $.ajax({
+            type: "POST",
+            url: "/index.php",
+            data: {
+                action: "logIn",
+                login : document.getElementById("login").value,
+                password : document.getElementById("password").value
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.success === false) {
+                    connectButton.disabled = true;
+                    connectButton.value = 'Réessayez dans 3 secondes...';
+                    document.getElementById("res").style.display = 'block'
+                    setTimeout(() => {
+                        connectButton.disabled = false;
+                        connectButton.value = 'Se connecter';
+                    }, 3000);
                 }
-            }, 1000);
-        }
-    });*/
+            },
+        });
+    });
 </script>

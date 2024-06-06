@@ -5,7 +5,7 @@ RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Block access to specific file types (e.g., .php, .inc, .config)
+# Block access to specific file types (e.g., .inc, .config)
 <FilesMatch "\.(inc|config)$">
     Order allow,deny
     Deny from all
