@@ -41,7 +41,6 @@ $(document).ready(function (e) {
             type: form_method,
             data: form_data
         }).done(function (response) {
-            console.log(response)
             if (response.success) {
                 // Si l'authentification est réussie, changer l'URL et recharger la page
                 window.location.href = response.url;
@@ -74,8 +73,7 @@ $(document).ready(function (e) {
                 }else if(typeof response === 'string' && response[0] === "/"){
                     window.location.href = response;
                 } else {
-                    alert(response)
-                    //window.location.reload()
+                    alert("Erreur lors de l'envoie du formulaire")
                 }
             }
         });
@@ -101,7 +99,7 @@ $(document).ready(function (e) {
                 }else if(typeof response === 'string' && response[0] === "/"){
                     window.location.href = response;
                 } else {
-                    alert(response)
+                    alert("Erreur lors de la suppression")
                     window.location.reload()
                 }
             }
@@ -151,7 +149,6 @@ $(document).ready(function (e) {
                 sendMessage(response);
             }
             setTimeout(updateRanking, 1000);
-            console.log("updateRanking");
         });
     });
 
@@ -183,7 +180,6 @@ function getSessionCode() {
 }
 
 function animationHelper() {
-    console.log("animationHelper")
     if( document.getElementById('tutorial-hand').style.display === 'none'){
         document.getElementById('tutorial-hand').style.display = 'block';
     } else {

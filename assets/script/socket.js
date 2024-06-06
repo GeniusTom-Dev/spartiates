@@ -22,12 +22,9 @@ let messageMapping = [
 ];
 
 socket.addEventListener('message', (event) => {
-    console.log('Message reçu:', event.data);
     const message = event.data;
     if (messageMapping.includes(message)) {
-        console.log('recu', message);
         if (typeof window.endGame === 'function')
-            console.log('endGame', window.endGame);
             window.endGame(message);
     } else {
         WSRanking(message);
