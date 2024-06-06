@@ -15,24 +15,22 @@ socket.addEventListener('open', (event) => {
 
 });
 
-let messageMapping = [
-    "stop",
-    "start",
-    // "reset",
-];
 
 socket.addEventListener('message', (event) => {
+    console.log('Message reçu:', event.data);
     const message = event.data;
-    if (messageMapping.includes(message)) {
-        if (typeof window.endGame === 'function')
+    if (message === "stop") {
+        if (typeof window.endGame === 'function'){
             window.endGame(message);
-    } else {
+        }
+    }else{
         WSRanking(message);
     }
 });
 
 socket.addEventListener('close', (event) => {
     console.log('Connexion WebSocket fermée:', event);
+    window.location.reload();
 });
 
 function sendMessage(message) {
@@ -77,6 +75,14 @@ function sendIDMessage(message, id) {
 }
 
 function WSRanking(message) {
+    $.ajax({
+        type: "POST",
+        url: "/index.php",
+        data: {
+            action: "saveScore",
+            score: jsonToString(message),
+        },
+    })
     let ranking = $("#ranking");
     ranking.empty();
 // [{"id":"239","score":2600, "pseudo": "JohnDoe"}]
@@ -102,4 +108,15 @@ function WSRanking(message) {
         // Ajouter la nouvelle ligne au tableau
         ranking.append(newRow);
     }
+}
+
+
+function jsonToString(json) {
+    json = JSON.parse(json)
+    for (let i = 0; i < json.length; i++) {
+        json[i].id = json[i].id.toString();
+        json[i].score = json[i].score.toString();
+    }
+    json = JSON.stringify(json);
+    return json;
 }

@@ -13,9 +13,18 @@ let elements = [spartiate, puck, container, answerA, answerB, answerC];
 let allElementsLoaded = elements.every(element => element);
 
 if (allElementsLoaded){
+    if($("#sessionCode").val() !== sessionStorage.getItem("sessionCode") || sessionStorage.getItem("sessionCode") === null){
+        sessionStorage.setItem("score", "0");
+        sessionStorage.setItem("sessionCode", $("#sessionCode").val());
+    }
+
+
     let game = new Game(spartiate, puck, container)
     await game.initialize()
     await game.getQuestion()
+
+
+    $("#score").text(game.score);
 
     // Link a clickListener and a button
     // This function disables the buttons until all the actions are done in order to prevent the user from spam-clicking the answers
@@ -26,7 +35,7 @@ if (allElementsLoaded){
 
             await game.startSpartiateAnnimation(answer);
             await game.checkedAnswer(answer);
-            await game.sleep(1000)
+            await game.sleep(2000)
             game.resetPuck();
             await game.getQuestion();
             enableButtons();
@@ -49,6 +58,12 @@ if (allElementsLoaded){
         answerC.disabled = false;
     }
 
+    function initScore(message) {
+        game.score = message;
+
+
+    }
+
     function endGame(message) {
 
         switch (message) {
@@ -57,17 +72,18 @@ if (allElementsLoaded){
 
                 $.ajax({
                     type: "POST",
-                    url: "/class/controls/actionController.php",
+                    url: "/index.php",
                     data: {
                         action: "showEndGame",
-                        score: parseInt(sessionStorage.getItem("score")),
+                        score: game.score,
                     },
                     dataType: 'json',
                     success: function (response) {
+                        console.log(response)
                         $("#pseudo").text(response.pseudo);
                         $("#scoreEnd").text(response.score.toString());
                         $("#rank").text(response.rank.toString());
-                        sessionStorage.setItem("score", 0);
+                        sessionStorage.setItem("score", "0");
                     }
                 });
                 break;

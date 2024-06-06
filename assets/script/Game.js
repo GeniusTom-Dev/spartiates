@@ -5,6 +5,12 @@ export default class Game {
         this.puck = puck;
         this.container = container;
 
+        if(sessionStorage.getItem("score") == null || sessionStorage.getItem("score") === ""){
+            sessionStorage.setItem("score", "0");
+        }
+
+        this.score = parseInt(sessionStorage.getItem("score"));
+
         this.multiplicator = []
         this.multiplicator["A"] = 1;
         this.multiplicator["B"] = 2;
@@ -30,7 +36,7 @@ export default class Game {
     async getQuestionsNumber() {
         return await $.ajax({
             type: "POST",
-            url: "/class/controls/actionController.php",
+            url: "/index.php",
             data: {
                 action: "getQuestionsNumber",
             },
@@ -56,7 +62,7 @@ export default class Game {
         // Send Ajax request in order to get the question's information
         $.ajax({
             type: "POST",
-            url: "/class/controls/actionController.php",
+            url: "/index.php",
             data: {
                 action: "getQuestion",
                 index: this.questionIndexes[0]
@@ -93,49 +99,57 @@ export default class Game {
      * Check the player's answer
      **/
     checkedAnswer(playerAnswer) {
-            $.ajax({
-                type: "POST",
-                url: "/class/controls/actionController.php",
-                data: {
-                    action: "getAnswer",
-                    index: this.questionIndexes[0]
-                },
-                dataType: 'json',
-                success: async (answer) =>  {
+        $.ajax({
+            type: "POST",
+            url: "/index.php",
+            data: {
+                action: "getAnswer",
+                index: this.questionIndexes[0]
+            },
+            dataType: 'json',
+            success: async (answer) =>  {
 
-                    const answers = {
-                        "A": document.getElementById('answerA'),
-                        "B": document.getElementById('answerB'),
-                        "C": document.getElementById('answerC')
-                    };
+                const answers = {
+                    "A": document.getElementById('answerA'),
+                    "B": document.getElementById('answerB'),
+                    "C": document.getElementById('answerC')
+                };
 
-                    // Function to update the background colors
-                    const updateBackgroundColors = () => {
-                        Object.keys(answers).forEach(key => {
-                            // If the answer is the right one, the background color of the button become green
-                            // Otherwise, the background color will be red
-                            answers[key].style.backgroundColor = (answers[key].innerHTML.slice(3) === answer) ? "#28A745" : "#DC3545";
-                        });
-                    };
+                // Function to update the background colors
+                const updateBackgroundColors = () => {
+                    Object.keys(answers).forEach(key => {
+                        // If the answer is the right one, the background color of the button become green
+                        // Otherwise, the background color will be red
+                        answers[key].style.backgroundColor = (answers[key].innerHTML.slice(3) === answer) ? "#28A745" : "#DC3545";
+                    });
+                };
 
-                    updateBackgroundColors();
+                updateBackgroundColors();
 
-                    // remove the current question index of the list
-                    if (this.questionIndexes.length !== 0) {
-                        this.questionIndexes = this.questionIndexes.slice(1)
-                    }
+                if(answers[playerAnswer].innerHTML.slice(3) === answer) {
+                    this.score += 100;
+                    sessionStorage.setItem("score", this.score.toString());
+                    $("#score").text(this.score);
+                    sendScore(this.score)
 
                 }
-            });
+
+                // remove the current question index of the list
+                if (this.questionIndexes.length !== 0) {
+                    this.questionIndexes = this.questionIndexes.slice(1)
+                }
+
+            }
+        });
     }
 
     sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 
     startSpartiateAnnimation = async (direction) => {
         this.spartiate.src = "./assets/images/annimation_spartiates.gif"
-        await this.sleep(1650)
+        await this.sleep(1700)
         this.movePuck(direction)
-        await this.sleep(100)
+        await this.sleep(300)
         this.spartiate.src = "./assets/images/default_spartiates.png"
     }
 

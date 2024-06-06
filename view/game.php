@@ -1,8 +1,12 @@
 <script src="../assets/script/socket.js" type="module"></script>
 
 <div class="w-full lg:w-2/3 h-full flex flex-col">
-    <div class="w-full h-[12vh] flex justify-center items-center text-center">
-        <h2 id="question">Lorem ipsum dolor sit amet. C’est juste un texte exemple pour visualiser les choses ?</h2>
+    <input type="hidden" id="sessionCode" value="<?= $_SESSION['code']?>">
+    <div class="w-full h-[6vh] flex justify-center text-center">
+        <h2 class="text-2xl"><?= $_SESSION['id']?>Score: <span class="text-customBlueDark" id="score">0</span></h2>
+    </div>
+    <div class="w-full h-[6vh] flex justify-center text-center">
+        <h2 id="question"></h2>
     </div>
     <div class="w-full h-[28vh]">
         <div class="w-full h-[8vh] flex items-center justify-around">
@@ -35,7 +39,7 @@
         <label class="text-5xl" id="scoreEnd"></label>
     </span>
     <span>
-        <label class="text-5xl">Classement : #</label>
+        <label class="text-5xl">Classement : </label>
         <label class="text-5xl" id="rank"></label>
     </span>
     <a href="/home" class="p-5 bg-customBlue opacity-100 rounded-xl text-4xl">

@@ -5,6 +5,8 @@ namespace class\dataAccess\database;
 use class\entity\Admin;
 use class\exception\MoreThanOneException;
 use class\exception\NotFoundException;
+use model\Admin;
+use PDO;
 
 /**
  * Class UsersTable
@@ -49,5 +51,19 @@ class UsersTable extends AbstractTable
         $result = $this->connexion->prepare($query);
         $result->execute(['login' => $login, 'password' => $password]);
 
+    }
+
+    public function updateScore($id, $score): void {
+        $query = 'UPDATE PLAYER SET SCORE = :score WHERE ID = :id';
+        $result = $this->connexion->prepare($query);
+        $result->execute(['id' => $id, 'score' => $score]);
+    }
+
+    public function getRanking(): array
+    {
+        $query = 'SELECT Id, Score, DENSE_RANK() OVER (ORDER BY Score DESC) as Rank FROM PLAYER WHERE Score > 0 ORDER BY Score DESC LIMIT 10;';
+        $statement = $this->connexion->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
