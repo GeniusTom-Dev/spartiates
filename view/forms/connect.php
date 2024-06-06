@@ -54,11 +54,38 @@
         });
     });
 
-    /*let connectButton = document.getElementById("connectButton");
+    let connectButton = document.getElementById("connectButton");
     connectButton.addEventListener('click', function(event) {
-        connectButton.disabled = true;
-        setTimeout(() => {
-            connectButton.disabled = false;
-        }, 3000);
+        console.log('clicked')
+        console.log(connectButton.disabled)
+        if(connectButton.disabled === false){
+            connectButton.disabled = true;
+            connectButton.value = 'Réessayez dans 3 secondes...';
+            setTimeout(() => {
+                connectButton.disabled = false;
+                connectButton.value = 'Se connecter';
+                console.log('enabled')
+            }, 3000);
+        }
+    });
+
+    /*
+     let connectButton = document.getElementById("connectButton");
+    connectButton.addEventListener('click', function(event) {
+        if (!connectButton.disabled) {
+            connectButton.disabled = true;
+            connectButton.value = 'Réessayez dans 3 secondes...';
+
+            let countdown = 3;
+            let interval = setInterval(() => {
+                countdown--;
+                connectButton.value = `Réessayez dans ${countdown} secondes...`;
+                if (countdown <= 0) {
+                    clearInterval(interval);
+                    connectButton.disabled = false;
+                    connectButton.value = 'Se connecter';
+                }
+            }, 1000);
+        }
     });*/
 </script>
