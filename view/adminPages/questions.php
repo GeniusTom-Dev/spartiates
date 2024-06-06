@@ -47,17 +47,6 @@
         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
             <!-- Modal content -->
             <div class="relative p-4 text-center rounded-lg shadow bg-customBlueDark sm:p-5">
-                <button type="button"
-                        class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-600 hover:text-white"
-                        data-modal-toggle="deleteModalQuestion">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                              clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
                 <img class="text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true"
                      src="../../assets/images/icon/trashcan.svg" alt="supprimer"/>
                 <p class="mb-4 text-gray-300">Êtes-vous sûr de vouloir supprimer ?</p>
