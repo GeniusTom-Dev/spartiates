@@ -33,16 +33,10 @@ class CodesController
      *
      * @return bool True if the code is active, false otherwise.
      */
-    public function codeIsActive($code): bool
+    public function codeIsActive(mixed $code): bool
     {
-        try {
-            if ($this->repository->isActive($code)) {
-                return true;
-            }
-        } catch (MoreThanOneException $ERROR) {
-            //on fait un retour d'erreur
-            file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
-            echo $ERROR->getMessage();
+        if ($this->repository->isActive($code)) {
+            return true;
         }
         return false;
     }
@@ -54,18 +48,14 @@ class CodesController
      *
      * @return bool True if the session code is valid, false otherwise.
      */
-    public function checkSessionCode($code): bool
+    public function checkSessionCode(mixed $code): bool
     {
-        try {
-            if ($this->repository->checkSessionCode($code)) {
-                $_SESSION['code'] = $code;
-                return true;
-            }
-        } catch (MoreThanOneException $ERROR) {
-            //on fait un retour d'erreur
-            file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
-            echo $ERROR->getMessage();
-        }
+
+                if ($this->repository->checkSessionCode($code)) {
+                    $_SESSION['code'] = $code;
+                    return true;
+                }
+
         return false;
     }
 

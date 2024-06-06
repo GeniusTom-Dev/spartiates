@@ -10,7 +10,8 @@ use Random\RandomException;
  * This class is responsible for managing the token repository.
  */
 class TokenRepository {
-    private string $file = '../assets/data/token.json';
+
+    private string $file = __DIR__ . '/../../../assets/data/token.json';
 
     /**
      * @param string $email

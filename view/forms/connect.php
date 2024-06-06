@@ -30,10 +30,14 @@
 <script>
     document.getElementById('forgot-password').addEventListener('click', function(event) {
         event.preventDefault();
-
-        fetch('/controls/sendResetEmail.php')
-            .then(response => response.json())
-            .then(data => {
+        $.ajax({
+            type: "POST",
+            url: "/class/controls/actionController.php",
+            data: {
+                action: "sendResetEmail",
+            },
+            dataType: 'json',
+            success: function (data) {
                 if (data.success) {
                     const emailSentMessage = document.getElementById('email-sent-message');
                     emailSentMessage.classList.remove('hidden');
@@ -43,8 +47,11 @@
                 } else {
                     alert('Impossible d\'envoyer l\'email. Veuillez réessayer plus tard.');
                 }
-            })
-            .catch(error => console.error('Error:', error));
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
     });
 
     /*let connectButton = document.getElementById("connectButton");

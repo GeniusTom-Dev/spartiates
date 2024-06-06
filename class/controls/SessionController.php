@@ -108,12 +108,7 @@ class SessionController
      */
     public function deleteUser(mixed $id): void
     {
-        try {
-            $this->playerTable->delete($id);
-        } catch (NotFoundException $ERROR) {
-            file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
-            echo $ERROR->getMessage();
-        }
+        $this->playerTable->delete($id);
     }
 
     /**

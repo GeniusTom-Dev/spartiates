@@ -1,18 +1,20 @@
 <?php
 
-namespace class\controls;
+namespace class;
 
+use class\controls\CodesController;
+use class\controls\SpartanController;
 use Exception;
 use JetBrains\PhpStorm\NoReturn;
 use stdClass;
 use view\View;
 
 /**
- * Class RouteController
+ * Class Router
  *
  * This class is responsible for managing routes.
  */
-class RouteController{
+class Router{
     /**
      * @var array The array of routes.
      */
@@ -34,9 +36,9 @@ class RouteController{
     private stdClass $route;
 
     /**
-     * RouteController constructor.
+     * Router constructor.
      *
-     * Initializes a new instance of the RouteController class.
+     * Initializes a new instance of the Router class.
      */
     public function __construct(){
         $this->getAllTitles();
@@ -49,7 +51,7 @@ class RouteController{
      *
      * @return void
      */
-    public function displayRoutes($url): void{
+    public function displayRoutes(string $url): void{
         $this->url = $url;
         $route = $this->getRoute();
         if($route !== null) {

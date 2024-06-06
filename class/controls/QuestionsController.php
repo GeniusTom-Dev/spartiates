@@ -32,13 +32,8 @@ class QuestionsController
      */
     public function showQuestions(): void
     {
-        try {
-            $path = 'view/adminPages/questions.php';
-            View::display('Questions', $path, $this->repository->getAll());
-        } catch (NotFoundException $ERROR) {
-            file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
-            echo $ERROR->getMessage();
-        }
+        $path = 'view/adminPages/questions.php';
+        View::display('Questions', $path, $this->repository->getAll());
     }
 
     /**
@@ -107,14 +102,8 @@ class QuestionsController
      */
     public function createQuestion(string $text, string $true, string $false1, string $false2): void
     {
-        try {
-            $this->repository->createQuestion(trim($text), trim($true), trim($false1), trim($false2));
-        } catch (CannotCreateException $ERROR) {
-            file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
-            echo $ERROR->getMessage();
-        }
+        $this->repository->createQuestion(trim($text), trim($true), trim($false1), trim($false2));
     }
-
 
     /**
      * Deletes a question by its ID.
@@ -125,12 +114,7 @@ class QuestionsController
      */
     public function deleteQuestion(int $id): void
     {
-        try {
-            $this->repository->deleteQuestionById($id);
-        } catch (NotFoundException $ERROR) {
-            file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
-            echo $ERROR->getMessage();
-        }
+        $this->repository->deleteQuestionById($id);
     }
 
     /**
@@ -146,12 +130,7 @@ class QuestionsController
      */
     public function updateQuestion(int $id, string $text, string $true, string $false1, string $false2): void
     {
-        try {
-            $this->repository->updateQuestionById($id, trim($text), trim($true), trim($false1), trim($false2));
-        } catch (NotFoundException $ERROR) {
-            file_put_contents('log/HockeyGame.log', $ERROR->getMessage() . "\n", FILE_APPEND | LOCK_EX);
-            echo $ERROR->getMessage();
-        }
+        $this->repository->updateQuestionById($id, trim($text), trim($true), trim($false1), trim($false2));
     }
 
     /**

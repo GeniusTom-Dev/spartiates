@@ -1,17 +1,17 @@
 <?php
 
-namespace class\controls;
+namespace class;
 
 use stdClass;
 
 /**
- * Class ActionController
+ * Class ActionRouter
  *
  * This class manages the registration and handling of various actions.
  * It allows actions to be registered with specific fields, controllers, redirection,
  * and other optional parameters. It handles the execution of these actions based on the provided POST data.
  */
-class ActionController{
+class ActionRouter{
 
     /**
      * @var array $actions An array that stores the registered actions.

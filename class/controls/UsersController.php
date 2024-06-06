@@ -3,6 +3,7 @@
 namespace class\controls;
 
 use class\dataAccess\database\UsersTable;
+use class\dataAccess\server\TokenRepository;
 use class\exception\MoreThanOneException;
 use class\exception\NotFoundException;
 
@@ -47,8 +48,7 @@ class UsersController
             }
 
         } catch (MoreThanOneException|NotFoundException $ERROR) {
-            //on fait un retour d'erreur
-//            echo $ERROR->getMessage();
+            return false;
         }
         return false;
     }
@@ -103,6 +103,31 @@ class UsersController
             } else {
                 echo "Les mots de passe ne correspondent pas.";
             }
+        }
+    }
+
+
+    public function sendResetEmail(): void {
+        $email = $_ENV['USER_EMAIL'];
+
+        if ($email) {
+            $tokenRepository = new TokenRepository();
+            $token = $tokenRepository->generateToken($email);
+
+            $resetLink = "https://newspartitatesgames.alwaysdata.net/reset&token=$token";
+
+            // Assuming you have a mail function setup
+            $to = $email;
+            $subject = "Password Reset Request";
+            $message = "Cliquez sur ce lien pour réinitialiser le mot de passe: $resetLink";
+            $headers = "From: no-reply@spartiates.com";
+            if (mail($to, $subject, $message, $headers)) {
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['success' => false]);
+            }
+        } else {
+            echo json_encode(['success' => false]);
         }
     }
 

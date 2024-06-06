@@ -4,11 +4,11 @@
 /// Load classes
 ///////////////////////////////////////////////////////////////////////////////
 
-use class\controls\{RouteController};
-use class\controls\ActionController;
+use class\ActionRouter;
 use class\controls\QuestionsController;
 use class\controls\SpartanController;
 use class\controls\UsersController;
+use class\Router;
 
 require_once "autoloader.php";
 
@@ -26,6 +26,10 @@ ini_set('session.gc_lifetime', 5);
 /*ini_set('session.use_only_cookies', false);
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_strict_mode', 1);*/
+//session_set_cookie_params([
+//    'secure' => true,
+//    'httponly' => true,
+//]);
 if (!isset($_SESSION))
     session_start();
     // TODO
@@ -55,8 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
 $questionsController = new QuestionsController();
 $spartanController = new SpartanController();
-$routeController = new RouteController();
-$actionController = new ActionController();
+$routeController = new Router();
+$actionController = new ActionRouter();
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -140,6 +144,7 @@ $actionController->registerAction("connexionWS", [], "WSController", null);
 $actionController->registerAction("logIn", ['fields' => ['login', 'password']], "UsersController", null,false, ['success' => ['success' => true, 'url' => '/users']], ['error' => ['success' => false, 'error' => 'Identifiant ou mot de passe incorrect']], ['needResponse' => true]);
 $actionController->registerAction("disconnect", [], "UsersController", null,false, ['success' => ['success' => true, 'url' => '/']], ['needResponse' => true]);
 $actionController->registerAction("deleteUser", ['idField' => 'id'], "SessionController", '', true);
+$actionController->registerAction("sendResetEmail", [], "UsersController", '', false);
 
 $actionController->registerAction("showRanking", [], "SessionController", null, true);
 $actionController->registerAction("showEndGame", ['fields' => ['score']], "SessionController", null);
