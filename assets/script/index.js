@@ -99,7 +99,6 @@ $(document).ready(function (e) {
                 }else if(typeof response === 'string' && response[0] === "/"){
                     window.location.href = response;
                 } else {
-                    alert("Erreur lors de la suppression")
                     window.location.reload()
                 }
             }

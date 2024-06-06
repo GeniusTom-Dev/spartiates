@@ -30,17 +30,17 @@
 <div class="absolute w-full h-full z-50 top-0 bg-customBlueDark opacity-95 flex flex-col items-center justify-center space-y-5 text-white"
      id="endGame" style="display: none">
     <span>
-        <label class="text-5xl">Felicitation </label>
-        <label class="text-5xl" id="username"></label>
-        <label class="text-5xl">!</label>
+        <label class="text-4xl">Felicitation </label>
+        <label class="text-4xl" id="username"></label>
+        <label class="text-4xl">!</label>
     </span>
     <span>
-        <label class="text-5xl">Score : </label>
-        <label class="text-5xl" id="scoreEnd"></label>
+        <label class="text-4xl">Score : </label>
+        <label class="text-4xl" id="scoreEnd"></label>
     </span>
     <span>
-        <label class="text-5xl">Classement : </label>
-        <label class="text-5xl" id="rank"></label>
+        <label class="text-4xl">Classement : </label>
+        <label class="text-4xl" id="rank"></label>
     </span>
     <a href="/home" class="p-5 bg-customBlue opacity-100 rounded-xl text-4xl">
         Retour à l'accueil
