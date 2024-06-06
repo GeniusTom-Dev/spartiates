@@ -4,6 +4,7 @@ $cptSecurity = 30;
 
 while($cptSecurity > 0){
     if(file_exists($fileLocation)){
+        //$fileHandle = fopen($fileLocation, 'r');
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename="' . $fileLocation . '"');
@@ -15,9 +16,13 @@ while($cptSecurity > 0){
         flush();
 
         readfile($fileLocation);
-        unlink($fileLocation);
+        //unlink($fileLocation);
 
-        break;
+        //fclose($fileHandle);
+
+        // Redirection vers l'URL /accueil
+        //header('Location: /users');
+        exit;
     }
 
     sleep(1);
