@@ -1,6 +1,6 @@
 <?php
 $fileLocation = realpath(".") . '/assets/data/download/emails.csv';
-$cptSecurity = 10;
+$cptSecurity = 30;
 
 while($cptSecurity > 0){
     if(file_exists($fileLocation)){
@@ -21,5 +21,6 @@ while($cptSecurity > 0){
     }
 
     sleep(1);
+    header('refresh:0;url=/' . "download");
     $cptSecurity--;
 }

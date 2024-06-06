@@ -6,7 +6,7 @@ RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
 # Block access to specific file types (e.g., .inc, .config)
-<FilesMatch "\.(inc|config)$">
+<FilesMatch "\.(inc|config|json)$">
     Order allow,deny
     Deny from all
 </FilesMatch>

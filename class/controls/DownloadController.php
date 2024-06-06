@@ -35,10 +35,6 @@ class DownloadController{
     public function dlData(string $separator = ';'): void {
         $filePath = realpath(".") . '/assets/data/download/emails.csv';
 
-        if(file_exists($filePath)){
-            unlink($filePath);
-        }
-
         $file = fopen($filePath, 'w');
 
         $header = ['Nom', 'Email', 'Telephone'];
